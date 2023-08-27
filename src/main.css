@@ -1,0 +1,162 @@
+@tailwind base;
+
+@layer base {
+  strong {
+    font-weight: 600 !important;
+  }
+
+  html {
+    height: 100dvh;
+  }
+
+  *,
+  ::before,
+  ::after {
+    box-sizing: border-box;
+    border-width: 0;
+    border-style: solid;
+    border-color: #e5e7eb;
+    /* Highlight color on tap buttons */
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  th {
+    text-align: start;
+    min-width: 140px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.25rem;
+  }
+
+  td {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.25rem;
+  }
+}
+
+@tailwind components;
+
+@layer components {
+  .form-box {
+    @apply w-full space-y-5 p-4 border rounded-2xl mb-2 shadow-2xl shadow-gray-200 bg-white;
+  }
+
+  .input-default {
+    @apply block px-4 max-w-md w-full h-14 text-noom-text-900 text-base rounded-xl border bg-gray-100 outline-none;
+  }
+
+  .input-default:focus {
+    @apply bg-blue-50;
+  }
+
+  .shadow-default {
+    @apply shadow-md shadow-gray-200;
+  }
+
+  .logo-animation {
+    animation-name: logo-move;
+    animation-duration: 1000ms;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes logo-move {
+    0% {
+      transform: translateX("20px");
+    }
+
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  .png-image-shadow {
+    -webkit-filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.2));
+    filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.2));
+  }
+
+  /* ChatGPT sidebar style */
+  .chat-sidebar-open {
+    animation: sidebarOpen 150ms ease-out forwards;
+    width: 0;
+    min-width: 0;
+  }
+
+  @keyframes sidebarOpen {
+    0% {
+      width: 0;
+      min-width: 0;
+      visibility: hidden;
+    }
+
+    100% {
+      width: 16rem;
+      min-width: 16rem;
+      visibility: visible;
+    }
+  }
+
+  .chat-sidebar-close {
+    animation: sidebarClose 150ms ease-out forwards;
+  }
+
+  @keyframes sidebarClose {
+    0% {
+      width: 16rem;
+      min-width: 16rem;
+      visibility: hidden;
+    }
+
+    100% {
+      width: 0;
+      min-width: 0;
+      visibility: hidden;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    @keyframes sidebarOpen {
+      0% {
+        width: 0;
+        min-width: 0;
+        visibility: hidden;
+      }
+
+      100% {
+        width: 16rem;
+        min-width: 16rem;
+        visibility: visible;
+      }
+    }
+
+    @keyframes sidebarClose {
+      0% {
+        width: 16rem;
+        min-width: 16rem;
+        visibility: hidden;
+      }
+
+      100% {
+        width: 0;
+        min-width: 0;
+        visibility: hidden;
+      }
+    }
+  }
+
+  /* ChatGPT sidebar scrollbar style */
+  .scrollbar-dark::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .scrollbar-dark::-webkit-scrollbar-thumb {
+    background-color: #bbbbbb;
+    border-radius: 8px;
+  }
+
+  .scrollbar-dark::-webkit-scrollbar-thumb:hover {
+    background-color: #999999;
+    border-radius: 8px;
+  }
+}
+
+@tailwind utilities;

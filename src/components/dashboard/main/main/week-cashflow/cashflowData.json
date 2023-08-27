@@ -1,0 +1,478 @@
+{
+    "weeks": [
+        {
+            "week": 1,
+            "startDate": "2023-06-25",
+            "endDate": "2023-07-01",
+            "inflow": [
+                {
+                    "source": "Sales",
+                    "amount": 6000
+                },
+                {
+                    "source": "Loan",
+                    "amount": 4000
+                },
+                {
+                    "source": "Investments",
+                    "amount": 1800
+                },
+                {
+                    "source": "Collections",
+                    "amount": 900
+                },
+                {
+                    "source": "Likkle",
+                    "amount": 7000
+                },
+                {
+                    "source": "Freckle",
+                    "amount": 300
+                },
+                {
+                    "source": "Lackle",
+                    "amount": 4000
+                }
+            ],
+            "outflow": [
+                {
+                    "source": "Salaries",
+                    "amount": 5000
+                },
+                {
+                    "source": "Rent",
+                    "amount": 3000
+                },
+                {
+                    "source": "Operations",
+                    "amount": 2000
+                },
+                {
+                    "source": "OCollections",
+                    "amount": 900
+                },
+                {
+                    "source": "OLikkle",
+                    "amount": 7000
+                },
+                {
+                    "source": "OFreckle",
+                    "amount": 300
+                },
+                {
+                    "source": "OLackle",
+                    "amount": 4000
+                }
+            ],
+            "net": 2000
+        },
+        {
+            "week": 2,
+            "startDate": "2023-07-02",
+            "endDate": "2023-07-08",
+            "inflow": [
+                {
+                    "source": "Sales",
+                    "amount": 6200
+                },
+                {
+                    "source": "Loan",
+                    "amount": 4000
+                },
+                {
+                    "source": "Investments",
+                    "amount": 2100
+                }
+            ],
+            "outflow": [
+                {
+                    "source": "Salaries",
+                    "amount": 5100
+                },
+                {
+                    "source": "Rent",
+                    "amount": 3000
+                },
+                {
+                    "source": "Operations",
+                    "amount": 2050
+                }
+            ],
+            "net": 2150
+        },
+        {
+            "week": 3,
+            "startDate": "2023-07-09",
+            "endDate": "2023-07-15",
+            "inflow": [
+                {
+                    "source": "Sales",
+                    "amount": 6400
+                },
+                {
+                    "source": "Loan",
+                    "amount": 4000
+                },
+                {
+                    "source": "Investments",
+                    "amount": 2200
+                }
+            ],
+            "outflow": [
+                {
+                    "source": "Salaries",
+                    "amount": 5200
+                },
+                {
+                    "source": "Rent",
+                    "amount": 3000
+                },
+                {
+                    "source": "Operations",
+                    "amount": 2100
+                }
+            ],
+            "net": 2300
+        },
+        {
+            "week": 4,
+            "startDate": "2023-07-16",
+            "endDate": "2023-07-22",
+            "inflow": [
+                {
+                    "source": "Sales",
+                    "amount": 6600
+                },
+                {
+                    "source": "Loan",
+                    "amount": 4000
+                },
+                {
+                    "source": "Investments",
+                    "amount": 2300
+                }
+            ],
+            "outflow": [
+                {
+                    "source": "Salaries",
+                    "amount": 5300
+                },
+                {
+                    "source": "Rent",
+                    "amount": 3000
+                },
+                {
+                    "source": "Operations",
+                    "amount": 2150
+                }
+            ],
+            "net": 2450
+        },
+        {
+            "week": 5,
+            "startDate": "2023-07-23",
+            "endDate": "2023-07-29",
+            "inflow": [
+                {
+                    "source": "Sales",
+                    "amount": 6800
+                },
+                {
+                    "source": "Loan",
+                    "amount": 4000
+                },
+                {
+                    "source": "Investments",
+                    "amount": 2400
+                }
+            ],
+            "outflow": [
+                {
+                    "source": "Salaries",
+                    "amount": 5400
+                },
+                {
+                    "source": "Rent",
+                    "amount": 3000
+                },
+                {
+                    "source": "Operations",
+                    "amount": 2200
+                }
+            ],
+            "net": 2600
+        },
+        {
+            "week": 6,
+            "startDate": "2023-07-30",
+            "endDate": "2023-08-05",
+            "inflow": [
+                {
+                    "source": "Sales",
+                    "amount": 7000
+                },
+                {
+                    "source": "Loan",
+                    "amount": 4000
+                },
+                {
+                    "source": "Investments",
+                    "amount": 2500
+                }
+            ],
+            "outflow": [
+                {
+                    "source": "Salaries",
+                    "amount": 5500
+                },
+                {
+                    "source": "Rent",
+                    "amount": 3000
+                },
+                {
+                    "source": "Operations",
+                    "amount": 2250
+                }
+            ],
+            "net": 2750
+        },
+        {
+            "week": 7,
+            "startDate": "2023-08-06",
+            "endDate": "2023-08-12",
+            "inflow": [
+                {
+                    "source": "Sales",
+                    "amount": 7200
+                },
+                {
+                    "source": "Loan",
+                    "amount": 4000
+                },
+                {
+                    "source": "Investments",
+                    "amount": 2600
+                }
+            ],
+            "outflow": [
+                {
+                    "source": "Salaries",
+                    "amount": 5600
+                },
+                {
+                    "source": "Rent",
+                    "amount": 3000
+                },
+                {
+                    "source": "Operations",
+                    "amount": 2300
+                }
+            ],
+            "net": 2900
+        },
+        {
+            "week": 8,
+            "startDate": "2023-08-13",
+            "endDate": "2023-08-19",
+            "inflow": [
+                {
+                    "source": "Sales",
+                    "amount": 7400
+                },
+                {
+                    "source": "Loan",
+                    "amount": 4000
+                },
+                {
+                    "source": "Investments",
+                    "amount": 2700
+                }
+            ],
+            "outflow": [
+                {
+                    "source": "Salaries",
+                    "amount": 5700
+                },
+                {
+                    "source": "Rent",
+                    "amount": 3000
+                },
+                {
+                    "source": "Operations",
+                    "amount": 2350
+                }
+            ],
+            "net": 3050
+        },
+        {
+            "week": 9,
+            "startDate": "2023-08-20",
+            "endDate": "2023-08-26",
+            "inflow": [
+                {
+                    "source": "Sales",
+                    "amount": 7600
+                },
+                {
+                    "source": "Loan",
+                    "amount": 4000
+                },
+                {
+                    "source": "Investments",
+                    "amount": 2800
+                }
+            ],
+            "outflow": [
+                {
+                    "source": "Salaries",
+                    "amount": 5800
+                },
+                {
+                    "source": "Rent",
+                    "amount": 3000
+                },
+                {
+                    "source": "Operations",
+                    "amount": 2400
+                }
+            ],
+            "net": 3200
+        },
+        {
+            "week": 10,
+            "startDate": "2023-08-27",
+            "endDate": "2023-09-02",
+            "inflow": [
+                {
+                    "source": "Sales",
+                    "amount": 7800
+                },
+                {
+                    "source": "Loan",
+                    "amount": 4000
+                },
+                {
+                    "source": "Investments",
+                    "amount": 2900
+                }
+            ],
+            "outflow": [
+                {
+                    "source": "Salaries",
+                    "amount": 5900
+                },
+                {
+                    "source": "Rent",
+                    "amount": 3000
+                },
+                {
+                    "source": "Operations",
+                    "amount": 2450
+                }
+            ],
+            "net": 3350
+        },
+        {
+            "week": 11,
+            "startDate": "2023-09-03",
+            "endDate": "2023-09-09",
+            "inflow": [
+                {
+                    "source": "Sales",
+                    "amount": 8000
+                },
+                {
+                    "source": "Loan",
+                    "amount": 4000
+                },
+                {
+                    "source": "Investments",
+                    "amount": 3000
+                }
+            ],
+            "outflow": [
+                {
+                    "source": "Salaries",
+                    "amount": 6000
+                },
+                {
+                    "source": "Rent",
+                    "amount": 3000
+                },
+                {
+                    "source": "Operations",
+                    "amount": 2500
+                }
+            ],
+            "net": 3500
+        },
+        {
+            "week": 12,
+            "startDate": "2023-09-10",
+            "endDate": "2023-09-16",
+            "inflow": [
+                {
+                    "source": "Sales",
+                    "amount": 8200
+                },
+                {
+                    "source": "Loan",
+                    "amount": 4000
+                },
+                {
+                    "source": "Investments",
+                    "amount": 3100
+                }
+            ],
+            "outflow": [
+                {
+                    "source": "Salaries",
+                    "amount": 6100
+                },
+                {
+                    "source": "Rent",
+                    "amount": 3000
+                },
+                {
+                    "source": "Operations",
+                    "amount": 2550
+                }
+            ],
+            "net": 3650
+        },
+        {
+            "week": 13,
+            "startDate": "2023-09-17",
+            "endDate": "2023-09-23",
+            "inflow": [
+                {
+                    "source": "Sales",
+                    "amount": 8400
+                },
+                {
+                    "source": "Loan",
+                    "amount": 4000
+                },
+                {
+                    "source": "Investments",
+                    "amount": 3200
+                }
+            ],
+            "outflow": [
+                {
+                    "source": "Salaries",
+                    "amount": 6200
+                },
+                {
+                    "source": "Rent",
+                    "amount": 3000
+                },
+                {
+                    "source": "Operations",
+                    "amount": 2600
+                }
+            ],
+            "net": 3800
+        }
+    ]
+}

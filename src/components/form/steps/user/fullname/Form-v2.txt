@@ -1,0 +1,95 @@
+<script>
+import { reactive, ref } from "vue";
+import QNextButton from "../layout/QNextButton.vue";
+import { useFormDataStore } from "../../../../stores/FormData";
+</script>
+
+<script lang="ts" setup>const formData:any = useFormDataStore();
+const user = reactive({ firstname: "", lastname: "", surname: "" });
+const disabled = ref(true);
+const surname = ref(false);
+
+function handleChange(e) {
+  const { name, value } = e.target;
+  user[name] = value;
+
+  if (user.firstname && user.lastname) {
+    disabled.value = false;
+  }
+}
+
+function nextForm() {
+  const { firstname, lastname } = user;
+  formData.$patch({ user: { name: { firstname, lastname, surname } } });
+  next();
+}
+</script>
+
+<template>
+  <form @submit.prevent="() => {}" class="space-y-6 py-6 px-6 border rounded-xl my-4">
+    <div class="space-y-3">
+      <label for="firstName" class="font-normal">Legal First Name</label> <br />
+      <input
+        type="text"
+        name="firstname"
+        id="firstName"
+        placeholder=""
+        @input="handleChange"
+        v-model="user.firstname"
+        :class="
+          'block p-4 max-w-md w-full text-noom-text-900 sm:text-md rounded-lg border ' +
+          'bg-gray-100 border-gray-300 '
+        "
+        title="Legal First Name"
+      />
+    </div>
+    <div class="space-y-3">
+      <label for="lastName" class="font-normal">Legal First Name</label> <br />
+      <input
+        type="text"
+        name="lastname"
+        id="lastName"
+        placeholder=""
+        @input="handleChange"
+        v-model="user.lastname"
+        :class="
+          'block p-4 max-w-md w-full text-noom-text-900 sm:text-md rounded-lg border ' +
+          'bg-gray-100 border-gray-300 '
+        "
+        title="Legal Last Name"
+      />
+    </div>
+    <div class="flex items-center gap-2">
+      <input
+        type="checkbox"
+        @change="
+          () => {
+            surname = !surname;
+          }
+        "
+        id="differentFirstName"
+        class="h-4 w-4"
+      />
+      <label for="differentFirstName" class="text-gray-600">
+        I go by a different first name
+      </label>
+    </div>
+    <div class="space-y-3" v-if="surname">
+      <label for="surName" class="font-normal">Different First Name</label> <br />
+      <input
+        type="text"
+        name="surname"
+        id="surName"
+        placeholder=""
+        @input="handleChange"
+        v-model="user.surname"
+        :class="
+          'block p-4 max-w-md w-full text-noom-text-900 sm:text-md rounded-lg border ' +
+          'bg-gray-100 border-gray-300 '
+        "
+        title="Legal First Name"
+      />
+    </div>
+    <QNextButton :nextForm="nextForm" :disabled="disabled" />
+  </form>
+</template>

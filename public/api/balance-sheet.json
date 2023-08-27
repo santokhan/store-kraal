@@ -1,0 +1,133 @@
+{
+  "title": "Balance Sheet",
+  "data": [
+    {
+      "sectionTitle": "Assets",
+      "isOpen": false,
+      "items": [
+        {
+          "label": "Cash",
+          "amount": "$239,550",
+          "color": "bg-blue-500"
+        },
+        {
+          "label": "Accounts Receivable",
+          "amount": "$7,539",
+          "color": "bg-blue-500"
+        },
+        {
+          "label": "Prepaid Expense",
+          "amount": "$5,682",
+          "color": "bg-blue-500"
+        },
+        {
+          "label": "Inventory",
+          "amount": "$11,342",
+          "color": "bg-blue-500"
+        },
+        {
+          "label": "Other Current Assets",
+          "amount": "$0",
+          "color": "bg-blue-500"
+        },
+        {
+          "label": "Total Current Assets",
+          "amount": "$264,113",
+          "color": "bg-blue-500"
+        },
+        {
+          "label": "Property & Equipment",
+          "amount": "$37,521",
+          "color": "bg-blue-500"
+        },
+        {
+          "label": "Intangible Assets",
+          "amount": "$3,850",
+          "color": "bg-blue-500"
+        },
+        {
+          "label": "Other Assets",
+          "amount": "$0",
+          "color": "bg-blue-500"
+        },
+        {
+          "label": "Total Assets",
+          "amount": "$305,484",
+          "color": "bg-blue-500"
+        }
+      ]
+    },
+    {
+      "sectionTitle": "Liabilities",
+      "isOpen": false,
+      "items": [
+        {
+          "label": "Accounts Payable",
+          "amount": "$5,671",
+          "color": "bg-red-500"
+        },
+        {
+          "label": "Accrued Expenses",
+          "amount": "$1,899",
+          "color": "bg-red-500"
+        },
+        {
+          "label": "Unearned Revenue",
+          "amount": "$1,724",
+          "color": "bg-red-500"
+        },
+        {
+          "label": "Other Current Liabilities",
+          "amount": "$0",
+          "color": "bg-red-500"
+        },
+        {
+          "label": "Total Current Liabilities",
+          "amount": "$9,294",
+          "color": "bg-red-500"
+        },
+        {
+          "label": "Long Term Debt",
+          "amount": "$30,000",
+          "color": "bg-red-500"
+        },
+        {
+          "label": "Other Long Term Liabilities",
+          "amount": "$5,909",
+          "color": "bg-red-500"
+        },
+        {
+          "label": "Total Liabilities",
+          "amount": "$45,203",
+          "color": "bg-red-500"
+        }
+      ]
+    },
+    {
+      "sectionTitle": "Equity",
+      "isOpen": false,
+      "items": [
+        {
+          "label": "Equity Capital",
+          "amount": "$170,000",
+          "color": "bg-green-500"
+        },
+        {
+          "label": "Retained Earnings",
+          "amount": "$90,280",
+          "color": "bg-green-500"
+        },
+        {
+          "label": "Shareholder's Equity",
+          "amount": "$260,280",
+          "color": "bg-green-500"
+        },
+        {
+          "label": "Total Liabilities & Shareholder's Equity",
+          "amount": "$305,483",
+          "color": "bg-green-500"
+        }
+      ]
+    }
+  ]
+}

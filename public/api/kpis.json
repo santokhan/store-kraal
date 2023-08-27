@@ -1,0 +1,64 @@
+{
+    "kpi": [
+        {
+            "name": "Revenue Growth Rate",
+            "description": "The rate of increase or decrease in a company's sales from one period to the next.",
+            "actual_value": 10.5,
+            "target_value": 15
+        },
+        {
+            "name": "Gross Profit Margin",
+            "description": "The proportion of money left over from revenues after accounting for the cost of goods sold (COGS).",
+            "actual_value": 45.3,
+            "target_value": 50
+        },
+        {
+            "name": "Net Profit Margin",
+            "description": "The percentage of revenue left after all expenses have been deducted from sales.",
+            "actual_value": 23.7,
+            "target_value": 30
+        },
+        {
+            "name": "Customer Acquisition Cost (CAC)",
+            "description": "The cost to acquire a new customer.",
+            "actual_value": 120,
+            "target_value": 100
+        },
+        {
+            "name": "Customer Lifetime Value (CLTV)",
+            "description": "The value of a customer over their entire relationship with a business.",
+            "actual_value": 1000,
+            "target_value": 1200
+        },
+        {
+            "name": "Inventory Turnover",
+            "description": "How efficiently a company manages its stock.",
+            "actual_value": 7,
+            "target_value": 8
+        },
+        {
+            "name": "Sales Conversion Rate",
+            "description": "The effectiveness of a sales team at converting leads into customers.",
+            "actual_value": 25,
+            "target_value": 30
+        },
+        {
+            "name": "Employee Productivity",
+            "description": "How much output each employee generates.",
+            "actual_value": 5000,
+            "target_value": 5500
+        },
+        {
+            "name": "Operational Efficiency Ratios",
+            "description": "Insights into how efficiently your business uses its assets to generate sales.",
+            "actual_value": 1.2,
+            "target_value": 1.5
+        },
+        {
+            "name": "Return on Investment (ROI)",
+            "description": "The efficiency of different investments.",
+            "actual_value": 15,
+            "target_value": 20
+        }
+    ]
+}

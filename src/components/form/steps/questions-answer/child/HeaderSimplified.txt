@@ -1,0 +1,7 @@
+<template>
+  <HeaderSimplified />
+</template>
+
+<script setup lang="ts">
+import HeaderSimplified from "../../../../shared/header/HeaderSimplified.vue";
+</script>

@@ -1,0 +1,211 @@
+.noom-nav {
+    font-size: 0.83rem;
+}
+
+.css-c36zr9 {
+    width: 47%;
+    height: calc(100% - 100px);
+    object-fit: cover;
+    object-position: center center;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    border-top-left-radius: 100px;
+}
+
+.item___QQWvs {
+    font-family: Brown LL, sans-serif;
+    font-size: .83rem;
+    height: 100%;
+    justify-content: center;
+    margin: 0 5px;
+    text-decoration: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.css-qbx0ou,
+.css-qbx0ou::before,
+.css-qbx0ou::after {
+    background-color: currentcolor;
+    transition: all 500ms ease-in-out 0s;
+    border-radius: 1px;
+    height: 3px;
+    width: 20px;
+    position: absolute;
+    display: block;
+    content: "";
+}
+
+.css-qbx0ou,
+.css-qbx0ou::before,
+.css-qbx0ou::after {
+    background-color: currentcolor;
+    transition: all 500ms ease-in-out 0s;
+    border-radius: 1px;
+    height: 3px;
+    width: 20px;
+    position: absolute;
+    display: block;
+    content: "";
+}
+
+.css-qbx0ou,
+.css-qbx0ou::before,
+.css-qbx0ou::after {
+    background-color: currentcolor;
+    transition: all 500ms ease-in-out 0s;
+    border-radius: 1px;
+    height: 3px;
+    width: 20px;
+    position: absolute;
+    display: block;
+    content: "";
+}
+
+.css-qbx0ou,
+.css-qbx0ou::before,
+.css-qbx0ou::after {
+    background-color: currentcolor;
+    transition: all 500ms ease-in-out 0s;
+    border-radius: 1px;
+    height: 3px;
+    width: 20px;
+    position: absolute;
+    display: block;
+    content: "";
+}
+
+.css-1kz67ow {
+    width: 100%;
+    border-bottom-left-radius: 25px;
+}
+
+.css-1d3w5wq {
+    width: 100%;
+}
+
+.css-ubdoq0 {
+    display: flex;
+    height: 100%;
+    -webkit-box-pack: center;
+    justify-content: center;
+    width: 53%;
+}
+
+.css-1ix31d2 {
+    align-self: inherit;
+    -webkit-box-pack: center;
+    justify-content: center;
+    width: 100%;
+    flex-wrap: wrap;
+    margin-top: calc(1em + 10px);
+    margin-bottom: 40px;
+}
+
+.css-1ix31d2 {
+    -webkit-box-align: inherit;
+    align-items: inherit;
+    justify-content: left;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+.roboto-slab {
+    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto Slab', serif;
+}
+
+
+
+@media only screen and (max-width: 720px) {
+    .css-c36zr9 {
+        position: relative;
+        height: auto;
+        width: 100%;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 65px;
+    }
+
+    .css-1b060lf {
+        margin: 15px 25px 0px;
+    }
+
+    .css-121awgg {
+        font-family: "Untitled Serif", serif;
+        font-weight: 500;
+        font-style: normal;
+        color: rgb(25, 23, 23);
+        font-size: 28px;
+        line-height: 36px;
+        text-align: center;
+    }
+
+    .css-5qihfj {
+        font-family: "Untitled Serif", serif;
+        font-weight: 500;
+        font-style: normal;
+        color: rgb(25, 23, 23);
+        font-size: 20px;
+        line-height: 26px;
+        letter-spacing: 0.2px;
+        text-align: center;
+        margin-left: 1.5em;
+    }
+
+    .css-1ix31d2 {
+        align-self: inherit;
+        -webkit-box-pack: center;
+        justify-content: center;
+        width: 100%;
+        flex-wrap: wrap;
+        margin-top: calc(1em + 10px);
+        margin-bottom: 40px;
+    }
+
+
+    .css-c36zr9 {
+        aspect-ratio: 1.46 / 1;
+    }
+
+    .css-ubdoq0 {
+        flex-direction: row;
+        margin-left: 0px;
+        width: 100%;
+    }
+
+    .css-1fdbk32 {
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
+    }
+
+    .css-ubdoq0 {
+        flex-direction: row;
+        margin-left: 0px;
+        width: 100%;
+    }
+
+    .css-121awgg {
+        font-family: "Untitled Serif", serif;
+        font-weight: 500;
+        font-style: normal;
+        color: rgb(25, 23, 23);
+        font-size: 28px;
+        line-height: 36px;
+        text-align: center;
+    }
+
+    .css-5qihfj {
+        font-family: "Untitled Serif", serif;
+        font-weight: 500;
+        font-style: normal;
+        color: rgb(25, 23, 23);
+        font-size: 20px;
+        line-height: 26px;
+        letter-spacing: 0.2px;
+        text-align: center;
+        margin-left: 1.5em;
+    }
+}

@@ -1,0 +1,83 @@
+{
+  "title": "Profit & Loss",
+  "data": [
+    {
+      "sectionTitle": "Revenue",
+      "isOpen": false,
+      "items": [
+        {
+          "label": "Sales",
+          "amount": "$250,000",
+          "color": "bg-green-500"
+        },
+        {
+          "label": "Interest Income",
+          "amount": "$2,000",
+          "color": "bg-green-500"
+        },
+        {
+          "label": "Other Income",
+          "amount": "$1,000",
+          "color": "bg-green-500"
+        },
+        {
+          "label": "Total Revenue",
+          "amount": "$253,000",
+          "color": "bg-green-500"
+        }
+      ]
+    },
+    {
+      "sectionTitle": "Expenses",
+      "isOpen": false,
+      "items": [
+        {
+          "label": "Cost of Goods Sold",
+          "amount": "$150,000",
+          "color": "bg-red-500"
+        },
+        {
+          "label": "Operational Expenses",
+          "amount": "$50,000",
+          "color": "bg-red-500"
+        },
+        {
+          "label": "Depreciation Expense",
+          "amount": "$10,000",
+          "color": "bg-red-500"
+        },
+        {
+          "label": "Interest Expense",
+          "amount": "$2,000",
+          "color": "bg-red-500"
+        },
+        {
+          "label": "Total Expenses",
+          "amount": "$212,000",
+          "color": "bg-red-500"
+        }
+      ]
+    },
+    {
+      "sectionTitle": "Profit",
+      "isOpen": false,
+      "items": [
+        {
+          "label": "Net Profit Before Tax",
+          "amount": "$41,000",
+          "color": "bg-blue-500"
+        },
+        {
+          "label": "Tax",
+          "amount": "$11,000",
+          "color": "bg-blue-500"
+        },
+        {
+          "label": "Net Profit After Tax",
+          "amount": "$30,000",
+          "color": "bg-blue-500"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+    "title": "Cash Flow",
+    "data": [
+        {
+            "sectionTitle": "Operating Activities",
+            "isOpen": false,
+            "items": [
+                {
+                    "label": "Net Income",
+                    "amount": "$30,000",
+                    "color": "bg-green-500"
+                },
+                {
+                    "label": "Depreciation",
+                    "amount": "$10,000",
+                    "color": "bg-green-500"
+                },
+                {
+                    "label": "Changes in Working Capital",
+                    "amount": "-$5,000",
+                    "color": "bg-red-500"
+                },
+                {
+                    "label": "Net Cash from Operating Activities",
+                    "amount": "$35,000",
+                    "color": "bg-blue-500"
+                }
+            ]
+        },
+        {
+            "sectionTitle": "Investing Activities",
+            "isOpen": false,
+            "items": [
+                {
+                    "label": "Capital Expenditures",
+                    "amount": "-$20,000",
+                    "color": "bg-red-500"
+                },
+                {
+                    "label": "Investments",
+                    "amount": "-$5,000",
+                    "color": "bg-red-500"
+                },
+                {
+                    "label": "Net Cash used in Investing Activities",
+                    "amount": "-$25,000",
+                    "color": "bg-blue-500"
+                }
+            ]
+        },
+        {
+            "sectionTitle": "Financing Activities",
+            "isOpen": false,
+            "items": [
+                {
+                    "label": "Dividends Paid",
+                    "amount": "-$10,000",
+                    "color": "bg-red-500"
+                },
+                {
+                    "label": "Proceeds from Loan",
+                    "amount": "$15,000",
+                    "color": "bg-green-500"
+                },
+                {
+                    "label": "Net Cash from Financing Activities",
+                    "amount": "$5,000",
+                    "color": "bg-blue-500"
+                }
+            ]
+        },
+        {
+            "sectionTitle": "Net Increase in Cash",
+            "isOpen": false,
+            "items": [
+                {
+                    "label": "Net Increase in Cash",
+                    "amount": "$15,000",
+                    "color": "bg-blue-500"
+                }
+            ]
+        }
+    ]
+}

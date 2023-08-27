@@ -1,0 +1,64 @@
+{
+    "bills": [
+        {
+            "bill_type": "Vendor Bill",
+            "due_date": "2023-07-08",
+            "amount": "$900",
+            "vendor": "ABC Corp"
+        },
+        {
+            "bill_type": "Loan Bill",
+            "due_date": "2023-07-09",
+            "amount": "$1.2K",
+            "lender": "XYZ LLC"
+        },
+        {
+            "bill_type": "Vendor Bill",
+            "due_date": "2023-07-10",
+            "amount": "$950",
+            "vendor": "DEF Industries"
+        },
+        {
+            "bill_type": "Loan Bill",
+            "due_date": "2023-07-11",
+            "amount": "$1K",
+            "lender": "GHI Services"
+        },
+        {
+            "bill_type": "Vendor Bill",
+            "due_date": "2023-07-13",
+            "amount": "$850",
+            "vendor": "JKL Inc"
+        },
+        {
+            "bill_type": "Loan Bill",
+            "due_date": "2023-07-14",
+            "amount": "$925",
+            "lender": "MNO Enterprises"
+        },
+        {
+            "bill_type": "Vendor Bill",
+            "due_date": "2023-07-16",
+            "amount": "$1.1K",
+            "vendor": "PQR Ltd"
+        },
+        {
+            "bill_type": "Loan Bill",
+            "due_date": "2023-07-17",
+            "amount": "$900",
+            "lender": "STU Co"
+        },
+        {
+            "bill_type": "Vendor Bill",
+            "due_date": "2023-07-18",
+            "amount": "$1.3K",
+            "vendor": "VWX Corp"
+        },
+        {
+            "bill_type": "Loan Bill",
+            "due_date": "2023-07-19",
+            "amount": "$875",
+            "lender": "YZ Inc"
+        }
+    ]
+}
