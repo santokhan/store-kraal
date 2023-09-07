@@ -28,11 +28,11 @@ export default {
      },
      chat: {
           getChats: () => get('/chats'),
-          getChat: (id: number) => get('/chats', { id: id }),
+          getChat: (id: number) => get('/chats', { params: { id: id }}),
           createChat: (name: string) => post('/chats', { name: name }),
 
-          getChatMessages: (chatId: number) => get('/chatmessages', { chatid: chatId }),
-          getChatMessage: (id: number) => get('/chatmessages', { id: id }),
+          getChatMessages: (chatId: number) => get('/chatmessages', { params: { chatid: chatId }}),
+          getChatMessage: (id: number) => get('/chatmessages', { params: { id: id }}),
           sendChatMessage: (chatId: number, message: string) => post('/chatmessages', { chatid: chatId, message: message }),
      },
 }
