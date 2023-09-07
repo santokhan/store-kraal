@@ -3,7 +3,7 @@ import axios from "axios";
 
 // console.log(`Loading API. Base URL: ${import.meta.env.VITE_API_URL}`);
 const client = axios.create({
-     baseURL: 'https://black-sand-0eb4ae60f.3.azurestaticapps.net/api', // import.meta.env.VITE_API_URL,
+     baseURL: 'https://kraalapi20230810134811.azurewebsites.net/api', // import.meta.env.VITE_API_URL,
      headers: {
          'Content-Type': 'application/json',
          'Accept': 'application/json',
