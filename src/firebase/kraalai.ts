@@ -1,6 +1,7 @@
 import { type DocumentData, collection, addDoc, getDoc, doc, deleteDoc, where, query, getDocs, updateDoc, } from "firebase/firestore";
 import { USER_CHAT_DATA, db as firestore } from "../auth/firestore";
 import { Chat, type ChatList } from "../stores/chatSideBarTypes";
+import api from "../services/api";
 
 class KraalAIStore {
     async addDoc(chatInstance: ChatList, callBack: () => void) {
@@ -15,6 +16,10 @@ class KraalAIStore {
         }
     }
     async getDoc(uid: string, callBack: (docs: DocumentData[]) => void) {
+        let chats = await api.chat.getChats();
+        let messages = await api.chat.getChatMessages(1);
+        console.log(JSON.stringify(chats));
+        console.log(JSON.stringify(messages));
         try {
             const colRef = collection(firestore, USER_CHAT_DATA)
             const q = query(colRef, where('uid', '==', uid))
