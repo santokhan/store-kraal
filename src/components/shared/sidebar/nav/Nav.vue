@@ -2,6 +2,7 @@
   <div class="w-full space-y-5 mt-20">
     <div v-for="(item, i) in  navList_with_dropdown" :key="i" class="w-full text-base capitalize">
 
+
       <!-- For KraalAI redirect -->
       <a v-if="item.link && item.link.includes('http')" :href="item.link" @click="() => { handleTab(i) }"
         :class='["sidebar-nav-item px-10 gap-3", activeStyle(item.link)]'>
@@ -11,6 +12,7 @@
         {{ item.name }}
       </a>
 
+
       <!-- For RouterLink -->
       <RouterLink v-if="item.link && !item.link.includes('http')" :to="item.link" @click="() => { handleTab(i) }"
         :class='["sidebar-nav-item px-10 gap-3", activeStyle(item.link)]'>
@@ -19,6 +21,7 @@
         </div>
         {{ item.name }}
       </RouterLink>
+
 
       <!-- If dropdown is true print dropdown -->
       <SidebarDropNav v-if="item.dropdown" :navItem="item" :index="i" />
@@ -35,6 +38,7 @@ import NavIcon from "./NavIcon.vue";
 import SidebarDropNav from "./SidebarDropNav.vue";
 import { navList_with_dropdown } from './navList';
 import { useRoute } from "vue-router";
+
 
 const route = useRoute();
 // const props = defineProps<{ expand: boolean | null }>()

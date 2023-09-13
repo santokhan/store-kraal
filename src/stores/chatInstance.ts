@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
+
 export interface Chat {
     id?: number;
     robot?: Promise<string> | string;
@@ -9,9 +10,11 @@ export interface Chat {
 const useChatInstanceStore: any = defineStore("chatInstance", () => {
     // first chatList on page load
     const database = ref<Chat[]>([])
+
     function addInitial(value: Chat[]) {
         database.value = value;
     }
+
     // Lifting state up form chat input
     function handleSubmitedText(message: string) {
         function findMax(list: any[]): number {
@@ -39,6 +42,7 @@ const useChatInstanceStore: any = defineStore("chatInstance", () => {
                     },
                 }).then((res) => res.json());
             }
+
             function add(res: string) {
                 database.value.forEach((e: any, i: number) => {
                     if (database.value[i].id == max && database.value[i].user) {
@@ -48,11 +52,15 @@ const useChatInstanceStore: any = defineStore("chatInstance", () => {
             }
             function generateSummary(res: string) {
                 const trimRes = res.slice(0, 200);
+
                 // summary generation API developed using Express.js + Firebase
                 // use the correct url to get summary
                 let url = "https://kraal-aggnuk-kts3.vercel.app/?summary=" + encodeURI(trimRes);
                 fetch(url, {
-                    headers: { Accept: "application/json", "Content-Type": "application/json;charset=UTF-8" },
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json;charset=UTF-8",
+                    },
                 })
                     .then((res) => res.json())
                     .then((data) => {
@@ -62,6 +70,7 @@ const useChatInstanceStore: any = defineStore("chatInstance", () => {
                         console.log(err.message);
                     });
             }
+
             APIRequest(message)
                 .then((res) => {
                     // push new response to vue state
@@ -74,13 +83,13 @@ const useChatInstanceStore: any = defineStore("chatInstance", () => {
                     console.log(error);
                 });
         }
-
+        
         const newMax = findMax(database.value);
         addUserInput(message, newMax);
         addResponse(message, newMax);
     }
+
     return { database, addInitial, handleSubmitedText }
 });
-
 
 export default useChatInstanceStore;

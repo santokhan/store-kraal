@@ -19,18 +19,6 @@
     /* Highlight color on tap buttons */
     -webkit-tap-highlight-color: transparent;
   }
-
-  th {
-    text-align: start;
-    min-width: 140px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 0.25rem;
-  }
-
-  td {
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 0.25rem;
-  }
 }
 
 @tailwind components;

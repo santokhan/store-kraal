@@ -1,13 +1,13 @@
 <template>
   <ChatContainer :robot="false">
     <Profile>
-      <div :class="`w-full h-full rounded-full border-2 flex justify-center items-center font-semibold`">
-        <!-- {{ formData.answers.d.toUpperCase() || "NA" }} -->
+      <div
+        :class="`w-full h-full rounded-full border-2 flex justify-center items-center font-semibold`"
+      >
+        {{ formData.answers.d.toUpperCase() || "NA" }}
       </div>
     </Profile>
-    <ChatText>
-      <slot></slot>
-    </ChatText>
+    <ChatText><slot></slot></ChatText>
   </ChatContainer>
 </template>
 
@@ -17,5 +17,5 @@ import ChatContainer from "../child/ChatContainer.vue";
 import ChatText from "../child/ChatText.vue";
 import Profile from "./Profile.vue";
 
-const formData = useFormDataStore();
+const formData: any = useFormDataStore();
 </script>

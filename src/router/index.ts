@@ -96,12 +96,7 @@ const reportsRoutes: ProtecteRoutes[] = [
     path: '/report/ar', name: "report/ar",
     component: () => import("../views/reports/AdhocView.vue"),
     meta: { requiresAuth: true }
-  },
-  {
-    path: '/download-only-report', name: "download-only-report",
-    component: () => import("../views/reports/DownloadOnlyPDFView.vue"),
-    meta: { requiresAuth: true }
-  },
+  }
 ]
 
 

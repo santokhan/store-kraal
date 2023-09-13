@@ -3,7 +3,7 @@
         <div class="lg:py-5"></div>
 
         <div class="max-w-6xl mx-4 lg:mx-auto space-y-5">
-            <div class="bg-white text-gray-600 border rounded-xl px-4 lg:px-6">
+            <section class="bg-white text-gray-600 border rounded-xl px-4 lg:px-6">
                 <form
                     class="flex flex-col lg:flex-row gap-3 lg:gap-5 items-start lg:items-center rounded-xl drop transition-transform ease-in-out px-2 py-6">
                     <label for="datePicker"><span class="font-bold whitespace-nowrap">Filter by date</span></label>
@@ -23,7 +23,7 @@
                     </div>
                     <FilterSubmit/>
                 </form>
-            </div>
+            </section>
 
             <section v-if="reports_data"  class="bg-white text-gray-600 border rounded-xl px-4 lg:px-6 py-4 overflow-auto">
                 <table class="w-full">

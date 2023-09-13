@@ -1,17 +1,6 @@
 <template>
     <div class="bg-white px-6 py-4 w-full h-full rounded-lg border shadow-sm space-y-1">
-        <div class="flex justify-between items-center mb-2">
-            <div class="font-medium text-gray-400 sm:text-lg">{{ props.title }}</div>
-            <div class="flex gap-3 items-center">
-                <RouterLink to="/kraalai" title="KraalAI">
-                    <User class="w-6 hover:text-kraal-blue-500"/>
-                </RouterLink>
-                <RouterLink to="/download-only-report" title="Download Report">
-                    <Download class="hover:text-kraal-blue-500"/>
-                </RouterLink>
-
-            </div>
-        </div>
+        <div class="font-medium text-gray-400 sm:text-lg">{{ props.title }}</div>
 
         <div class="py-2" v-for="(section, i) in data" :key="i">
             <table class="w-full" v-if="section">
@@ -53,9 +42,6 @@
   
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import Download from '../../icons/download.vue';
-import User from '../../icons/user.vue';
-import { RouterLink } from 'vue-router';
 
 interface SectionItem {
     label: string;

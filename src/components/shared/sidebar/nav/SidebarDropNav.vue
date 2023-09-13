@@ -14,8 +14,8 @@
 
         <!-- dropdown -->
         <div class="space-y-2 border-l-4 border-l-kraal-blue-500 my-2" v-if="props.navItem.dropdown && expand">
-            <RouterLink class="sidebar-nav-item pl-6 text-gray-600" v-for="(dd, di) in props.navItem.dropdown"
-                :key="index + di" :to="dd.link" :class="active_style_dropdown(dd.link, route.path)" :title="dd.title">
+            <RouterLink class="sidebar-nav-item pl-6 text-gray-600" v-for="(dd, di) in props.navItem.dropdown" :key="index + di"
+                :to="dd.link" :class="active_style_dropdown(dd.link, route.path)">
                 <div class="icon-box">
                     <NavIcon :name="dd.icon" />
                 </div>

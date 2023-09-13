@@ -16,13 +16,13 @@ import ArrowRight from "../../icons/arrow-right.vue";
 const router = useRouter();
 
 // nextForm or authentication
-// function nextForm() {
-//   const id = router.currentRoute.value.params.id;
-//   if (typeof id == "string") {
-//     const to = "/form/" + (parseInt(id) + 1);
-//     router.replace(to);
-//   }
-// }
+function nextForm() {
+  const id = router.currentRoute.value.params.id;
+  if (typeof id == "string") {
+    const to = "/form/" + (parseInt(id) + 1);
+    router.replace(to);
+  }
+}
 
 function authentication() {
   const currentUser = useCurrentUser();
