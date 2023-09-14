@@ -6,7 +6,7 @@
         <!-- Dashboard main container with margin and full width -->
         <div class="w-full lg:ml-[272px] mt-20 overflow-auto py-12">
             <div class="w-full max-w-screen-lg mx-auto px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 place-items-center">
-                <!-- <MainContainer /> -->
+                <MainContainer />
                 <Chart />
                 <Due />
                 <WeekCashFlow />
@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts" setup>
-// import MainContainer from '../components/dashboard/main/main/MainContainer.vue';
+import MainContainer from '../components/dashboard/main/main/MainContainer.vue';
 import SideBarBlue from "../components/dashboard/sidebar-blue/SideBarBlue.vue";
 import Chart from "../components/dashboard/main/main/chart/Chart.vue";
 import WeekCashFlow from "../components/dashboard/main/main/week-cashflow/WeekCashFlow.vue";

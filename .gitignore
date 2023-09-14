@@ -24,13 +24,16 @@ dist-ssr
 *.sw?
 
 # Santo
-*.zip
 src/test/
-notes
-*.eps
-test.js
-.txt
 server/*
-Response.vue
 questions-answers/
 temp/
+
+*.zip
+*.eps
+*.gz
+
+notes
+test.js
+.txt
+Response.vue
