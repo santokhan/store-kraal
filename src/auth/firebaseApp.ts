@@ -5,16 +5,8 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-    apiKey: "AIzaSyA529IWXVycZ5mTfchHCzWZdGZhD6i7TGg",
-    authDomain: "kraalapp.firebaseapp.com",
-    databaseURL: "https://kraalapp-default-rtdb.firebaseio.com",
-    projectId: "kraalapp",
-    storageBucket: "kraalapp.appspot.com",
-    messagingSenderId: "246857133401",
-    appId: "1:246857133401:web:5a6872ce97130173697048",
-    measurementId: "G-D5J4JWCM0B",
-};
+console.log(import.meta.env);
+const firebaseConfig = JSON.parse(import.meta.env.VITE_FIREBASE_SERVICE_CREDENTIALS);
 
 // Initialize Firebase
 export const firebaseApp = initializeApp(firebaseConfig);
