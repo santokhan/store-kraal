@@ -34,7 +34,7 @@ const useChatInstanceStore: any = defineStore("chatInstance", () => {
             // !important
             async function APIRequest(message: string) {
                 let url = "http://localhost:9000";
-                url = "https://kraal-aggnuk-kts3.vercel.app";
+                url = "https://kraal-aggnuk-kts3.vercel.app"; // Santo's URL
                 return await fetch(url + "/chat?message=" + encodeURI(message), {
                     headers: {
                         Accept: "application/json",
