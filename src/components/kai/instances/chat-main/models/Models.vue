@@ -1,19 +1,18 @@
 <template>
-  <!-- KraalAI dropdown models -->
-  <Listbox v-model="selectedPerson">
-    <ListboxButton
-      class="w-full border border-gray-500 focus:border-green-300 bg-chatgpt-500 rounded-lg px-4 py-2 flex justify-between items-center text-gray-300">
-      {{ selectedPerson.name || "Select Model" }}
-      <AngleDown class="w-3" />
-    </ListboxButton>
-    <ListboxOptions class="p-1 bg-chatgpt-400 rounded-lg text-gray-300">
-      <ListboxOption class="w-full px-4 py-2 rounded hover:bg-chatgpt-500" v-for="person in people" :key="person.id"
-        :value="person" :disabled="person.unavailable">
-        {{ person.name }}
-      </ListboxOption>
-    </ListboxOptions>
-  </Listbox>
-</template>
+  <div class="relative w-80">
+    <Listbox v-model="selectedPerson">
+      <ListboxButton
+        class="w-full border border-gray-500 focus:border-green-300 bg-chatgpt-500 rounded-lg px-4 py-2 flex justify-between items-center text-gray-300">
+        {{ selectedPerson.name || "Select Model" }}
+        <AngleDown class="w-3" />
+      </ListboxButton>
+      <ListboxOptions class="p-1 bg-chatgpt-400 rounded-lg text-gray-300">
+        <ListboxOption class="w-full px-4 py-2 rounded hover:bg-chatgpt-500" v-for="person in people" :key="person.id"
+          :value="person" :disabled="person.unavailable">{{ person.name }}</ListboxOption>
+      </ListboxOptions>
+    </Listbox>
+  </div>
+</template> 
 
 <script lang="ts" setup>
 import { ref } from "vue";

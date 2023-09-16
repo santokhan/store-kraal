@@ -2,14 +2,12 @@ export interface Nav {
     name: string;
     link: string;
 }
-
 export interface DropList {
     name: string
     link: string
     icon: string
     title: string
 }
-
 export interface NavList {
     name: string
     link?: string
@@ -35,14 +33,14 @@ export const navList_with_dropdown: (NavList | NavList)[] = [
     { name: "KraalAI", link: "/kraalai", icon: "ai" },
     {
         name: "Reports", icon: "docs", dropdown: [
-            { name: "Profit & Loss", title: "Profit & Loss Statement", link: "/report/pl", icon: "bar_chart" },
-            { name: "Balance Sheets", title: "Balance Sheets", link: "/report/bl", icon: "chart_with_upwards_trend" },
-            { name: "Cash Flow", title: "Cash Flow Statement", link: "/report/cf", icon: "moneybag" },
-            { name: "13-Week CF", title: "13-Week Cash Flow", link: "/report/wcf", icon: "heavy_dollar_sign" },
             { name: "KPI", title: "Key Performance Indicators", link: "/report/kpi", icon: "chart_with_upwards_trend" },
+            { name: "13-Week CF", title: "13-Week Cash Flow", link: "/report/wcf", icon: "heavy_dollar_sign" },
+            { name: "Adhoc Reports", title: "Adhoc Reports", link: "/report/ar", icon: "mag" },
+            { name: "Balance Sheets", title: "Balance Sheets", link: "/report/bl", icon: "chart_with_upwards_trend" },
             { name: "Baseline Report", title: "Baseline Report", link: "/report/br", icon: "bar_chart" },
+            { name: "Cash Flow", title: "Cash Flow Statement", link: "/report/cf", icon: "moneybag" },
+            { name: "Profit & Loss", title: "Profit & Loss Statement", link: "/report/pl", icon: "bar_chart" },
             { name: "Reporting Pack", title: "Reporting Package", link: "/report/rp", icon: "package" },
-            { name: "Adhoc Reports", title: "Adhoc Reports", link: "/report/ar", icon: "mag" }
         ]
     },
 ]

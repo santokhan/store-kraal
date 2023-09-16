@@ -2,7 +2,6 @@ import { defineStore } from "pinia";
 import { reactive } from "vue";
 
 export const useBusinessFormStore = defineStore("businessForm", () => {
-
     const state = reactive<any>({
         firstName: "",
         lastName: "",
@@ -16,10 +15,8 @@ export const useBusinessFormStore = defineStore("businessForm", () => {
         confirmPass: "",
         message: "",
     })
-
     function updateBusinessForm(identifier: string, item: string) {
         state[identifier] = item;
     }
-
     return { state, updateBusinessForm }
 });

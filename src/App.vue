@@ -1,9 +1,8 @@
 <script lang="ts" setup>
 import { RouterView } from "vue-router";
+// console.log(import.meta.env)
 </script>
 
 <template>
-  <div class="cheyenne text-noom-text">
-    <RouterView :key="$route.path" />
-  </div>
+  <RouterView :key="$route.path" />
 </template>

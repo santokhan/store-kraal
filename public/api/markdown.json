@@ -1,0 +1,8 @@
+{
+    "status": "success",
+    "message": "Data successfully retrieved",
+    "data": {
+        "markdownData": "I'm sorry, but as a pure text-based AI model, I am unable to generate tables or format my responses using Markdown directly. However, I can try to assist you in creating a table by providing the necessary information and structure. Here's an example of a basic table in Markdown format:\n\n```\n| Column 1 Header | Column 2 Header | Column 3 Header |\n| --------------- | --------------- | --------------- |\n| Row 1, Col 1    | Row 1, Col 2    | Row 1, Col 3    |\n| Row 2, Col 1    | Row 2, Col 2    | Row 2, Col 3    |\n| Row 3, Col 1    | Row 3, Col 2    | Row 3, Col 3    |\n```\n\nTo create a table, you need to define the headers and content within the pipe (|) characters, separated by dashes for the header row. Each content row should be separated by dashes as well. You can replace the example values with your own data.\n\nLet me know if there's anything specific you would like me to assist you with regarding tables or if you have any other questions!",
+        "tables": []
+    }
+}

@@ -111,7 +111,7 @@ function nextForm() {
     warn,
     onSignIn: () => {
       // if signed in redirect to
-      router.replace("/dashboard");
+      router.replace("/kraalai");
     },
     onError: (error) => {
       invalid.value = warns[1];

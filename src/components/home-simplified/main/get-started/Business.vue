@@ -11,16 +11,16 @@
 <script lang="ts" setup>
 import { useRouter } from "vue-router";
 import { useCurrentUser } from "vuefire";
-import { RouterLink } from "vue-router";
+// import { RouterLink } from "vue-router";
 
-const props = defineProps<{ goToLogin: () => void }>();
+// const props = defineProps<{ goToLogin: () => void }>();
 const router = useRouter();
 
 // firebase
 function getStartedBusiness() {
   const currentUser = useCurrentUser();
   if (currentUser) {
-    router.replace("/dashboard");
+    router.replace("/kraalai");
   } else {
     router.replace("/business-signup");
   }

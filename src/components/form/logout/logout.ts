@@ -1,14 +1,12 @@
 import { getAuth, signOut } from "firebase/auth";
+import { log } from "../../funtions";
 
 function logout(redirect: () => void) {
     const auth = getAuth();
     signOut(auth).then(() => {
-        // pass a callback to redirect because `router.replace('/...')` only work on `setup`
+        // pass a callback function to redirect, because `router.push()` only support on `setup`
         redirect()
-        // console.log('Sign-out successful');
-    }).catch((error) => {
-        console.log(error);
-    });
+    }).catch((error) => { log(error); });
 }
 
 export default logout;

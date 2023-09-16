@@ -1,34 +1,34 @@
 import { collection, getDocs, getFirestore, onSnapshot, query, where } from 'firebase/firestore';
-import { getCurrentUser, useCurrentUser } from 'vuefire';
+import { getCurrentUser } from 'vuefire';
+import { fireStore } from './firebaseApp'
+import { log } from '../components/funtions';
 
-function userInfo() {
-    const db = getFirestore()
-    const colRef = collection(db, 'user');
-    const currentUser = getCurrentUser();
-    currentUser.then((user) => {
+/**
+ * Read user info by query with email === user.email
+ */
+async function userInfo() {
+    await getCurrentUser().then((user) => {
         const email = user?.email;
         if (email) {
             readInfo(email)
-            // console.log(email);
         }
     })
 
     // it will invoke immediately after defined
     function readInfo(email: string) {
-        // run query using `currentUser.email` 
+        const colRef = collection(fireStore, 'user');
         // use `"nuku@gmail.com"` for test only
         const q = query(colRef, where("email", "==", email))
 
-        // read snapshot after query
-        onSnapshot(q, (snapshot) => {
-            let books: any = []
+        const unSubscribe = onSnapshot(q, (snapshot) => {
+            let books: any[] = []
             snapshot.docs.forEach(doc => {
                 books.push({
                     ...doc.data(),
                     id: doc.id
                 })
             })
-            // console.log(books)
+            log(books)
         })
     }
 }
@@ -43,9 +43,9 @@ function getAllData() {
                 user.push(item.data())
             }
         })
-        console.log(user);
+        log(user);
     }).catch((err) => {
-        console.log(err.message);
+        log(err.message);
     })
 }
 

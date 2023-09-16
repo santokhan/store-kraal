@@ -5,21 +5,8 @@ import { RouterLink } from "vue-router";
 import LTitle from "./LTitle.vue";
 import LContainer from "./LContainer.vue";
 import LBox from "./LBox.vue";
-
 import Social from "./child/Social.vue";
-
-import CreatePDFFile from "../../pdf-generator/CreatePDF";
 import Kraal from "../../icons/kraal.vue";
-
-function handlePDF() {
-  CreatePDFFile((doc) => {
-    doc.save("kraal.pdf");
-  });
-}
-
-function handleDownloadPDF() {
-  window.open("/pdf", "_blank", "width=793.92,height=1122.24");
-}
 
 const len = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
 </script>
