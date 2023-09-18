@@ -193,7 +193,7 @@ function handleSubmit(e: Event) {
                 addBusinessUser({ firstName, lastName, email, jobTitle, company, organization, accounting, phone, message })
 
                 // redirect to slide welcome page
-                router.push('/account-linking');
+                router.push('/kraalai');
             },
             onUserExist: () => {
                 // set another warning under mail input
