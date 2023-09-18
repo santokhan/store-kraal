@@ -165,6 +165,18 @@ const protectedRoutes: ProtectedRoutes[] = [
     component: () => import("../views/Logout.vue"),
     meta: { requiresAuth: true },
   },
+  {
+    path: "/qb-link",
+    name: "qb-link",
+    component: () => import("../views/QuickbooksConnect.vue"),
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/qb-redirect",
+    name: "qb-redirect",
+    component: () => import("../views/QuickbooksRedirect.vue"),
+    meta: { requiresAuth: true },
+  },
 ]
 
 
