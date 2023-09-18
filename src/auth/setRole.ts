@@ -1,7 +1,8 @@
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "./firestore";
+import { log } from "../components/funtions";
 
-interface Role { email: string, role: string }
+export interface Role { email: string, role: string }
 
 async function addRoleToFirestore(role: Role) {
     try {
@@ -10,9 +11,9 @@ async function addRoleToFirestore(role: Role) {
             email: role.email,
             role: role.role
         });
-        console.log("Document written with ID: ", docRef.id);
+        log(`Document written with ID: ${docRef.id}`);
     } catch (error) {
-        console.error('Error adding role: ', error)
+        log(`Error adding role: ${error}`)
     }
 }
 

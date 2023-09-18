@@ -7,15 +7,14 @@
             <div class="icon-box">
                 <NavIcon :index="props.index" />
             </div>
-            <div class="w-full capitalize flex justify-start items-center">{{ props.navItem.name }}</div>
+            <div class="w-full capitalize flex justify-start items-center">{{ props.data.name }}</div>
             <AngleDown :class="['w-4 h-4 transition-transform ease-in-out', expand || '-rotate-90']" />
         </button>
 
-
         <!-- dropdown -->
-        <div class="space-y-2 border-l-4 border-l-kraal-blue-500 my-2" v-if="props.navItem.dropdown && expand">
-            <RouterLink class="sidebar-nav-item pl-6 text-gray-600" v-for="(dd, di) in props.navItem.dropdown" :key="index + di"
-                :to="dd.link" :class="active_style_dropdown(dd.link, route.path)">
+        <div class="space-y-2 border-l-4 border-l-kraal-blue-500 my-2" v-if="props.data.dropdown && expand">
+            <RouterLink class="sidebar-nav-item pl-6 text-gray-600" v-for="(dd, di) in props.data.dropdown"
+                :key="index + di" :to="dd.link" :class="active_style_dropdown(dd.link, route.path)" :title="dd.title">
                 <div class="icon-box">
                     <NavIcon :name="dd.icon" />
                 </div>
@@ -35,8 +34,7 @@ import AngleDown from "../../../icons/angle-down.vue";
 
 const expand = ref<boolean>(false)
 const route = useRoute();
-const props = defineProps<{ navItem: NavList, index: number }>()
-
+const props = defineProps<{ data: NavList, index: number }>()
 
 const tabIndex = ref<number>(0);
 function handleTab(n: number) {

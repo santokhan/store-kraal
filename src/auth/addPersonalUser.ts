@@ -16,7 +16,7 @@ interface BusinessUser {
     checkToolkit: boolean
 }
 
-interface Role { email: string, role: string }
+export interface Role { email: string, role: string }
 
 async function addBusinessUser(businessUser: BusinessUser) {
     try {

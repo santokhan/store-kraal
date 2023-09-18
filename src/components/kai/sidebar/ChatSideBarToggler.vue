@@ -1,15 +1,17 @@
 <template>
-    <a
-        class="flex p-3 items-center justify-center transition-colors duration-200 text-white text-sm rounded-md border border-white/20 h-11 w-11 flex-shrink-0 hover:bg-gray-500/10">
-        <!-- removed gap-3 and flex-grow to just show the icon -->
-        <Layout class="w-6" />
-        <span class="absolute border-none w-[1px] h-[1px] p-0 m-[-1px] overflow-hidden whitespace-nowrap overflow"
-            style="clip: rect(0px, 0px, 0px, 0px); overflow-wrap: normal;">Hide sidebar</span>
-    </a>
+    <button type="button" :class="[
+        'flex items-center justify-center pr-1',
+        'h-[2.75rem] min-h-[2.75rem] w-[1.5rem] min-w-[1.5rem] absolute left-full top-1/2 -translate-y-1/2 z-[11]',
+        'transition-colors duration-200 text-white text-sm rounded-r-full bg-chatgpt-600 z-10'
+    ]">
+        <i :class="['fa fa-angle-left transition-transform linear text-lg', store.getSidebar() ? 'scale-x-100' : '-scale-x-100']"></i>
+    </button>
 </template>
 
 <script setup lang="ts">
-import Layout from '../../icons/layout.vue'
+import { useChatSideBarStore } from '../../../stores/chatSideBar';
+
+const store = useChatSideBarStore()
 </script>
 
 <style scoped></style>

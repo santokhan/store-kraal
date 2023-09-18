@@ -1,17 +1,20 @@
 <template>
-    <label for="chatInput" class="w-full">
-        <button type="button" @click="store.addNewInstance"
-            class="w-full flex p-3 items-center gap-3 transition-colors duration-200 text-white cursor-pointer text-sm border rounded-md h-11 flex-grow flex-shrink-0 hover:bg-gray-500/10">
-            <Plus class="w-5" />New chat
-        </button>
-    </label>
+    <button type="button" @click="store.addNewInstance" :class="[
+        'text-white text-sm border border-gray-600 rounded-md',
+        'w-full h-[3rem] max-h-[3rem] overflow-hidden p-2',
+        'flex items-center gap-2',
+        'hover:bg-chatgpt-700 my-2'
+    ]">
+        <Plus class="w-5" />
+        <span class="whitespace-nowrap">New chat</span>
+    </button>
 </template>
 
 <script setup lang="ts">
-import { useChatSideBarStore } from '../../../stores/chatSideBar';
+import { useSideBarStoreAzureStore } from '../../../stores/sideBarStoreAzure';
 import Plus from '../../icons/plus.vue';
 
-const store = useChatSideBarStore()
+const store = useSideBarStoreAzureStore()
 </script>
 
 <style scoped></style>

@@ -5,90 +5,60 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <div class="space-y-3 col-span-2 lg:col-span-1">
-                <label class="flex items-center font-bold">
-                    <div>First Name</div>
-                    <div>*</div>
-                </label>
+                <label class="flex items-center font-bold"><span>First Name</span><span>*</span></label>
                 <input type="text" v-model="businessForm.firstName"
                     class="block w-full h-12 rounded-md border border-blue-300 p-4 focus:outline-none text-blue-950 bg-transparent">
                 <Warning :message="warn.firstName" />
             </div>
             <div class="space-y-3 col-span-2 lg:col-span-1">
-                <label class="flex items-center font-bold">
-                    <div>Last Name</div>
-                    <div>*</div>
-                </label>
+                <label class="flex items-center font-bold"><span>Last Name</span><span>*</span></label>
                 <input type="text" v-model="businessForm.lastName"
                     class="block w-full h-12 rounded-md border border-blue-300 p-4 focus:outline-none text-blue-950 bg-transparent">
                 <Warning :message="warn.lastName" />
             </div>
             <div class="space-y-3 col-span-2 lg:col-span-1">
-                <label class="flex items-center font-bold">
-                    <div>Work Email</div>
-                    <div>*</div>
-                </label>
+                <label class="flex items-center font-bold"><span>Work Email</span><span>*</span></label>
                 <input type="email" v-model="businessForm.email"
                     class="block w-full h-12 rounded-md border border-blue-300 p-4 focus:outline-none text-blue-950 bg-transparent">
                 <Warning :message="warn.email" />
             </div>
             <div class="space-y-3 col-span-2 lg:col-span-1">
-                <label class="flex items-center font-bold">
-                    <div>Job Title</div>
-                    <div>*</div>
-                </label>
+                <label class="flex items-center font-bold"><span>Job Title</span><span>*</span></label>
                 <input type="text" v-model="businessForm.jobTitle"
                     class="block w-full h-12 rounded-md border border-blue-300 p-4 focus:outline-none text-blue-950 bg-transparent">
                 <Warning :message="warn.jobTitle" />
             </div>
             <div class="space-y-3 col-span-2 lg:col-span-1">
-                <label class="flex items-center font-bold">
-                    <div>Company Name</div>
-                    <div>*</div>
-                </label>
+                <label class="flex items-center font-bold"><span>Company Name</span><span>*</span></label>
                 <input type="text" v-model="businessForm.company"
                     class="block w-full h-12 rounded-md border border-blue-300 p-4 focus:outline-none text-blue-950 bg-transparent">
                 <Warning :message="warn.company" />
             </div>
             <div class="space-y-3 col-span-2 lg:col-span-1">
-                <label class="flex items-center font-bold">
-                    <div>Organization Type</div>
-                    <div>*</div>
-                </label>
+                <label class="flex items-center font-bold"><span>Organization Type</span><span>*</span></label>
                 <OrgType :organizationType="organizationType" />
                 <Warning :message="warn.organization" />
             </div>
             <div class="space-y-3 col-span-2 lg:col-span-1">
-                <label class="flex items-center font-bold">
-                    <div>Accounting System</div>
-                    <div>*</div>
-                </label>
+                <label class="flex items-center font-bold"><span>Accounting System</span><span>*</span></label>
                 <Accounting :accounting="accounting" />
                 <Warning :message="warn.accounting" />
             </div>
             <div class="space-y-3 col-span-2 lg:col-span-1">
-                <label class="flex items-center font-bold">
-                    <div>Phone</div>
-                    <div>*</div>
-                </label>
+                <label class="flex items-center font-bold"><span>Phone</span><span>*</span></label>
                 <input type="text" v-model="businessForm.phone"
                     class="block w-full h-12 rounded-md border border-blue-300 p-4 focus:outline-none text-blue-950 bg-transparent">
                 <Warning :message="warn.phone" />
             </div>
             <div class="space-y-3 col-span-2 lg:col-span-1">
-                <label class="flex items-center font-bold">
-                    <div>Password</div>
-                    <div>*</div>
-                </label>
-                <input type="text" v-model="businessForm.pass"
+                <label class="flex items-center font-bold"><span>Password</span><span>*</span></label>
+                <input type="text" v-model="businessForm.pass" name="password"
                     class="block w-full h-12 rounded-md border border-blue-300 p-4 focus:outline-none bg-transparent">
                 <Warning :message="warn.pass" />
             </div>
             <div class="space-y-3 col-span-2 lg:col-span-1">
-                <label class="flex items-center font-bold">
-                    <div>Confirm Password</div>
-                    <div>*</div>
-                </label>
-                <input type="password" v-model="businessForm.confirmPass"
+                <label class="flex items-center font-bold"><span>Confirm Password</span><span>*</span></label>
+                <input type="password" v-model="businessForm.confirmPass" name="confirm_password"
                     class="block w-full h-12 rounded-md border border-blue-300 p-4 focus:outline-none bg-transparent">
                 <Warning :message="warn.confirmPass" />
             </div>
@@ -98,10 +68,9 @@
                     class="block w-full h-28 rounded-md border border-blue-300 p-4 focus:outline-none bg-transparent"></textarea>
             </div>
             <div class="col-span-2 flex flex-col items-center gap-5 text-center text-gray-800 pb-4">
-                <button type="submit"
-                    class="block h-10 px-20 font-semibold bg-kraal-blue-500 text-white rounded-md hover:bg-kraal-blue-700 my-2 uppercase"
-                    :disabled="disabled">{{ submit
-                    }}</button>
+                <button type="submit" :disabled="disabled"
+                    class="block h-10 px-20 font-semibold bg-kraal-blue-500 text-white rounded-md hover:bg-kraal-blue-700 my-2 uppercase">
+                    {{ submit }}</button>
                 <div class="space-y-2">
                     <p class="text-sm">Already have an account? <RouterLink to="/signin"
                             class="underline decoration-2 underline-offset-4 text-kraal-blue-500">Sign In
@@ -134,7 +103,6 @@ const router = useRouter()
 const regexEmail = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,20}$/
 const submit = ref<string>('Create account')
 const disabled = ref<boolean>(false)
-
 
 const businessForm = reactive({
     firstName: "",

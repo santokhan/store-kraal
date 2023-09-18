@@ -14,7 +14,7 @@
           <Warning :message="warn" />
         </div>
 
-        <QNextButtonBlue :nextForm="() => { }" text="Forgot password" />
+        <QNextButtonBlue :nextForm="handleForgotPassword" text="Forgot password" />
         <div class="text-center">
           Go Back to
           <RouterLink to="/signin" class="text-kraal-blue-500 underline hover:no-underline">Sign In</RouterLink>
@@ -33,8 +33,8 @@ import Success from "../steps/layout/Success.vue";
 import MobileView from "../layouts/MobileView.vue";
 import HeaderSimple from "../../shared/header/HeaderSimplified.vue";
 import Lock from "../../icons/lock.vue";
-import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import QNextButtonBlue from "../steps/layout/QNextButtonBlue.vue";
+import ForgotPassword from '../../../auth/forgotPassword'
 
 // `v-model="email"`
 const email = ref<string>("");
@@ -52,22 +52,17 @@ function emailValidation(inputEmail: string) {
   }
 }
 
-function handleForgotPassword() {
+function handleForgotPassword(e: any) {
+  e.preventDefault();
+
   emailValidation(email.value);
 
   if (warn.value) {
     return false;
   } else {
-    // firebase
-    const auth = getAuth();
-    sendPasswordResetEmail(auth, email.value)
-      .then(() => {
-        // password reset email sent
-        mailSent.value = "Password reset email sent.";
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    ForgotPassword(email.value, () => {
+      mailSent.value = `Email sent to ${email.value}`
+    })
   }
 }
 </script>

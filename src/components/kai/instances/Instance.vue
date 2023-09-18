@@ -1,17 +1,55 @@
 <template>
-  <!-- Do not use parent div in this instance -->
-  <ChatMain v-if="!props.hidden" />
+    <!-- !Do not use parent div in this instance -->
+    <div ref="chatMain" class="h-full overflow-y-auto text-white">
+        <div v-if="!store.getActiveNavIndex()" class="max-w-4xl mx-auto px-4 pt-24 flex justify-center">
+            <Models />
+        </div>
 
-  <Typewriter />
-
-  <ChatFooter v-if="!props.hidden" />
+        <div class="relative text-gray-200">
+            <div v-for="(chat, index) in chatMessage" :key="index">
+                <div v-if="chat.author === 'User'" class="border-b border-gray-800">
+                    <div class="flex gap-4 max-w-4xl mx-auto px-4 py-7">
+                        <User class="w-6 min-w-[1.5rem] text-gray-400" />{{ chat.message }}
+                    </div>
+                </div>
+                <div v-if="chat.author === 'Assistant'" class="bg-chatgpt-400 border-b border-gray-800">
+                    <div class="max-w-4xl mx-auto px-4 py-7 flex gap-4 items-start w-full">
+                        <!-- <RobotStatic v-if="chat.stopTypeWriter" :robot="chat.robot" /> -->
+                        <RobotWriter :robot="chat.message" :eleScrollTop="eleScrollTop" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ChatFooter />
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
+import { ref } from "vue";
+import { useChatSideBarStore } from "../../../stores/chatSideBar";
 import ChatFooter from "../chat-footer/ChatFooter.vue";
-import Typewriter from "../typewriter/Typewriter.vue";
-import ChatMain from "./chat-main/ChatMain.vue";
+import Models from "./chat-main/models/Models.vue";
+import User from '../../icons/user-pro.vue';
+import RobotWriter from "../typewriter/robot-writer/RobotWriter.vue";
+import { useRoute } from "vue-router";
+import { useSideBarStoreAzureStore } from "../../../stores/sideBarStoreAzure";
+import { storeToRefs } from "pinia";
 
-interface Props { hidden: boolean }
-const props = defineProps<Props>();
+const store = useChatSideBarStore()
+const sidebarStore = useSideBarStoreAzureStore()
+const { chatMessage } = storeToRefs(sidebarStore)
+const route = useRoute()
+if (typeof route.params.id === 'string') {
+    // console.log(route.params.id);
+    sidebarStore.emptyChatMessage()
+    sidebarStore.assignChatMessage(parseInt(route.params.id))
+}
+
+const chatMain: any = ref(null);
+// Will be called on typewriter
+function eleScrollTop() {
+    const ele = chatMain.value;
+    const rect = ele.getBoundingClientRect();
+    ele.scrollTop += rect.height;
+}
 </script>
