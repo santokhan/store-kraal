@@ -97,6 +97,7 @@ import Warning from '../steps/layout/warnings/Warning.vue';
 import addRoleToFirestore from '../../../auth/setRole';
 import addBusinessUser from '../../../auth/addBusinessUser'
 import { useBusinessFormStore } from '../../../stores/BusinessForm';
+import api from "../../../kraal-api/azureAPI";
 
 const bussinessFormStore = useBusinessFormStore()
 const router = useRouter()
@@ -186,14 +187,21 @@ function handleSubmit(e: Event) {
                 disabled.value = true;
 
                 // add role for user
-                addRoleToFirestore({ email: businessForm.email, role: 'business' })
+                // addRoleToFirestore({ email: businessForm.email, role: 'business' })
 
                 // add business user data to firestore
                 const { firstName, lastName, email, jobTitle, company, organization, accounting, phone, message, } = businessForm;
-                addBusinessUser({ firstName, lastName, email, jobTitle, company, organization, accounting, phone, message })
+                // addBusinessUser({ firstName, lastName, email, jobTitle, company, organization, accounting, phone, message })
+                api.auth.signup({
+                    firstName: firstName,
+                    lastName: lastName,
+                    birthDate: "2000-01-01",
+                    businessName: company,
+                });
+
 
                 // redirect to slide welcome page
-                router.push('/kraalai');
+                router.push('/qb-link');
             },
             onUserExist: () => {
                 // set another warning under mail input
