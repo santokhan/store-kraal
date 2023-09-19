@@ -26,6 +26,9 @@ export default {
     main: {
         getApiVersion: () => get('/'),
     },
+    auth: {
+        signup: (userData: any) => post('/auth/signup', userData),
+    },
     chat: {
         getChats: () => get('/chats'),
         getChat: (id: number) => get('/chats', { params: { id: id } }),
