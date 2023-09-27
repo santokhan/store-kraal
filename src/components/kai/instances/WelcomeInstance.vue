@@ -20,21 +20,19 @@
             </div>
         </div>
     </div>
-    <ChatFooter :chatId="props.chatId" :assignChat="assignChat" />
+    <ChatFooter :chatId="recentChatId" />
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref } from "vue";
 import ChatFooter from "../chat-footer/ChatFooter.vue";
 import User from '../../icons/user-pro.vue';
 import RobotWriter from "../typewriter/robot-writer/RobotWriter.vue";
-import azureAPI from "../../../kraal-api/azureAPI";
-import { useSideBarStoreAzureStore } from "../../../stores/sideBarStoreAzure";
+import { useWelcomeChatStore } from "../../../stores/sideBarStoreAzure";
 import { storeToRefs } from "pinia";
 
-const props = defineProps<{ chatId: any }>()
-const store = useSideBarStoreAzureStore()
-const { chatMessages } = storeToRefs(store)
+const store = useWelcomeChatStore()
+const { recentChatId, chatMessages } = storeToRefs(store)
 
 const chatMain: any = ref(null);
 // Will be called on typewriter
@@ -43,11 +41,4 @@ function eleScrollTop() {
     const rect = ele.getBoundingClientRect();
     ele.scrollTop += rect.height;
 }
-
-const messages = ref<any[]>()
-async function assignChat() {
-    messages.value = await azureAPI.chat.getChatMessages(props.chatId)
-}
-onMounted(assignChat)
-onUnmounted(() => { messages.value = [] })
 </script>

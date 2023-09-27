@@ -27,11 +27,11 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import Telegram from "../../icons/telegram.vue";
-import { useSideBarStoreAzureStore } from "../../../stores/sideBarStoreAzure";
+import { useWelcomeChatStore } from "../../../stores/sideBarStoreAzure";
 
-const props = defineProps<{ chatId: any, assignChat: () => void }>()
+const props = defineProps<{ chatId: any }>()
 
-const store = useSideBarStoreAzureStore()
+const store = useWelcomeChatStore()
 const hiddenDiv: any = ref<null | HTMLElement>(null);
 const input = ref<string>("");
 const textarea: any = ref(null);
@@ -46,7 +46,6 @@ async function handleSubmit(e: any) {
 
     if (typeof props.chatId !== "number") return;
     await store.sendChatMessage(props.chatId, input.value)
-    props.assignChat()
 
     // Clear <textarea> afer submit & set initial height
     input.value = "";

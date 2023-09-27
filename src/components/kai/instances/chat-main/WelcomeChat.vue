@@ -3,7 +3,6 @@
         <div class="max-w-4xl mx-auto px-4 flex justify-center items-center">
             <h2 class="text-2xl lg:text-4xl font-semibold text-white text-center opacity-30">KraalAI</h2>
         </div>
-        {{ chatId }}
         <div class="w-full max-w-4xl mx-auto mt-auto bg-chatgpt-500 px-4 pt-2">
             <form @submit="handleSubmit">
                 <div class="rounded-xl shadow bg-chatgpt-400">
@@ -34,12 +33,12 @@ import Telegram from '../../../icons/telegram.vue';
 import AttachmentPreview from './AttachmentPreview.vue';
 import FileInputBox from './FileInputBox.vue';
 import { useRoute } from 'vue-router';
-import { useSideBarStoreAzureStore } from '../../../../stores/sideBarStoreAzure';
+import { useSideBarStoreAzureStore, useWelcomeChatStore } from '../../../../stores/sideBarStoreAzure';
+import { storeToRefs } from 'pinia';
 
 const input = ref<string>("")
 const fileInput = ref<any[]>([])
 const route = useRoute()
-const props = defineProps<{ hideWelcomeChat: () => void }>()
 
 const chatId = ref<number>()
 function assignInstanceId() {
@@ -50,6 +49,8 @@ function assignInstanceId() {
 watch(() => route.params.id, assignInstanceId)
 
 const store = useSideBarStoreAzureStore()
+const chatStore = useWelcomeChatStore()
+const { chatMessages } = storeToRefs(chatStore)
 
 // User input file handling
 function handleChange(e: any) {
@@ -71,10 +72,11 @@ function handleFiles(index: number) {
 async function handleSubmit(e: any) {
     e.preventDefault()
     const formData = { message: input.value, files: fileInput.value.map(e => e) }
-    
+
+
     // switch to original chat instance
-    props.hideWelcomeChat()
-    await store.create_chat_and_send_message(input.value)
+    const chat = await store.create_chat_and_send_message()
+    chatStore.sendChatMessage(chat.id, input.value)
 
     // TODO: clear input after form submit complete
     input.value = ""

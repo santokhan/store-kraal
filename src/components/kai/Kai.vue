@@ -2,7 +2,7 @@
     <div class="fixed left-0 top-0 right-0 bottom-0 bg-chatgpt-500 z-50 flex">
         <ChatSidebar />
         <div class="flex flex-col w-full h-full">
-            <ChatInstance :chatId="parseInt(typeof id === 'string' ? id : id[0])" />
+            <ChatInstance :chatId="id" />
             <QuestionIcon />
         </div>
     </div>
@@ -19,10 +19,11 @@ import { useRoute } from "vue-router"
 const store = useSideBarStoreAzureStore()
 store.assignSideBarData()
 const route = useRoute()
-const id = route.params.id
+const paramsId = route.params.id
+const id: number = typeof paramsId === 'string' ? parseInt(paramsId) : parseInt(paramsId[0])
 
 onMounted(() => {
-    if (typeof id === 'string') store.assignChatMessage(parseInt(id));
+    store.assignChatMessage(id);
     // Set `background: bg-chatgpt-500` on /Kai page for Apple phones
     document.body.style.background = "rgb(52 53 65)"
 })
