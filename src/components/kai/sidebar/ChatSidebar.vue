@@ -1,5 +1,5 @@
 <template>
-	<div class="absolute lg:relative z-[60] lg:z-0">
+	<div class="absolute lg:relative z-[2] lg:z-[1]">
 		<ChatSideBarToggler @click="store.toggleSideBarDesktop" />
 		<SidebarContainer :class="dyClass(state.sidebarDesktop)">
 			<NewChat />

@@ -41,8 +41,8 @@ export default {
         getChats: () => get('/chats'),
         getChat: (id: number) => get('/chats', { params: { id: id } }),
         createChat: (name: string) => post('/chats', { name: name }),
-        editChat: (id: number, name: string) => put(`/chat/${id}`, { name: name }),
-        deleteChat: (id: number) => deleteReq(`/chat/${id}`),
+        editChat: (id: number, name: string) => put(`/chats/${id}`, { name: name }),
+        deleteChat: (id: number) => deleteReq(`/chats/${id}`),
 
         getChatMessages: (chatId: number) => get('/chatmessages', { params: { chatid: chatId } }),
         getChatMessage: (id: number) => get('/chatmessages', { params: { id: id } }),

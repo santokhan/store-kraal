@@ -17,11 +17,10 @@
             <button @click="edit = true" type="button" class="w-full h-full p-1 hover:opacity-50">
                 <ChatEdit />
             </button>
-            <button @click="store.forwardMessage(props.chat.id)" type="button" class="w-full h-full p-1 hover:opacity-50">
+            <button @click="edit = !edit" type="button" class="w-full h-full p-1 hover:opacity-50">
                 <ChatUpload />
             </button>
-            <button @click="store.deleteMessage(props.chat.id, props.chat.id)" type="button"
-                class="w-full h-full p-1 hover:opacity-50">
+            <button @click="() => { handleDelete(props.chat.id) }" type="button" class="w-full h-full p-1 hover:opacity-50">
                 <ChatDelete />
             </button>
         </div>
@@ -29,29 +28,33 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import { useChatSideBarStore } from "../../../../../stores/chatSideBar";
-import ChatEdit from "../../../../icons/chat-edit.vue";
-import ChatUpload from "../../../../icons/chat-upload.vue";
-import ChatDelete from "../../../../icons/chat-delete.vue";
-import Chat from "../../../../icons/chat.vue";
-import NavText from "../NavText.vue";
-import { ChatList } from "../../../../../stores/chatSideBarTypes";
-import { SideBarData } from "../../../../../kraal-api/types.azureAPI";
-import Ellipse from "./Ellipse.vue";
+import { ref } from "vue"
+import ChatEdit from "../../../../icons/chat-edit.vue"
+import ChatUpload from "../../../../icons/chat-upload.vue"
+import ChatDelete from "../../../../icons/chat-delete.vue"
+import NavText from "../NavText.vue"
+import { SideBarData } from "../../../../../kraal-api/types.azureAPI"
+import Ellipse from "./Ellipse.vue"
+import { useSideBarStoreAzureStore } from "../../../../../stores/sideBarStoreAzure"
+import { useRouter } from "vue-router"
 
-const props = defineProps<{ chat: SideBarData, color: string }>()
+const props = defineProps<{ chat: SideBarData, color: string, id: number }>()
 const edit = ref<boolean>(false)
-const store = useChatSideBarStore()
+const store = useSideBarStoreAzureStore()
 // make chat history to reactive state
 const navText = ref<string>(props.chat.name);
 
 function handleSubmit(e: any) {
-    e.preventDefault();
-    // change the nav text on submit
-    store.editMessage(props.chat.id, navText.value, "props.chat.id")
-    // set active nav item false, set edit status false
-    edit.value = false;
+    e.preventDefault()
+    store.editChatName(props.id, navText.value)
+    edit.value = false
+}
+
+const router = useRouter()
+function handleDelete(id: number) {
+    store.deleteSideBarInstance(id)
+    // navigate to welcome page when chat delete
+    router.push("/kraalai")
 }
 </script>
 

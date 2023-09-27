@@ -25,15 +25,15 @@
 </template>  
 
 <script lang="ts" setup>
-import { ref, watchEffect } from "vue";
+import { ref } from "vue";
 import Telegram from "../../icons/telegram.vue";
-import { useChatSideBarStore } from "../../../stores/chatSideBar";
-import Attachment from "../../icons/attachment.vue";
+import { useSideBarStoreAzureStore } from "../../../stores/sideBarStoreAzure";
 
-const store = useChatSideBarStore()
+const props = defineProps<{ chatId: any, assignChat: () => void }>()
+
+const store = useSideBarStoreAzureStore()
 const hiddenDiv: any = ref<null | HTMLElement>(null);
 const input = ref<string>("");
-const input2 = ref<string>("");
 const textarea: any = ref(null);
 
 function handleChange(e: any) {
@@ -41,19 +41,15 @@ function handleChange(e: any) {
     e.target.style.height = `${hiddenDiv.value.scrollHeight}px`;
 }
 
-function handleSubmit(e: any) {
+async function handleSubmit(e: any) {
     e.preventDefault();
-    store.updateChatList(input.value)
+
+    if (typeof props.chatId !== "number") return;
+    await store.sendChatMessage(props.chatId, input.value)
+    props.assignChat()
 
     // Clear <textarea> afer submit & set initial height
     input.value = "";
     textarea.value.style.height = "24px";
 }
-
-watchEffect(() => {
-    // Will make <textarea> empty on switch or delete instance 
-    if (store.getActiveNavIndex()) {
-        input.value = ""
-    }
-})
 </script>
