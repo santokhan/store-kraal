@@ -1,7 +1,7 @@
 <template>
     <form @submit="handleSubmit"
         class="w-full rounded-xl bg-[#2463eb0a] px-6 lg:px-10 py-2 lg:py-6 my-10 lg:my-0 backdrop-blur-sm text-blue-950">
-        <p class="my-4 text-blue-950">Create your account and connect with Kraal’s dedicated enterprise team.</p>
+        <p class="my-4 text-blue-950">Create your account to connect with Kraal’s dedicated enterprise team.</p>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <div class="space-y-3 col-span-2 lg:col-span-1">
@@ -62,14 +62,9 @@
                     class="block w-full h-12 rounded-md border border-blue-300 p-4 focus:outline-none bg-transparent">
                 <Warning :message="warn.confirmPass" />
             </div>
-            <div class="col-span-2 space-y-4">
-                <label class="flex items-center font-bold">Tell us how we can help.</label>
-                <textarea type="text" v-model="businessForm.message" maxlength="300"
-                    class="block w-full h-28 rounded-md border border-blue-300 p-4 focus:outline-none bg-transparent"></textarea>
-            </div>
             <div class="col-span-2 flex flex-col items-center gap-5 text-center text-gray-800 pb-4">
                 <button type="submit" :disabled="disabled"
-                    class="block h-10 px-20 font-semibold bg-kraal-blue-500 text-white rounded-md hover:bg-kraal-blue-700 my-2 uppercase">
+                    class="block h-10 px-20 font-semibold bg-kraal-blue-500 text-white rounded-md hover:bg-kraal-blue-700 my-2 capitalize">
                     {{ submit }}</button>
                 <div class="space-y-2">
                     <p class="text-sm">Already have an account? <RouterLink to="/signin"
@@ -94,14 +89,12 @@ import { reactive, ref, watch } from 'vue';
 import handleSignUp from '../../../auth/signup';
 import { useRouter } from 'vue-router';
 import Warning from '../steps/layout/warnings/Warning.vue';
-import addRoleToFirestore from '../../../auth/setRole';
-import addBusinessUser from '../../../auth/addBusinessUser'
 import { useBusinessFormStore } from '../../../stores/BusinessForm';
 import api from "../../../kraal-api/azureAPI";
 
 const bussinessFormStore = useBusinessFormStore()
 const router = useRouter()
-const regexEmail = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,20}$/
+// const regexEmail = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,20}$/
 const submit = ref<string>('Create account')
 const disabled = ref<boolean>(false)
 
@@ -117,7 +110,7 @@ const businessForm = reactive({
     pass: "",
     confirmPass: "",
     message: "",
-});
+})
 const warn = reactive({
     firstName: "",
     lastName: "",
@@ -130,9 +123,9 @@ const warn = reactive({
     pass: "",
     confirmPass: "",
     message: "",
-});
+})
 
-
+// Select > options
 function organizationType(org: string) {
     businessForm.organization = org;
 }
@@ -156,13 +149,15 @@ watch(businessForm, async (newInpt, oldInput) => {
     warn.accounting = businessForm.accounting && "";
     warn.phone = businessForm.phone && "";
 
-    if (businessForm.pass) {
-        if (regexEmail.test(businessForm.pass)) {
-            warn.pass = "";
-        } else {
-            warn.pass = "Password should include upper case, lower case, number, and minimun length of 8";
-        }
-    }
+    // Turn off client side password validation and show firebase validation on error
+    // if (businessForm.pass) {
+    //     if (regexEmail.test(businessForm.pass)) {
+    //         warn.pass = "";
+    //     } else {
+    //         warn.pass = "Password should include upper case, lower case, number, and minimun length of 8";
+    //     }
+    // }
+
     if (businessForm.confirmPass) {
         if (businessForm.pass === businessForm.confirmPass) {
             warn.confirmPass = "";
@@ -193,23 +188,21 @@ function handleSubmit(e: Event) {
                 const { firstName, lastName, email, jobTitle, company, organization, accounting, phone, message, } = businessForm;
                 // addBusinessUser({ firstName, lastName, email, jobTitle, company, organization, accounting, phone, message })
                 api.auth.signup({
-                    firstName: firstName,
-                    lastName: lastName,
+                    firstName,
+                    lastName,
                     birthDate: "2000-01-01",
                     businessName: company,
                 });
 
-
                 // redirect to slide welcome page
                 router.push('/qb-link');
             },
-            onUserExist: () => {
+            onUserExist: (message) => {
                 // set another warning under mail input
-                warn.email = 'User already exist';
+                warn.email = message;
             }
         });
     }
-
 
     if (businessForm.firstName === '') {
         warn.firstName = "Enter your first name";
