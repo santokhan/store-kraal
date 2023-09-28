@@ -22,6 +22,14 @@ async function post(url: string, data?: Record<string, unknown>) {
     return client.post(url, data).then(res => res.data);
 }
 
+async function put(url: string, data?: Record<string, unknown>) {
+    return client.put(url, data).then(res => res.data);
+}
+
+async function deleteReq(url: string, data?: Record<string, unknown>) {
+    return client.delete(url, data).then(res => res.data);
+}
+
 export default {
     main: {
         getApiVersion: () => get('/'),
@@ -33,6 +41,8 @@ export default {
         getChats: () => get('/chats'),
         getChat: (id: number) => get('/chats', { params: { id: id } }),
         createChat: (name: string) => post('/chats', { name: name }),
+        editChat: (id: number, name: string) => put(`/chats/${id}`, { name: name }),
+        deleteChat: (id: number) => deleteReq(`/chats/${id}`),
 
         getChatMessages: (chatId: number) => get('/chatmessages', { params: { chatid: chatId } }),
         getChatMessage: (id: number) => get('/chatmessages', { params: { id: id } }),

@@ -53,7 +53,6 @@ import { ref } from 'vue'
 import { businessUserInfo } from '../../../firebase/read.business.user'
 import Logout from '../../icons/logout.vue';
 import NavLink from './footer/NavLink.vue'
-import { RouterLink } from 'vue-router';
 import IconBox from '../../shared/header/dashbboard/absolutesidebar/icon/IconBox.vue';
 import Card from '../../icons/card.vue';
 import Team from '../../icons/team.vue';
@@ -65,14 +64,12 @@ const settings = ref(null)
 
 function handleOpenSettings() {
     openSettings.value = !openSettings.value
-
     onClickOutside(settings, () => {
         openSettings.value = false
     }, { ignore: [opener] })
 }
 
 const userData = ref<any>()
-
 businessUserInfo.getUserData(data => {
     if (data) { userData.value = data }
 })

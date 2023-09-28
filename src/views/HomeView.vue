@@ -27,7 +27,7 @@ const router = useRouter();
 function goToLogin() {
   const currentUser = useCurrentUser();
   if (currentUser) {
-    router.push("/dashboard");
+    router.push("/kraalai");
   } else {
     router.push("/signin");
   }

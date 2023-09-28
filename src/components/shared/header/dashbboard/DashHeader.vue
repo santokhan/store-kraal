@@ -15,8 +15,7 @@
         </RouterLink>
 
         <p><!-- empty div for grid --></p>
-
-        <ProfileOnHeader />
+        <!-- <ProfileOnHeader /> -->
     </div>
 
     <AbsoluteSidebar :class="mDropodown" ref="target" />
@@ -24,14 +23,12 @@
   
 <script lang="ts" setup>
 import { provide, ref } from "vue";
-import { RouterLink, useRouter } from "vue-router";
+import { RouterLink } from "vue-router";
 import Kraal from "../../../icons/kraal.vue";
 import { onClickOutside } from "@vueuse/core";
 import Button from "../../../dashboard/main/header/button/Button.vue";
 import AbsoluteSidebar from "./absolutesidebar/AbsoluteSidebar.vue";
-import ProfileOnHeader from "../profile/ProfileOnHeader.vue";
 
-const router = useRouter();
 // class name as value
 const mDropodown = ref<string>('hidden');
 function handleMDropdown() {

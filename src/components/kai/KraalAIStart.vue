@@ -2,32 +2,34 @@
     <div class="fixed left-0 top-0 right-0 bottom-0 bg-chatgpt-500 z-50 flex">
         <ChatSidebar />
         <div class="flex flex-col w-full h-full">
-            <ChatInstance :chatId="id" />
+            <WelcomeChat v-if="recentChatId === 0" />
+            <WelcomeInstance v-else />
             <QuestionIcon />
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
-import { onMounted, onUnmounted } from "vue"
-import ChatInstance from "./instances/Instance.vue"
+import { onMounted, onUnmounted, ref } from "vue"
+import WelcomeInstance from "./instances/WelcomeInstance.vue"
 import ChatSidebar from "./sidebar/ChatSidebar.vue"
-import { useSideBarStoreAzureStore } from '../../stores/sideBarStoreAzure'
+import WelcomeChat from "./instances/chat-main/WelcomeChat.vue"
 import QuestionIcon from './instances/QuestionIcon.vue'
-import { useRoute } from "vue-router"
+import { useSideBarStoreAzureStore, useWelcomeChatStore } from "../../stores/sideBarStoreAzure"
+import { storeToRefs } from "pinia"
 
 const store = useSideBarStoreAzureStore()
+const chatStore = useWelcomeChatStore()
 store.assignSideBarData()
-const route = useRoute()
-const paramsId = route.params.id
-const id: number = typeof paramsId === 'string' ? parseInt(paramsId) : parseInt(paramsId[0])
+const { recentChatId, chatMessages } = storeToRefs(chatStore)
 
 onMounted(() => {
-    store.assignChatMessage(id);
     // Set `background: bg-chatgpt-500` on /Kai page for Apple phones
     document.body.style.background = "rgb(52 53 65)"
 })
 onUnmounted(() => { document.body.style.background = "" })
+
+
 </script>
 
 <style scoped></style>

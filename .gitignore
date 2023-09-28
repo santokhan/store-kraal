@@ -35,3 +35,5 @@ Response.vue
 questions-answers/
 temp/
 .env
+# Local Netlify folder
+.netlify

@@ -29,8 +29,7 @@ export const navList2: NavList[] = [
 ]
 
 export const navList_with_dropdown: (NavList | NavList)[] = [
-    { name: "Home", link: "/dashboard", icon: "home" },
-    { name: "KraalAI", link: "/kraalai", icon: "ai" },
+    { name: "Home", link: "/kraalai", icon: "home" },
     {
         name: "Reports", icon: "docs", dropdown: [
             { name: "KPI", title: "Key Performance Indicators", link: "/report/kpi", icon: "chart_with_upwards_trend" },

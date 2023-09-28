@@ -11,7 +11,7 @@
 
         <!-- Input Email -->
         <div class="space-y-3">
-          <input type="email" name="email" id="email" placeholder="doe@domain.com" maxlength="32" v-model="user.email"
+          <input type="email" name="email" id="email" placeholder="someone@kraal.com" maxlength="32" v-model="user.email"
             class="input-default" autocomplete="false" />
           <Warning :message="warn.email" />
         </div>
@@ -31,14 +31,14 @@
         <Warning :message="invalid" />
 
         <div class="flex items-center gap-2 px-1">
-          <RouterLink to="/forgot-password" class="text-kraal-blue-500 text-sm underline hover:no-underline">Forgot you
+          <RouterLink to="/forgot-password" class="text-kraal-blue-500 text-sm hover:underline">Forgot you
             password?</RouterLink>
         </div>
         <QNextButton :nextForm="nextForm" :disabled="disabled" text="Sign In" />
         <div class="text-center">
           Don't have a account?
           <!-- Go to signup page if don't have an account. -->
-          <RouterLink to="/business-signup" class="text-kraal-blue-500 underline hover:no-underline">Sign Up</RouterLink>
+          <RouterLink to="/business-signup" class="text-kraal-blue-500 hover:underline">Sign Up</RouterLink>
         </div>
       </form>
     </MobileView>

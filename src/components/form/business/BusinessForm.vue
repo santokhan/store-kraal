@@ -1,83 +1,78 @@
 <template>
     <form @submit="handleSubmit"
-        class="w-full rounded-xl bg-[#2463eb0a] px-6 lg:px-10 py-2 lg:py-6 my-10 lg:my-0 backdrop-blur-sm text-blue-950">
-        <p class="my-4 text-blue-950">Create your account and connect with Kraal’s dedicated enterprise team.</p>
+        class="w-full rounded-xl bg-[#2463eb0a] p-6 lg:p-10 my-10 lg:my-0 backdrop-blur-sm text-blue-950">
+        <p class="text-blue-950">Create your account to connect with Kraal’s dedicated enterprise team.</p>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <div class="space-y-3 col-span-2 lg:col-span-1">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-5 gap-y-5 mt-5">
+            <div class="space-y-2 col-span-2 lg:col-span-1">
                 <label class="flex items-center font-bold"><span>First Name</span><span>*</span></label>
                 <input type="text" v-model="businessForm.firstName"
-                    class="block w-full h-12 rounded-md border border-blue-300 p-4 focus:outline-none text-blue-950 bg-transparent">
+                    class="block w-full h-12 rounded-xl border border-blue-300 p-4 focus:outline-none text-blue-950 bg-transparent">
                 <Warning :message="warn.firstName" />
             </div>
-            <div class="space-y-3 col-span-2 lg:col-span-1">
+            <div class="space-y-2 col-span-2 lg:col-span-1">
                 <label class="flex items-center font-bold"><span>Last Name</span><span>*</span></label>
                 <input type="text" v-model="businessForm.lastName"
-                    class="block w-full h-12 rounded-md border border-blue-300 p-4 focus:outline-none text-blue-950 bg-transparent">
+                    class="block w-full h-12 rounded-xl border border-blue-300 p-4 focus:outline-none text-blue-950 bg-transparent">
                 <Warning :message="warn.lastName" />
             </div>
-            <div class="space-y-3 col-span-2 lg:col-span-1">
+            <div class="space-y-2 col-span-2 lg:col-span-1">
                 <label class="flex items-center font-bold"><span>Work Email</span><span>*</span></label>
                 <input type="email" v-model="businessForm.email"
-                    class="block w-full h-12 rounded-md border border-blue-300 p-4 focus:outline-none text-blue-950 bg-transparent">
+                    class="block w-full h-12 rounded-xl border border-blue-300 p-4 focus:outline-none text-blue-950 bg-transparent">
                 <Warning :message="warn.email" />
             </div>
-            <div class="space-y-3 col-span-2 lg:col-span-1">
+            <div class="space-y-2 col-span-2 lg:col-span-1">
                 <label class="flex items-center font-bold"><span>Job Title</span><span>*</span></label>
                 <input type="text" v-model="businessForm.jobTitle"
-                    class="block w-full h-12 rounded-md border border-blue-300 p-4 focus:outline-none text-blue-950 bg-transparent">
+                    class="block w-full h-12 rounded-xl border border-blue-300 p-4 focus:outline-none text-blue-950 bg-transparent">
                 <Warning :message="warn.jobTitle" />
             </div>
-            <div class="space-y-3 col-span-2 lg:col-span-1">
+            <div class="space-y-2 col-span-2 lg:col-span-1">
                 <label class="flex items-center font-bold"><span>Company Name</span><span>*</span></label>
                 <input type="text" v-model="businessForm.company"
-                    class="block w-full h-12 rounded-md border border-blue-300 p-4 focus:outline-none text-blue-950 bg-transparent">
+                    class="block w-full h-12 rounded-xl border border-blue-300 p-4 focus:outline-none text-blue-950 bg-transparent">
                 <Warning :message="warn.company" />
             </div>
-            <div class="space-y-3 col-span-2 lg:col-span-1">
+            <div class="space-y-2 col-span-2 lg:col-span-1">
                 <label class="flex items-center font-bold"><span>Organization Type</span><span>*</span></label>
                 <OrgType :organizationType="organizationType" />
                 <Warning :message="warn.organization" />
             </div>
-            <div class="space-y-3 col-span-2 lg:col-span-1">
+            <div class="space-y-2 col-span-2 lg:col-span-1">
                 <label class="flex items-center font-bold"><span>Accounting System</span><span>*</span></label>
                 <Accounting :accounting="accounting" />
                 <Warning :message="warn.accounting" />
             </div>
-            <div class="space-y-3 col-span-2 lg:col-span-1">
+            <div class="space-y-2 col-span-2 lg:col-span-1">
                 <label class="flex items-center font-bold"><span>Phone</span><span>*</span></label>
                 <input type="text" v-model="businessForm.phone"
-                    class="block w-full h-12 rounded-md border border-blue-300 p-4 focus:outline-none text-blue-950 bg-transparent">
+                    class="block w-full h-12 rounded-xl border border-blue-300 p-4 focus:outline-none text-blue-950 bg-transparent">
                 <Warning :message="warn.phone" />
             </div>
-            <div class="space-y-3 col-span-2 lg:col-span-1">
+            <div class="space-y-2 col-span-2 lg:col-span-1">
                 <label class="flex items-center font-bold"><span>Password</span><span>*</span></label>
                 <input type="text" v-model="businessForm.pass" name="password"
-                    class="block w-full h-12 rounded-md border border-blue-300 p-4 focus:outline-none bg-transparent">
+                    class="block w-full h-12 rounded-xl border border-blue-300 p-4 focus:outline-none bg-transparent">
                 <Warning :message="warn.pass" />
             </div>
-            <div class="space-y-3 col-span-2 lg:col-span-1">
+            <div class="space-y-2 col-span-2 lg:col-span-1">
                 <label class="flex items-center font-bold"><span>Confirm Password</span><span>*</span></label>
                 <input type="password" v-model="businessForm.confirmPass" name="confirm_password"
-                    class="block w-full h-12 rounded-md border border-blue-300 p-4 focus:outline-none bg-transparent">
+                    class="block w-full h-12 rounded-xl border border-blue-300 p-4 focus:outline-none bg-transparent">
                 <Warning :message="warn.confirmPass" />
             </div>
-            <div class="col-span-2 space-y-4">
-                <label class="flex items-center font-bold">Tell us how we can help.</label>
-                <textarea type="text" v-model="businessForm.message" maxlength="300"
-                    class="block w-full h-28 rounded-md border border-blue-300 p-4 focus:outline-none bg-transparent"></textarea>
-            </div>
-            <div class="col-span-2 flex flex-col items-center gap-5 text-center text-gray-800 pb-4">
+            <div class="col-span-2 flex flex-col items-center gap-5 text-center text-gray-800 mt-2">
                 <button type="submit" :disabled="disabled"
-                    class="block h-10 px-20 font-semibold bg-kraal-blue-500 text-white rounded-md hover:bg-kraal-blue-700 my-2 uppercase">
+                    class="block h-12 px-8 font-semibold bg-kraal-blue-500 text-white rounded-xl hover:bg-kraal-blue-700 my-2 capitalize">
                     {{ submit }}</button>
                 <div class="space-y-2">
                     <p class="text-sm">Already have an account? <RouterLink to="/signin"
-                            class="underline decoration-2 underline-offset-4 text-kraal-blue-500">Sign In
+                            class="text-kraal-blue-500 hover:underline">Sign In
                         </RouterLink>
                     </p>
                     <p class="text-sm">By submitting this form, you consent to our <RouterLink to="/terms"
-                            class="underline decoration-2 underline-offset-4 text-kraal-blue-500">Terms and Conditions.
+                            class="text-kraal-blue-500 hover:underline">Terms and Conditions.
                         </RouterLink>
                     </p>
                 </div>
@@ -94,14 +89,12 @@ import { reactive, ref, watch } from 'vue';
 import handleSignUp from '../../../auth/signup';
 import { useRouter } from 'vue-router';
 import Warning from '../steps/layout/warnings/Warning.vue';
-import addRoleToFirestore from '../../../auth/setRole';
-import addBusinessUser from '../../../auth/addBusinessUser'
 import { useBusinessFormStore } from '../../../stores/BusinessForm';
 import api from "../../../kraal-api/azureAPI";
 
 const bussinessFormStore = useBusinessFormStore()
 const router = useRouter()
-const regexEmail = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,20}$/
+// const regexEmail = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,20}$/
 const submit = ref<string>('Create account')
 const disabled = ref<boolean>(false)
 
@@ -117,7 +110,7 @@ const businessForm = reactive({
     pass: "",
     confirmPass: "",
     message: "",
-});
+})
 const warn = reactive({
     firstName: "",
     lastName: "",
@@ -130,9 +123,9 @@ const warn = reactive({
     pass: "",
     confirmPass: "",
     message: "",
-});
+})
 
-
+// Select > options
 function organizationType(org: string) {
     businessForm.organization = org;
 }
@@ -156,13 +149,15 @@ watch(businessForm, async (newInpt, oldInput) => {
     warn.accounting = businessForm.accounting && "";
     warn.phone = businessForm.phone && "";
 
-    if (businessForm.pass) {
-        if (regexEmail.test(businessForm.pass)) {
-            warn.pass = "";
-        } else {
-            warn.pass = "Password should include upper case, lower case, number, and minimun length of 8";
-        }
-    }
+    // Turn off client side password validation and show firebase validation on error
+    // if (businessForm.pass) {
+    //     if (regexEmail.test(businessForm.pass)) {
+    //         warn.pass = "";
+    //     } else {
+    //         warn.pass = "Password should include upper case, lower case, number, and minimun length of 8";
+    //     }
+    // }
+
     if (businessForm.confirmPass) {
         if (businessForm.pass === businessForm.confirmPass) {
             warn.confirmPass = "";
@@ -193,23 +188,21 @@ function handleSubmit(e: Event) {
                 const { firstName, lastName, email, jobTitle, company, organization, accounting, phone, message, } = businessForm;
                 // addBusinessUser({ firstName, lastName, email, jobTitle, company, organization, accounting, phone, message })
                 api.auth.signup({
-                    firstName: firstName,
-                    lastName: lastName,
+                    firstName,
+                    lastName,
                     birthDate: "2000-01-01",
                     businessName: company,
                 });
 
-
                 // redirect to slide welcome page
                 router.push('/qb-link');
             },
-            onUserExist: () => {
+            onUserExist: (message) => {
                 // set another warning under mail input
-                warn.email = 'User already exist';
+                warn.email = message;
             }
         });
     }
-
 
     if (businessForm.firstName === '') {
         warn.firstName = "Enter your first name";

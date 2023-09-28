@@ -4,12 +4,12 @@
       <div class="max-w-5xl mx-auto space-y-8">
         <!-- Page Header -->
         <div class="">
-          <h1 class="text-3xl font-bold">Billing Information</h1>
+          <h1 class="text-3xl font-semibold">Billing Information</h1>
         </div>
         <!-- Billed To -->
         <div class="bg-white rounded-lg shadow p-6 border border-gray-200">
           <div class="border-b border-gray-200 pb-2 mb-4">
-            <h2 class="text-2xl font-bold">Billed To</h2>
+            <h2 class="text-2xl font-semibold">Billed To</h2>
           </div>
           <p class="mt-4">MasterCard card ending in 4425</p>
           <div class="mt-4 flex flex-col lg:flex-row gap-2 items-start">
@@ -20,7 +20,7 @@
         <!-- Plan Usage -->
         <div class="bg-white rounded-lg shadow p-6 border border-gray-200 mt-4">
           <div class="border-b border-gray-200 pb-2 mb-4">
-            <h2 class="text-2xl font-bold">Plan Usage</h2>
+            <h2 class="text-2xl font-semibold">Plan Usage</h2>
           </div>
           <div class="mt-4 grid grid-cols-3">
             <p>Current Usage:</p>
@@ -38,7 +38,7 @@
         <!-- Invoices -->
         <div class="bg-white rounded-lg shadow p-6 border border-gray-200 mt-4">
           <div class="border-b border-gray-200 pb-2 mb-4">
-            <h2 class="text-2xl font-bold">Invoices</h2>
+            <h2 class="text-2xl font-semibold">Invoices</h2>
           </div>
           <div class="mt-4 space-y-4">
             <div v-for="(invoice, index) in invoices" :key="index" class="grid grid-cols-3 items-center">
@@ -55,7 +55,7 @@
           <div class="modal-container bg-white w-full max-w-lg mx-auto rounded shadow-lg z-50 overflow-y-auto">
             <div class="modal-content py-4 text-left px-6">
               <div class="flex justify-between items-center pb-3">
-                <h5 class="text-xl font-bold">Update Plan</h5>
+                <h5 class="text-xl font-semibold">Update Plan</h5>
                 <button class="close-modal" @click="closePlanModal">&times;</button>
               </div>
               <div class="modal-body">
@@ -79,11 +79,11 @@
           <div class="modal-container bg-white w-full max-w-lg mx-auto rounded shadow-lg z-50 overflow-y-auto">
             <div class="modal-content py-4 text-left px-6">
               <div class="flex justify-between items-center pb-3">
-                <h5 class="text-xl font-bold">Invoice Details</h5>
+                <h5 class="text-xl font-semibold">Invoice Details</h5>
                 <button class="close-modal" @click="closeInvoiceModal">&times;</button>
               </div>
               <div class="modal-body">
-                <h2 class="text-lg font-bold">Invoice</h2>
+                <h2 class="text-lg font-semibold">Invoice</h2>
                 <p>Month: {{ selectedInvoice.month }}</p>
                 <p>Amount: ${{ selectedInvoice.amount }}</p>
                 <p>Status: {{ selectedInvoice.status }}</p>
@@ -102,15 +102,52 @@
 </template>
 
 <script lang="ts" setup>
-import UnderConstruction from "../components/shared/UnderConstruction.vue";
 import DBLayout from "../components/shared/dashboard-layout/DBLayout.vue";
 import { useRoute } from 'vue-router'
+import { reactive, ref } from 'vue'
+
+interface Invoice {
+  month: string;
+  amount: number;
+  status: string;
+}
 
 const route = useRoute();
 const path = route.path;
+
+const showPlanModal = ref(false)
+const showInvoiceModal = ref(false)
+const selectedPlan = ref('')
+const selectedInvoice = ref<Invoice>({ month: "", amount: 0, status: "" })
+const plans = reactive(['Starter', 'Pro', 'Enterprise'])
+const invoices = reactive<Invoice[]>([
+  { month: 'May 2023', amount: 5.31, status: 'Paid' },
+  { month: 'Apr 2023', amount: 4.97, status: 'Paid' },
+  { month: 'Mar 2023', amount: 4.97, status: 'Paid' },
+  { month: 'Feb 2023', amount: 4.97, status: 'Paid' },
+  { month: 'Jan 2023', amount: 5.31, status: 'Paid' }
+])
+
+function openPlanModal() {
+  showPlanModal.value = true;
+}
+function closePlanModal() {
+  showPlanModal.value = false;
+}
+function updatePlan() {
+  // logic to update plan
+  closePlanModal();
+}
+function openInvoiceModal(invoice: Invoice) {
+  selectedInvoice.value = invoice;
+  showInvoiceModal.value = true;
+}
+function closeInvoiceModal() {
+  showInvoiceModal.value = false;
+}
 </script>
 
-<script lang="ts">
+<!-- <script lang="ts">
 interface Invoice {
   month: string;
   amount: number;
@@ -155,4 +192,4 @@ export default defineComponent({
     },
   },
 });
-</script>
+</script> -->

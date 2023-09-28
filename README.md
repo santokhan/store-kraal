@@ -22,3 +22,5 @@ If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has a
 <!-- Santo -->
 Read HighlightJS documentation to understand properly
 [HighLight](https://highlightjs.readthedocs.io/en/latest/api.html#highlightall)
+
+[Repo](https://github.com/kraalai/app-frontend.git)

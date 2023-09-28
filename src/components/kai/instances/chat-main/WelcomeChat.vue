@@ -3,13 +3,12 @@
         <div class="max-w-4xl mx-auto px-4 flex justify-center items-center">
             <h2 class="text-2xl lg:text-4xl font-semibold text-white text-center opacity-30">KraalAI</h2>
         </div>
-
         <div class="w-full max-w-4xl mx-auto mt-auto bg-chatgpt-500 px-4 pt-2">
             <form @submit="handleSubmit">
                 <div class="rounded-xl shadow bg-chatgpt-400">
                     <div class="relative w-full h-full">
                         <textarea :value="input" placeholder="Send a message..." @input="(e: any) => input = e.target.value"
-                            class="w-full focus:outline-none resize-none overflow-auto bg-transparent text-white min-h-44 h-44 px-4 py-3"></textarea>
+                            class="w-full focus:outline-none resize-none overflow-auto bg-transparent text-white min-h-56 h-56 px-4 py-3"></textarea>
                     </div>
                     <AttachmentPreview :files="fileInput" :handleFiles="(index) => { handleFiles(index) }" />
                     <div class="p-2 flex justify-between items-center">
@@ -29,13 +28,29 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import Telegram from '../../../icons/telegram.vue';
 import AttachmentPreview from './AttachmentPreview.vue';
 import FileInputBox from './FileInputBox.vue';
+import { useRoute } from 'vue-router';
+import { useSideBarStoreAzureStore, useWelcomeChatStore } from '../../../../stores/sideBarStoreAzure';
+import { storeToRefs } from 'pinia';
 
 const input = ref<string>("")
 const fileInput = ref<any[]>([])
+const route = useRoute()
+
+const chatId = ref<number>()
+function assignInstanceId() {
+    if (typeof route.params.id === 'string' || typeof route.params.id === 'number') {
+        chatId.value = parseInt(route.params.id)
+    }
+} assignInstanceId()
+watch(() => route.params.id, assignInstanceId)
+
+const store = useSideBarStoreAzureStore()
+const chatStore = useWelcomeChatStore()
+const { chatMessages } = storeToRefs(chatStore)
 
 // User input file handling
 function handleChange(e: any) {
@@ -57,13 +72,14 @@ function handleFiles(index: number) {
 async function handleSubmit(e: any) {
     e.preventDefault()
     const formData = { message: input.value, files: fileInput.value.map(e => e) }
-    console.log(formData);
 
-    // await fetch("", {
-    //     method: "POST",
-    //     body: JSON.stringify(formData)
-    // })
+
+    // switch to original chat instance
+    const chat = await store.create_chat_and_send_message()
+    chatStore.sendChatMessage(chat.id, input.value)
 
     // TODO: clear input after form submit complete
+    input.value = ""
+    fileInput.value = []
 }
 </script>

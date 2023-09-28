@@ -114,12 +114,12 @@ const protectedRoutes: ProtectedRoutes[] = [
   {
     path: "/kraalai",
     name: "kraalai",
-    component: () => import("../components/kai/Kai.vue"),
+    component: () => import("../components/kai/KraalAIStart.vue"),
     meta: { requiresAuth: true },
   },
   {
     path: "/kraalai/:id",
-    name: "kraalai-with-id", 
+    name: "kraalai-with-id",
     component: () => import("../components/kai/Kai.vue"),
     meta: { requiresAuth: true },
   },

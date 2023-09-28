@@ -4,6 +4,7 @@ import { ChatList, State } from "./chatSideBarTypes";
 import { APIURL } from "./APIURL";
 import { getCurrentUser } from "vuefire";
 import KraalAIStore from '../firebase/kraalai'
+import azureAPI from "../kraal-api/azureAPI";
 
 export const useChatSideBarStore = defineStore("chatSideBar", () => {
     const state = reactive<State>({ sidebarMobile: false, sidebarDesktop: true })
@@ -32,22 +33,7 @@ export const useChatSideBarStore = defineStore("chatSideBar", () => {
         toggleSideBarDesktop() { state.sidebarDesktop = !state.sidebarDesktop },
         // Info: Chat related functions
         addNewInstance() {
-            // Todo: When new instance will be created `activeNavIndex` will be shifted to the new instance
-            const max = this.max() + 1;
-            const newChat: ChatList = {
-                _id: "",
-                chats: [],
-                id: max,
-                nav: `Chat message ${max}`,
-                uid: uid.value
-            }
-            // addDoc to firestore
-            KraalAIStore.addDoc(newChat, () => {
-                chatList.value = [...chatList.value, newChat]
-                activeNavIndex.value = max; // switch to new insFance
-
-                this.reAssignDocs()
-            })
+            azureAPI.chat.sendChatMessage(0, "").then()
         },
         /**
          * Re-assign on adding new chat instance
@@ -56,15 +42,9 @@ export const useChatSideBarStore = defineStore("chatSideBar", () => {
          * 
          * Re-assign on chat instance delete
          */
-        reAssignDocs() {
-            KraalAIStore.getDoc(uid.value, (docs) => {
-                if (docs.length > 0) {
-                    chatList.value = JSON.parse(JSON.stringify(docs))
-                    logger('Kai: Docs are re-assigned');
-                } else {
-                    logger(`Kai: Docs are empty.`);
-                }
-            })
+        async assignChats() {
+            const chats = await azureAPI.chat.getChats()
+            chatList.value = chats
         },
         /**
          * Call once
@@ -198,8 +178,6 @@ export const useChatSideBarStore = defineStore("chatSideBar", () => {
 
             // Delete document from firestore
             KraalAIStore.deleteDoc("uid", deleting)
-
-            this.reAssignDocs()
         },
         forwardMessage(id: number) {
         },
