@@ -10,7 +10,7 @@
                 <!-- General Info -->
                 <div class="bg-white rounded-lg shadow p-6 border border-gray-200 w-full">
                     <div class="border-b border-gray-200 pb-2 mb-4">
-                        <h2 class="text-2xl font-bold">General</h2>
+                        <h2 class="text-2xl font-semibold">General</h2>
                     </div>
                     <p class="mt-4">
                         Settings for {{ state.teamName }}<br />
@@ -22,7 +22,7 @@
                 <!-- Team details -->
                 <div class="bg-white rounded-lg shadow p-6 border border-gray-200 w-full">
                     <div class="border-b border-gray-200 pb-2 mb-4">
-                        <h2 class="text-2xl font-bold">Team Information</h2>
+                        <h2 class="text-2xl font-semibold">Team Information</h2>
                     </div>
                     <div class="mt-4 space-y-4">
                         <div>
@@ -32,11 +32,7 @@
                                     <dd v-if="!state.isEditing">{{ state.teamName }}</dd>
                                     <dd v-else><input v-model="state.editableTeamName" type="text"></dd>
                                 </div>
-                                <div class="grid grid-cols-2 py-2 bg-gray-50">
-                                    <dt>Slug:</dt>
-                                    <dd v-if="!state.isEditing">{{ state.teamSlug }}</dd>
-                                    <dd v-else><input v-model="state.editableTeamSlug" type="text"></dd>
-                                </div>
+
                                 <div class="grid grid-cols-2 py-2">
                                     <dt>Logo:</dt>
                                     <dd v-if="!state.isEditing">{{ state.teamLogo }}</dd>
@@ -62,7 +58,7 @@
                 <!-- Query Pack -->
                 <div class="bg-white rounded-lg shadow p-6 border border-gray-200 w-full">
                     <div class="border-b border-gray-200 pb-2 mb-4">
-                        <h2 class="text-2xl font-bold">Query Pack</h2>
+                        <h2 class="text-2xl font-semibold">Query Pack</h2>
                     </div>
                     <p class="mt-4">
                         Add Kraal query tokens. These tokens are used to run queries on the AI
@@ -72,26 +68,20 @@
                         and $50 bundles that expire after 3 months.
                     </p>
                     <div class="mt-4">
-                        <button
-                            class="px-4 py-2 text-white bg-blue-500 rounded hover:bg-
-                                                                                                                                                                        blue-600">Add
+                        <button class="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600">Add
                             Tokens</button>
                     </div>
                 </div>
                 <!-- Danger Zone -->
                 <div class="w-full">
-                    <h2 class="text-xl text-red-600 mb-2 font-bold">Danger zone</h2>
-                    <p>Irreversible and destructive actions</p>
-                    <!-- Delete Team -->
                     <div class="bg-white rounded-lg shadow p-6 mt-4 border border-gray-200">
                         <div class="border-b border-gray-200 pb-2 mb-4">
-                            <h2 class="text-2xl font-bold">Delete Team</h2>
+                            <h2 class="text-2xl font-semibold">Manage team member</h2>
                         </div>
                         <p class="mt-4">This team was created at Kraal signup and cannot be deleted.To remove all your data
                             from Kraal, delete your user under User settings.</p>
                         <div class="mt-4">
-                            <button class="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600">Go to User
-                                Settings</button>
+                            <button class="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600">Manage</button>
                         </div>
                     </div>
                 </div>
@@ -134,9 +124,7 @@
 
 <script lang="ts" setup>
 import { reactive } from "vue";
-import UnderConstruction from "../components/shared/UnderConstruction.vue";
 import DBLayout from "../components/shared/dashboard-layout/DBLayout.vue";
-import { useRoute } from 'vue-router'
 
 const state: any = reactive({
     teamName: 'Kraal',
@@ -186,5 +174,4 @@ function changePlan(plan: any) {
     state.teamPlan = plan;
     state.closePlanModal();
 }
-const route = useRoute();
 </script>

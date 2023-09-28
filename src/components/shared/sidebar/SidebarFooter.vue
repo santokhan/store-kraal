@@ -1,41 +1,41 @@
 <template>
-    <hr class="border-gray-600 mb-1">
-    <div class="w-full relative text-sm mb-2">
+    <hr class="mb-1">
+    <div class="w-full relative text-sm mb-2 px-2">
         <!-- Drop Up bar -->
         <div v-if="openSettings" ref="settings"
-            class="absolute bottom-full left-0 right-0 bg-neutral-950 text-gray-200 rounded-lg overflow-hidden py-1 z-[10]">
-            <NavLink to="/user-setting">
-                <IconBox>
+            class="absolute bottom-full left-0 right-0 text-gray-800 rounded-lg overflow-hidden py-1 z-[10] bg-gray-100 mx-2 mb-1">
+            <RouterLink to="/user-setting" class="w-full flex items-center hover:bg-white">
+                <div class="w-[2.5rem] h-[2.5rem] flex justify-center items-center">
                     <UserSimple class="w-5" />
-                </IconBox>
+                </div>
                 User Settings
-            </NavLink>
-            <NavLink to="/team-setting">
-                <IconBox>
+            </RouterLink>
+            <RouterLink to="/team-setting" class="w-full flex items-center hover:bg-white">
+                <div class="w-[2.5rem] h-[2.5rem] flex justify-center items-center">
                     <Team class="w-5" />
-                </IconBox>
+                </div>
                 Team Settings
-            </NavLink>
-            <NavLink to="/bills">
-                <IconBox>
+            </RouterLink>
+            <RouterLink to="/bills" class="w-full flex items-center hover:bg-white">
+                <div class="w-[2.5rem] h-[2.5rem] flex justify-center items-center">
                     <Card class="w-5" />
-                </IconBox>
+                </div>
                 Bills
-            </NavLink>
-            <hr class="border-1 border-neutral-700 my-1">
-            <NavLink class="w-full flex items-center hover:bg-chatgpt-700" to="/logout">
-                <IconBox>
+            </RouterLink>
+            <hr class="border-1 my-1 mx-3">
+            <RouterLink to="/logout" class="w-full flex items-center hover:bg-white">
+                <div class="w-[2.5rem] h-[2.5rem] flex justify-center items-center">
                     <Logout class="w-5" />
-                </IconBox>
+                </div>
                 Log out
-            </NavLink>
+            </RouterLink>
         </div>
 
-        <button type="button" @click="handleOpenSettings" ref="opener"
-            class="w-full text-gray-100 flex items-center gap-3 px-2 h-[3.25rem] rounded-lg hover:bg-chatgpt-700 overflow-x-hidden"
-            :class="openSettings ? 'bg-chatgpt-700' : ''" title="Settings">
+        <!-- [SK] Santo Khan   ••• -->
+        <button type="button" @click="handleOpenSettings" ref="opener" title="Settings"
+            :class="['w-full text-gray-800 flex items-center gap-3 px-2 h-[3.25rem] rounded-lg hover:bg-gray-100 overflow-x-hidden']">
             <div v-if="userData?.firstName"
-                class="bg-chatgpt-500 min-w-[2.25rem] min-h-[2.25rem] flex justify-center items-center rounded">
+                class="bg-white min-w-[2.25rem] min-h-[2.25rem] flex justify-center items-center rounded">
                 <h5 class="font-medium">{{ userData.firstName[0] }}{{ userData.lastName[0] }}</h5>
             </div>
             <div class="w-full flex justify-start">
@@ -52,11 +52,12 @@ import { onClickOutside } from '@vueuse/core';
 import { ref } from 'vue'
 import { businessUserInfo } from '../../../firebase/read.business.user'
 import Logout from '../../icons/logout.vue';
-import NavLink from './footer/NavLink.vue'
 import IconBox from '../../shared/header/dashbboard/absolutesidebar/icon/IconBox.vue';
 import Card from '../../icons/card.vue';
 import Team from '../../icons/team.vue';
 import UserSimple from '../../icons/user-simple.vue';
+import NavLink from '../../kai/sidebar/footer/NavLink.vue';
+import { RouterLink } from 'vue-router';
 
 const openSettings = ref(false)
 const opener = ref(null)
