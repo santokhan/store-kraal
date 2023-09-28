@@ -2,7 +2,7 @@
     <div class="relative z-50">
         <Listbox v-model="selectedPerson">
             <ListboxButton
-                class="w-full rounded-lg px-4 h-12 flex justify-between items-center text-blue-950 border border-blue-300 bg-transparent">
+                class="w-full rounded-xl px-4 h-12 flex justify-between items-center text-blue-950 border border-blue-300 bg-transparent">
                 <span>{{ selectedPerson.name || "" }}</span>
                 <AngleDown class="w-3" />
             </ListboxButton>
