@@ -10,7 +10,7 @@
                 <!-- General Info -->
                 <div class="bg-white rounded-lg shadow p-6 border border-gray-200 w-full">
                     <div class="border-b border-gray-200 pb-2 mb-4">
-                        <h2 class="text-2xl font-semibold">General</h2>
+                        <h2 class="text-2xl font-semibold capitalize">General</h2>
                     </div>
                     <p class="mt-4">
                         Settings for {{ state.teamName }}<br />
@@ -22,7 +22,7 @@
                 <!-- Team details -->
                 <div class="bg-white rounded-lg shadow p-6 border border-gray-200 w-full">
                     <div class="border-b border-gray-200 pb-2 mb-4">
-                        <h2 class="text-2xl font-semibold">Team Information</h2>
+                        <h2 class="text-2xl font-semibold capitalize">Team Information</h2>
                     </div>
                     <div class="mt-4 space-y-4">
                         <div>
@@ -58,7 +58,7 @@
                 <!-- Query Pack -->
                 <div class="bg-white rounded-lg shadow p-6 border border-gray-200 w-full">
                     <div class="border-b border-gray-200 pb-2 mb-4">
-                        <h2 class="text-2xl font-semibold">Query Pack</h2>
+                        <h2 class="text-2xl font-semibold capitalize">Query Pack</h2>
                     </div>
                     <p class="mt-4">
                         Add Kraal query tokens. These tokens are used to run queries on the AI
@@ -72,11 +72,27 @@
                             Tokens</button>
                     </div>
                 </div>
+                <!-- Invite team member -->
+                <div class="bg-white rounded-lg shadow p-6 border border-gray-200 w-full">
+                    <div class="border-b border-gray-200 pb-2 mb-4">
+                        <h2 class="text-2xl font-semibold capitalize">Invite team member</h2>
+                    </div>
+                    <form class="mt-4">
+                        <div class="flex items-center gap-2 relative">
+                            <label for="email" class="absolute left-3 text-gray-700"><i class="fa fa-envelope"></i></label>
+                            <input type="email" name="email" id="email" placeholder="someone@kraal.com" maxlength="24"
+                                class="block px-4 max-w-md w-full h-10 text-noom-text-900 text-base rounded-xl border bg-gray-100 outline-none pl-9"
+                                autocomplete="false">
+                            <button class="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600">Sent
+                                Invitation</button>
+                        </div>
+                    </form>
+                </div>
                 <!-- Danger Zone -->
                 <div class="w-full">
                     <div class="bg-white rounded-lg shadow p-6 mt-4 border border-gray-200">
                         <div class="border-b border-gray-200 pb-2 mb-4">
-                            <h2 class="text-2xl font-semibold">Manage team member</h2>
+                            <h2 class="text-2xl font-semibold capitalize">Manage team member</h2>
                         </div>
                         <p class="mt-4">This team was created at Kraal signup and cannot be deleted.To remove all your data
                             from Kraal, delete your user under User settings.</p>
