@@ -32,7 +32,6 @@
 import { ref } from "vue";
 import { RouterLink } from "vue-router";
 import NavIcon from "./NavIcon.vue";
-import SidebarDropNav from "./SidebarDropNav.vue";
 import { navList_with_dropdown } from './navList';
 import { useRoute } from "vue-router";
 

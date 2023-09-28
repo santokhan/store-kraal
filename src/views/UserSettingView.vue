@@ -9,72 +9,94 @@
                 </div>
                 <!-- General Info -->
                 <div class="bg-white rounded-lg shadow p-6 border border-gray-200 w-full">
-                    <div class="border-b border-gray-200 pb-2 mb-4">
+                    <div class="border-b border-gray-200 pb-2">
                         <h2 class="text-2xl font-semibold">Profile</h2>
                     </div>
-                    <div class="mt-4 space-y-4" v-if="!userData.isEditing">
-                        <div>
-                            <dl class="space-y-2 mt-2 divide-y divide-gray-100">
-                                <div class="grid grid-cols-2 py-2">
-                                    <dt>Avatar:</dt>
-                                    <dd>{{ userData.avatar }}</dd>
-                                </div>
-                                <div class="grid grid-cols-2 py-2 bg-gray-50">
-                                    <dt>Name:</dt>
-                                    <dd>{{ userData.firstName }} {{ userData.lastName }}</dd>
-                                </div>
-                                <div class="grid grid-cols-2 py-2">
-                                    <dt>Email:</dt>
-                                    <dd>{{ userData.email }}</dd>
-                                </div>
-                                <!-- <div class="grid grid-cols-2 py-2 bg-gray-50">
-                                    <dt>Password:</dt>
-                                    <dd>{{ userData.userPassword }}</dd>
-                                </div> -->
-                                <div class="grid grid-cols-2 py-2">
-                                    <dt>Default team:</dt>
-                                    <dd>{{ userData.defaultTeam }}</dd>
-                                </div>
-                            </dl>
-                            <div class="mt-4">
-                                <button class="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
-                                    @click="toggleEdit">Edit settings</button>
-                            </div>
+                    <div class="space-y-4" v-if="!userData.isEditing">
+                        <table class="w-full">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="w-1/2"></th>
+                                    <th scope="col" class="w-1/2"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="">
+                                    <td class="py-2.5 border-t">Avatar</td>
+                                    <td class="py-2.5 border-t">
+                                        <div
+                                            class="w-11 h-11 bg-gray-50 border rounded-full flex justify-center items-center font-semibold">
+                                            {{ userData.firstName?.slice(0, 1) }}{{ userData.lastName?.slice(0, 1) }}
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="bg-gray-50">
+                                    <td class="py-2.5 border-t">Name</td>
+                                    <td class="py-2.5 border-t">{{ userData.firstName }} {{ userData.lastName }}</td>
+                                </tr>
+                                <tr class="">
+                                    <td class="py-2.5 border-t">Email</td>
+                                    <td class="py-2.5 border-t">{{ userData.email }}</td>
+                                </tr>
+                                <tr class="bg-gray-50">
+                                    <td class="py-2.5 border-t">Default team</td>
+                                    <td class="py-2.5 border-t">{{ userData.defaultTeam }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="mt-6">
+                            <button class="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
+                                @click="toggleEdit">Edit settings</button>
                         </div>
                     </div>
-                    <div class="mt-4 space-y-4" v-else>
-                        <div>
-                            <form @submit.prevent="updateUserSettings">
-                                <div class="grid grid-cols-2 py-2">
-                                    <dt>Avatar:</dt>
-                                    <dd><input v-model="userData.avatar" type="text" /></dd>
-                                </div>
-                                <div class="grid grid-cols-2 py-2 bg-gray-50">
-                                    <dt>Name:</dt>
-                                    <dd><input v-model="userData.userName" type="text" /></dd>
-                                </div>
-                                <div class="grid grid-cols-2 py-2">
-                                    <dt>Email:</dt>
-                                    <dd><input v-model="userData.email" type="email" /></dd>
-                                </div>
-                                <!-- <div class="grid grid-cols-2 py-2 bg-gray-50">
-                                    <dt>Password:</dt>
-                                    <dd><input v-model="userData.userPassword" type="password" /></dd>
-                                </div> -->
-                                <div class="grid grid-cols-2 py-2">
-                                    <dt>Default team:</dt>
-                                    <dd><input v-model="userData.defaultTeam" type="text" /></dd>
-                                </div>
-                                <div class="mt-4">
+                    <div v-else>
+                        <form @submit.prevent="updateUserSettings">
+                            <table class="w-full">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="w-1/2"></th>
+                                        <th scope="col" class="w-1/2"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="py-2.5">Avatar</td>
+                                        <td class="py-2.5">
+                                            <div
+                                                class="w-11 h-11 bg-gray-50 border rounded-full flex justify-center items-center font-semibold">
+                                                {{ userData.firstName?.slice(0, 1) }}{{ userData.lastName?.slice(0, 1)
+                                                }}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="bg-gray-50">
+                                        <td class="py-2.5">Name</td>
+                                        <td class=""><input v-model="userData.userName" type="text"
+                                                class="bg-transparent border px-3 h-9 rounded-xl" />
+                                        </td>
+                                    </tr>
+                                    <tr class="">
+                                        <td class="py-2.5">Email</td>
+                                        <td class=""><input v-model="userData.email" type="email"
+                                                class="bg-transparent border px-3 h-9 rounded-xl" /></td>
+                                    </tr>
+                                    <tr class="bg-gray-50">
+                                        <td class="py-2.5">Default team</td>
+                                        <td class=""><input v-model="userData.defaultTeam" type="text"
+                                                class="bg-transparent border px-3 h-9 rounded-xl" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <div class="pt-4">
                                     <button class="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
                                         type="submit">Save settings</button>
                                 </div>
-                            </form>
-                        </div>
+                            </table>
+                        </form>
                     </div>
                 </div>
                 <!-- Connected Accounts -->
-                <div class="bg-white rounded-lg shadow p-6 border border-gray-200 w-full">
+                <!-- <div class="bg-white rounded-lg shadow p-6 border border-gray-200 w-full">
                     <div class="border-b border-gray-200 pb-2 mb-4">
                         <h2 class="text-2xl font-semibold">Connected Accounts</h2>
                     </div>
@@ -86,7 +108,7 @@
                                 settings</button>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- Security -->
                 <div class="bg-white rounded-lg shadow p-6 border border-gray-200 w-full">
                     <div class="border-b border-gray-200 pb-2 mb-4">
@@ -102,7 +124,7 @@
                     </div>
                 </div>
                 <!-- Danger Zone -->
-                <div class="w-full">
+                <!-- <div class="w-full">
                     <h2 class="text-xl text-red-600 font-semibold">Danger zone</h2>
                     <p>Irreversible and destructive actions</p>
 
@@ -117,34 +139,36 @@
                             <button class="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600">Delete User</button>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </DBLayout>
 </template>
 
 <script lang="ts" setup>
-import { reactive } from "vue";
-import DBLayout from "../components/shared/dashboard-layout/DBLayout.vue";
-import { useRoute } from 'vue-router'
-import getUserInfo from '../firebase/read.business.user'
-import { getCurrentUser } from "vuefire";
+import { reactive } from "vue"
+import DBLayout from "../components/shared/dashboard-layout/DBLayout.vue"
+import getUserInfo from "../firebase/read.business.user"
+import { getCurrentUser } from "vuefire"
 
-const route = useRoute();
-const path = route.path;
+interface UserData {
+    avatar: string
+    userName: string
+    userEmail: string
+    userPassword: string
+    defaultTeam: string
+    isEditing: boolean,
+}
 
-getCurrentUser().then(currenUser => {
-    const email = currenUser?.email;
+async function getUserData() {
+    const user = await getCurrentUser()
+    const email = user?.email;
     if (email) {
         getUserInfo(email).then(dataInfo => {
             Object.assign(userData, dataInfo)
-            console.log(dataInfo)
-            
         })
-    } else {
-        console.error("Can not read user email")
-    }
-})
+    } else { console.error("Can not read user email") }
+} getUserData()
 
 const userData: any = reactive({
     avatar: 'User avatar',
@@ -159,6 +183,7 @@ function toggleEdit() {
 }
 async function updateUserSettings() {
     try {
+        userData.isEditing = false;
         const response = await fetch('http://your-api-url/settings', {
             method: 'POST',
             body: JSON.stringify({
@@ -173,11 +198,8 @@ async function updateUserSettings() {
             }
         });
         const data = await response.json();
-        console.log(data);
-        userData.isEditing = false;
-    } catch (error) {
-        console.error('Error:', error);
-    }
+        // userData.isEditing = false;
+    } catch (error) { console.error('Error:', error) }
 }
 </script>
 
