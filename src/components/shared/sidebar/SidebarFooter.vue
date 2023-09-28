@@ -4,36 +4,37 @@
         <!-- Drop Up bar -->
         <div v-if="openSettings" ref="settings"
             class="absolute bottom-full left-0 right-0 text-gray-800 rounded-lg overflow-hidden py-1 z-[10] bg-gray-100 mx-2 mb-1">
-            <RouterLink to="/user-setting" class="w-full flex items-center hover:bg-white">
-                <div class="w-[2.5rem] h-[2.5rem] flex justify-center items-center">
+            <NavLinkFooter :to="userNavs[0].path">
+                <IconBox>
                     <UserSimple class="w-5" />
-                </div>
-                User Settings
-            </RouterLink>
-            <RouterLink to="/team-setting" class="w-full flex items-center hover:bg-white">
-                <div class="w-[2.5rem] h-[2.5rem] flex justify-center items-center">
+                </IconBox>
+                {{ userNavs[0].name }}
+            </NavLinkFooter>
+            <NavLinkFooter :to="userNavs[1].path">
+                <IconBox>
                     <Team class="w-5" />
-                </div>
-                Team Settings
-            </RouterLink>
-            <RouterLink to="/bills" class="w-full flex items-center hover:bg-white">
-                <div class="w-[2.5rem] h-[2.5rem] flex justify-center items-center">
+                </IconBox>
+                {{ userNavs[1].name }}
+            </NavLinkFooter>
+            <NavLinkFooter :to="userNavs[2].path">
+                <IconBox>
                     <Card class="w-5" />
-                </div>
-                Bills
-            </RouterLink>
+                </IconBox>
+                {{ userNavs[2].name }}
+            </NavLinkFooter>
+
             <hr class="border-1 my-1 mx-3">
-            <RouterLink to="/logout" class="w-full flex items-center hover:bg-white">
-                <div class="w-[2.5rem] h-[2.5rem] flex justify-center items-center">
+            <NavLinkFooter :to="userNavs[3].path">
+                <IconBox>
                     <Logout class="w-5" />
-                </div>
-                Log out
-            </RouterLink>
+                </IconBox>
+                {{ userNavs[3].name }}
+            </NavLinkFooter>
         </div>
 
         <!-- [SK] Santo Khan   ••• -->
         <button type="button" @click="handleOpenSettings" ref="opener" title="Settings"
-            :class="['w-full text-gray-800 flex items-center gap-3 px-2 h-[3.25rem] rounded-lg hover:bg-gray-100 overflow-x-hidden']">
+            :class="[pathExistOnNavs() ? 'bg-gray-100' : '', 'w-full text-gray-800 flex items-center gap-3 px-2 h-[3.25rem] rounded-lg hover:bg-gray-100 overflow-x-hidden']">
             <div v-if="userData?.firstName"
                 class="bg-white min-w-[2.25rem] min-h-[2.25rem] flex justify-center items-center rounded">
                 <h5 class="font-medium">{{ userData.firstName[0] }}{{ userData.lastName[0] }}</h5>
@@ -52,12 +53,14 @@ import { onClickOutside } from '@vueuse/core';
 import { ref } from 'vue'
 import { businessUserInfo } from '../../../firebase/read.business.user'
 import Logout from '../../icons/logout.vue';
-import IconBox from '../../shared/header/dashbboard/absolutesidebar/icon/IconBox.vue';
 import Card from '../../icons/card.vue';
 import Team from '../../icons/team.vue';
 import UserSimple from '../../icons/user-simple.vue';
-import NavLink from '../../kai/sidebar/footer/NavLink.vue';
-import { RouterLink } from 'vue-router';
+import { RouterLink, useRoute } from 'vue-router';
+import IconBox from '../../kai/sidebar/footer/IconBox.vue';
+import NavLinkFooter from './NavLinkFooter.vue';
+
+const route = useRoute()
 
 const openSettings = ref(false)
 const opener = ref(null)
@@ -74,6 +77,36 @@ const userData = ref<any>()
 businessUserInfo.getUserData(data => {
     if (data) { userData.value = data }
 })
+
+const userNavs = [
+    {
+        name: "User Settings",
+        path: "/user-setting"
+    },
+    {
+        name: "Team Settings",
+        path: "/team-setting"
+    },
+    {
+        name: "Bills",
+        path: "/bills"
+    },
+    {
+        name: "Logout",
+        path: "/logout"
+    },
+]
+
+function pathExistOnNavs(): boolean {
+    const path = route.path
+    let exist: boolean = false
+    userNavs.forEach(e => {
+        if (e.path === path) {
+            exist = true;
+        }
+    })
+    return exist
+}
 </script>
 
 <style scoped></style>
