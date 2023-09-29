@@ -13,8 +13,8 @@
                 </div>
                 <div v-if="chat.author === 'Assistant'" class="bg-chatgpt-400 border-b border-gray-800">
                     <div class="max-w-4xl mx-auto px-4 py-7 flex gap-4 items-start w-full">
-                        <!-- <RobotStatic v-if="chat.stopTypeWriter" :robot="chat.robot" /> -->
-                        <RobotWriter :robot="chat.message" :eleScrollTop="eleScrollTop" />
+                        <RobotStatic :robot="chat.message" />
+                        <!-- <RobotWriter :robot="chat.message" :eleScrollTop="eleScrollTop" /> -->
                     </div>
                 </div>
             </div>
@@ -31,6 +31,7 @@ import RobotWriter from "../typewriter/robot-writer/RobotWriter.vue";
 import azureAPI from "../../../kraal-api/azureAPI";
 import { useSideBarStoreAzureStore } from "../../../stores/sideBarStoreAzure";
 import { storeToRefs } from "pinia";
+import RobotStatic from "../typewriter/robot-writer/RobotStatic.vue";
 
 const props = defineProps<{ chatId: any }>()
 const store = useSideBarStoreAzureStore()
