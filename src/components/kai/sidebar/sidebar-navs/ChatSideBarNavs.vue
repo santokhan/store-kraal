@@ -1,17 +1,17 @@
 <template>
     <div class="relative h-full w-full flex-1 items-start border-white/20 overflow-y-auto -mr-2 scrollbar-dark">
         <Legend>Today</Legend>
-        <div v-for="(instance, i) in disorderByDate(sideBarList)" :key="i" class="text-white">
-            <ItemForm v-if="chatId === instance.id" :chat="instance" :color="colorList[i]" :id="instance.id" />
-            <ItemStatic v-else :instance="instance" :color="colorList[i]" />
+        <div v-for='(instance, i) in disorderByDate(sideBarList)' :key='i' class="text-white">
+            <ItemForm v-if='chatId === instance.id' :chat='instance' :color='colorList[i]' :id='instance.id' />
+            <ItemStatic v-else :instance='instance' :color='colorList[i]' />
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
 import Legend from '../Legend.vue';
-import ItemForm from './items/ItemForm.vue'
-import ItemStatic from './items/ItemStatic.vue'
+import ItemForm from './items/ItemForm.vue';
+import ItemStatic from './items/ItemStatic.vue';
 import { ref } from 'vue';
 import { useSideBarStoreAzureStore } from '../../../../stores/sideBarStoreAzure';
 import { useRoute } from 'vue-router';
