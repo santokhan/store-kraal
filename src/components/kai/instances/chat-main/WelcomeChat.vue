@@ -34,7 +34,6 @@ import AttachmentPreview from './AttachmentPreview.vue';
 import FileInputBox from './FileInputBox.vue';
 import { useRoute } from 'vue-router';
 import { useSideBarStoreAzureStore, useWelcomeChatStore } from '../../../../stores/sideBarStoreAzure';
-import { storeToRefs } from 'pinia';
 
 const input = ref<string>("")
 const fileInput = ref<any[]>([])
@@ -50,7 +49,6 @@ watch(() => route.params.id, assignInstanceId)
 
 const store = useSideBarStoreAzureStore()
 const chatStore = useWelcomeChatStore()
-const { chatMessages } = storeToRefs(chatStore)
 
 // User input file handling
 function handleChange(e: any) {
@@ -72,7 +70,6 @@ function handleFiles(index: number) {
 async function handleSubmit(e: any) {
     e.preventDefault()
     const formData = { message: input.value, files: fileInput.value.map(e => e) }
-
 
     // switch to original chat instance
     const chat = await store.create_chat_and_send_message()

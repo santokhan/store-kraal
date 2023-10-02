@@ -10,7 +10,6 @@
 
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
-import Chat from '../../../../icons/chat.vue'
 import { SideBarData } from '../../../../../kraal-api/types.azureAPI';
 import Ellipse from './Ellipse.vue';
 

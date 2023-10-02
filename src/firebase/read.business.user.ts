@@ -25,23 +25,21 @@ export default getUserInfo;
 class BusinessUserInfo {
     COLLECTION_NAME = "business-user"
     async getUserData(callBack: (data: any) => void) {
-        await getCurrentUser().then((user) => {
-            const email = user?.email;
-            if (email) {
-                const colRef = collection(fireStore, this.COLLECTION_NAME);
-                // use `"nuku@gmail.com"` for test only
-                const q = query(colRef, where("email", "==", email))
+        const user = await getCurrentUser()
+        const email = user?.email
+        if (!email) return;
+        const colRef = collection(fireStore, this.COLLECTION_NAME);
+        // use `"nuku@gmail.com"` for test only
+        const q = query(colRef, where("email", "==", email))
 
-                const unSubscribe = onSnapshot(q, (snapshot) => {
-                    let data: any = {}
-                    snapshot.docs.forEach(doc => {
-                        data = doc.data();
-                        data.id = doc.id;
-                    })
-                    callBack(data);
-                    unSubscribe();
-                })
-            }
+        const unSubscribe = onSnapshot(q, (snapshot) => {
+            let data: any = {}
+            snapshot.docs.forEach(doc => {
+                data = doc.data();
+                data.id = doc.id;
+            })
+            callBack(data);
+            unSubscribe();
         })
     }
 }

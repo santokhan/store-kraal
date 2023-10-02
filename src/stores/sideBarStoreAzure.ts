@@ -1,7 +1,6 @@
 import { defineStore } from "pinia";
 import { reactive, ref } from "vue";
 import { State } from "./chatSideBarTypes";
-import { getCurrentUser } from "vuefire";
 import { SideBarData, TypeChatMessage } from "../kraal-api/types.azureAPI";
 import azureAPI from "../kraal-api/azureAPI";
 
@@ -9,19 +8,11 @@ export const useSideBarStoreAzureStore = defineStore("chatSideBarAzure", () => {
     const state = reactive<State>({ sidebarMobile: null, sidebarDesktop: true })
     // Set previous chatList from `getAPIResponse`
     const sideBarList = ref<SideBarData[]>([])
-    const chatMessages = ref<TypeChatMessage[]>([])
     const recentChatId = ref<number>(0)
-    const uid = ref<string>("")
-    const cUser = getCurrentUser()
-    cUser.then(user => { if (user) { uid.value = user.uid } })
+    const chatMessages = ref<TypeChatMessage[]>([])
 
     return {
         state,
-        sideBarList,
-        recentChatId,
-        chatMessages,
-        max(): number { return sideBarList.value.reduce((acc: number, curr: SideBarData) => acc > curr.id ? acc : curr.id, 0) },
-        min(): number { return sideBarList.value.reduce((acc: number, curr: SideBarData) => acc < curr.id ? acc : curr.id, this.max()) },
         getSidebarMobile: () => state.sidebarMobile,
         showSideBarMobile() { state.sidebarMobile = true },
         hideSideBarMobile() { state.sidebarMobile = false },
@@ -30,6 +21,9 @@ export const useSideBarStoreAzureStore = defineStore("chatSideBarAzure", () => {
         hideSideBarDesktop() { state.sidebarDesktop = false },
         toggleSideBarDesktop() { state.sidebarDesktop = !state.sidebarDesktop },
 
+        // sidebar
+        sideBarList,
+        recentChatId,
         async addNewInstance() {
             const res = await azureAPI.chat.createChat("New chat")
             await this.assignSideBarData()
@@ -43,10 +37,14 @@ export const useSideBarStoreAzureStore = defineStore("chatSideBarAzure", () => {
             this.assignSideBarData()
         },
         async deleteSideBarInstance(id: number) {
+            alert(id)
             await azureAPI.chat.deleteChat(id)
             this.assignSideBarData()
             recentChatId.value = 0
         },
+
+        // coversation
+        chatMessages,
         /**
          * 1. Create new chat instance on form submit
          * 

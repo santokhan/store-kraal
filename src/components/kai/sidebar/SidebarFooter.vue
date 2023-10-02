@@ -1,6 +1,6 @@
 <template>
-    <hr class="border-gray-600 mb-1">
-    <div class="w-full relative text-sm mb-2">
+    <div v-if="userData?.firstName" class="w-full relative text-sm mb-2">
+        <hr class="border-gray-600 mb-1">
         <!-- Drop Up bar -->
         <div v-if="openSettings" ref="settings"
             class="absolute bottom-full left-0 right-0 bg-neutral-950 text-gray-200 rounded-lg overflow-hidden py-1 z-[10]">
@@ -49,7 +49,7 @@
 
 <script setup lang="ts">
 import { onClickOutside } from '@vueuse/core';
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { businessUserInfo } from '../../../firebase/read.business.user'
 import Logout from '../../icons/logout.vue';
 import NavLink from './footer/NavLink.vue'
@@ -70,8 +70,11 @@ function handleOpenSettings() {
 }
 
 const userData = ref<any>()
-businessUserInfo.getUserData(data => {
-    if (data) { userData.value = data }
+onMounted(() => {
+    businessUserInfo.getUserData(data => {
+        if (!data) return;
+        userData.value = data
+    })
 })
 </script>
 

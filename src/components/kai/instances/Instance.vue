@@ -1,9 +1,6 @@
 <template>
     <!-- !Do not use parent div in this instance -->
     <div ref="chatMain" class="h-full overflow-y-auto text-white">
-        <!-- <div v-if="!store.getActiveNavIndex()" class="max-w-4xl mx-auto px-4 pt-24 flex justify-center">
-            <Models />
-        </div> -->
         <div class="relative text-gray-200">
             <div v-for="(chat, index) in chatMessages" :key="index">
                 <div v-if="chat.author === 'User'" class="border-b border-gray-800">
@@ -20,7 +17,7 @@
             </div>
         </div>
     </div>
-    <ChatFooter :chatId="props.chatId" :assignChat="assignChat" />
+    <ChatFooter :chatId="props.chatId" />
 </template>
 
 <script setup lang="ts">
@@ -28,7 +25,6 @@ import { ref, onMounted, onUnmounted } from "vue";
 import ChatFooter from "../chat-footer/ChatFooter.vue";
 import User from '../../icons/user-pro.vue';
 import RobotWriter from "../typewriter/robot-writer/RobotWriter.vue";
-import azureAPI from "../../../kraal-api/azureAPI";
 import { useSideBarStoreAzureStore } from "../../../stores/sideBarStoreAzure";
 import { storeToRefs } from "pinia";
 import RobotStatic from "../typewriter/robot-writer/RobotStatic.vue";
@@ -45,10 +41,10 @@ function eleScrollTop() {
     ele.scrollTop += rect.height;
 }
 
-const messages = ref<any[]>()
-async function assignChat() {
-    messages.value = await azureAPI.chat.getChatMessages(props.chatId)
-}
-onMounted(assignChat)
-onUnmounted(() => { messages.value = [] })
+// const messages = ref<any[]>()
+// async function assignChat() {
+//     messages.value = await azureAPI.chat.getChatMessages(props.chatId)
+// }
+// onMounted(assignChat)
+// onUnmounted(() => { messages.value = [] })
 </script>

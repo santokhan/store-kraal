@@ -2,6 +2,7 @@
     <div class="relative h-full w-full flex-1 items-start border-white/20 overflow-y-auto -mr-2 scrollbar-dark">
         <Legend>Today</Legend>
         <div v-for='(instance, i) in disorderByDate(sideBarList)' :key='i' class="text-white">
+            <!-- If sidebar item active or clicked -->
             <ItemForm v-if='chatId === instance.id' :chat='instance' :color='colorList[i]' :id='instance.id' />
             <ItemStatic v-else :instance='instance' :color='colorList[i]' />
         </div>
@@ -17,10 +18,11 @@ import { useSideBarStoreAzureStore } from '../../../../stores/sideBarStoreAzure'
 import { useRoute } from 'vue-router';
 import { storeToRefs } from 'pinia';
 
-const route = useRoute()
 const chatId = ref<number>()
-if (typeof route.params.id === 'string') {
-    chatId.value = parseInt(route.params.id)
+const route = useRoute()
+const paramId = route.params.id
+if (typeof paramId === 'string') {
+    chatId.value = parseInt(paramId)
 }
 const store = useSideBarStoreAzureStore()
 const { sideBarList } = storeToRefs(store)
