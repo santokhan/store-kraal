@@ -10,10 +10,9 @@
             <button @click="edit = !edit" type="button" class="w-full h-full p-1 hover:opacity-50">
                 <ChatUpload />
             </button>
-            <button @click="handleDeleteModal" type="button" class="w-full h-full p-1 hover:opacity-50">
+            <button @click="handleModal" type="button" class="w-full h-full p-1 hover:opacity-50">
                 <ChatDelete />
-                <DeleteModal v-if="openDeleteModal && props.chat.name" :chatName="props.chat.name"
-                    :handleDeleteModal="handleDeleteModal" :handleDelete="handleDelete" />
+                <DeleteModal v-if="openDeleteModal && props.chat" :chat="props.chat" :handleModal="handleModal" />
             </button>
         </div>
     </div>
@@ -35,11 +34,11 @@ import ChatEdit from "../../../../icons/chat-edit.vue"
 import ChatUpload from "../../../../icons/chat-upload.vue"
 import ChatDelete from "../../../../icons/chat-delete.vue"
 import NavText from "../NavText.vue"
-import { SideBarData } from "../../../../../kraal-api/types.azureAPI"
 import Ellipse from "./Ellipse.vue"
-import { useSideBarStoreAzureStore } from "../../../../../stores/sideBarStoreAzure"
 import { useRouter } from "vue-router"
 import DeleteModal from "./DeleteModal.vue"
+import { SideBarData } from "../../../../../kraal-api/types.azureAPI"
+import { useSideBarStoreAzureStore } from "../../../../../stores/sideBarStoreAzure"
 
 const props = defineProps<{ chat: SideBarData, color: string, id: number }>()
 const edit = ref<boolean>(false)
@@ -53,15 +52,15 @@ function handleSubmit(e: any) {
     edit.value = false
 }
 
-const router = useRouter()
-function handleDelete() {
-    store.deleteSideBarInstance(props.chat.id)
-    // navigate to welcome page when chat delete
-    router.push("/kraalai")
-}
+// const router = useRouter()
+// async function handleDelete() {
+//     await store.deleteSideBarInstance(props.chat.id)
+//     // navigate to welcome page when chat delete
+//     router.push("/kraalai")
+// }
 
 const openDeleteModal = ref<boolean>(false)
-function handleDeleteModal() {
+function handleModal() {
     openDeleteModal.value = !openDeleteModal.value;
 }
 </script>

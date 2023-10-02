@@ -36,8 +36,13 @@ export const useSideBarStoreAzureStore = defineStore("chatSideBarAzure", () => {
             await azureAPI.chat.editChat(id, name)
             this.assignSideBarData()
         },
+        /**
+         * 1. Delete chat instance from server
+         * 2. Re-assign sidebar data on delete
+         * 3. Set `recentChatId` to 0. Because on delete it will redirect to /kraalai. The /kraalai should not have valid `recentChatId`
+         * @param id 
+         */
         async deleteSideBarInstance(id: number) {
-            alert(id)
             await azureAPI.chat.deleteChat(id)
             this.assignSideBarData()
             recentChatId.value = 0
