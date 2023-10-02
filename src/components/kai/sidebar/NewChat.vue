@@ -16,9 +16,9 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import Plus from '../../icons/plus.vue'
-import { useWelcomeChatStore } from '../../../stores/sideBarStoreAzure'
+import { useSideBarStoreAzureStore } from '../../../stores/sideBarStoreAzure'
 
-const store = useWelcomeChatStore()
+const store = useSideBarStoreAzureStore()
 const router = useRouter()
 
 /**

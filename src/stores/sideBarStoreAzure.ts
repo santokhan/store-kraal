@@ -58,55 +58,40 @@ export const useSideBarStoreAzureStore = defineStore("chatSideBarAzure", () => {
          * @param message 
          * @returns 
          */
-        async create_chat_and_send_message(message?: string) {
-            return await this.addNewInstance()
-            // recentChatId.value = chat.id
-            // await azureAPI.chat.sendChatMessage(chat.id, message);
+        create_chat() {
+            return this.addNewInstance()
         },
         async assignChatMessage(chatId: number) {
-            chatMessages.value = await azureAPI.chat.getChatMessages(chatId);
+            const conversations = await azureAPI.chat.getChatMessages(chatId);
+            const len = conversations.length
+            if (len < 1) { throw new Error() };
+            chatMessages.value = conversations
+        },
+        async Re_assignChatMessage(chatId: number) {
+            const conversations = await azureAPI.chat.getChatMessages(chatId);
+            const len = conversations.length
+            if (len < 1) { throw new Error() };
+
+            conversations[len - 1].typewriter = true
+            chatMessages.value = conversations
         },
         async clearChatMessages() {
             chatMessages.value = []
         },
         async sendChatMessage(id: number, message: string) {
-            await azureAPI.chat.sendChatMessage(id, message)
-        },
-        clearRecentChatId() {
-            recentChatId.value = 0
-        }
-    }
-})
-
-export const useWelcomeChatStore = defineStore("welcomeChat", () => {
-    const chatMessages = ref<TypeChatMessage[]>([])
-    const recentChatId = ref<number>(0)
-
-    return {
-        recentChatId,
-        chatMessages,
-
-        /**
-         * 1. Create new chat instance on form submit
-         * 
-         * 2. Create new chat messsage
-         * 
-         * @param message 
-         * @returns 
-         */
-        async assignChatMessage(chatId: number) {
-            chatMessages.value = await azureAPI.chat.getChatMessages(chatId);
-        },
-        async clearChatMessages() {
-            chatMessages.value = []
-        },
-        async sendChatMessage(id: number, message: string) {
+            if (!id && !message) {
+                console.log(`Can not read 'id' and 'message'`);
+                return;
+            }
             await azureAPI.chat.sendChatMessage(id, message)
             // set `recentChatId` to switch welcome to coversation
             recentChatId.value = id
 
             // assign messages to print
-            this.assignChatMessage(id)
+            this.Re_assignChatMessage(id)
+        },
+        clearRecentChatId() {
+            recentChatId.value = 0
         },
         clear_chatId_and_messages() {
             recentChatId.value = 0

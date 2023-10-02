@@ -28,10 +28,10 @@ import { ref } from "vue";
 import ChatFooter from "../chat-footer/ChatFooter.vue";
 import User from '../../icons/user-pro.vue';
 import RobotWriter from "../typewriter/robot-writer/RobotWriter.vue";
-import { useWelcomeChatStore } from "../../../stores/sideBarStoreAzure";
+import { useSideBarStoreAzureStore } from "../../../stores/sideBarStoreAzure";
 import { storeToRefs } from "pinia";
 
-const store = useWelcomeChatStore()
+const store = useSideBarStoreAzureStore()
 const { recentChatId, chatMessages } = storeToRefs(store)
 
 const chatMain: any = ref(null);

@@ -18,7 +18,8 @@
                         </FileInputBox>
                         <button type="submit" :disabled="!input" title="Send message"
                             class="w-8 h-8 flex justify-center items-center rounded-md text-gray-100 hover:bg-kraal-blue-500 disabled:opacity-40">
-                            <Telegram class="h-4" />
+                            <Telegram class="h-4" v-if="!loading" />
+                            <SpinnerCircle class="h-5 text-gray-200" v-if="loading" />
                         </button>
                     </div>
                 </div>
@@ -33,11 +34,13 @@ import Telegram from '../../../icons/telegram.vue';
 import AttachmentPreview from './AttachmentPreview.vue';
 import FileInputBox from './FileInputBox.vue';
 import { useRoute } from 'vue-router';
-import { useSideBarStoreAzureStore, useWelcomeChatStore } from '../../../../stores/sideBarStoreAzure';
+import { useSideBarStoreAzureStore } from '../../../../stores/sideBarStoreAzure';
+import SpinnerCircle from '../../../shared/spinner/SpinnerCircle.vue';
 
 const input = ref<string>("")
 const fileInput = ref<any[]>([])
 const route = useRoute()
+const loading = ref<boolean>(false)
 
 const chatId = ref<number>()
 function assignInstanceId() {
@@ -48,7 +51,6 @@ function assignInstanceId() {
 watch(() => route.params.id, assignInstanceId)
 
 const store = useSideBarStoreAzureStore()
-const chatStore = useWelcomeChatStore()
 
 // User input file handling
 function handleChange(e: any) {
@@ -66,14 +68,15 @@ function handleChange(e: any) {
 function handleFiles(index: number) {
     fileInput.value = fileInput.value.filter((e, i) => i !== index)
 }
-
 async function handleSubmit(e: any) {
     e.preventDefault()
     const formData = { message: input.value, files: fileInput.value.map(e => e) }
 
+    loading.value = true
     // switch to original chat instance
-    const chat = await store.create_chat_and_send_message()
-    chatStore.sendChatMessage(chat.id, input.value)
+    const chat = await store.create_chat()
+    await store.sendChatMessage(chat.id, input.value)
+    loading.value = false
 
     // TODO: clear input after form submit complete
     input.value = ""

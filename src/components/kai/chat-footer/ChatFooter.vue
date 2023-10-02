@@ -4,7 +4,8 @@
             <form @submit="handleSubmit" class="relative">
                 <div
                     class="flex items-center gap-1 rounded-xl pl-2 lg:pl-4 pr-1 lg:pr-3 py-1 lg:py-3 shadow bg-chatgpt-400">
-                    <div class="w-6 h-6 rounded-full bg-chatgpt-700 grid place-items-center relative overflow-hidden text-gray-400 hover:text-gray-300">
+                    <div
+                        class="w-6 h-6 rounded-full bg-chatgpt-700 grid place-items-center relative overflow-hidden text-gray-400 hover:text-gray-300">
                         <i class="fa fa-plus rounded-full bg-chatgpt-600"></i>
                         <input type="file" name="" id="" class="absolute left-0 top-0 opacity-0 e z-[50]">
                     </div>
@@ -19,7 +20,8 @@
                     <div class="self-end">
                         <button type="submit" :disabled="!input"
                             class="w-8 h-8 flex justify-center items-center rounded-md text-gray-100 hover:bg-kraal-blue-500 disabled:opacity-40">
-                            <Telegram class="h-4" />
+                            <Telegram class="h-4" v-if="!loading" />
+                            <SpinnerCircle class="h-5 text-gray-200" v-if="loading" />
                         </button>
                     </div>
                 </div>
@@ -31,14 +33,15 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import Telegram from "../../icons/telegram.vue";
-import { useWelcomeChatStore } from "../../../stores/sideBarStoreAzure";
-
+import { useSideBarStoreAzureStore } from "../../../stores/sideBarStoreAzure";
+import SpinnerCircle from "../../shared/spinner/SpinnerCircle.vue";
 const props = defineProps<{ chatId: any }>()
 
-const store = useWelcomeChatStore()
+const store = useSideBarStoreAzureStore()
 const hiddenDiv: any = ref<null | HTMLElement>(null);
 const input = ref<string>("");
 const textarea: any = ref(null);
+const loading = ref<boolean>(false)
 
 function handleChange(e: any) {
     input.value = e.target.value.trim();
@@ -49,7 +52,9 @@ async function handleSubmit(e: any) {
     e.preventDefault();
 
     if (typeof props.chatId !== "number") return;
+    loading.value = true
     await store.sendChatMessage(props.chatId, input.value)
+    loading.value = false
 
     // Clear <textarea> afer submit & set initial height
     input.value = "";
