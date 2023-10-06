@@ -43,7 +43,7 @@ const route = useRoute()
 const loading = ref<boolean>(false)
 
 const chatId = ref<number>()
-function assignInstanceId() {
+function assignInstanceId() { 
     if (typeof route.params.id === 'string' || typeof route.params.id === 'number') {
         chatId.value = parseInt(route.params.id)
     }

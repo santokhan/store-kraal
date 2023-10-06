@@ -10,7 +10,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useMediaQuery } from '@vueuse/core'
 import ChatSideBarToggler from './ChatSideBarToggler.vue'
