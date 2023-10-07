@@ -29,7 +29,7 @@
                         </div>
                         <div class="mt-5 sm:mt-4">
                             <div class="mt-5 flex flex-col gap-3 sm:mt-4 sm:flex-row-reverse"><button
-                                    class="h-10 px-4 text-chatgpt-600 font-semibold rounded-lg bg-gray-200 hover:bg-gray-300">Save</button>
+                                    class="h-10 px-4 text-chatgpt-600 font-semibold rounded-lg bg-gray-400 hover:bg-gray-500">Save</button>
                             </div>
                         </div>
                     </div>

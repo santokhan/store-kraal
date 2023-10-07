@@ -4,7 +4,7 @@
         <div class="flex flex-col w-full h-full">
             <slot></slot>
         </div>
-        <RightSidebar/>
+        <RightSidebar />
     </div>
 </template>
 
@@ -12,7 +12,7 @@
 import { onMounted, onUnmounted } from "vue"
 import ChatSidebar from "../sidebar/ChatSidebar.vue"
 import { useSideBarStoreAzureStore } from '../../../stores/sideBarStoreAzure'
-import RightSidebar from "../sidebar/right/Right.vue"
+import RightSidebar from "../sidebar/right-sidebar/RightSidebar.vue"
 
 const store = useSideBarStoreAzureStore()
 onMounted(() => {
