@@ -1,6 +1,6 @@
-## Kraal Web Application
+# Kraal Web Application
 
-### Vue 3 + TypeScript + Vite
+## Vue 3 + TypeScript + Vite
 
 This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
 
@@ -19,8 +19,42 @@ If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has a
    2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
 2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
 
-<!-- Santo -->
+## Deployment Guide
+
+- Build your application locally and fix bugs
+
+   ```bash
+   npm run build
+   ```
+
+- Deploy using netlify cli
+
+   ```bash
+   netlify deploy
+   netlify deploy --prod
+   ```
+
+   ***Note:** Do not push to repository before checking your netlify deployment.*
+
+## Others
+
 Read HighlightJS documentation to understand properly
 [HighLight](https://highlightjs.readthedocs.io/en/latest/api.html#highlightall)
 
-[Repo](https://github.com/kraalai/app-frontend.git)
+Repo Link: [https://github.com/kraalai/app-frontend.git](https://github.com/kraalai/app-frontend.git)
+
+## User Schema
+
+```json
+{
+   "accounting": "",
+   "company": "",
+   "email": "",
+   "firstName": "",
+   "jobTitle": "",
+   "lastName": "",
+   "message": "",
+   "organization": "",
+   "phone": "",
+}
+```

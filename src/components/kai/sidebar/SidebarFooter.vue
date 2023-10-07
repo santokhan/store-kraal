@@ -4,6 +4,12 @@
         <!-- Drop Up bar -->
         <div v-if="openSettings" ref="settings"
             class="absolute bottom-full left-0 right-0 bg-neutral-950 text-gray-200 rounded-lg overflow-hidden py-1 z-[10]">
+            <NavLink to="" @click="handleModal" role="button">
+                <IconBox>
+                    <ChatBubbleLeftEllipsisIcon class="w-5" />
+                </IconBox>
+                Custom Instructions
+            </NavLink>
             <NavLink to="/user-setting">
                 <IconBox>
                     <UserSimple class="w-5" />
@@ -45,6 +51,7 @@
             <div class="w-auto"><i class="fa fa-ellipsis-h text-sm text-neutral-400"></i></div>
         </button>
     </div>
+    <CustomInstructions :isOpenModal="isOpenModal" :handleModal="handleModal" />
 </template>
 
 <script setup lang="ts">
@@ -57,6 +64,8 @@ import IconBox from '../../shared/header/dashbboard/absolutesidebar/icon/IconBox
 import Card from '../../icons/card.vue';
 import Team from '../../icons/team.vue';
 import UserSimple from '../../icons/user-simple.vue';
+import { ChatBubbleLeftEllipsisIcon } from '@heroicons/vue/24/outline'
+import CustomInstructions from "./custom-instructions/CustomInstructions.vue";
 
 const openSettings = ref(false)
 const opener = ref(null)
@@ -76,6 +85,12 @@ onMounted(() => {
         userData.value = data
     })
 })
+
+const isOpenModal = ref<boolean>(false)
+
+function handleModal() {
+    isOpenModal.value = !isOpenModal.value
+}
 </script>
 
 <style scoped></style>
