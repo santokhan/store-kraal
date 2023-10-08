@@ -12,7 +12,7 @@
             </NavLink>
             <NavLink to="/user-setting">
                 <IconBox>
-                    <UserSimple class="w-5" />
+                    <User class="w-5" />
                 </IconBox>
                 User Settings
             </NavLink>
@@ -37,17 +37,12 @@
             </NavLink>
         </div>
 
-        <button type="button" @click="handleOpenSettings" ref="opener"
-            class="w-full text-gray-100 flex items-center gap-3 px-2 h-[3.25rem] rounded-lg hover:bg-chatgpt-700 overflow-x-hidden"
-            :class="openSettings ? 'bg-chatgpt-700' : ''" title="Settings">
-            <div v-if="userData?.firstName"
-                class="bg-chatgpt-500 min-w-[2.25rem] min-h-[2.25rem] flex justify-center items-center rounded">
-                <h5 class="font-medium">{{ userData.firstName[0] }}{{ userData.lastName[0] }}</h5>
-            </div>
-            <div class="w-full flex justify-start">
-                <h5 class="font-semibold" v-if="userData">{{ userData.firstName }} {{ userData.lastName }}</h5>
-                <h5 v-else>...</h5>
-            </div>
+        <button type="button" @click="handleSettings" ref="opener" title="MenuBar"
+            :class="['w-full text-gray-100 flex items-center gap-3 px-2 h-[3.25rem] rounded-lg hover:bg-chatgpt-700 overflow-x-hidden', openSettings && 'bg-chatgpt-700']">
+            <UserIcon>{{ userData.firstName[0] }}{{ userData.lastName[0] }}</UserIcon>
+            <h5 class="w-full flex justify-start font-semibold">
+                {{ userData ? userData.firstName + " " + userData.lastName : "..." }}
+            </h5>
             <div class="w-auto"><i class="fa fa-ellipsis-h text-sm text-neutral-400"></i></div>
         </button>
     </div>
@@ -55,42 +50,44 @@
 </template>
 
 <script setup lang="ts">
-import { onClickOutside } from '@vueuse/core';
 import { onMounted, ref } from 'vue'
-import { businessUserInfo } from '../../../firebase/read.business.user'
-import Logout from '../../icons/logout.vue';
-import NavLink from './footer/NavLink.vue'
-import IconBox from '../../shared/header/dashbboard/absolutesidebar/icon/IconBox.vue';
-import Card from '../../icons/card.vue';
-import Team from '../../icons/team.vue';
-import UserSimple from '../../icons/user-simple.vue';
+import { onClickOutside } from '@vueuse/core';
 import { ChatBubbleLeftEllipsisIcon } from '@heroicons/vue/24/outline'
+// Firestore
+import { businessUserInfo } from '../../../firebase/read.business.user'
+// Comp
+import IconBox from '../../shared/header/dashbboard/absolutesidebar/icon/IconBox.vue';
 import CustomInstructions from "./custom-instructions/CustomInstructions.vue";
+import NavLink from './footer/NavLink.vue'
+import UserIcon from './footer/UserProfileIcon.vue';
+// Icons
+import User from '../../icons/user-simple.vue';
+import Card from '../../icons/card.vue';
+import Logout from '../../icons/logout.vue';
+import Team from '../../icons/team.vue';
 
-const openSettings = ref(false)
 const opener = ref(null)
+const openSettings = ref(false)
 const settings = ref(null)
+const isOpenModal = ref<boolean>(false)
+// From firestore
+const userData = ref<any>()
 
-function handleOpenSettings() {
+function handleSettings() {
     openSettings.value = !openSettings.value
     onClickOutside(settings, () => {
         openSettings.value = false
     }, { ignore: [opener] })
 }
-
-const userData = ref<any>()
+function handleModal() {
+    isOpenModal.value = !isOpenModal.value
+}
 onMounted(() => {
     businessUserInfo.getUserData(data => {
         if (!data) return;
         userData.value = data
     })
 })
-
-const isOpenModal = ref<boolean>(false)
-
-function handleModal() {
-    isOpenModal.value = !isOpenModal.value
-}
 </script>
 
 <style scoped></style>

@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col justify-between items-center h-full gap-10 lg:mb-4">
         <div class="max-w-4xl mx-auto px-4 flex justify-center items-center mt-12">
-            <h2 class="text-2xl lg:text-4xl font-semibold text-white text-center opacity-30">KraalAI</h2>
+            <h2 class="text-2xl lg:text-4xl font-semibold text-white text-center opacity-30 drop-shadow">KraalAI</h2>
         </div>
         <div class="w-full max-w-4xl mx-auto mt-auto bg-chatgpt-500 px-4 pt-2">
             <form @submit="handleSubmit">
@@ -43,7 +43,7 @@ const route = useRoute()
 const loading = ref<boolean>(false)
 
 const chatId = ref<number>()
-function assignInstanceId() { 
+function assignInstanceId() {
     if (typeof route.params.id === 'string' || typeof route.params.id === 'number') {
         chatId.value = parseInt(route.params.id)
     }

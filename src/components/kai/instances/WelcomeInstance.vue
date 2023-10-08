@@ -1,9 +1,6 @@
 <template>
     <!-- !Do not use parent div in this instance -->
     <div ref="chatMain" class="h-full overflow-y-auto text-white">
-        <!-- <div v-if="!store.getActiveNavIndex()" class="max-w-4xl mx-auto px-4 pt-24 flex justify-center">
-            <Models />
-        </div> -->
         <div class="relative text-gray-200">
             <div v-for="(chat, index) in chatMessages" :key="index">
                 <div v-if="chat.author === 'User'" class="border-b border-gray-800">
