@@ -3,28 +3,25 @@
         <div class="max-w-4xl mx-auto px-4 flex justify-center items-center mt-12">
             <h2 class="text-2xl lg:text-4xl font-semibold text-white text-center opacity-30 drop-shadow">KraalAI</h2>
         </div>
-        <div class="w-full max-w-4xl mx-auto mt-auto bg-chatgpt-500 px-4 pt-2">
-            <form @submit="handleSubmit">
-                <div class="rounded-xl shadow bg-chatgpt-400">
-                    <div class="relative w-full h-full">
-                        <textarea :value="input" placeholder="Send a message..." @input="(e: any) => input = e.target.value"
-                            class="w-full focus:outline-none resize-none overflow-auto bg-transparent text-white min-h-56 h-56 px-4 py-3"></textarea>
-                    </div>
-                    <AttachmentPreview :files="fileInput" :handleFiles="(index) => { handleFiles(index) }" />
-                    <div class="p-2 flex justify-between items-center">
-                        <FileInputBox>
-                            <input type="file" multiple="true" @change="handleChange" title="Attachment"
-                                class="opacity-0 absolute z-10 w-full h-full left-0 top-0">
-                        </FileInputBox>
-                        <button type="submit" :disabled="!input" title="Send message"
-                            class="w-8 h-8 flex justify-center items-center rounded-md text-gray-100 hover:bg-kraal-blue-500 disabled:opacity-40">
-                            <Telegram class="h-4" v-if="!loading" />
-                            <SpinnerCircle class="h-5 text-gray-200" v-if="loading" />
-                        </button>
-                    </div>
+
+        <form @submit="handleSubmit" class="w-full max-w-4xl mx-auto mt-auto bg-chatgpt-500 px-4 pt-2">
+            <div class="rounded-xl shadow bg-chatgpt-400" :class="animateChatBox && 'animate-chatbox'">
+                <div class="relative w-full h-full">
+                    <textarea :value="input" placeholder="Send a message..." @input="(e: any) => input = e.target.value"
+                        class="w-full focus:outline-none resize-none overflow-auto bg-transparent text-white min-h-56 h-56 px-4 py-3"></textarea>
                 </div>
-            </form>
-        </div>
+                <AttachmentPreview :files="fileInput" :handleFiles="(index) => { handleFiles(index) }" />
+                <div class="p-2 flex justify-between items-center">
+                    <FileInputBox><input type="file" multiple="true" @change="handleChange" title="Attachment"
+                            class="opacity-0 absolute z-10 w-full h-full left-0 top-0"></FileInputBox>
+                    <button type="submit" :disabled="!input" title="Send message"
+                        class="w-8 h-8 flex justify-center items-center rounded-md text-gray-100 hover:bg-kraal-blue-500 disabled:opacity-40">
+                        <Telegram class="h-4" v-if="!loading" />
+                        <SpinnerCircle class="h-5 text-gray-200" v-if="loading" />
+                    </button>
+                </div>
+            </div>
+        </form>
     </div>
 </template>
 
@@ -36,11 +33,15 @@ import FileInputBox from './FileInputBox.vue';
 import { useRoute } from 'vue-router';
 import { useSideBarStoreAzureStore } from '../../../../stores/sideBarStoreAzure';
 import SpinnerCircle from '../../../shared/spinner/SpinnerCircle.vue';
+import { storeToRefs } from 'pinia';
+
 
 const input = ref<string>("")
 const fileInput = ref<any[]>([])
 const route = useRoute()
 const loading = ref<boolean>(false)
+const store = useSideBarStoreAzureStore()
+const { animateChatBox } = storeToRefs(store)
 
 const chatId = ref<number>()
 function assignInstanceId() {
@@ -50,7 +51,6 @@ function assignInstanceId() {
 } assignInstanceId()
 watch(() => route.params.id, assignInstanceId)
 
-const store = useSideBarStoreAzureStore()
 
 // User input file handling
 function handleChange(e: any) {
@@ -83,3 +83,29 @@ async function handleSubmit(e: any) {
     fileInput.value = []
 }
 </script>
+
+<style scoped>
+.animate-chatbox {
+    animation-name: chatbox;
+    animation-duration: 3000ms;
+    animation-timing-function: ease-in;
+}
+
+@keyframes chatbox {
+    0% {
+        outline: 2px solid #9ca3af;
+    }
+
+    60% {
+        outline: 2px solid #9ca3af;
+    }
+
+    90% {
+        outline: 2px solid transparent;
+    }
+
+    100% {
+        outline: 2px solid transparent;
+    }
+}
+</style>

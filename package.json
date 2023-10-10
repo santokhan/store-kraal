@@ -33,6 +33,7 @@
     "randomcolor": "^0.6.2",
     "tailwind-scrollbar": "^3.0.4",
     "vue": "^3.2.47",
+    "vue-query": "^1.26.0",
     "vue-router": "^4.0.13",
     "vue3-datepicker": "^0.4.0",
     "vuefire": "^3.1.0"

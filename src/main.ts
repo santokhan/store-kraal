@@ -7,12 +7,6 @@ import { VueFire, VueFireAuth } from 'vuefire';
 import { firebaseApp } from "./auth/firebaseApp";
 // CSS
 import "./main.css";
-// noom
-// import "./assets/css/bundle.a1ef1dfe.css";
-// import "./assets/css/dropdown.css";
-// import "./assets/css/input-style.css";
-// import "./assets/css/locale.1cac42c3.chunk.css";
-// import "./assets/css/noom.css";
 // highlightjs https://github.com/highlightjs/vue-plugin
 import 'highlight.js/styles/stackoverflow-light.css'
 import hljs from 'highlight.js/lib/core';

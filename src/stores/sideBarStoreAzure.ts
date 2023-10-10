@@ -10,6 +10,7 @@ export const useSideBarStoreAzureStore = defineStore("chatSideBarAzure", () => {
     const sideBarList = ref<SideBarData[]>([])
     const recentChatId = ref<number>(0)
     const chatMessages = ref<TypeChatMessage[]>([])
+    const animateChatBox = ref<boolean>(false)
 
     return {
         state,
@@ -20,6 +21,15 @@ export const useSideBarStoreAzureStore = defineStore("chatSideBarAzure", () => {
         showSideBarDesktop() { state.sidebarDesktop = true },
         hideSideBarDesktop() { state.sidebarDesktop = false },
         toggleSideBarDesktop() { state.sidebarDesktop = !state.sidebarDesktop },
+        animateChatBox,
+        handleAnimateChatBox() {
+            animateChatBox.value = true
+
+            // clear outline after 3000ms
+            setTimeout(() => {
+                animateChatBox.value = false
+            }, 3000);
+        },
 
         // sidebar
         sideBarList,

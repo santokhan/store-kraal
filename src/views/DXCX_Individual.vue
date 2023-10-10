@@ -29,7 +29,6 @@ import BS from "../components/dxcx_individual/pl-with-ts/PLWithTS.vue";
 import CF from "../components/dxcx_individual/cash-flow/CashFlow.vue";
 import Card from "../components/dxcx_individual/card/Card.vue";
 // 
-import BalanceSheet from "../components/dxcx_individual/financial-statement/BalanceSheet.vue";
 import CashFlow from "../components/dxcx_individual/financial-statement/CashFlow.vue";
 import ProfitLossStatement from "../components/dxcx_individual/financial-statement/ProfitLossStatement.vue";
 </script>

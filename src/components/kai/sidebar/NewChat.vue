@@ -2,6 +2,7 @@
     <button type="button" @click="() => {
         store.clear_chatId_and_messages()
         router.push('/kraalai')
+        store.handleAnimateChatBox();
     }" :class="[
     'text-white text-sm border border-gray-600 rounded-md',
     'w-full h-[3rem] max-h-[3rem] overflow-hidden p-2',
@@ -26,5 +27,3 @@ const router = useRouter()
  * 2. Add new response to chatInstance on pinia store
  */
 </script>
-
-<style scoped></style>

@@ -30,7 +30,8 @@ notes
 *.eps
 test.js
 .txt
-server/*
+server
+.vscode
 Response.vue
 questions-answers/
 temp/

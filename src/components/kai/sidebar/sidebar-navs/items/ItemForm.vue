@@ -52,13 +52,6 @@ function handleSubmit(e: any) {
     edit.value = false
 }
 
-// const router = useRouter()
-// async function handleDelete() {
-//     await store.deleteSideBarInstance(props.chat.id)
-//     // navigate to welcome page when chat delete
-//     router.push("/kraalai")
-// }
-
 const openDeleteModal = ref<boolean>(false)
 function handleModal() {
     openDeleteModal.value = !openDeleteModal.value;

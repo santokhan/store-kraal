@@ -41,7 +41,7 @@
                     <ul class="text-sm font-medium space-y-2">
                         <li>
                             <RouterLink class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out"
-                                to="/terms">Terms of Use</RouterLink>
+                                to="">Terms of Use</RouterLink>
                         </li>
                         <li>
                             <RouterLink class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out"

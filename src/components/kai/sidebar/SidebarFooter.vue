@@ -67,6 +67,7 @@ import User from '../../icons/user-simple.vue';
 import Card from '../../icons/card.vue';
 import Logout from '../../icons/logout.vue';
 import Team from '../../icons/team.vue';
+import { getCurrentUser } from 'vuefire';
 
 const opener = ref(null)
 const openSettings = ref(false)
@@ -88,7 +89,7 @@ function handleModal() {
     openSettings.value = false;
 }
 onMounted(() => {
-    businessUserInfo.getUserData(data => {
+    businessUserInfo.getUserData(async (data) => {
         if (!data) return;
         userData.value = data
     })
