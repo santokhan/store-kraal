@@ -1,9 +1,6 @@
 <template>
     <div class="flex flex-col justify-between items-center h-full gap-10 lg:mb-4">
-        <div class="max-w-4xl mx-auto px-4 flex justify-center items-center mt-12">
-            <h2 class="text-2xl lg:text-4xl font-semibold text-white text-center opacity-30 drop-shadow">KraalAI</h2>
-        </div>
-
+        <Branding />
         <form @submit="handleSubmit" class="w-full max-w-4xl mx-auto mt-auto bg-chatgpt-500 px-4 pt-2">
             <div class="rounded-xl shadow bg-chatgpt-400" :class="animateChatBox && 'animate-chatbox'">
                 <div class="relative w-full h-full">
@@ -16,8 +13,8 @@
                             class="opacity-0 absolute z-10 w-full h-full left-0 top-0"></FileInputBox>
                     <button type="submit" :disabled="!input" title="Send message"
                         class="w-8 h-8 flex justify-center items-center rounded-md text-gray-100 hover:bg-kraal-blue-500 disabled:opacity-40">
-                        <Telegram class="h-4" v-if="!loading" />
-                        <SpinnerCircle class="h-5 text-gray-200" v-if="loading" />
+                        <Telegram v-if="!loading" class="h-4" />
+                        <SpinnerCircle v-else-if="loading" class="h-5 text-gray-200" />
                     </button>
                 </div>
             </div>
@@ -34,7 +31,7 @@ import { useRoute } from 'vue-router';
 import { useSideBarStoreAzureStore } from '../../../../stores/sideBarStoreAzure';
 import SpinnerCircle from '../../../shared/spinner/SpinnerCircle.vue';
 import { storeToRefs } from 'pinia';
-
+import Branding from './Branding.vue';
 
 const input = ref<string>("")
 const fileInput = ref<any[]>([])
@@ -50,7 +47,6 @@ function assignInstanceId() {
     }
 } assignInstanceId()
 watch(() => route.params.id, assignInstanceId)
-
 
 // User input file handling
 function handleChange(e: any) {
@@ -76,9 +72,9 @@ async function handleSubmit(e: any) {
     // switch to original chat instance
     const chat = await store.create_chat()
     await store.sendChatMessage(chat.id, input.value)
-    loading.value = false
-
+    
     // TODO: clear input after form submit complete
+    loading.value = false
     input.value = ""
     fileInput.value = []
 }

@@ -35,12 +35,25 @@ export const useSideBarStoreAzureStore = defineStore("chatSideBarAzure", () => {
         sideBarList,
         recentChatId,
         async addNewInstance() {
-            const res = await azureAPI.chat.createChat("New chat")
-            await this.assignSideBarData()
+            const res = await azureAPI.chat.createChat("New chat");
+            // call it after getting response
+            // await this.assignSideBarData();
             return res;
         },
         async assignSideBarData() {
-            sideBarList.value = await azureAPI.chat.getChats()
+            const navList = await azureAPI.chat.getChats();
+            if (navList.length > 0) {
+                // descending
+                sideBarList.value = navList.sort((a: SideBarData, b: SideBarData) => {
+                    if (a.id < b.id) {
+                        return 1
+                    } else if (a.id > b.id) {
+                        return -1
+                    } else {
+                        return 0
+                    }
+                });
+            }
         },
         async editChatName(id: number, name: string) {
             await azureAPI.chat.editChat(id, name)
@@ -98,7 +111,8 @@ export const useSideBarStoreAzureStore = defineStore("chatSideBarAzure", () => {
             recentChatId.value = id
 
             // assign messages to print
-            this.Re_assignChatMessage(id)
+            await this.Re_assignChatMessage(id)
+            await this.assignSideBarData();
         },
         clearRecentChatId() {
             recentChatId.value = 0
