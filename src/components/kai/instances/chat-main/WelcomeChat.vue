@@ -9,13 +9,15 @@
                 </div>
                 <AttachmentPreview :files="fileInput" :handleFiles="(index) => { handleFiles(index) }" />
                 <div class="p-2 flex justify-between items-center">
-                    <FileInputBox><input type="file" multiple="true" @change="handleChange" title="Attachment"
-                            class="opacity-0 absolute z-10 w-full h-full left-0 top-0"></FileInputBox>
-                    <button type="submit" :disabled="!input" title="Send message"
-                        class="w-8 h-8 flex justify-center items-center rounded-md text-gray-100 hover:bg-kraal-blue-500 disabled:opacity-40">
-                        <Telegram v-if="!loading" class="h-4" />
-                        <SpinnerCircle v-else-if="loading" class="h-5 text-gray-200" />
-                    </button>
+                    <FileInputBox>
+                        <input type="file" multiple="true" @change="handleChange" title="Attachment"
+                            class="opacity-0 absolute z-10 w-full h-full left-0 top-0">
+                    </FileInputBox>
+
+                    <ChatSubmitBtn v-if="!loading" :disabled="!input" />
+                    <div v-else-if="loading" class="w-8 h-8 grid place-items-center">
+                        <SpinnerCircle class="h-5 text-gray-200" />
+                    </div>
                 </div>
             </div>
         </form>
@@ -24,7 +26,6 @@
 
 <script lang="ts" setup>
 import { ref, watch } from 'vue';
-import Telegram from '../../../icons/telegram.vue';
 import AttachmentPreview from './AttachmentPreview.vue';
 import FileInputBox from './FileInputBox.vue';
 import { useRoute } from 'vue-router';
@@ -32,6 +33,7 @@ import { useSideBarStoreAzureStore } from '../../../../stores/sideBarStoreAzure'
 import SpinnerCircle from '../../../shared/spinner/SpinnerCircle.vue';
 import { storeToRefs } from 'pinia';
 import Branding from './Branding.vue';
+import ChatSubmitBtn from './ChatSubmitBtn.vue';
 
 const input = ref<string>("")
 const fileInput = ref<any[]>([])
@@ -72,7 +74,7 @@ async function handleSubmit(e: any) {
     // switch to original chat instance
     const chat = await store.create_chat()
     await store.sendChatMessage(chat.id, input.value)
-    
+
     // TODO: clear input after form submit complete
     loading.value = false
     input.value = ""

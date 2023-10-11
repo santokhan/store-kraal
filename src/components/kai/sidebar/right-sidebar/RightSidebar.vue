@@ -2,7 +2,7 @@
     <Container>
         <div v-for="(item, index) in sidebarItems" :key="index" :class="[
             'min-h-[6rem] rounded-lg p-4 space-y-4 bg-kraal-purple-500 hover:bg-kraal-purple-500/80',
-            'border-t border-t-white/30'
+            'border-t border-t-white/30',
         ]">
             <div class="h-6 w-6 grid place-items-center">
                 <i v-if="item.name === sidebarItems[0].name" class="fa fa-cog text-xl" aria-hidden="true"></i>

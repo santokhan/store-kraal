@@ -31,7 +31,7 @@ export const useSideBarStoreAzureStore = defineStore("chatSideBarAzure", () => {
             }, 3000);
         },
 
-        // sidebar
+        // #sidebar
         sideBarList,
         recentChatId,
         async addNewInstance() {
@@ -71,7 +71,7 @@ export const useSideBarStoreAzureStore = defineStore("chatSideBarAzure", () => {
             recentChatId.value = 0
         },
 
-        // coversation
+        // #coversation
         chatMessages,
         /**
          * 1. Create new chat instance on form submit
