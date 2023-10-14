@@ -60,7 +60,7 @@ export async function sendEmailVerification() {
             return false;
         }
         await firebase.sendEmailVerification(user, {
-            url: window.location.origin + '/signup',
+            url: window.location.origin + '/email-verified',
         });
         console.log(`Verification email sent to ${user.email}`);
         return true;

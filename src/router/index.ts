@@ -107,6 +107,12 @@ const protectedRoutes: ProtectedRoutes[] = [
     name: "email-verification",
     component: () => import("../views/EmailVerification.vue"),
     meta: { requiresAuth: true },
+  },
+  {
+    path: "/email-verified",
+    name: "email-verified",
+    component: () => import("../views/EmailVerified.vue"),
+    meta: { requiresVerification: true },
   }
 ]
 
