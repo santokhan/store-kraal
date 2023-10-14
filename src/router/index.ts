@@ -6,32 +6,32 @@ const financialRoutes: ProtectedRoutes[] = [
   {
     path: '/pl', name: "pl",
     component: () => import("../views/financial-statement/ProfitLossStatementView.vue"),
-    meta: { requiresAuth: true }
+    meta: { requiresVerification: true }
   },
   {
     path: '/cf', name: "cf",
     component: () => import("../views/financial-statement/CFView.vue"),
-    meta: { requiresAuth: true }
+    meta: { requiresVerification: true }
   },
   {
     path: '/cashflow', name: "cashflow",
     component: () => import("../views/financial-statement/CashFlowView.vue"),
-    meta: { requiresAuth: true }
+    meta: { requiresVerification: true }
   },
   {
     path: '/due', name: "due",
     component: () => import("../views/financial-statement/DueView.vue"),
-    meta: { requiresAuth: true }
+    meta: { requiresVerification: true }
   },
   {
     path: '/statement', name: "statement",
     component: () => import("../views/financial-statement/StatementView.vue"),
-    meta: { requiresAuth: true }
+    meta: { requiresVerification: true }
   },
   {
     path: '/chart', name: "chart",
     component: () => import("../views/financial-statement/ChartView.vue"),
-    meta: { requiresAuth: true }
+    meta: { requiresVerification: true }
   }
 ]
 
@@ -40,49 +40,49 @@ const protectedRoutes: ProtectedRoutes[] = [
     path: "/kraalai",
     name: "kraalai",
     component: () => import("../components/kai/KraalAIStart.vue"),
-    meta: { requiresAuth: true },
+    meta: { requiresVerification: true },
   },
   {
     path: "/kraalai/:id",
     name: "kraalai-with-id",
     component: () => import("../components/kai/Kai.vue"),
-    meta: { requiresAuth: true },
+    meta: { requiresVerification: true },
   },
   {
     path: "/dashboard",
     name: "dashboard",
     component: () => import("../views/DashboardView.vue"),
-    meta: { requiresAuth: true },
+    meta: { requiresVerification: true },
   },
   {
     path: "/dxcx_individual",
     name: "dxcx_individual",
     component: () => import("../views/DXCX_Individual.vue"),
-    meta: { requiresAuth: true },
+    meta: { requiresVerification: true },
   },
   {
     path: "/reports",
     name: "reports",
     component: () => import("../views/ReportsView.vue"),
-    meta: { requiresAuth: true },
+    meta: { requiresVerification: true },
   },
   {
     path: "/bills",
     name: "bills",
     component: () => import("../views/BillView.vue"),
-    meta: { requiresAuth: true },
+    meta: { requiresVerification: true },
   },
   {
     path: "/user-setting",
     name: "user-setting",
     component: () => import("../views/UserSettingView.vue"),
-    meta: { requiresAuth: true },
+    meta: { requiresVerification: true },
   },
   {
     path: "/team-setting",
     name: "team-setting",
     component: () => import("../views/TeamSettingView.vue"),
-    meta: { requiresAuth: true },
+    meta: { requiresVerification: true },
   },
   {
     path: "/logout",
@@ -94,14 +94,20 @@ const protectedRoutes: ProtectedRoutes[] = [
     path: "/qb-link",
     name: "qb-link",
     component: () => import("../views/QuickbooksConnect.vue"),
-    meta: { requiresAuth: true },
+    meta: { requiresVerification: true },
   },
   {
     path: "/qb-redirect",
     name: "qb-redirect",
     component: () => import("../views/QuickbooksRedirect.vue"),
-    meta: { requiresAuth: true },
+    meta: { requiresVerification: true },
   },
+  {
+    path: "/email-verification",
+    name: "email-verification",
+    component: () => import("../views/EmailVerification.vue"),
+    meta: { requiresAuth: true },
+  }
 ]
 
 const publicRoutes: routes[] = [
@@ -134,7 +140,7 @@ const router: any = createRouter({
 })
 router.beforeEach(async (to: any) => {
   // routes with `meta: { requiresAuth: true }` will check for the users, others won't
-  if (to.meta.requiresAuth === true) {
+  if (to.meta.requiresAuth === true || to.meta.requiredVerification === true) {
     const currentUser = await getCurrentUser();
 
     // if the user is not logged in, redirect to the login page
@@ -147,6 +153,10 @@ router.beforeEach(async (to: any) => {
           redirect: to.fullPath,
         },
       };
+    } else if (!currentUser.emailVerified) {
+      return {
+        path: "/email-verification",
+      }
     }
   } else if (to.meta.requiresAuth === false) {
     // Rare routes

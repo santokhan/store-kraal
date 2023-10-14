@@ -7,6 +7,7 @@ export interface routes {
 
 export interface ProtectedRoutes extends routes {
     meta: {
-        requiresAuth: boolean
+        requiresAuth?: boolean,
+        requiresVerification?: boolean,
     }
 }
