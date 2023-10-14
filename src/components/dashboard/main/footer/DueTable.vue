@@ -28,7 +28,6 @@ import Ellipse from "../../../icons/ellipse.vue";
 import Title from "./row/RTitle.vue";
 import Desc from "./row/RDesc.vue";
 import { dateFormatter } from './formatter';
-import randomColor from 'randomcolor';
 import { dueColors } from "./dueColor";
 
 

@@ -55,7 +55,6 @@ function dyClass(condition: boolean | null) {
 
 // low level function
 function active_style_dropdown(to: string, path: string): string {
-    // alert(to + " " + path)
     if (to === path) {
         return "bg-kraal-blue-500 text-white"
     } else {

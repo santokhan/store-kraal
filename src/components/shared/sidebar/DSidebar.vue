@@ -1,6 +1,6 @@
 <template>
     <div :class="[
-        'hidden xl:flex flex-col justify-between relative bg-white',
+        'hidden xl:flex flex-col justify-between relative border-r',
         'lg:h-[calc(100dvh_-_64px)] min-w-[280px] pt-4 w-60'
     ]">
         <SidebarNav />

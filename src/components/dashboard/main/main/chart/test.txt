@@ -31,7 +31,6 @@ The external JavaScript file must contain the <script> tag.
 
 
 How do you write "Hello World" in an alert box?
-    alert(“Hello World”);
     msgBox(“Hello World”);
     msg(“Hello World”);
     alertBox(“Hello World”);

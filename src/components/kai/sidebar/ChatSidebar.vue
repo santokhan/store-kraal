@@ -10,15 +10,14 @@
 </template>
 
 <script setup lang="ts">
+import { storeToRefs } from 'pinia'
+import { useMediaQuery } from '@vueuse/core'
 import ChatSideBarToggler from './ChatSideBarToggler.vue'
 import SidebarContainer from './SidebarContainer.vue'
 import ChatSideBarNavs from './sidebar-navs/ChatSideBarNavs.vue'
-import { useChatSideBarStore } from '../../../stores/chatSideBar'
-import { onClickOutside, useMediaQuery } from '@vueuse/core'
-import { ref } from 'vue'
 import NewChat from './NewChat.vue'
 import SidebarFooter from './SidebarFooter.vue'
-import { storeToRefs } from 'pinia'
+import { useChatSideBarStore } from '../../../stores/chatSideBar'
 
 const store = useChatSideBarStore()
 const { state } = storeToRefs(store)
@@ -39,8 +38,5 @@ const dyClass = (condition: boolean | null) => {
 		return 'chat-sidebar-close'
 	}
 }
-
-const chatSidebarMobile = ref<null | HTMLElement>(null)
-onClickOutside(chatSidebarMobile, store.hideSideBarMobile)
 </script>
 

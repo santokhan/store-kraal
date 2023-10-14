@@ -8,4 +8,6 @@ export interface TypeChatMessage {
     message: string
     author: string
     chatId: number
+    // extra for Pinia store only
+    typewriter?: boolean
 }

@@ -52,13 +52,13 @@
             </div>
             <div class="space-y-2 col-span-2 lg:col-span-1">
                 <label class="flex items-center font-bold"><span>Password</span><span>*</span></label>
-                <input type="text" v-model="businessForm.pass" name="password"
+                <input type="text" v-model="businessForm.pass" name="password"  autocomplete="true"
                     class="block w-full h-12 rounded-xl border border-blue-300 p-4 focus:outline-none bg-transparent">
                 <Warning :message="warn.pass" />
             </div>
             <div class="space-y-2 col-span-2 lg:col-span-1">
                 <label class="flex items-center font-bold"><span>Confirm Password</span><span>*</span></label>
-                <input type="password" v-model="businessForm.confirmPass" name="confirm_password"
+                <input type="password" v-model="businessForm.confirmPass" name="confirm_password" autocomplete="false"
                     class="block w-full h-12 rounded-xl border border-blue-300 p-4 focus:outline-none bg-transparent">
                 <Warning :message="warn.confirmPass" />
             </div>
@@ -71,7 +71,7 @@
                             class="text-kraal-blue-500 hover:underline">Sign In
                         </RouterLink>
                     </p>
-                    <p class="text-sm">By submitting this form, you consent to our <RouterLink to="/terms"
+                    <p class="text-sm">By submitting this form, you consent to our <RouterLink to=""
                             class="text-kraal-blue-500 hover:underline">Terms and Conditions.
                         </RouterLink>
                     </p>
@@ -91,6 +91,7 @@ import { useRouter } from 'vue-router';
 import Warning from '../steps/layout/warnings/Warning.vue';
 import { useBusinessFormStore } from '../../../stores/BusinessForm';
 import api from "../../../kraal-api/azureAPI";
+import { SignupData } from '../../../models/signupdata';
 
 const bussinessFormStore = useBusinessFormStore()
 const router = useRouter()
@@ -177,7 +178,7 @@ function handleSubmit(e: Event) {
         handleSignUp({
             email: businessForm.email,
             password: businessForm.confirmPass,
-            onSignUp: () => {
+            onSignUp: async () => {
                 submit.value = 'Thank you for signing up';
                 disabled.value = true;
 
@@ -187,15 +188,10 @@ function handleSubmit(e: Event) {
                 // add business user data to firestore
                 const { firstName, lastName, email, jobTitle, company, organization, accounting, phone, message, } = businessForm;
                 // addBusinessUser({ firstName, lastName, email, jobTitle, company, organization, accounting, phone, message })
-                api.auth.signup({
-                    firstName,
-                    lastName,
-                    birthDate: "2000-01-01",
-                    businessName: company,
-                });
+                await api.auth.signupWithBusiness(new SignupData(firstName, lastName, company));
 
                 // redirect to slide welcome page
-                router.push('/qb-link');
+                router.push('/email-verification');
             },
             onUserExist: (message) => {
                 // set another warning under mail input
