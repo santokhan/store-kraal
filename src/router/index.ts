@@ -140,7 +140,7 @@ const router: any = createRouter({
 })
 router.beforeEach(async (to: any) => {
   // routes with `meta: { requiresAuth: true }` will check for the users, others won't
-  if (to.meta.requiresAuth === true || to.meta.requiredVerification === true) {
+  if (to.meta.requiresAuth === true || to.meta.requiresVerification === true) {
     const currentUser = await getCurrentUser();
 
     // if the user is not logged in, redirect to the login page
@@ -153,7 +153,7 @@ router.beforeEach(async (to: any) => {
           redirect: to.fullPath,
         },
       };
-    } else if (!currentUser.emailVerified) {
+    } else if (to.meta.requiresVerification === true && !currentUser.emailVerified) {
       return {
         path: "/email-verification",
       }
