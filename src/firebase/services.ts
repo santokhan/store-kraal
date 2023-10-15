@@ -57,15 +57,17 @@ export async function sendEmailVerification() {
         const user = await getCurrentUser();
         if (!user) {
             console.log("Can't send email: not signed in");
-            return;
+            return false;
         }
         await firebase.sendEmailVerification(user, {
-            url: window.location.origin + '/signup',
+            url: window.location.origin + '/email-verified',
         });
         console.log(`Verification email sent to ${user.email}`);
+        return true;
     } catch (error) {
         console.log(error);
     }
+    return false;
 }
 
 export async function getCurrentUser() {

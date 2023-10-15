@@ -1,4 +1,4 @@
-import { Auth, getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import * as firebase from "../firebase/services";
 
 interface Props {
     email: string;
@@ -8,8 +8,7 @@ interface Props {
 }
 
 function handleSignUp(props: Props) {
-    const auth: Auth = getAuth();
-    createUserWithEmailAndPassword(auth, props.email, props.password).then(userCredential => {
+    firebase.createUser(props.email, props.password).then(userCredential => {
         // const user = userCredential.user;
         props.onSignUp()
     }).catch((error) => {
