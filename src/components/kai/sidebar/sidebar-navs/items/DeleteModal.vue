@@ -26,9 +26,9 @@
                         <div v-if="err" class="text-sm flex items-center gap-1 text-orange-700">
                             <i class="fa fa-info-circle"></i>Typing error. Check again.
                         </div>
-
-                        <button type="submit" :disabled="name ? false : true"
-                            class="w-full h-9 text-center bg-chatgpt-700 rounded-lg font-medium text-orange-900 flex justify-center items-center enabled:hover:bg-orange-900 enabled:hover:text-gray-100">
+                        <button type="submit" :disabled="name ? false : true" :class="[
+                            'w-full h-9 bg-chatgpt-700 text-orange-900 text-center rounded-lg font-medium flex justify-center items-center',
+                            'enabled:hover:bg-orange-900 enabled:hover:text-gray-100']">
                             <Spinner v-if="loading" /><span v-else>Delete this chat</span>
                         </button>
                     </div>
@@ -58,8 +58,10 @@ const router = useRouter()
 
 async function handleSubmit(e: any) {
     e.preventDefault()
-
-    if (name.value === props.chat.name) {
+    const filtered = name.value.trim().replace("  ", " ").toLowerCase()
+    const target = props.chat.name.trim().toLowerCase()
+    console.log(filtered, "===", target);
+    if (filtered === target) {
         loading.value = true
 
         await store.deleteSideBarInstance(props.chat.id)

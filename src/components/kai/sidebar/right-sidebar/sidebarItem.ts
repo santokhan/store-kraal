@@ -1,6 +1,8 @@
 export const sidebarItems = [
     { name: "AI Settings" },
-    { name: "OTR" },
-    { name: "AIMe" },
-    { name: "ToDos" },
+    { name: "Meetings" },
+    { name: "App Connect" },
+    { name: "Planner" },
+    { name: "RAG Upload" },
+    { name: "Report" },
 ];
