@@ -102,18 +102,6 @@ const protectedRoutes: ProtectedRoutes[] = [
     component: () => import("../views/QuickbooksRedirect.vue"),
     meta: { requiresVerification: true },
   },
-  {
-    path: "/email-verification",
-    name: "email-verification",
-    component: () => import("../views/EmailVerification.vue"),
-    meta: { requiresAuth: true },
-  },
-  {
-    path: "/email-verified",
-    name: "email-verified",
-    component: () => import("../views/EmailVerified.vue"),
-    meta: { requiresVerification: true },
-  }
 ]
 
 const publicRoutes: routes[] = [
@@ -159,11 +147,12 @@ router.beforeEach(async (to: any) => {
           redirect: to.fullPath,
         },
       };
-    } else if (to.meta.requiresVerification === true && !currentUser.emailVerified) {
-      return {
-        path: "/email-verification",
-      }
-    }
+    } 
+    // else if (to.meta.requiresVerification === true && !currentUser.emailVerified) {
+    //   return {
+    //     path: "/email-verification",
+    //   }
+    // }
   } else if (to.meta.requiresAuth === false) {
     // Rare routes
     // on route enter > check auth > redirect
