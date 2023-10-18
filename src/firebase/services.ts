@@ -14,12 +14,11 @@ let user: firebase.User | null = null;
 export let token: string | null = null;
 
 export async function createUser(email: string, password: string) {
-    try {
-        const credentials = await firebase.createUserWithEmailAndPassword(auth, email, password);
+    const credentials = await firebase.createUserWithEmailAndPassword(auth, email, password);
+    if (credentials) {
         await sendEmailVerification();
-    } catch (error) {
-        console.log(error);
     }
+    return credentials;
 }
 
 export async function signIn(email: string, password: string, elementId: string) {

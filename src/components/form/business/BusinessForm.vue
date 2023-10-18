@@ -52,7 +52,7 @@
             </div>
             <div class="space-y-2 col-span-2 lg:col-span-1">
                 <label class="flex items-center font-bold"><span>Password</span><span>*</span></label>
-                <input type="text" v-model="businessForm.pass" name="password"  autocomplete="true"
+                <input type="text" v-model="businessForm.pass" name="password" autocomplete="true"
                     class="block w-full h-12 rounded-xl border border-blue-300 p-4 focus:outline-none bg-transparent">
                 <Warning :message="warn.pass" />
             </div>
@@ -63,6 +63,7 @@
                 <Warning :message="warn.confirmPass" />
             </div>
             <div class="col-span-2 flex flex-col items-center gap-5 text-center text-gray-800 mt-2">
+                <Warning :message="firebaseWarn" class="w-full" />
                 <button type="submit" :disabled="disabled"
                     class="block h-12 px-8 font-semibold bg-kraal-blue-500 text-white rounded-xl hover:bg-kraal-blue-700 my-2 capitalize">
                     {{ submit }}</button>
@@ -86,18 +87,19 @@ import { RouterLink } from 'vue-router';
 import OrgType from './OrgType.vue';
 import Accounting from './Accounting.vue';
 import { reactive, ref, watch } from 'vue';
-import handleSignUp from '../../../auth/signup';
 import { useRouter } from 'vue-router';
 import Warning from '../steps/layout/warnings/Warning.vue';
 import { useBusinessFormStore } from '../../../stores/BusinessForm';
 import api from "../../../kraal-api/azureAPI";
 import { SignupData } from '../../../models/signupdata';
+import * as firebase from "../../../firebase/services";
 
 const bussinessFormStore = useBusinessFormStore()
 const router = useRouter()
 // const regexEmail = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,20}$/
 const submit = ref<string>('Create account')
 const disabled = ref<boolean>(false)
+const firebaseWarn = ref<string>()
 
 const businessForm = reactive({
     firstName: "",
@@ -110,7 +112,6 @@ const businessForm = reactive({
     phone: "",
     pass: "",
     confirmPass: "",
-    message: "",
 })
 const warn = reactive({
     firstName: "",
@@ -123,7 +124,6 @@ const warn = reactive({
     phone: "",
     pass: "",
     confirmPass: "",
-    message: "",
 })
 
 // Select > options
@@ -170,34 +170,41 @@ watch(businessForm, async (newInpt, oldInput) => {
 
 function handleSubmit(e: Event) {
     e.preventDefault();
-
     addDataToPinia();
 
-    function signUp() {
-        // register a new user
-        handleSignUp({
-            email: businessForm.email,
-            password: businessForm.confirmPass,
-            onSignUp: async () => {
-                submit.value = 'Thank you for signing up';
-                disabled.value = true;
+    async function signUp() {
+        const { firstName, lastName, company, email, confirmPass, jobTitle, organization, accounting, phone } = businessForm;
+        try {
+            await firebase.createUser(email, confirmPass);
+            // addBusinessUser({ firstName, lastName, email, jobTitle, company, organization, accounting, phone, message })
+            // await api.auth.signupWithBusiness(new SignupData(firstName, lastName, company));
+            submit.value = 'Thank you for signing up';
+            disabled.value = true;
+            router.push('/email-verification');
+        } catch (error: any) {
+            firebaseWarn.value = error.message;
+        }
+        // await handleSignUp({
+        //     onSignUp: async () => {
+        //         submit.value = 'Thank you for signing up';
+        //         disabled.value = true;
 
-                // add role for user
-                // addRoleToFirestore({ email: businessForm.email, role: 'business' })
+        //         // add role for user
+        //         // addRoleToFirestore({ email: businessForm.email, role: 'business' })
 
-                // add business user data to firestore
-                const { firstName, lastName, email, jobTitle, company, organization, accounting, phone, message, } = businessForm;
-                // addBusinessUser({ firstName, lastName, email, jobTitle, company, organization, accounting, phone, message })
-                await api.auth.signupWithBusiness(new SignupData(firstName, lastName, company));
+        //         // add business user data to firestore
+        //         const { firstName, lastName, email, jobTitle, company, organization, accounting, phone } = businessForm;
+        //         // addBusinessUser({ firstName, lastName, email, jobTitle, company, organization, accounting, phone, message })
+        //         await api.auth.signupWithBusiness(new SignupData(firstName, lastName, company));
 
-                // redirect to slide welcome page
-                router.push('/email-verification');
-            },
-            onUserExist: (message) => {
-                // set another warning under mail input
-                warn.email = message;
-            }
-        });
+        //         // redirect to slide welcome page
+        //         router.push('/email-verification');
+        //     },
+        //     onUserExist: (message) => {
+        //         // set another warning under mail input
+        //         warn.email = message;
+        //     }
+        // });
     }
 
     if (businessForm.firstName === '') {
