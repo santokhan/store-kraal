@@ -9,8 +9,8 @@ import azureAPI from "../kraal-api/azureAPI";
 const router = useRouter();
 
 callVerify();
-function callVerify() {
-    azureAPI.auth.verifyEmail();
+async function callVerify() {
+    await azureAPI.auth.verifyEmail();
     router.replace("/kraalai");
 }
 

@@ -7,11 +7,11 @@ interface Props {
     onUserExist: (status: string) => void;
 }
 
-// function handleSignUp(props: Props) {
-//     firebase.createUser(props.email, props.password).then(userCredential => {
-//         props.onSignUp()
-//     }).catch((error) => {
-//         props.onUserExist(error.code);
-//     });
-// };
+export default function handleSignUp(props: Props) {
+    firebase.createUser(props.email, props.password).then(userCredential => {
+        props.onSignUp()
+    }).catch((error) => {
+        props.onUserExist(error.code);
+    });
+};
 

@@ -41,8 +41,6 @@ function accounting(account: string) {
     businessForm.accounting = account;
 }
 
-
-
 function handleSubmit(e: Event, callBack: () => void) {
     e.preventDefault();
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}$/

@@ -156,6 +156,16 @@ const protectedRoutes: Array<RouteRecordRaw> = [
     // it require authentication not verifyfication. this component will verify
     meta: { requiresAuth: true },
   },
+  {
+    path: "/email-verified",
+    name: "email-verified",
+    component: () => import("../views/VerifiedEmailView.vue"),
+    // it require authentication not verifyfication. this component will verify
+    meta: {
+      requiresAuth: true,
+      requiresVerification: true
+    },
+  },
 ]
 
 const publicRoutes: Array<RouteRecordRaw> = [
@@ -207,26 +217,17 @@ router.beforeEach(async (to: any) => {
           redirect: to.fullPath,
         },
       };
-    } else if (currentUser) {
-      if (to.meta.requiresVerification) {
-        if (currentUser.emailVerified === false) {
-          return {
-            path: "/email-verification",
-          }
+    } else if (currentUser && to.meta.requiresVerification) {
+      if (currentUser.emailVerified === false) {
+        return {
+          path: "/email-verification",
+          redirect: to.fullPath,
         }
       }
     }
-  } else if (to.meta.requiresAuth === false) {
-    // Rare routes
-    // on route enter > check auth > redirect
-    if (to.path === '/signin') {
-      const currentUser = await getCurrentUser();
-
-      // if the user is not logged in, redirect to the login page
-      if (currentUser) {
-        return { path: "/" };
-      }
-    } else if (to.path === '/business-signup') {
+  } else {
+    // direct signup > check auth > redirect to home
+    if (to.path === '/business-signup') {
       const currentUser = await getCurrentUser();
 
       // if the user is not logged in, redirect to the login page
@@ -235,58 +236,6 @@ router.beforeEach(async (to: any) => {
       }
     }
   }
-
-  // if (to.meta.requiresVerification) {
-  //   const currentUser = await getCurrentUser();
-
-  //   // if the user is not logged in, redirect to the login page
-  //   if (!currentUser) {
-  //     return {
-  //       path: "/signin",
-  //       query: {
-  //         // we keep the current path in the query so we can redirect to it after login
-  //         // with `router.push(route.query.redirect || '/')`
-  //         redirect: to.fullPath,
-  //       },
-  //     };
-  //   } else if (!currentUser.emailVerified && to.path === "/email-verification") {
-  //     return {
-  //       path: "/email-verification",
-  //     }
-  //   }
-  // } else if (to.meta.requiresAuth) {
-  //   const currentUser = await getCurrentUser();
-
-  //   // if the user is not logged in, redirect to the login page
-  //   if (!currentUser) {
-  //     return {
-  //       path: "/signin",
-  //       query: {
-  //         // we keep the current path in the query so we can redirect to it after login
-  //         // with `router.push(route.query.redirect || '/')`
-  //         redirect: to.fullPath,
-  //       },
-  //     };
-  //   }
-  // } else if (to.meta.requiresAuth === false) {
-  //   // Rare routes
-  //   // on route enter > check auth > redirect
-  //   if (to.path === '/signin') {
-  //     const currentUser = await getCurrentUser();
-
-  //     // if the user is not logged in, redirect to the login page
-  //     if (currentUser) {
-  //       return { path: "/" };
-  //     }
-  //   } else if (to.path === '/business-signup') {
-  //     const currentUser = await getCurrentUser();
-
-  //     // if the user is not logged in, redirect to the login page
-  //     if (currentUser) {
-  //       return { path: "/" };
-  //     }
-  //   }
-  // }
 })
 
 export default router;

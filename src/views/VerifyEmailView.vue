@@ -8,11 +8,11 @@
                 </div>
                 <div class="max-w-lg flex flex-col items-center relative">
                     <h5 class="mt-6 mb-5 text-2xl font-semibold tracking-tight text-gray-700">Please verify your email</h5>
-                    <p class="mb-5 font-normal text-gray-500">
+                    <p class="mb-5 font-normal text-gray-500" v-if="currentUser">
                         You are almost there! We send an e-mail to
                         <a href="https://mail.google.com/mail/u/0/"
                             class="text-kraal-blue-500 underline hover:text-kraal-blue-700">
-                            {{ email || "doe@example.com" }}</a>
+                            {{ currentUser.email }}</a>
                     </p>
                     <p class="mb-5 font-normal text-gray-500">
                         Just click on the link in that e-mail to complete your sign up.
@@ -21,13 +21,16 @@
                     <div class="mb-4">
                         <p class="mb-4 font-normal text-gray-500">Still can't find the e-mail?</p>
                         <div class="mb-4">
-                            <button @click="isSent = !isSent"
-                                class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-kraal-blue-500 rounded-lg hover:bg-kraal-blue-600 focus:ring-4 focus:outline-none focus:ring-kraal-blue-300">
+                            <button @click="resend" :class="[
+                                'inline-flex items-center px-3 py-2 text-sm font-medium text-center rounded-lg',
+                                'text-white bg-kraal-blue-500 hover:bg-kraal-blue-600 focus:ring-4 focus:outline-none focus:ring-kraal-blue-300'
+                            ]">
                                 {{ isSent ? "Email sent" : "Resend Email" }}
                             </button>
                         </div>
                         <p class="font-normal text-gray-500">
-                            Need help? <RouterLink to="/contact-us" class="text-kraal-blue-500 underline">
+                            Need help? <RouterLink to="/contact-us"
+                                class="text-kraal-blue-500 underline hover:text-kraal-blue-700">
                                 Contact Us
                             </RouterLink>
                         </p>
@@ -39,16 +42,33 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue"
+import { ref, onBeforeMount } from "vue"
 import KraalIcon from "../components/icons/kraal.v2.vue";
-import { RouterLink } from "vue-router";
+import { LocationQueryValue, RouterLink, useRoute, useRouter } from "vue-router";
+import * as firebase from "../firebase/services";
+import { getCurrentUser } from "vuefire";
+
+const router = useRouter()
+const route = useRoute()
+const currentUser = ref()
 
 const isSent = ref<boolean>()
-const email = ref<string>()
-</script>
 
-<style scope>
-.top-brand-shadow {
-    box-shadow: inset 0 -1px 2px #00000010
+async function resend() {
+    await firebase.sendEmailVerification()
 }
-</style>
+
+onBeforeMount(async () => {
+    currentUser.value = await getCurrentUser();
+
+    if (currentUser.value) {
+        const redirect: LocationQueryValue | LocationQueryValue[] = route.query.redirect
+        if (typeof redirect === 'string') {
+            router.push(redirect);
+        } else {
+            // if redirect url not found
+            router.push("/kraalai");
+        }
+    }
+})
+</script>

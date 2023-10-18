@@ -58,8 +58,9 @@ export async function sendEmailVerification() {
             console.log("Can't send email: not signed in");
             return false;
         }
+        const targetPath = '/email-verified'
         await firebase.sendEmailVerification(user, {
-            url: window.location.origin + '/email-verified',
+            url: window.location.href.replace('/email-verification', '/email-verified'),
         });
         console.log(`Verification email sent to ${user.email}`);
         return true;

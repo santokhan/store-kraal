@@ -2,7 +2,6 @@
 import ArrowRight from "../../../icons/arrow-right.vue";
 
 const props = defineProps<{
-  nextForm?: () => void;
   disabled?: boolean;
   text?: string;
   theme?: string;
@@ -19,13 +18,14 @@ const styles = (disabled: boolean, theme: string | undefined) =>
 </script>
 
 <template>
-  <button @click="props.nextForm" :disabled="props.disabled" :class="[
+  <!-- :disabled="props.disabled" -->
+  <button type="submit" :class="[
     'appearance-none overflow-hidden w-full relative font-medium rounded-xl px-12 h-14 shadow-xl',
     'flex gap-4 justify-center items-center', styles(props.disabled, props.theme)]">
     <div :class="[
       'h-full flex justify-center items-center rounded-r-full text-base arrow',
-      props.theme === 'dark' ? 'bg-kraal-dark-500/25' : 'bg-white/25']">
-      <ArrowRight class="w-5 text-white" />
+      props.theme === 'dark' ? 'bg-kraal-dark-500/25' : 'bg-white/25']" aria-hidden="true">
+      <ArrowRight class="w-5 text-white" aria-hidden="true" />
     </div>
     {{ props.text || "Continue" }}
   </button>

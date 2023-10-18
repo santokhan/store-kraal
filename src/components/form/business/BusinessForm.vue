@@ -90,8 +90,6 @@ import { reactive, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import Warning from '../steps/layout/warnings/Warning.vue';
 import { useBusinessFormStore } from '../../../stores/BusinessForm';
-import api from "../../../kraal-api/azureAPI";
-import { SignupData } from '../../../models/signupdata';
 import * as firebase from "../../../firebase/services";
 
 const bussinessFormStore = useBusinessFormStore()
@@ -184,27 +182,6 @@ function handleSubmit(e: Event) {
         } catch (error: any) {
             firebaseWarn.value = error.message;
         }
-        // await handleSignUp({
-        //     onSignUp: async () => {
-        //         submit.value = 'Thank you for signing up';
-        //         disabled.value = true;
-
-        //         // add role for user
-        //         // addRoleToFirestore({ email: businessForm.email, role: 'business' })
-
-        //         // add business user data to firestore
-        //         const { firstName, lastName, email, jobTitle, company, organization, accounting, phone } = businessForm;
-        //         // addBusinessUser({ firstName, lastName, email, jobTitle, company, organization, accounting, phone, message })
-        //         await api.auth.signupWithBusiness(new SignupData(firstName, lastName, company));
-
-        //         // redirect to slide welcome page
-        //         router.push('/email-verification');
-        //     },
-        //     onUserExist: (message) => {
-        //         // set another warning under mail input
-        //         warn.email = message;
-        //     }
-        // });
     }
 
     if (businessForm.firstName === '') {

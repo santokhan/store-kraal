@@ -45,7 +45,7 @@ Repo Link: [https://github.com/kraalai/app-frontend.git](https://github.com/kraa
 
 ## User Schema
 
-```json
+<!-- ```json
 {
    "accounting": "",
    "company": "",
@@ -57,4 +57,4 @@ Repo Link: [https://github.com/kraalai/app-frontend.git](https://github.com/kraa
    "organization": "",
    "phone": "",
 }
-```
+``` -->

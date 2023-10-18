@@ -1,5 +1,4 @@
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { useRouter } from "vue-router";
 
 interface authParams {
     user: any,
@@ -29,6 +28,11 @@ function authenticate(authParams: authParams) {
 
             onError({ errorCode, errorMessage })
         });
+}
+
+export function authenticate_v1(email: string, password: string) {
+    const auth = getAuth();
+    return signInWithEmailAndPassword(auth, email, password);
 }
 
 export default authenticate;
