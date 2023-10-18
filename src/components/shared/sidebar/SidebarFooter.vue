@@ -92,8 +92,8 @@ const userNavs = [
         path: "/bills"
     },
     {
-        name: "Logout",
-        path: "/logout"
+        name: "Sign Out",
+        path: "/user/sign-out"
     },
 ]
 

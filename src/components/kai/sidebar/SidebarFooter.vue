@@ -29,7 +29,7 @@
                 Bills
             </NavLink>
             <hr class="border-1 border-neutral-700 my-1">
-            <NavLink class="w-full flex items-center hover:bg-chatgpt-700" to="/logout">
+            <NavLink class="w-full flex items-center hover:bg-chatgpt-700" to="/user/sign-out">
                 <IconBox>
                     <Logout class="w-5" />
                 </IconBox>

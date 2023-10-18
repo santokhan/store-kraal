@@ -18,14 +18,14 @@
                         Just click on the link in that e-mail to complete your sign up.
                         If you do not see it, you may need to check your spam folder.
                     </p>
-                    <div class="mb-4">
-                        <p class="mb-4 font-normal text-gray-500">Still can't find the e-mail?</p>
-                        <div class="mb-4">
+                    <div class="space-y-4">
+                        <p class="font-normal text-gray-500">Still can't find the e-mail?</p>
+                        <div class="">
                             <button @click="resend" :class="[
-                                'inline-flex items-center px-3 py-2 text-sm font-medium text-center rounded-lg',
-                                'text-white bg-kraal-blue-500 hover:bg-kraal-blue-600 focus:ring-4 focus:outline-none focus:ring-kraal-blue-300'
+                                'inline-flex items-center px-5 py-2.5 text-sm font-medium text-center rounded-lg',
+                                'text-white bg-kraal-blue-500 hover:bg-kraal-blue-600'
                             ]">
-                                {{ isSent ? "Email sent" : "Resend Email" }}
+                                {{ isSent ? "Email sent" : "Resend email" }}
                             </button>
                         </div>
                         <p class="font-normal text-gray-500 hidden">
@@ -42,10 +42,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onBeforeMount } from "vue"
-import KraalIcon from "../components/icons/kraal.v2.vue";
+import { ref, onBeforeMount } from "vue";
+import KraalIcon from "../../components/icons/kraal.v2.vue";
 import { LocationQueryValue, RouterLink, useRoute, useRouter } from "vue-router";
-import * as firebase from "../firebase/services";
+import * as firebase from "../../firebase/services";
 import { getCurrentUser } from "vuefire";
 
 const router = useRouter()
@@ -59,7 +59,7 @@ async function resend() {
     isSent.value = true;
 }
 
-onBeforeMount(async () => {
+async function redirect() {
     currentUser.value = await getCurrentUser();
 
     if (currentUser.value) {
@@ -71,5 +71,7 @@ onBeforeMount(async () => {
             router.push("/kraalai");
         }
     }
-})
+}
+
+onBeforeMount(redirect)
 </script>

@@ -56,20 +56,23 @@ const protectedRoutes: Array<RouteRecordRaw> = [
   {
     path: "/kraalai",
     name: "kraalai",
-    component: () => import("../components/kai/KraalAIStart.vue"),
+    component: () => import("../views/kraala-ai/RootView.vue"),
     meta: {
       requiresAuth: true,
       requiresVerification: true
     },
-  },
-  {
-    path: "/kraalai/:id",
-    name: "kraalai-with-id",
-    component: () => import("../components/kai/Kai.vue"),
-    meta: {
-      requiresAuth: true,
-      requiresVerification: true
-    },
+    children: [
+      {
+        path: "",
+        name: "kraal-ai-start",
+        component: () => import("../components/kai/KraalAIStart.vue"),
+      },
+      {
+        path: ":id",
+        name: "kraal-ai-with-id",
+        component: () => import("../components/kai/Kai.vue"),
+      },
+    ]
   },
   {
     path: "/dashboard",
@@ -126,12 +129,6 @@ const protectedRoutes: Array<RouteRecordRaw> = [
     },
   },
   {
-    path: "/logout",
-    name: "logout",
-    component: () => import("../views/Logout.vue"),
-    meta: { requiresAuth: true },
-  },
-  {
     path: "/qb-link",
     name: "qb-link",
     component: () => import("../views/QuickbooksConnect.vue"),
@@ -150,21 +147,42 @@ const protectedRoutes: Array<RouteRecordRaw> = [
     },
   },
   {
-    path: "/email-verification",
-    name: "email-verification",
-    component: () => import("../views/VerifyEmailView.vue"),
-    // it require authentication not verifyfication. this component will verify
-    meta: { requiresAuth: true },
-  },
-  {
-    path: "/email-verified",
-    name: "email-verified",
-    component: () => import("../views/VerifiedEmailView.vue"),
-    // it require authentication not verifyfication. this component will verify
-    meta: {
-      requiresAuth: true,
-      requiresVerification: true
-    },
+    path: "/user",
+    name: "user",
+    component: () => import("../views/user/RootView.vue"),
+    children: [
+      {
+        path: "sign-up",
+        name: "sign-up",
+        component: () => import("../views/user/SignUpView.vue"),
+      },
+      {
+        path: "sign-in",
+        name: "sign-in",
+        component: () => import("../views/user/SignInView.vue"),
+      },
+      {
+        path: "verify",
+        name: "verify",
+        component: () => import("../views/user/VerifyView.vue"),
+        meta: { requiresAuth: true },
+      },
+      {
+        path: "verified",
+        name: "verified",
+        component: () => import("../views/user/VerifiedView.vue"),
+        meta: {
+          requiresAuth: true,
+          requiresVerification: true
+        },
+      },
+      {
+        path: "sign-out",
+        name: "sign-out",
+        component: () => import("../views/user/SignOutView.vue"),
+        meta: { requiresAuth: true },
+      },
+    ]
   },
 ]
 
@@ -210,7 +228,7 @@ router.beforeEach(async (to: any) => {
     // if the user is not logged in, redirect to the login page
     if (!currentUser) {
       return {
-        path: "/signin",
+        path: "/user/sign-in",
         query: {
           // we keep the current path in the query so we can redirect to it after login
           // with `router.push(route.query.redirect || '/')`
@@ -223,16 +241,6 @@ router.beforeEach(async (to: any) => {
           path: "/email-verification",
           redirect: to.fullPath,
         }
-      }
-    }
-  } else {
-    // direct signup > check auth > redirect to home
-    if (to.path === '/business-signup') {
-      const currentUser = await getCurrentUser();
-
-      // if the user is not logged in, redirect to the login page
-      if (currentUser) {
-        return { path: "/" };
       }
     }
   }

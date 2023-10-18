@@ -68,7 +68,7 @@
                     class="block h-12 px-8 font-semibold bg-kraal-blue-500 text-white rounded-xl hover:bg-kraal-blue-700 my-2 capitalize">
                     {{ submit }}</button>
                 <div class="space-y-2">
-                    <p class="text-sm">Already have an account? <RouterLink to="/signin"
+                    <p class="text-sm">Already have an account? <RouterLink to="sign-in"
                             class="text-kraal-blue-500 hover:underline">Sign In
                         </RouterLink>
                     </p>
@@ -178,7 +178,9 @@ function handleSubmit(e: Event) {
             // await api.auth.signupWithBusiness(new SignupData(firstName, lastName, company));
             submit.value = 'Thank you for signing up';
             disabled.value = true;
-            router.push('/email-verification');
+
+            await firebase.sendEmailVerification();
+            router.push('/user/verify');
         } catch (error: any) {
             firebaseWarn.value = error.message;
         }
