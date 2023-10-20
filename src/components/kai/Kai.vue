@@ -1,7 +1,6 @@
 <template>
     <KraalAILayout>
         <ChatInstance :chatId="id" />
-        <QuestionIcon />
     </KraalAILayout>
 </template>
 
@@ -9,7 +8,6 @@
 import { onMounted } from "vue"
 import ChatInstance from "./instances/Instance.vue"
 import { useSideBarStoreAzureStore } from '../../stores/sideBarStoreAzure'
-import QuestionIcon from './instances/QuestionIcon.vue'
 import { useRoute } from "vue-router"
 import KraalAILayout from "./layout/KraalAILayout.vue"
 

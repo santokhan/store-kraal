@@ -1,7 +1,7 @@
 <template>
   <RouterLink to="/kraalai" :class="[
     'h-[3.25rem] w-full relative flex gap-4 justify-center items-center overflow-hidden rounded-xl',
-    'px-12 bg-kraal-blue-500 parent shadow-inset text-white text-lg font-normal',
+    'px-12 bg-kraal-blue-500 parent shadow-inset text-white text-lg font-medium',
   ]">
     <div class="rounded-r-full text-base arrow-right bg-noom-orange-500/10">
       <i class="fa fa-arrow-right" aria-hidden="true"></i>

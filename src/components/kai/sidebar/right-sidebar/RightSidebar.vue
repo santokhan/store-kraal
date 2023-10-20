@@ -12,7 +12,7 @@
                 <i v-else-if="item.name === sidebarItems[4].name" class="fa fa-upload text-xl" aria-hidden="true"></i>
                 <i v-else-if="item.name === sidebarItems[5].name" class="fa fa-info text-xl" aria-hidden="true"></i>
             </div>
-            <h5 class="font-medium text-start">{{ item.name }}</h5>
+            <h5 class="text-start">{{ item.name }}</h5>
         </button>
         <button type="button" @click="isOpen = !isOpen" :class="[
             'min-h-[6rem] rounded-lg p-4 space-y-4 border-t border-t-white/30 grid place-items-center',

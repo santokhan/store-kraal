@@ -28,6 +28,12 @@
                 </IconBox>
                 Bills
             </NavLink>
+            <NavLink to="/bills">
+                <IconBox>
+                    <i class="fa fa-info"></i>
+                </IconBox>
+                FAQs
+            </NavLink>
             <hr class="border-1 border-neutral-700 my-1">
             <NavLink class="w-full flex items-center hover:bg-chatgpt-700" to="/user/sign-out">
                 <IconBox>
