@@ -19,7 +19,7 @@ export const navList: Nav[] = [
     { name: "home", link: "/dashboard" },
     { name: "account", link: "/account" },
     { name: "bills", link: "/bills" },
-    { name: "logout", link: "/logout" },
+    { name: "sign out", link: "/user/sign-out" },
 ]
 
 export const navList2: NavList[] = [
@@ -50,13 +50,9 @@ export const blueSideBarNavList: { name: string; url: string; icon: string }[] =
     { name: "Reports", url: "/reports", icon: "docs" },
 ]
 
-export const userNavList: {
-    name: string;
-    link: string;
-    icon: string;
-}[] = [
-        { name: "user setting", link: "/user-setting", icon: "user" },
-        { name: "team setting", link: "/team-setting", icon: "team" },
-        { name: "bills", link: "/bills", icon: "bills" },
-        { name: "logout", link: "/logout", icon: "logout" },
-    ]
+export const userNavList: { name: string; link: string; icon: string }[] = [
+    { name: "user setting", link: "/user-setting", icon: "user" },
+    { name: "team setting", link: "/team-setting", icon: "team" },
+    { name: "bills", link: "/bills", icon: "bills" },
+    { name: "sign out", link: "/user/sign-out", icon: "logout" },
+]

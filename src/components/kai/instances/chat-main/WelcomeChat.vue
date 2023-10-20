@@ -15,9 +15,7 @@
                     </FileInputBox>
 
                     <ChatSubmitBtn v-if="!loading" :disabled="!input" />
-                    <div v-else-if="loading" class="w-8 h-8 grid place-items-center">
-                        <SpinnerCircle class="h-5 text-gray-200" />
-                    </div>
+                    <Loading v-else-if="loading" />
                 </div>
             </div>
         </form>
@@ -30,10 +28,10 @@ import AttachmentPreview from './AttachmentPreview.vue';
 import FileInputBox from './FileInputBox.vue';
 import { useRoute } from 'vue-router';
 import { useSideBarStoreAzureStore } from '../../../../stores/sideBarStoreAzure';
-import SpinnerCircle from '../../../shared/spinner/SpinnerCircle.vue';
 import { storeToRefs } from 'pinia';
 import Branding from './Branding.vue';
 import ChatSubmitBtn from './ChatSubmitBtn.vue';
+import Loading from './Loading.vue';
 
 const input = ref<string>("")
 const fileInput = ref<any[]>([])
@@ -91,19 +89,19 @@ async function handleSubmit(e: any) {
 
 @keyframes chatbox {
     0% {
-        outline: 2px solid #9ca3af;
+        outline: 1px solid #9ca3af;
     }
 
     60% {
-        outline: 2px solid #9ca3af;
+        outline: 1px solid #9ca3af;
     }
 
     90% {
-        outline: 2px solid transparent;
+        outline: 1px solid transparent;
     }
 
     100% {
-        outline: 2px solid transparent;
+        outline: 1px solid transparent;
     }
 }
-</style>
+</style> 

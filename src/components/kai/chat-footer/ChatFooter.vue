@@ -18,11 +18,10 @@
                         </div>
                     </div>
                     <div class="self-end">
-                        <button type="submit" :disabled="!input"
-                            class="w-8 h-8 flex justify-center items-center rounded-md text-gray-100 hover:bg-kraal-blue-500 disabled:opacity-40">
-                            <Telegram class="h-4" v-if="!loading" />
-                            <SpinnerCircle class="h-5 text-gray-200" v-if="loading" />
-                        </button>
+                        <div class="flex items-center">
+                            <ChatSubmitBtn v-if="!loading" :disabled="!input" />
+                            <Loading v-else />
+                        </div>
                     </div>
                 </div>
             </form>
@@ -34,7 +33,8 @@
 import { ref } from "vue";
 import Telegram from "../../icons/telegram.vue";
 import { useSideBarStoreAzureStore } from "../../../stores/sideBarStoreAzure";
-import SpinnerCircle from "../../shared/spinner/SpinnerCircle.vue";
+import Loading from "../instances/chat-main/Loading.vue";
+import ChatSubmitBtn from "../instances/chat-main/ChatSubmitBtn.vue";
 const props = defineProps<{ chatId: any }>()
 
 const store = useSideBarStoreAzureStore()

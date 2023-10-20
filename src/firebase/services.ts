@@ -14,12 +14,11 @@ let user: firebase.User | null = null;
 export let token: string | null = null;
 
 export async function createUser(email: string, password: string) {
-    try {
-        const credentials = await firebase.createUserWithEmailAndPassword(auth, email, password);
+    const credentials = await firebase.createUserWithEmailAndPassword(auth, email, password);
+    if (credentials) {
         await sendEmailVerification();
-    } catch (error) {
-        console.log(error);
     }
+    return credentials;
 }
 
 export async function signIn(email: string, password: string, elementId: string) {
@@ -59,8 +58,9 @@ export async function sendEmailVerification() {
             console.log("Can't send email: not signed in");
             return false;
         }
+        const targetPath = '/user/verified'
         await firebase.sendEmailVerification(user, {
-            url: window.location.origin + '/email-verified',
+            url: window.location.href.replace('//user/verify', '/user/verified'),
         });
         console.log(`Verification email sent to ${user.email}`);
         return true;

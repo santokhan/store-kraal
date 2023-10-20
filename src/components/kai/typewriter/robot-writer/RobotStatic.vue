@@ -1,6 +1,6 @@
 <template>
     <KraalAI class="w-6 min-w-[1.5rem] text-gray-400" />
-    <div v-html="markdownParser(props.robot)" class="text-gray-200 space-y-4 overflow-auto">
+    <div v-html="markdownParser(props.robot)" class="text-gray-200 space-y-4 overflow-auto my-1">
     </div>
 </template>
 

@@ -1,7 +1,7 @@
 <template>
   <div class="text-kraal-blue-500 h-[52px] shadow shadow-gray-100 flex items-center bg-white">
     <div class="max-w-screen-xl mx-auto w-full px-4 text-noom-text-900 cheyenne flex justify-start items-center">
-      <RouterLink :to="props.to || ''">
+      <RouterLink to="/">
         <Kraal class="h-[32px] text-kraal-blue-500" />
       </RouterLink>
     </div>

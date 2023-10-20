@@ -15,11 +15,8 @@
                             </svg>
                         </RouterLink>
                     </div>
-
-
                     <div class="text-lg font-bold text-slate-800">A new way to do finance.</div>
                 </div>
-
                 <!-- 2nd block -->
                 <div class="sm:col-span-6 md:col-span-3 lg:col-span-2">
                     <h6 class="text-sm text-slate-800 font-semibold mb-2">How it works</h6>
@@ -34,7 +31,6 @@
                         </li>
                     </ul>
                 </div>
-
                 <!-- 3rd block -->
                 <div class="sm:col-span-6 md:col-span-3 lg:col-span-2">
                     <h6 class="text-sm text-slate-800 font-semibold mb-2">Resources</h6>
@@ -49,7 +45,6 @@
                         </li>
                     </ul>
                 </div>
-
                 <!-- 4th block -->
                 <div class="sm:col-span-6 md:col-span-3 lg:col-span-2">
                     <h6 class="text-sm text-slate-800 font-semibold mb-2">Products</h6>
@@ -64,7 +59,6 @@
                         </li>
                     </ul>
                 </div>
-
                 <!-- 5th block -->
                 <div class="sm:col-span-6 md:col-span-3 lg:col-span-2">
                     <h6 class="text-sm text-slate-800 font-semibold mb-2">Company</h6>
@@ -80,9 +74,8 @@
                     </ul>
                 </div>
             </div>
-
             <!-- Bottom area -->
-            <div class="md:flex md:items-center md:justify-between py-6 md:py-8 border-t border-slate-200">
+            <div class="md:flex md:items-center md:justify-between py-6 border-t border-slate-200">
                 <!-- Social links -->
                 <ul class="flex space-x-6 mb-4 md:order-1 md:ml-4 md:mb-0">
                     <li>
@@ -122,17 +115,12 @@
                         </RouterLink>
                     </li>
                 </ul>
-
-                <!-- Copyrights note -->
-                <div class="text-sm text-slate-500 mr-4">
-                    &copy; Kraal.ai. All rights reserved.
-                </div>
+                <div class="text-sm text-slate-500 mr-4">&copy;Kraal.ai. All rights reserved.</div>
             </div>
         </div>
     </footer>
 </template>
-  
+
 <script lang="ts" setup>
 import { RouterLink } from 'vue-router'
 </script>
-  
