@@ -20,7 +20,7 @@
                 <!-- 2nd block -->
                 <div class="sm:col-span-6 md:col-span-3 lg:col-span-2">
                     <h6 class="text-sm  font-semibold mb-2">How it works</h6>
-                    <ul class="text-sm font-medium space-y-2">
+                    <ul class="text-sm font-medium space-y-1.5">
                         <li>
                             <RouterLink class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out"
                                 to="/overview">Overview</RouterLink>
@@ -35,7 +35,7 @@
                 <!-- 3rd block -->
                 <div class="sm:col-span-6 md:col-span-3 lg:col-span-2">
                     <h6 class="text-sm  font-semibold mb-2">Resources</h6>
-                    <ul class="text-sm font-medium space-y-2">
+                    <ul class="text-sm font-medium space-y-1.5">
                         <li>
                             <RouterLink class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out"
                                 to="">Terms of Use</RouterLink>
@@ -50,7 +50,7 @@
                 <!-- 4th block -->
                 <div class="sm:col-span-6 md:col-span-3 lg:col-span-2">
                     <h6 class="text-sm  font-semibold mb-2">Products</h6>
-                    <ul class="text-sm font-medium space-y-2">
+                    <ul class="text-sm font-medium space-y-1.5">
                         <li>
                             <RouterLink class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out"
                                 to="micro-cfo">
@@ -67,7 +67,7 @@
                 <!-- 5th block -->
                 <div class="sm:col-span-6 md:col-span-3 lg:col-span-2">
                     <h6 class="text-sm  font-semibold mb-2">Company</h6>
-                    <ul class="text-sm font-medium space-y-2">
+                    <ul class="text-sm font-medium space-y-1.5">
                         <li>
                             <RouterLink class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out"
                                 to="about-us">About Us</RouterLink>
