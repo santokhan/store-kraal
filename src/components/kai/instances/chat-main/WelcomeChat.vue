@@ -70,8 +70,8 @@ async function handleSubmit(e: any) {
 
     loading.value = true
     // switch to original chat instance
-    const chat = await store.create_chat()
-    await store.sendChatMessage(chat.id, input.value)
+    // const chat = await store.create_chat()
+    await store.sendNewChatMessage(input.value)
 
     // TODO: clear input after form submit complete
     loading.value = false
