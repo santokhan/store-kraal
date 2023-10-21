@@ -55,6 +55,7 @@ export default {
         getChatMessages: (chatId: number) => get('/chatmessages', { params: { chatid: chatId } }),
         getChatMessage: (id: number) => get('/chatmessages', { params: { id: id } }),
         sendChatMessage: (chatId: number, message: string) => post('/chatmessages', { chatid: chatId, message: message }),
+        sendNewChatMessage: (message: string) => post('/chatmessages', { message: message }),
     },
     quickbooks: {
         getAuthorizationUrl: () => get('/linking/url'),
