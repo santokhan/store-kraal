@@ -1,5 +1,5 @@
 <template>
-    <div v-if="userData?.firstName" class="w-full relative text-sm mb-2">
+    <div v-if="refUserStore.currentUser.value" class="w-full relative text-sm mb-2">
         <hr class="border-gray-600 mb-1">
         <!-- Drop Up bar -->
         <div v-if="openSettings" ref="settings"
@@ -47,9 +47,9 @@
             'w-full text-gray-100 flex items-center gap-3 px-2 h-[3.25rem] rounded-lg hover:bg-chatgpt-700 overflow-x-hidden',
             openSettings && 'bg-chatgpt-700'
         ]">
-            <UserIcon>{{ userData.firstName[0] }}{{ userData.lastName[0] }}</UserIcon>
+            <UserIcon>{{ refUserStore.currentUser.value.fullName }}</UserIcon>
             <h5 class="w-full flex justify-start font-semibold">
-                {{ userData ? userData.firstName + " " + userData.lastName : "..." }}
+                {{ refUserStore.currentUser.value.fullName }}
             </h5>
             <div class="w-auto"><i class="fa fa-ellipsis-h text-sm text-neutral-400"></i></div>
         </button>
@@ -74,6 +74,9 @@ import Card from '../../icons/card.vue';
 import Logout from '../../icons/logout.vue';
 import Team from '../../icons/team.vue';
 import { getCurrentUser } from 'vuefire';
+import azureAPI from '../../../kraal-api/azureAPI';
+import { useUserStore } from '../../../stores/userStore';
+import { storeToRefs } from 'pinia';
 
 const opener = ref(null)
 const openSettings = ref(false)
@@ -81,6 +84,9 @@ const settings = ref(null)
 const isOpenModal = ref<boolean>(false)
 // From firestore
 const userData = ref<any>()
+
+const userStore = useUserStore();
+const refUserStore = storeToRefs(userStore);
 
 function handleSettings() {
     openSettings.value = !openSettings.value
@@ -94,11 +100,10 @@ function handleModal() {
     // hide dropdown
     openSettings.value = false;
 }
-onMounted(() => {
-    businessUserInfo.getUserData(async (data) => {
-        if (!data) return;
-        userData.value = data
-    })
+onMounted(async () => {
+    if (!userStore.currentUser) {
+        await userStore.loadUser();
+    }
 })
 </script>
 
