@@ -47,7 +47,7 @@
             'w-full text-gray-100 flex items-center gap-3 px-2 h-[3.25rem] rounded-lg hover:bg-chatgpt-700 overflow-x-hidden',
             openSettings && 'bg-chatgpt-700'
         ]">
-            <UserIcon>{{ Math.random() >= 0.1 ? refUserStore.currentUser.value.initials : "🗿" }}</UserIcon>
+            <UserIcon>{{ refUserStore.currentUser.value.initials }}</UserIcon>
             <h5 class="w-full flex justify-start font-semibold">
                 {{ refUserStore.currentUser.value.fullName }}
             </h5>
