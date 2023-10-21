@@ -11,7 +11,7 @@ export class User {
     }
 
     get initials() {
-        return `${this.firstName[0]} ${this.lastName[0]}`;
+        return `${this.firstName[0]}${this.lastName[0]}`;
     }
 
     constructor(uuid: string, firstName: string, lastName: string, email: string, status: string, businessRole: string | null) {
