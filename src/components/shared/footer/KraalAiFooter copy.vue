@@ -1,7 +1,9 @@
 <template>
     <footer class="relative" :class="props.theme === 'dark' ? 'text-white' : 'text-slate-800 bg-white'">
         <div class="max-w-screen-xl mx-auto px-4 ">
+            <!-- Top area: Blocks -->
             <div class="grid sm:grid-cols-12 gap-8 py-8 md:py-12">
+                <!-- 1st block -->
                 <div class="sm:col-span-12 lg:col-span-4 lg:max-w-xs">
                     <div class="mb-2">
                         <RouterLink class="inline-flex text-blue-600 transition duration-150 ease-in-out" to="/"
@@ -12,27 +14,31 @@
                             </svg>
                         </RouterLink>
                     </div>
-                    <div class="text-lg font-bold ">Transforming business, empowering success!</div>
+                    <div class="text-lg font-bold ">A new way to do finance.</div>
                 </div>
+
+                <!-- 2nd block -->
                 <div class="sm:col-span-6 md:col-span-3 lg:col-span-2">
-                    <h6 class="text-sm  font-semibold mb-2">Kraalai</h6>
+                    <h6 class="text-sm  font-semibold mb-2">How it works</h6>
                     <ul class="text-sm font-medium space-y-1.5">
                         <li>
                             <RouterLink class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out"
-                                to="/kraal-overview">Mission</RouterLink>
+                                to="/overview">Overview</RouterLink>
                         </li>
                         <li>
                             <RouterLink class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out"
-                                to="/pricing-overview">Pricing</RouterLink>
+                                to="/pricing">Pricing</RouterLink>
                         </li>
                     </ul>
                 </div>
+
+                <!-- 3rd block -->
                 <div class="sm:col-span-6 md:col-span-3 lg:col-span-2">
                     <h6 class="text-sm  font-semibold mb-2">Resources</h6>
                     <ul class="text-sm font-medium space-y-1.5">
                         <li>
                             <RouterLink class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out"
-                                to="/terms">Terms of Use</RouterLink>
+                                to="">Terms of Use</RouterLink>
                         </li>
                         <li>
                             <RouterLink class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out"
@@ -40,19 +46,25 @@
                         </li>
                     </ul>
                 </div>
+
+                <!-- 4th block -->
                 <div class="sm:col-span-6 md:col-span-3 lg:col-span-2">
                     <h6 class="text-sm  font-semibold mb-2">Products</h6>
                     <ul class="text-sm font-medium space-y-1.5">
                         <li>
                             <RouterLink class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out"
-                                to="explore-products">Autonomous</RouterLink>
+                                to="micro-cfo">
+                                Micro CFO</RouterLink>
                         </li>
                         <li>
                             <RouterLink class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out"
-                                to="explore-products">AI Agents</RouterLink>
+                                to="corporate-partners">
+                                Corporate Partners</RouterLink>
                         </li>
                     </ul>
                 </div>
+
+                <!-- 5th block -->
                 <div class="sm:col-span-6 md:col-span-3 lg:col-span-2">
                     <h6 class="text-sm  font-semibold mb-2">Company</h6>
                     <ul class="text-sm font-medium space-y-1.5">
@@ -67,7 +79,10 @@
                     </ul>
                 </div>
             </div>
+
+            <!-- Bottom area -->
             <div class="md:flex md:items-center md:justify-between py-6 md:py-8 border-t border-slate-200">
+                <!-- Social links -->
                 <ul class="flex space-x-6 mb-4 md:order-1 md:ml-4 md:mb-0">
                     <li>
                         <RouterLink class="text-blue-500 hover:text-blue-600 transition duration-150 ease-in-out" to="#0"
@@ -106,6 +121,8 @@
                         </RouterLink>
                     </li>
                 </ul>
+
+                <!-- Copyrights note -->
                 <div class="text-sm text-slate-500 mr-4">&copy; Kraal.ai. All rights reserved.</div>
             </div>
         </div>

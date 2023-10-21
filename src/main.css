@@ -7,6 +7,8 @@
 
   html {
     height: 100dvh;
+    font-family: 'Inter', sans-serif;
+    /* font-family: 'Urbanist', sans-serif; */
   }
 
   *,
