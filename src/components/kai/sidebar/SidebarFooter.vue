@@ -4,7 +4,7 @@
         <!-- Drop Up bar -->
         <div v-if="openSettings" ref="settings"
             class="absolute bottom-full left-0 right-0 bg-neutral-950 text-gray-200 rounded-lg overflow-hidden py-1 z-[10]">
-            <NavLink to="" @click="handleModal" role="button">
+            <NavLink to="" @click="handleModal" role="button" v-if="customInstructions">
                 <IconBox>
                     <ChatBubbleLeftEllipsisIcon class="w-5" />
                 </IconBox>
@@ -28,7 +28,7 @@
                 </IconBox>
                 Bills
             </NavLink>
-            <NavLink to="/bills">
+            <NavLink to="/faqs">
                 <IconBox>
                     <i class="fa fa-info"></i>
                 </IconBox>
@@ -42,13 +42,11 @@
                 Log out
             </NavLink>
         </div>
-
         <button type="button" @click="handleSettings" ref="opener" title="MenuBar" :class="[
             'w-full text-gray-100 flex items-center gap-3 px-2 h-[3.25rem] rounded-lg hover:bg-chatgpt-700 overflow-x-hidden',
-            openSettings && 'bg-chatgpt-700'
-        ]">
+            openSettings && 'bg-chatgpt-700']">
             <UserIcon>{{ userData.firstName[0] }}{{ userData.lastName[0] }}</UserIcon>
-            <h5 class="w-full flex justify-start font-semibold">
+            <h5 class="w-full flex justify-start font-semibold text-sm tracking-wider font-normal">
                 {{ userData ? userData.firstName + " " + userData.lastName : "..." }}
             </h5>
             <div class="w-auto"><i class="fa fa-ellipsis-h text-sm text-neutral-400"></i></div>
@@ -61,19 +59,17 @@
 import { onMounted, ref } from 'vue'
 import { onClickOutside } from '@vueuse/core';
 import { ChatBubbleLeftEllipsisIcon } from '@heroicons/vue/24/outline'
-// Firestore
+import { storeToRefs } from 'pinia';
 import { businessUserInfo } from '../../../firebase/read.business.user'
-// Comp
 import IconBox from '../../shared/header/dashbboard/absolutesidebar/icon/IconBox.vue';
 import CustomInstructions from "./custom-instructions/CustomInstructions.vue";
 import NavLink from './footer/NavLink.vue'
 import UserIcon from './footer/UserProfileIcon.vue';
-// Icons
 import User from '../../icons/user-simple.vue';
 import Card from '../../icons/card.vue';
 import Logout from '../../icons/logout.vue';
 import Team from '../../icons/team.vue';
-import { getCurrentUser } from 'vuefire';
+import { useSideBarStoreAzureStore } from '../../../stores/sideBarStoreAzure';
 
 const opener = ref(null)
 const openSettings = ref(false)
@@ -81,6 +77,8 @@ const settings = ref(null)
 const isOpenModal = ref<boolean>(false)
 // From firestore
 const userData = ref<any>()
+const store = useSideBarStoreAzureStore()
+const { customInstructions } = storeToRefs(store)
 
 function handleSettings() {
     openSettings.value = !openSettings.value

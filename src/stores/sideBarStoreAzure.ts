@@ -7,10 +7,29 @@ import azureAPI from "../kraal-api/azureAPI";
 export const useSideBarStoreAzureStore = defineStore("chatSideBarAzure", () => {
     const state = reactive<State>({ sidebarMobile: null, sidebarDesktop: true })
     // Set previous chatList from `getAPIResponse`
-    const sideBarList = ref<SideBarData[]>([])
+    const sideBarList = ref<SideBarData[]>([
+        {
+            id: 1,
+            name: "data"
+        }
+    ])
     const recentChatId = ref<number>(0)
-    const chatMessages = ref<TypeChatMessage[]>([])
+    const chatMessages = ref<TypeChatMessage[]>([
+        {
+            id: 1,
+            chatId: 20,
+            author: "User",
+            message: "I need to start resistance training. Can you create a 7-day workout plan for me to ease into it?"
+        },
+        {
+            id: 1,
+            chatId: 20,
+            author: "Bot",
+            message: "Certainly! Starting a resistance training program is a great way to improve your strength and overall fitness. Here's a 7-day workout plan to help you ease into resistance training. This plan targets different muscle groups on different days and gradually increases in intensity as the week goes on. Remember to consult with a healthcare professional before beginning any new exercise routine, and start with weights that are appropriate for your fitness level."
+        }
+    ])
     const animateChatBox = ref<boolean>(false)
+    const customInstructions = ref<boolean>(false)
 
     return {
         state,
@@ -133,6 +152,10 @@ export const useSideBarStoreAzureStore = defineStore("chatSideBarAzure", () => {
         clear_chatId_and_messages() {
             recentChatId.value = 0
             chatMessages.value = []
+        },
+        customInstructions,
+        handleCustomInstructions() {
+            customInstructions.value = true;
         }
     }
 })

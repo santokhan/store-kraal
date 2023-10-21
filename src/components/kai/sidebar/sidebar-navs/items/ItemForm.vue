@@ -7,7 +7,7 @@
             <button @click="edit = true" type="button" class="w-full h-full p-1 hover:opacity-50">
                 <ChatEdit />
             </button>
-            <button @click="edit = !edit" type="button" class="w-full h-full p-1 hover:opacity-50">
+            <button @click="edit = !edit" type="button" class="w-full h-full p-1 hover:opacity-50 disabled:opacity-50" disabled>
                 <ChatUpload />
             </button>
             <button @click="handleModal" type="button" class="w-full h-full p-1 hover:opacity-50">

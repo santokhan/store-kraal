@@ -4,12 +4,12 @@
         <div class="relative text-gray-200">
             <template v-for="chat in chatMessages">
                 <div v-if="chat.author === chat_user[0]" class="border-b border-gray-800">
-                    <div class="flex gap-4 max-w-4xl mx-auto px-4 py-7">
+                    <div class="flex gap-4 max-w-4xl mx-auto px-4 py-7 text-sm tracking-wider font-light text-white">
                         <User class="w-6 min-w-[1.5rem] text-gray-400" />{{ chat.message }}
                     </div>
                 </div>
                 <div v-if="chat.author === chat_user[1]" class="bg-chatgpt-400 border-b border-gray-800">
-                    <div class="max-w-4xl mx-auto px-4 py-7 flex gap-4 items-start w-full">
+                    <div class="max-w-4xl mx-auto px-4 py-7 flex gap-4 items-start w-full font-light">
                         <RobotWriter v-if="chat.typewriter" :robot="chat.message" :eleScrollTop="eleScrollTop" />
                         <RobotStatic v-else :robot="chat.message" />
                     </div>

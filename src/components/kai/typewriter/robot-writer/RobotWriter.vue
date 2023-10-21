@@ -1,7 +1,7 @@
 <template>
     <KraalAI class="w-6 min-w-[1.5rem] text-gray-400" />
     <div v-if="robotText.length <= 0" class="w-2 h-5 my-1.5 bg-white/50 on-off"></div>
-    <div v-html="markdownParser(robotText.join(' '))" class="text-gray-200 space-y-4 overflow-auto"></div>
+    <div v-html="markdownParser(robotText.join(' '))" class="text-gray-200 space-y-4 overflow-auto tracking-wide"></div>
 </template>
 
 <script setup lang="ts">

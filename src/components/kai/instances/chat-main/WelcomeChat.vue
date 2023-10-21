@@ -13,9 +13,8 @@
                         <input type="file" multiple="true" @change="handleChange" title="Attachment"
                             class="opacity-0 absolute z-10 w-full h-full left-0 top-0">
                     </FileInputBox>
-
-                    <ChatSubmitBtn v-if="!loading" :disabled="!input" />
-                    <Loading v-else-if="loading" />
+                    <Loading v-if="loading" />
+                    <ChatSubmitBtn v-else :disabled="!input" />
                 </div>
             </div>
         </form>
@@ -67,16 +66,20 @@ function handleFiles(index: number) {
 async function handleSubmit(e: any) {
     e.preventDefault()
     const formData = { message: input.value, files: fileInput.value.map(e => e) }
-
-    loading.value = true
-    // switch to original chat instance
-    // const chat = await store.create_chat()
-    await store.sendNewChatMessage(input.value)
-
-    // TODO: clear input after form submit complete
-    loading.value = false
-    input.value = ""
-    fileInput.value = []
+    if (input.value) {
+        // clone current input
+        const msg = input.value
+        // clear on submit for Nuku, doesn't matter user getting response of not
+        input.value = ""
+        loading.value = true // start loading dots
+        // switch to original chat instance
+        // const chat = await store.create_chat()
+        await store.sendNewChatMessage(msg)
+        // TODO: clear input after form submit complete
+        loading.value = false
+        // input.value = ""
+        fileInput.value = []
+    }
 }
 </script>
 

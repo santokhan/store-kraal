@@ -1,17 +1,17 @@
 <template>
-    <div class="h-auto w-full border-t xl:border-none border-white/20 mb-4">
+    <div class="h-auto w-full border-t xl:border-none border-white/20 mb-8">
         <div class="max-w-4xl mx-auto mt-auto bg-chatgpt-500 px-4 pt-2" title="footer">
             <form @submit="handleSubmit" class="relative">
                 <div
                     class="flex items-center gap-1 rounded-xl pl-2 lg:pl-4 pr-1 lg:pr-3 py-1 lg:py-3 shadow bg-chatgpt-400">
                     <div
-                        class="w-6 h-6 rounded-full bg-chatgpt-700 grid place-items-center relative overflow-hidden text-gray-400 hover:text-gray-300">
-                        <i class="fa fa-plus rounded-full bg-chatgpt-600"></i>
+                        class="w-6 h-6 rounded-full bg-chatgpt-700 grid place-items-center relative overflow-hidden  hover:text-gray-300">
+                        <i class="fa fa-plus text-sm rounded-full bg-chatgpt-600 text-gray-300"></i>
                         <input type="file" name="" id="" class="absolute left-0 top-0 opacity-0 e z-[50]">
                     </div>
                     <div class="relative w-full h-full flex items-center ml-2">
                         <textarea rows="1" id="chatInput" @keyup="handleChange" @input="handleChange"
-                            class="w-full focus:outline-none resize-none overflow-hidden bg-transparent text-white min-h-[32px] h-8 pt-1"
+                            class="w-full focus:outline-none resize-none overflow-hidden bg-transparent text-white min-h-[32px] h-8 pt-1 text-sm tracking-wider font-normal"
                             :value="input" ref="textarea" placeholder="Send a message..."></textarea>
                         <div class="whitespace-pre-wrap break-words invisible absolute left-0 top-0 w-full" ref="hiddenDiv">
                             {{ input }} <br />
@@ -31,7 +31,6 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import Telegram from "../../icons/telegram.vue";
 import { useSideBarStoreAzureStore } from "../../../stores/sideBarStoreAzure";
 import Loading from "../instances/chat-main/Loading.vue";
 import ChatSubmitBtn from "../instances/chat-main/ChatSubmitBtn.vue";
