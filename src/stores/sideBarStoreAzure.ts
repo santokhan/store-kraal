@@ -7,11 +7,11 @@ import { dummyChats, dummyConversation } from "./dummy";
 
 export const useSideBarStoreAzureStore = defineStore("chatSideBarAzure", () => {
     const state = reactive<State>({ sidebarMobile: null, sidebarDesktop: true })
-    // const sideBarList = ref<SideBarData[]>([])
-    const sideBarList = ref<SideBarData[]>(dummyChats)
+    const sideBarList = ref<SideBarData[]>([])
+    // const sideBarList = ref<SideBarData[]>(dummyChats)
     const recentChatId = ref<number>(0)
-    // const chatMessages = ref<TypeChatMessage[]>([])
-    const chatMessages = ref<TypeChatMessage[]>(dummyConversation)
+    const chatMessages = ref<TypeChatMessage[]>([])
+    // const chatMessages = ref<TypeChatMessage[]>(dummyConversation)
     const animateChatBox = ref<boolean>(false)
     const customInstructions = ref<boolean>(false)
 

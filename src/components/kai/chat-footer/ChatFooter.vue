@@ -8,7 +8,7 @@
                     </div>
                     <div class="grid grid-cols-[2rem_1fr_2rem] gap-2 items-end p-3">
                         <div
-                            class="w-8 h-8 rounded-lg grid place-items-center relative overflow-hidden text-gray-300" title="attachment">
+                            class="w-8 h-8 rounded-lg grid place-items-center relative overflow-hidden text-gray-300 hover:text-white" title="attachment">
                             <!-- <i class="fa fa-plus text-sm rounded-full"></i> -->
                             <Attachment class="w-5" />
                             <input type="file" name="" id="" class="absolute left-0 top-0 opacity-0 e z-[50]"
