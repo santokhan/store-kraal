@@ -42,11 +42,11 @@
                 Log out
             </NavLink>
         </div>
-        <button type="button" @click="handleSettings" ref="opener" title="MenuBar" :class="[
-            'w-full text-gray-100 flex items-center gap-3 px-2 h-[3.25rem] rounded-lg hover:bg-chatgpt-700 overflow-x-hidden',
-            openSettings && 'bg-chatgpt-700']">
+        <button type="button" @click="handleSettings" ref="opener" title="MenuBar"
+            :class="[
+                'w-full text-gray-100 flex items-center gap-3 px-2 h-[3.25rem] rounded-lg hover:bg-chatgpt-700 overflow-x-hidden', openSettings && 'bg-chatgpt-700']">
             <UserIcon>{{ userData.firstName[0] }}{{ userData.lastName[0] }}</UserIcon>
-            <h5 class="w-full flex justify-start font-semibold text-sm tracking-wider font-normal">
+            <h5 class="w-full flex justify-start font-medium text-sm tracking-wider font-normal">
                 {{ userData ? userData.firstName + " " + userData.lastName : "..." }}
             </h5>
             <div class="w-auto"><i class="fa fa-ellipsis-h text-sm text-neutral-400"></i></div>
@@ -99,5 +99,3 @@ onMounted(() => {
     })
 })
 </script>
-
-<style scoped></style>

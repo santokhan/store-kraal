@@ -2,23 +2,26 @@
     <div class="h-auto w-full border-t xl:border-none border-white/20 mb-8">
         <div class="max-w-4xl mx-auto mt-auto bg-chatgpt-500 px-4 pt-2" title="footer">
             <form @submit="handleSubmit" class="relative">
-                <div
-                    class="flex items-center gap-1 rounded-xl pl-2 lg:pl-4 pr-1 lg:pr-3 py-1 lg:py-3 shadow bg-chatgpt-400">
-                    <div
-                        class="w-6 h-6 rounded-full bg-chatgpt-700 grid place-items-center relative overflow-hidden  hover:text-gray-300">
-                        <i class="fa fa-plus text-sm rounded-full bg-chatgpt-600 text-gray-300"></i>
-                        <input type="file" name="" id="" class="absolute left-0 top-0 opacity-0 e z-[50]">
+                <div :class="['rounded-xl shadow bg-chatgpt-400 text-gray-300']">
+                    <div v-if="fileInput.length > 0" class="p-3">
+                        <AttachPreview :files="fileInput" :handleFiles="handleFiles" />
                     </div>
-                    <div class="relative w-full h-full flex items-center ml-2">
-                        <textarea rows="1" id="chatInput" @keyup="handleChange" @input="handleChange"
-                            class="w-full focus:outline-none resize-none overflow-hidden bg-transparent text-white min-h-[32px] h-8 pt-1 text-sm tracking-wider font-normal"
-                            :value="input" ref="textarea" placeholder="Send a message..."></textarea>
-                        <div class="whitespace-pre-wrap break-words invisible absolute left-0 top-0 w-full" ref="hiddenDiv">
-                            {{ input }} <br />
+                    <div class="grid grid-cols-[2rem_1fr_2rem] gap-2 items-end p-3">
+                        <div
+                            class="w-8 h-8 rounded-full bg-chatgpt-700 grid place-items-center relative overflow-hidden text-gray-300">
+                            <i class="fa fa-plus text-sm rounded-full"></i>
+                            <input type="file" name="" id="" class="absolute left-0 top-0 opacity-0 e z-[50]"
+                                @change="handleFileChange">
                         </div>
-                    </div>
-                    <div class="self-end">
-                        <div class="flex items-center">
+                        <div class="relative w-full h-full flex items-center">
+                            <textarea rows="1" id="chatInput" @keyup="handleChange" @input="handleChange" :class="[
+                                'w-full focus:outline-none resize-none overflow-hidden bg-transparent text-white min-h-[1.5rem] h-[1.5rem] text-sm tracking-wider font-light'
+                            ]" :value="input" ref="textarea" placeholder="Send a message..."></textarea>
+                            <div ref="hiddenDiv" :class="[
+                                'whitespace-pre-wrap break-words invisible absolute left-0 top-0 w-full'
+                            ]">{{ input }}</div>
+                        </div>
+                        <div class="flex justify-center items-end h-full">
                             <ChatSubmitBtn v-if="!loading" :disabled="!input" />
                             <Loading v-else />
                         </div>
@@ -34,6 +37,7 @@ import { ref } from "vue";
 import { useSideBarStoreAzureStore } from "../../../stores/sideBarStoreAzure";
 import Loading from "../instances/chat-main/Loading.vue";
 import ChatSubmitBtn from "../instances/chat-main/ChatSubmitBtn.vue";
+import AttachPreview from "../instances/chat-main/AttachPreview.vue";
 const props = defineProps<{ chatId: any }>()
 
 const store = useSideBarStoreAzureStore()
@@ -41,6 +45,23 @@ const hiddenDiv: any = ref<null | HTMLElement>(null);
 const input = ref<string>("");
 const textarea: any = ref(null);
 const loading = ref<boolean>(false)
+const fileInput = ref<any[]>([])
+// User input file handling
+function handleFileChange(e: any) {
+    const files = e.target.files
+    if (files['0']) {
+        for (const key in files) {
+            if (Object.prototype.hasOwnProperty.call(files, key)) {
+                const ele = files[key];
+                if (!ele) return;
+                fileInput.value.push(ele);
+            }
+        }
+    }
+}
+function handleFiles(index: number) {
+    fileInput.value = fileInput.value.filter((e, i) => i !== index)
+}
 
 function handleChange(e: any) {
     input.value = e.target.value.trim();

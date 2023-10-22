@@ -10,6 +10,10 @@ export class User {
         return `${this.firstName} ${this.lastName}`;
     }
 
+    get initials() {
+        return `${this.firstName[0]}${this.lastName[0]}`;
+    }
+
     constructor(uuid: string, firstName: string, lastName: string, email: string, status: string, businessRole: string | null) {
         this.uuid = uuid;
         this.firstName = firstName;
