@@ -23,24 +23,7 @@
 </template>
 
 <script lang="ts" setup>
+import { BYTEtoKB, fileName } from './attachment-preview';
+
 const props = defineProps<{ files: any, handleFiles: (index: number) => void }>()
-
-function fileName(name: string) {
-    const max = 12
-    if (name.length < max - 1) {
-        return name
-    } else {
-        return `${name.slice(0, max)}...`
-    }
-}
-function BYTEtoKB(BYTE: number) {
-    const KB = BYTE / 1000
-
-    if (KB < 1000) {
-        return `${Math.round(KB)} KB`
-    } else {
-        const MB = KB / 1000
-        return `${Math.round(MB)} MB`
-    }
-}
 </script>

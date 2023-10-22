@@ -8,8 +8,9 @@
                     </div>
                     <div class="grid grid-cols-[2rem_1fr_2rem] gap-2 items-end p-3">
                         <div
-                            class="w-8 h-8 rounded-full bg-chatgpt-700 grid place-items-center relative overflow-hidden text-gray-300">
-                            <i class="fa fa-plus text-sm rounded-full"></i>
+                            class="w-8 h-8 rounded-lg grid place-items-center relative overflow-hidden text-gray-300" title="attachment">
+                            <!-- <i class="fa fa-plus text-sm rounded-full"></i> -->
+                            <Attachment class="w-5" />
                             <input type="file" name="" id="" class="absolute left-0 top-0 opacity-0 e z-[50]"
                                 @change="handleFileChange">
                         </div>
@@ -30,7 +31,7 @@
             </form>
         </div>
     </div>
-</template>  
+</template>
 
 <script lang="ts" setup>
 import { ref } from "vue";
@@ -38,8 +39,9 @@ import { useSideBarStoreAzureStore } from "../../../stores/sideBarStoreAzure";
 import Loading from "../instances/chat-main/Loading.vue";
 import ChatSubmitBtn from "../instances/chat-main/ChatSubmitBtn.vue";
 import AttachPreview from "../instances/chat-main/AttachPreview.vue";
-const props = defineProps<{ chatId: any }>()
+import Attachment from "../../icons/attachment.vue";
 
+const props = defineProps<{ chatId: any }>()
 const store = useSideBarStoreAzureStore()
 const hiddenDiv: any = ref<null | HTMLElement>(null);
 const input = ref<string>("");
