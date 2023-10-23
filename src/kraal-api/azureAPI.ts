@@ -25,6 +25,10 @@ async function post(url: string, data?: Record<string, unknown>) {
     return client.post(url, data).then(res => res.data);
 }
 
+async function postForm(url: string, data: FormData) {
+    return client.post(url, data, { headers: { "Content-Type": "multipart/form-data" } }).then(res => res.data);
+}
+
 async function patch(url: string, data?: Record<string, unknown>) {
     return client.patch(url, data).then(res => res.data);
 }
@@ -56,6 +60,15 @@ export default {
         getChatMessage: (id: number) => get('/chatmessages', { params: { id: id } }),
         sendChatMessage: (chatId: number, message: string) => post('/chatmessages', { chatid: chatId, message: message }),
         sendNewChatMessage: (message: string) => post('/chatmessages', { message: message }),
+
+        sendDocuments: (chatId: number, files: File[]) => {
+            const formData = new FormData();
+            formData.set("chatId", chatId.toString());
+            for (const file of files) {
+                formData.append("files", file);
+            }
+            return postForm('/documents', formData);
+        },
     },
     quickbooks: {
         getAuthorizationUrl: () => get('/linking/url'),
