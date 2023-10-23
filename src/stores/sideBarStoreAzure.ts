@@ -105,17 +105,17 @@ export const useSideBarStoreAzureStore = defineStore("chatSideBarAzure", () => {
             chatMessages.value = []
         },
         async sendNewChatMessage(message: string) {
-            if (!message) {
-                console.log(`Can not read 'message'`);
-                return;
-            }
-            const res = await azureAPI.chat.sendNewChatMessage(message)
-            // set `recentChatId` to switch welcome to coversation
-            recentChatId.value = res.chatId;
+            if (message) {
+                const res = await azureAPI.chat.sendNewChatMessage(message)
+                // set `recentChatId` to switch welcome to coversation
+                recentChatId.value = res.chatId;
 
-            // assign messages to print
-            await this.Re_assignChatMessage(res.chatId)
-            await this.assignSideBarData();
+                // assign messages to print
+                await this.Re_assignChatMessage(res.chatId)
+                await this.assignSideBarData();
+            } else {
+                console.log(`Can not read 'message'`);
+            }
         },
         async sendChatMessage(id: number, message: string) {
             if (!id && !message) {
