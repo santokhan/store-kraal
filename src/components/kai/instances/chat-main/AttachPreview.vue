@@ -3,7 +3,7 @@
         <ul class="w-full flex flex-wrap gap-4 pt-2">
             <li v-for="(file, i) in props.files" :key="i" :title="file.name"
                 class="min-w-[10.5rem] w-[10.5rem] h-[2.75rem] flex items-center bg-chatgpt-500 text-gray-400 rounded-lg relative">
-                <button type="button" @click="() => { handleFiles(i) }"
+                <button type="button" @click="() => { removeFiles(i) }"
                     class="absolute -top-1.5 -right-1.5 w-[1rem] h-[1rem] overflow-hidden bg-chatgpt-600 border rounded-full flex justify-center items-center"><svg
                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                         stroke="currentColor" class="w-5 h-5 rotate-45">
@@ -25,5 +25,5 @@
 <script lang="ts" setup>
 import { BYTEtoKB, fileName } from './attachment-preview';
 
-const props = defineProps<{ files: any, handleFiles: (index: number) => void }>()
+const props = defineProps<{ files: any, removeFiles: (index: number) => void }>()
 </script>

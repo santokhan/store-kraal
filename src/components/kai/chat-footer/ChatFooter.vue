@@ -4,15 +4,14 @@
             <form @submit="handleSubmit" class="relative">
                 <div :class="['rounded-xl shadow bg-chatgpt-400 text-gray-300']">
                     <div v-if="fileInput.length > 0" class="p-3">
-                        <AttachPreview :files="fileInput" :handleFiles="handleFiles" />
+                        <AttachPreview :files="fileInput" :removeFiles="removeFiles" />
                     </div>
                     <div class="grid grid-cols-[2rem_1fr_2rem] gap-2 items-end p-3">
-                        <div
-                            class="w-8 h-8 rounded-lg grid place-items-center relative overflow-hidden text-gray-300 hover:text-white" title="attachment">
+                        <div class="w-8 h-8 rounded-lg grid place-items-center relative overflow-hidden text-gray-300 hover:text-white"
+                            title="attachment">
                             <!-- <i class="fa fa-plus text-sm rounded-full"></i> -->
                             <Attachment class="w-5" />
-                            <input type="file" name="" id="" class="absolute left-0 top-0 opacity-0 e z-[50]"
-                                @change="handleFileChange">
+                            <FileInput :handleFile="handleFile" />
                         </div>
                         <div class="relative w-full h-full flex items-center">
                             <textarea rows="1" id="chatInput" @keyup="handleChange" @input="handleChange" :class="[
@@ -22,9 +21,9 @@
                                 'whitespace-pre-wrap break-words invisible absolute left-0 top-0 w-full'
                             ]">{{ input }}</div>
                         </div>
-                        <div class="flex justify-center items-end h-full">
+                        <div class="flex justify-center items-end h-full relative">
                             <ChatSubmitBtn v-if="!loading" :disabled="!input" />
-                            <Loading v-else />
+                            <Loading v-else  class="absolute right-0"/>
                         </div>
                     </div>
                 </div>
@@ -40,6 +39,7 @@ import Loading from "../instances/chat-main/Loading.vue";
 import ChatSubmitBtn from "../instances/chat-main/ChatSubmitBtn.vue";
 import AttachPreview from "../instances/chat-main/AttachPreview.vue";
 import Attachment from "../../icons/attachment.vue";
+import FileInput from "../instances/chat-main/file-input/FileInput.vue";
 
 const props = defineProps<{ chatId: any }>()
 const store = useSideBarStoreAzureStore()
@@ -48,21 +48,18 @@ const input = ref<string>("");
 const textarea: any = ref(null);
 const loading = ref<boolean>(false)
 const fileInput = ref<any[]>([])
-// User input file handling
-function handleFileChange(e: any) {
-    const files = e.target.files
-    if (files['0']) {
-        for (const key in files) {
-            if (Object.prototype.hasOwnProperty.call(files, key)) {
-                const ele = files[key];
-                if (!ele) return;
-                fileInput.value.push(ele);
-            }
+
+function handleFile(files: FileList) {
+    const len = files.length;
+    if (len) {
+        for (let i = 0; i < len; i++) {
+            const file = files[i];
+            fileInput.value.push(file)
         }
     }
 }
-function handleFiles(index: number) {
-    fileInput.value = fileInput.value.filter((e, i) => i !== index)
+function removeFiles(index: number) {
+    fileInput.value.splice(index, 1)
 }
 
 function handleChange(e: any) {

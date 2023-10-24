@@ -7,11 +7,11 @@ import { dummyChats, dummyConversation } from "./dummy";
 
 export const useSideBarStoreAzureStore = defineStore("chatSideBarAzure", () => {
     const state = reactive<State>({ sidebarMobile: null, sidebarDesktop: true })
-    const sideBarList = ref<SideBarData[]>([])
-    // const sideBarList = ref<SideBarData[]>(dummyChats)
+    // const sideBarList = ref<SideBarData[]>([])
+    const sideBarList = ref<SideBarData[]>(dummyChats)
     const recentChatId = ref<number>(0)
-    const chatMessages = ref<TypeChatMessage[]>([])
-    // const chatMessages = ref<TypeChatMessage[]>(dummyConversation)
+    // const chatMessages = ref<TypeChatMessage[]>([])
+    const chatMessages = ref<TypeChatMessage[]>(dummyConversation)
     const animateChatBox = ref<boolean>(false)
     const customInstructions = ref<boolean>(false)
 
@@ -104,15 +104,24 @@ export const useSideBarStoreAzureStore = defineStore("chatSideBarAzure", () => {
         async clearChatMessages() {
             chatMessages.value = []
         },
-        async sendNewChatMessage(message: string) {
+        async sendNewChatMessage(message: string, files?: File[]) {
             if (message) {
                 const res = await azureAPI.chat.sendNewChatMessage(message)
-                // set `recentChatId` to switch welcome to coversation
-                recentChatId.value = res.chatId;
-
-                // assign messages to print
-                await this.Re_assignChatMessage(res.chatId)
-                await this.assignSideBarData();
+                console.log(res)
+                if (res) {
+                    if (files) {
+                        const result = await azureAPI.chat.sendDocuments(res.chatId, files);
+                        console.log(result);
+                    }
+                    // *** set `recentChatId` to switch welcome to coversation ***
+                    recentChatId.value = res.chatId;
+                    /**
+                     * 1. assign messages to print
+                     * 2. assign sidebar nav
+                     */
+                    await this.Re_assignChatMessage(res.chatId)
+                    await this.assignSideBarData();
+                }
             } else {
                 console.log(`Can not read 'message'`);
             }
