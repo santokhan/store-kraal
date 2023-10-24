@@ -4,7 +4,9 @@
             <div class="w-full max-w-lg text-gray-400 bg-chatgpt-600 rounded-xl shadow-lg">
                 <div class="flex justify-between items-center p-4">
                     <p class="font-medium text-sm select-none">
-                        Delete Chat "<span class="select-text">{{ props.chat.name }}</span>"
+                        Delete Chat "<span class="select-text">
+                            {{ props.chat.name.split(' ').slice(0, 5).join(" ") }}...
+                        </span>"
                     </p>
                     <button type="button" class="text-gray-500 hover:text-gray-200" @click="props.handleModal">
                         <i class="fa fa-plus rotate-45" aria-hidden="true"></i>
@@ -19,7 +21,9 @@
                 <form @submit="handleSubmit">
                     <div class="space-y-2 p-4">
                         <label for="chatName" class="font-medium text-sm select-none">
-                            To confirm type "{{ props.chat.name }}"in the box below
+                            To confirm type "<span class="select-text">
+                                {{ props.chat.name.split(' ').slice(0, 5).join(" ") }}...
+                            </span>" in the box below
                         </label>
                         <input type="text" name="chat_name" id="chatName" v-model="name"
                             class="block px-3 w-full h-9 text-gray-400 text-base rounded-lg border bg-transparent outline-none border-orange-900 text-sm hover:border-orange-800">
@@ -58,10 +62,10 @@ const router = useRouter()
 
 async function handleSubmit(e: any) {
     e.preventDefault()
-    const filtered = name.value.trim().replace("  ", " ").toLowerCase()
+    const filtered = name.value.trim().replace(/\s\s/g, " ").toLowerCase()
     const target = props.chat.name.trim().toLowerCase()
-    console.log(filtered, "===", target);
-    if (filtered === target) {
+    // console.log(filtered, "===", target);
+    if (target.includes(filtered)) {
         loading.value = true
 
         await store.deleteSideBarInstance(props.chat.id)
