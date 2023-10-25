@@ -26,13 +26,13 @@ import { getCurrentUser } from '../../firebase/services';
 /**
  * If someone try to access this route directly by typing /user/sign-up
  */
-const router = useRouter()
-async function redirect() {
-    const currentUserRef = await getCurrentUser()
-    if (currentUserRef) {
-        router.push('/')
-    }
-}
-onBeforeMount(redirect)
+// const router = useRouter()
+// async function redirect() {
+//     const currentUserRef = await getCurrentUser()
+//     if (currentUserRef) {
+//         router.push('/')
+//     }
+// }
+// onBeforeMount(redirect)
 </script>
 

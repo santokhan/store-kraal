@@ -1,13 +1,13 @@
-import { query, collection, where, getDocs, onSnapshot, getDoc } from "firebase/firestore";
+import { query, collection, where, getDocs, onSnapshot } from "firebase/firestore";
 import { db } from "../auth/firestore";
 import { getCurrentUser } from "vuefire";
 import { fireStore } from "../auth/firebaseApp";
-import { log } from "../components/funtions";
+import { COLLECTION_BUSINESS_USER } from "../auth/addBusinessUser";
 
 // read current user role form firebase collection role
-async function getUserInfo(email: string) {
+export default async function getUserInfo(email: string) {
     let data;
-    const colRef = collection(db, 'business-user');
+    const colRef = collection(db, COLLECTION_BUSINESS_USER);
     const q = query(colRef, where("email", "==", email));
 
     // get all user role
@@ -19,16 +19,12 @@ async function getUserInfo(email: string) {
     return data;
 }
 
-export default getUserInfo;
-
-
 class BusinessUserInfo {
-    COLLECTION_NAME = "business-user"
     async getUserData(callBack: (data: any) => void) {
         const user = await getCurrentUser()
         const email = user?.email
         if (!email) return;
-        const colRef = collection(fireStore, this.COLLECTION_NAME);
+        const colRef = collection(fireStore, COLLECTION_BUSINESS_USER);
         // use `"nuku@gmail.com"` for test only
         const q = query(colRef, where("email", "==", email))
 

@@ -1,7 +1,6 @@
-import { getFirestore } from "firebase/firestore";
-import { firebaseApp } from "./firebaseApp";
+import { fireStore } from "./firebaseApp";
 
 export const USER_CHAT_DATA = "user-chat-data";
 
-export const db = getFirestore(firebaseApp);
+export const db = fireStore;
 

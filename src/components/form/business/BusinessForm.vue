@@ -52,7 +52,7 @@
             </div>
             <div class="space-y-2 col-span-2 lg:col-span-1">
                 <label class="flex items-center font-bold"><span>Password</span><span>*</span></label>
-                <input type="text" v-model="businessForm.pass" name="password" autocomplete="true"
+                <input type="password" v-model="businessForm.pass" name="password" autocomplete="true"
                     class="block w-full h-12 rounded-xl border border-blue-300 p-4 focus:outline-none bg-transparent">
                 <Warning :message="warn.pass" />
             </div>
@@ -66,13 +66,14 @@
                 <Warning :message="firebaseWarn" class="w-full" />
                 <button type="submit" :disabled="disabled"
                     class="block h-12 px-8 font-semibold bg-kraal-blue-500 text-white rounded-xl hover:bg-kraal-blue-700 my-2 capitalize">
-                    {{ submit }}</button>
+                    {{ submit }}
+                </button>
                 <div class="space-y-2">
                     <p class="text-sm">Already have an account? <RouterLink to="sign-in"
                             class="text-kraal-blue-500 hover:underline">Sign In
                         </RouterLink>
                     </p>
-                    <p class="text-sm">By submitting this form, you consent to our <RouterLink to=""
+                    <p class="text-sm">By submitting this form, you consent to our <RouterLink to="terms"
                             class="text-kraal-blue-500 hover:underline">Terms and Conditions.
                         </RouterLink>
                     </p>
@@ -91,6 +92,7 @@ import { useRouter } from 'vue-router';
 import Warning from '../steps/layout/warnings/Warning.vue';
 import { useBusinessFormStore } from '../../../stores/BusinessForm';
 import * as firebase from "../../../firebase/services";
+import addBusinessUser from '../../../auth/addBusinessUser';
 
 const bussinessFormStore = useBusinessFormStore()
 const router = useRouter()
@@ -98,31 +100,21 @@ const router = useRouter()
 const submit = ref<string>('Create account')
 const disabled = ref<boolean>(false)
 const firebaseWarn = ref<string>()
+const user_schema = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    jobTitle: "",
+    company: "",
+    organization: "",
+    accounting: "",
+    phone: "",
+    pass: "",
+    confirmPass: "",
+}
 
-const businessForm = reactive({
-    firstName: "",
-    lastName: "",
-    email: "",
-    jobTitle: "",
-    company: "",
-    organization: "",
-    accounting: "",
-    phone: "",
-    pass: "",
-    confirmPass: "",
-})
-const warn = reactive({
-    firstName: "",
-    lastName: "",
-    email: "",
-    jobTitle: "",
-    company: "",
-    organization: "",
-    accounting: "",
-    phone: "",
-    pass: "",
-    confirmPass: "",
-})
+const businessForm = reactive({ ...user_schema })
+const warn = reactive({ ...user_schema })
 
 // Select > options
 function organizationType(org: string) {
@@ -173,41 +165,58 @@ function handleSubmit(e: Event) {
     async function signUp() {
         const { firstName, lastName, company, email, confirmPass, jobTitle, organization, accounting, phone } = businessForm;
         try {
-            await firebase.createUser(email, confirmPass);
-            // addBusinessUser({ firstName, lastName, email, jobTitle, company, organization, accounting, phone, message })
-            // await api.auth.signupWithBusiness(new SignupData(firstName, lastName, company));
-            submit.value = 'Thank you for signing up';
-            disabled.value = true;
+            const userCredential = await firebase.createUser(email, confirmPass);
+            if (userCredential) {
+                // await api.auth.signupWithBusiness(new SignupData(firstName, lastName, company));
+                const userData = await addBusinessUser({ firstName, lastName, email, jobTitle, company, organization, accounting, phone })
+                if (userData) {
+                    submit.value = 'Thank you for signing up';
+                    disabled.value = true;
 
-            await firebase.sendEmailVerification();
-            router.push('/user/verify');
+                    router.push('/user/verify');
+                }
+            }
         } catch (error: any) {
             firebaseWarn.value = error.message;
         }
     }
 
-    if (businessForm.firstName === '') {
-        warn.firstName = "Enter your first name";
-    } else if (businessForm.lastName === '') {
-        warn.lastName = "Enter your last name";
-    } else if (businessForm.email === '') {
-        warn.email = "Enter your email";
-    } else if (businessForm.jobTitle === '') {
-        warn.jobTitle = "Enter job title";
-    } else if (businessForm.company === '') {
-        warn.company = "Enter your company name";
-    } else if (businessForm.organization === '') {
-        warn.organization = "Select your organization name";
-    } else if (businessForm.accounting === '') {
-        warn.accounting = "Select your accounting type";
-    } else if (businessForm.phone === '') {
-        warn.phone = "Enter your phone number";
-    } else if (businessForm.pass === '') {
-        warn.pass = "Password should include upper case, lower case, number, and minimun length of 8 and maximum 20";
-    } else if (businessForm.confirmPass === '') {
-        warn.confirmPass = "Password does not matching";
-    } else {
-        signUp()
+    switch ("") {
+        case businessForm.firstName:
+            warn.firstName = "Enter your first name";
+            break;
+
+        case businessForm.lastName:
+            warn.lastName = "Enter your first name";
+            break;
+
+        case businessForm.email:
+            warn.email = "Enter your first name";
+            break;
+
+        case businessForm.jobTitle:
+            warn.jobTitle = "Enter your first name";
+            break;
+
+        case businessForm.company:
+            warn.company = "Enter your first name";
+            break;
+
+        case businessForm.organization:
+            warn.organization = "Enter your first name";
+            break;
+
+        case businessForm.accounting:
+            warn.accounting = "Enter your first name";
+            break;
+
+        case businessForm.phone:
+            warn.phone = "Enter your first name";
+            break;
+
+        default:
+            signUp()
+            break;
     }
 }
 </script>

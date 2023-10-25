@@ -19,42 +19,41 @@ If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has a
    2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
 2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
 
-## Deployment Guide
+## Library we use
 
-- Build your application locally and fix bugs
+We are using [HighLightJS](https://highlightjs.readthedocs.io/en/latest/api.html#highlightall) to highlight our tokenize code.
 
-   ```bash
-   npm run build
-   ```
+## Development
 
-- Deploy using netlify cli
+Run your application
 
-   ```bash
-   netlify deploy
-   netlify deploy --prod
-   ```
+```bash
+npm run dev
+```
 
-   ***Note:** Do not push to repository before checking your netlify deployment.*
+## Firebase Setup
 
-## Others
+[Setup Firebase](./src/firebase/FIREBASE.md)
 
-Read HighlightJS documentation to understand properly
-[HighLight](https://highlightjs.readthedocs.io/en/latest/api.html#highlightall)
+## Deployment
 
-Repo Link: [https://github.com/kraalai/app-frontend.git](https://github.com/kraalai/app-frontend.git)
+Build your application locally and fix bugs
 
-## User Schema
+```bash
+npm run build
+```
 
-<!-- ```json
-{
-   "accounting": "",
-   "company": "",
-   "email": "",
-   "firstName": "",
-   "jobTitle": "",
-   "lastName": "",
-   "message": "",
-   "organization": "",
-   "phone": "",
-}
-``` -->
+Deploy using netlify cli
+
+```bash
+netlify deploy
+netlify deploy --prod
+```
+
+***Note:** Do not push to repository before checking your netlify deployment.*
+
+## Related Links
+
+- [GitHub Repo](https://github.com/kraalai/app-frontend.git)
+- [Development preview](https://kraal-frontend.netlify.app)
+- [Website](https://app.kraal.ai)

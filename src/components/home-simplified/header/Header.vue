@@ -18,7 +18,6 @@ import { getCurrentUser } from "vuefire";
 const currentUserRef = ref()
 async function assign_user() {
   currentUserRef.value = await getCurrentUser()
-  console.log(currentUserRef.value);
 };
 onBeforeMount(assign_user)
 </script>

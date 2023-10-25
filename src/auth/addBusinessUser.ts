@@ -1,5 +1,5 @@
-import { addDoc, collection } from "firebase/firestore";
-import { db } from "./firestore";
+import { DocumentData, DocumentReference, addDoc, collection } from "firebase/firestore";
+import { fireStore } from "./firebaseApp";
 
 interface BusinessUser {
     firstName: string;
@@ -10,20 +10,17 @@ interface BusinessUser {
     organization: string;
     accounting: string;
     phone: string;
-    message: string;
 }
-
 export interface Role { email: string, role: string }
 
-async function addBusinessUser(businessUser: BusinessUser) {
+export const COLLECTION_BUSINESS_USER = "business-user"
+
+export default async function addBusinessUser(businessUser: BusinessUser): Promise<DocumentReference<DocumentData> | undefined> {
     try {
-        const docRef = await addDoc(collection(db, "business-user"), businessUser);
-
-
-        console.log("Document written with ID: ", docRef.id);
+        const collectionRef = collection(fireStore, COLLECTION_BUSINESS_USER);
+        const docSnapShot = await addDoc(collectionRef, businessUser);
+        return docSnapShot;
     } catch (error) {
         console.error('Error adding role: ', error)
     }
 }
-
-export default addBusinessUser;
