@@ -1,13 +1,13 @@
 import { query, collection, where, getDocs, onSnapshot } from "firebase/firestore";
-import { db } from "../auth/firestore";
 import { getCurrentUser } from "vuefire";
 import { fireStore } from "../auth/firebaseApp";
 import { COLLECTION_BUSINESS_USER } from "../auth/addBusinessUser";
+import { User } from "firebase/auth";
 
 // read current user role form firebase collection role
 export default async function getUserInfo(email: string) {
     let data;
-    const colRef = collection(db, COLLECTION_BUSINESS_USER);
+    const colRef = collection(fireStore, COLLECTION_BUSINESS_USER);
     const q = query(colRef, where("email", "==", email));
 
     // get all user role

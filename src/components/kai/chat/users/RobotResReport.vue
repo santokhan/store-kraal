@@ -14,7 +14,6 @@
 </template>
 
 <script lang="ts" setup>
-import { useFormDataStore } from "../../../../stores/FormData";
 import ChatContainer from "../child/ChatContainer.vue";
 import ChatText from "../child/ChatText.vue";
 import Profile from "./Profile.vue";
@@ -33,6 +32,4 @@ const isGenerate: Ref<boolean> = ref(false);
 function handleReport() {
   isGenerate.value = false;
 }
-
-const formData: any = useFormDataStore();
 </script>

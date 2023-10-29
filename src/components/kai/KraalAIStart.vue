@@ -10,7 +10,7 @@ import WelcomeChat from "./instances/chat-main/WelcomeChat.vue"
 import { useSideBarStoreAzureStore } from "../../stores/sideBarStoreAzure"
 import { storeToRefs } from "pinia"
 import ChatInstance from "./instances/Instance.vue"
-import KraalAILayout from "./layout/KraalAILayout.vue";
+import KraalAILayout from "./KraalAILayout.vue";
 
 const store = useSideBarStoreAzureStore()
 const { recentChatId } = storeToRefs(store)

@@ -1,6 +1,6 @@
 <template>
     <div v-if="robotText.length <= 0" class="w-2 h-5 bg-white/50 on-off"></div>
-    <div v-html="markdownParser(robotText.join(' '))" class="text-gray-200 space-y-4 overflow-auto tracking-wide"></div>
+    <div v-html="markdownParser(robotText.join(' '))" class="text-gray-200 overflow-auto tracking-wide"></div>
 </template>
 
 <script setup lang="ts">
@@ -8,8 +8,6 @@ import { reactive, watchEffect } from 'vue'
 import markdownParser from '../markdownParser'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/atom-one-dark.css'
-// import './atom-one-dark.css'
-import KraalAI from '../../../icons/kraalai.vue'
 
 const props = defineProps<{ robot: string, eleScrollTop: () => void }>()
 const robotText = reactive<string[]>([])

@@ -1,12 +1,7 @@
-import { FirebaseError, initializeApp } from "firebase/app";
+import { FirebaseError } from "firebase/app";
 import * as firebase from "firebase/auth";
 import { type MultiFactorError, getAuth, onAuthStateChanged, RecaptchaVerifier } from "firebase/auth";
 import { firebaseApp } from "../auth/firebaseApp";
-
-// const configs = JSON.parse(import.meta.env.VITE_FIREBASE_SERVICE_CREDENTIALS);
-// initializeApp(configs);
-
-// BASIC AUTHENTICATION
 
 const auth = getAuth(firebaseApp);
 let loading = true;
@@ -17,8 +12,8 @@ export async function createUser(email: string, password: string) {
     const credentials = await firebase.createUserWithEmailAndPassword(auth, email, password);
     if (credentials) {
         await sendEmailVerification();
+        return credentials;
     }
-    return credentials;
 }
 
 export async function signIn(email: string, password: string, elementId: string) {
@@ -51,7 +46,7 @@ export async function completeSignIn(resolver: firebase.MultiFactorResolver, ver
     await resolver.resolveSignIn(multiFactorAssertion);
 }
 
-export async function sendEmailVerification() {
+export async function sendEmailVerification(): Promise<boolean> {
     try {
         const user = await getCurrentUser();
         if (!user) {
@@ -60,9 +55,8 @@ export async function sendEmailVerification() {
         }
         const targetPath = '/user/verified'
         await firebase.sendEmailVerification(user, {
-            url: window.location.href.replace('//user/verify', '/user/verified'),
+            url: window.location.href.replace('/user/verify', targetPath),
         });
-        console.log(`Verification email sent to ${user.email}`);
         return true;
     } catch (error) {
         console.log(error);

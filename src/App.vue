@@ -1,5 +1,9 @@
 <script lang="ts" setup>
-import { RouterView } from "vue-router";
+import { watch } from "vue";
+import { RouterView, useRoute } from "vue-router";
+
+const route = useRoute()
+watch(() => route.path, () => { window.scrollTo(0, 0) })
 </script>
 
 <template>

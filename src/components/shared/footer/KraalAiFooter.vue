@@ -16,58 +16,66 @@
                 </div>
                 <div class="sm:col-span-6 md:col-span-3 lg:col-span-2">
                     <h6 class="text-sm  font-semibold mb-2">Kraalai</h6>
-                    <ul class="text-sm font-medium space-y-1.5">
+                    <ul class="text-sm space-y-1.5">
                         <li>
-                            <RouterLink class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out"
+                            <RouterLink
+                                class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out font-normal"
                                 to="/kraal-overview">Mission</RouterLink>
                         </li>
                         <li>
-                            <RouterLink class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out"
+                            <RouterLink
+                                class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out font-normal"
                                 to="/pricing-overview">Pricing</RouterLink>
                         </li>
                     </ul>
                 </div>
                 <div class="sm:col-span-6 md:col-span-3 lg:col-span-2">
                     <h6 class="text-sm  font-semibold mb-2">Resources</h6>
-                    <ul class="text-sm font-medium space-y-1.5">
+                    <ul class="text-sm space-y-1.5">
                         <li>
-                            <RouterLink class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out"
+                            <RouterLink
+                                class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out font-normal"
                                 to="/terms">Terms of Use</RouterLink>
                         </li>
                         <li>
-                            <RouterLink class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out"
+                            <RouterLink
+                                class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out font-normal"
                                 to="/contact">Contact Us</RouterLink>
                         </li>
                     </ul>
                 </div>
                 <div class="sm:col-span-6 md:col-span-3 lg:col-span-2">
                     <h6 class="text-sm  font-semibold mb-2">Products</h6>
-                    <ul class="text-sm font-medium space-y-1.5">
+                    <ul class="text-sm space-y-1.5">
                         <li>
-                            <RouterLink class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out"
+                            <RouterLink
+                                class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out font-normal"
                                 to="explore-products">Autonomous</RouterLink>
                         </li>
                         <li>
-                            <RouterLink class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out"
+                            <RouterLink
+                                class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out font-normal"
                                 to="explore-products">AI Agents</RouterLink>
                         </li>
                     </ul>
                 </div>
                 <div class="sm:col-span-6 md:col-span-3 lg:col-span-2">
                     <h6 class="text-sm  font-semibold mb-2">Company</h6>
-                    <ul class="text-sm font-medium space-y-1.5">
+                    <ul class="text-sm space-y-1.5">
                         <li>
-                            <RouterLink class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out"
+                            <RouterLink
+                                class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out font-normal"
                                 to="about-us">About Us</RouterLink>
                         </li>
                         <li>
-                            <RouterLink class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out"
+                            <RouterLink
+                                class="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out font-normal"
                                 to="careers">Careers</RouterLink>
                         </li>
                     </ul>
                 </div>
             </div>
-            <div class="md:flex md:items-center md:justify-between py-6 md:py-8 border-t border-slate-200">
+            <div class="md:flex md:items-center md:justify-between py-6 border-t border-slate-200">
                 <ul class="flex space-x-6 mb-4 md:order-1 md:ml-4 md:mb-0">
                     <li>
                         <RouterLink class="text-blue-500 hover:text-blue-600 transition duration-150 ease-in-out" to="#0"

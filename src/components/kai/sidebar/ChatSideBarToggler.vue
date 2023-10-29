@@ -13,5 +13,3 @@ import { useChatSideBarStore } from '../../../stores/chatSideBar';
 
 const store = useChatSideBarStore()
 </script>
-
-<style scoped></style>

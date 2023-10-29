@@ -1,5 +1,5 @@
 <template>
-    <div class="fixed left-0 top-0 right-0 bottom-0 bg-chatgpt-500 z-50 flex">
+    <div class="fixed inset-0 bg-chatgpt-500 z-50 flex">
         <SidebarLeft />
         <div class="flex flex-col w-full h-full">
             <slot></slot>
@@ -10,9 +10,9 @@
 
 <script lang="ts" setup>
 import { onMounted, onUnmounted } from "vue"
-import SidebarLeft from "../sidebar/ChatSidebar.vue"
-import { useSideBarStoreAzureStore } from '../../../stores/sideBarStoreAzure'
-import RightSidebar from "../sidebar/right-sidebar/RightSidebar.vue"
+import SidebarLeft from "./sidebar/ChatSidebar.vue"
+import RightSidebar from "./sidebar/right/RightSidebar.vue"
+import { useSideBarStoreAzureStore } from "../../stores/sideBarStoreAzure"
 
 const store = useSideBarStoreAzureStore()
 onMounted(() => {

@@ -1,17 +1,10 @@
-import * as firebase from "../firebase/services";
+import { UserCredential, createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 
-interface Props {
-    email: string;
-    password: string;
-    onSignUp: () => void;
-    onUserExist: (status: string) => void;
-}
+interface Props { email: string, password: string }
 
-export default function handleSignUp(props: Props) {
-    firebase.createUser(props.email, props.password).then(userCredential => {
-        props.onSignUp()
-    }).catch((error) => {
-        props.onUserExist(error.code);
-    });
+export default async function createNewUser(props: Props): Promise<UserCredential> {
+    const auth = getAuth();
+    const userCredential = await createUserWithEmailAndPassword(auth, props.email, props.password)
+    return userCredential;
 };
 

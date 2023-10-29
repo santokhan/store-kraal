@@ -15,7 +15,7 @@
                             </svg>
                         </RouterLink>
                     </div>
-                    <div class="text-lg font-bold text-slate-800">A new way to do finance.</div>
+                    <div class="text-lg font-bold text-slate-800">Transforming business, empowering success!</div>
                 </div>
                 <!-- 2nd block -->
                 <div class="sm:col-span-6 md:col-span-3 lg:col-span-2">

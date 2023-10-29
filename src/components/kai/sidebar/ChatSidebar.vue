@@ -15,7 +15,7 @@ import { useMediaQuery } from '@vueuse/core'
 import ChatSideBarToggler from './ChatSideBarToggler.vue'
 import SidebarContainer from './SidebarContainer.vue'
 import ChatSideBarNavs from './sidebar-navs/ChatSideBarNavs.vue'
-import NewChat from './NewChat.vue'
+import NewChat from './left/NewChat.vue'
 import SidebarFooter from './SidebarFooter.vue'
 import { useChatSideBarStore } from '../../../stores/chatSideBar'
 

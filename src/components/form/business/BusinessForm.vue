@@ -66,7 +66,8 @@
                 <Warning :message="firebaseWarn" class="w-full" />
                 <button type="submit" :disabled="disabled"
                     class="block h-12 px-8 font-semibold bg-kraal-blue-500 text-white rounded-xl hover:bg-kraal-blue-700 my-2 capitalize">
-                    {{ submit }}
+                    <SpinnerCircle v-if="submitMessage == 'loading'" class="fill-kraal-blue-500 mx-12" />
+                    <span v-else>{{ submitMessage }}</span>
                 </button>
                 <div class="space-y-2">
                     <p class="text-sm">Already have an account? <RouterLink to="sign-in"
@@ -90,14 +91,13 @@ import Accounting from './Accounting.vue';
 import { reactive, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import Warning from '../steps/layout/warnings/Warning.vue';
-import { useBusinessFormStore } from '../../../stores/BusinessForm';
 import * as firebase from "../../../firebase/services";
 import addBusinessUser from '../../../auth/addBusinessUser';
+import SpinnerCircle from '../../shared/spinner/SpinnerCircle.vue';
 
-const bussinessFormStore = useBusinessFormStore()
 const router = useRouter()
 // const regexEmail = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,20}$/
-const submit = ref<string>('Create account')
+const submitMessage = ref<string>('Create account')
 const disabled = ref<boolean>(false)
 const firebaseWarn = ref<string>()
 const user_schema = {
@@ -122,12 +122,6 @@ function organizationType(org: string) {
 }
 function accounting(account: string) {
     businessForm.accounting = account;
-}
-function addDataToPinia() {
-    const object = JSON.parse(JSON.stringify(businessForm));
-    Object.keys(object).forEach((ele: string) => {
-        bussinessFormStore.updateBusinessForm(ele, object[ele]);
-    })
 }
 
 watch(businessForm, async (newInpt, oldInput) => {
@@ -160,7 +154,8 @@ watch(businessForm, async (newInpt, oldInput) => {
 
 function handleSubmit(e: Event) {
     e.preventDefault();
-    addDataToPinia();
+    // loading means spinner
+    submitMessage.value = 'loading';
 
     async function signUp() {
         const { firstName, lastName, company, email, confirmPass, jobTitle, organization, accounting, phone } = businessForm;
@@ -170,7 +165,7 @@ function handleSubmit(e: Event) {
                 // await api.auth.signupWithBusiness(new SignupData(firstName, lastName, company));
                 const userData = await addBusinessUser({ firstName, lastName, email, jobTitle, company, organization, accounting, phone })
                 if (userData) {
-                    submit.value = 'Thank you for signing up';
+                    submitMessage.value = 'Thank you for signing up';
                     disabled.value = true;
 
                     router.push('/user/verify');

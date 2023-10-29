@@ -5,9 +5,3 @@
         <i class="fa fa-plus text-xl" aria-hidden="true"></i>
     </button>
 </template>
-
-<script setup lang="ts">
-
-</script>
-
-<style scoped></style>

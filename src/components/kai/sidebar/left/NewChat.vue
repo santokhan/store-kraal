@@ -4,7 +4,7 @@
         'text-white text-sm border border-gray-600 rounded-md',
         'hover:bg-chatgpt-700'
     ]">
-        <Plus class="w-5" /><span class="whitespace-nowrap">New chat</span>
+        <Plus class="w-5" /><span class="whitespace-nowrap font-normal">Start new chat</span>
     </button>
 </template>
 
@@ -14,8 +14,8 @@
  * 2. Add new response to chatInstance on pinia store
  */
 import { useRouter } from 'vue-router'
-import Plus from '../../icons/plus.vue'
-import { useSideBarStoreAzureStore } from '../../../stores/sideBarStoreAzure'
+import Plus from '../../../icons/plus.vue'
+import { useSideBarStoreAzureStore } from '../../../../stores/sideBarStoreAzure'
 
 const store = useSideBarStoreAzureStore()
 const router = useRouter()

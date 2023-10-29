@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import Legend from '../Legend.vue';
+import Legend from '../left/Legend.vue';
 import ItemForm from './items/ItemForm.vue';
 import ItemStatic from './items/ItemStatic.vue';
 import { ref } from 'vue';

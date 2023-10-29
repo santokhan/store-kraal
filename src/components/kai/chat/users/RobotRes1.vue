@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-chatgpt-400 border-t border-gray-900/50">
+  <!-- <div class="bg-chatgpt-400 border-t border-gray-900/50">
     <ChatContainer :robot="true">
       <Profile user="robot" />
       <ChatText>
@@ -31,12 +31,12 @@
         />
       </ChatText>
     </ChatContainer>
-  </div>
+  </div> -->
 </template>
 
 <script lang="ts" setup>
 import { RouterLink } from "vue-router";
-import { useFormDataStore } from "../../../../stores/FormData";
+// import { useFormDataStore } from "../../../../stores/FormData";
 import ChatContainer from "../child/ChatContainer.vue";
 import ChatText from "../child/ChatText.vue";
 import Profile from "./Profile.vue";
@@ -56,5 +56,5 @@ function handleReport() {
   isDone.value = true;
 }
 
-const formData: any = useFormDataStore();
+// const formData: any = useFormDataStore();
 </script>

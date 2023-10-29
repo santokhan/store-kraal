@@ -1,22 +1,23 @@
 import { type DocumentData, collection, addDoc, getDoc, doc, deleteDoc, where, query, getDocs, updateDoc, } from "firebase/firestore";
-import { USER_CHAT_DATA, db as firestore } from "../auth/firestore";
-import { Chat, type ChatList } from "../stores/chatSideBarTypes";
+import { type ChatList, Chat } from "../stores/chatSideBarTypes";
+import { fireStore } from "../auth/firebaseApp";
+
+export const USER_CHAT_DATA = "user-chat-data";
 
 class KraalAIStore {
     async addDoc(chatInstance: ChatList, callBack: () => void) {
         const chat: any = chatInstance
         delete chat._id;
         try {
-            const docRef = await addDoc(collection(firestore, USER_CHAT_DATA), chat)
+            const docRef = await addDoc(collection(fireStore, USER_CHAT_DATA), chat)
             callBack()
-            this.logErr(`Document written.`)
         } catch (error) {
             this.logErr(`Error adding document ${error}`)
         }
     }
     async getDoc(uid: string, callBack: (docs: DocumentData[]) => void) {
         try {
-            const colRef = collection(firestore, USER_CHAT_DATA)
+            const colRef = collection(fireStore, USER_CHAT_DATA)
             const q = query(colRef, where('uid', '==', uid))
             const dataSnap = getDocs(q)
             dataSnap.then(data => {
@@ -36,7 +37,7 @@ class KraalAIStore {
         if (docID) {
             if (nav) {
                 try {
-                    const docRef = doc(firestore, USER_CHAT_DATA, docID)
+                    const docRef = doc(fireStore, USER_CHAT_DATA, docID)
                     await updateDoc(docRef, { nav })
                     this.logErr(`Document field nav was updated`)
                 } catch (error) {
@@ -61,7 +62,7 @@ class KraalAIStore {
             })
             if (isSetStopTypeWriter) {
                 try {
-                    const docRef = doc(firestore, USER_CHAT_DATA, docID)
+                    const docRef = doc(fireStore, USER_CHAT_DATA, docID)
                     await updateDoc(docRef, {
                         chats: chats
                     })
@@ -79,7 +80,7 @@ class KraalAIStore {
     async deleteDoc(docId: string, callBack: () => void) {
         // get `docID` and delete `docRef` by `docID`
         try {
-            const docRef = doc(collection(firestore, USER_CHAT_DATA), docId)
+            const docRef = doc(collection(fireStore, USER_CHAT_DATA), docId)
             await deleteDoc(docRef)
             callBack()
             this.logErr(`Document deleted from Firebase and Pinia.`)

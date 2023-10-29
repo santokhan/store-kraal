@@ -149,7 +149,7 @@ const protectedRoutes: Array<RouteRecordRaw> = [
     {
         path: "/user",
         name: "user",
-        component: () => import("../views/user/RootView.vue"),
+        component: () => import("../views/user/UserRootView.vue"),
         children: [
             {
                 path: "sign-up",
@@ -233,12 +233,12 @@ router.beforeEach(async (to: any) => {
             }
         }
     } else {
-        // if (to.path === "/user/sign-up") {
-        //     const currentUser = await getCurrentUser()
-        //     if (currentUser) {
-        //         return { path: "/" }
-        //     }
-        // }
+        if (to.path === "/user/sign-up") {
+            const currentUser = await getCurrentUser()
+            if (currentUser) {
+                return { path: "/" }
+            }
+        }
     }
 })
 

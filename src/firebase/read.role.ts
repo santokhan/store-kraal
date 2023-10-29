@@ -1,11 +1,11 @@
 import { collection, getDocs, query, where, } from "firebase/firestore";
-import { db } from "../auth/firestore";
+import { fireStore } from "../auth/firebaseApp";
 
 // read current user role form firebase collection role
 // return user role in string
 async function getUserRole(email: string) {
     let role;
-    const colRef = collection(db, 'role');
+    const colRef = collection(fireStore, 'role');
     const q = query(colRef, where("email", "==", email));
 
     // get all user role

@@ -1,14 +1,14 @@
 <template>
     <RouterLink :to="props.item.to" class="w-full flex items-center hover:bg-chatgpt-700">
-        <IconBox>
+        <div class="w-[2.5rem] h-[2.5rem] flex justify-center items-center">
+
             <slot></slot>
-        </IconBox>
+        </div>
         {{ props.item.name }}
     </RouterLink>
 </template>
 
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
-import IconBox from './IconBox.vue';
 const props = defineProps<{ item: { name: string, to: string } }>()
 </script>

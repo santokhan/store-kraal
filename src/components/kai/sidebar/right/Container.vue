@@ -4,9 +4,8 @@
             'flex items-center justify-center pl-1',
             'h-[2.75rem] min-h-[2.75rem] w-[1.5rem] min-w-[1.5rem] absolute right-full top-1/2 -translate-y-1/2 z-[11]',
             'transition-colors duration-200 text-white text-sm rounded-l-full bg-chatgpt-600 z-10'
-        ]">
-            <i :class="['fa fa-angle-right transition-transform linear text-lg',
-                isOpen ? 'scale-x-100' : '-scale-x-100']"></i>
+        ]"><i
+                :class="['fa fa-angle-right transition-transform linear text-lg', isOpen ? 'scale-x-100' : '-scale-x-100']"></i>
         </button>
 
         <div v-if="isOpen" class="w-72 lg:w-96 p-4 grid grid-cols-2 gap-3">
@@ -20,5 +19,3 @@ import { ref } from 'vue';
 
 const isOpen = ref(false)
 </script>
-
-<style scoped></style>

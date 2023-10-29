@@ -1,6 +1,6 @@
 <template>
     <div v-html="markdownParser(props.robot)"
-        :class="['text-gray-300 space-y-4 overflow-auto leading-[2] text-sm tracking-wider']">
+        :class="['text-gray-300 overflow-auto leading-[2] text-sm tracking-wider']">
     </div>
 </template>
 

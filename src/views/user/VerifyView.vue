@@ -55,7 +55,7 @@ const currentUser = ref()
 const isSent = ref<boolean>(false)
 
 async function resend() {
-    await firebase.sendEmailVerification()
+    const sent = await firebase.sendEmailVerification();
     isSent.value = true;
 }
 

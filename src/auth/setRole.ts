@@ -1,12 +1,12 @@
 import { addDoc, collection } from "firebase/firestore";
-import { db } from "./firestore";
 import { log } from "../components/funtions";
+import { fireStore } from "./firebaseApp";
 
 export interface Role { email: string, role: string }
 
 async function addRoleToFirestore(role: Role) {
     try {
-        const collRef = collection(db, "role")
+        const collRef = collection(fireStore, "role")
         const docRef = await addDoc(collRef, {
             email: role.email,
             role: role.role

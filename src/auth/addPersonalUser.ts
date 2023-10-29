@@ -1,5 +1,5 @@
 import { addDoc, collection } from "firebase/firestore";
-import { db } from "./firestore";
+import { fireStore } from "./firebaseApp";
 
 // update this
 interface BusinessUser {
@@ -20,7 +20,7 @@ export interface Role { email: string, role: string }
 
 async function addBusinessUser(businessUser: BusinessUser) {
     try {
-        const docRef = await addDoc(collection(db, "user"), businessUser);
+        const docRef = await addDoc(collection(fireStore, "user"), businessUser);
 
 
         console.log("Document written with ID: ", docRef.id);
