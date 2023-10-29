@@ -33,13 +33,6 @@
                     </div>
                 </form>
             </MobileView>
-            <MobileView>
-                <div class="w-full py-6 space-y-2 text-gray-500">
-                    <h5 class="font-semibold text-lg">Dummy user for test only</h5>
-                    <p><span class="font-semibold">Email:</span> direct.santo@gmail.com</p>
-                    <p><span class="font-semibold">Password:</span> Sa12345678</p>
-                </div>
-            </MobileView>
         </div>
     </div>
 </template>
