@@ -42,15 +42,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onBeforeMount } from "vue";
+import { ref, onBeforeMount, Ref } from "vue";
 import KraalIcon from "../../components/icons/kraal.v2.vue";
 import { LocationQueryValue, RouterLink, useRoute, useRouter } from "vue-router";
 import * as firebase from "../../firebase/services";
 import { getCurrentUser } from "vuefire";
+import { User } from "firebase/auth";
 
-const router = useRouter()
-const route = useRoute()
-const currentUser = ref()
+const router = useRouter();
+const route = useRoute();
+const currentUser: Ref<User | null> = ref(null);
 
 const isSent = ref<boolean>(false)
 
@@ -60,9 +61,9 @@ async function resend() {
 }
 
 async function redirect() {
-    currentUser.value = await getCurrentUser();
+    currentUser.value = await getCurrentUser() ?? null;
 
-    if (currentUser.value) {
+    if (currentUser.value && currentUser.value.emailVerified) {
         const redirect: LocationQueryValue | LocationQueryValue[] = route.query.redirect
         if (typeof redirect === 'string') {
             router.push(redirect);
