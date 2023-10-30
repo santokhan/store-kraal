@@ -94,6 +94,8 @@ import Warning from '../steps/layout/warnings/Warning.vue';
 import * as firebase from "../../../firebase/services";
 import addBusinessUser from '../../../auth/addBusinessUser';
 import SpinnerCircle from '../../shared/spinner/SpinnerCircle.vue';
+import { SignupData } from '../../../models/signupdata';
+import azureAPI from '../../../kraal-api/azureAPI';
 
 const router = useRouter()
 // const regexEmail = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,20}$/
@@ -162,9 +164,9 @@ function handleSubmit(e: Event) {
         try {
             const userCredential = await firebase.createUser(email, confirmPass);
             if (userCredential) {
-                // await api.auth.signupWithBusiness(new SignupData(firstName, lastName, company));
-                const userData = await addBusinessUser({ firstName, lastName, email, jobTitle, company, organization, accounting, phone })
-                if (userData) {
+                const response = await azureAPI.auth.signupWithBusiness(new SignupData(firstName, lastName, company));
+                // const userData = await addBusinessUser({ firstName, lastName, email, jobTitle, company, organization, accounting, phone })
+                if (response) {
                     submitMessage.value = 'Thank you for signing up';
                     disabled.value = true;
 
