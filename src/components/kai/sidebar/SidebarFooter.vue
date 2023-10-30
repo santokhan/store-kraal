@@ -23,7 +23,7 @@
         <button type="button" @click="handleSettings" ref="opener" title="MenuBar"
             :class="[
                 'w-full text-gray-100 flex items-center gap-3 px-2 h-[3.25rem] rounded-lg hover:bg-chatgpt-700 overflow-x-hidden', openSettings && 'bg-chatgpt-700']">
-            <UserIcon>{{ generate_icon(userData) }}</UserIcon>
+            <UserIcon>{{ userStoreRef.currentUser.value?.initials }}</UserIcon>
             <h5 class="w-full flex justify-start font-medium text-sm tracking-wider font-normal">
                 {{ userData ? userData.firstName + " " + userData.lastName : "..." }}
             </h5>
@@ -43,10 +43,14 @@ import Card from '../../icons/card.vue';
 import Logout from '../../icons/logout.vue';
 import Team from '../../icons/team.vue';
 import { generate_icon, get_left_bar_item as glbi } from "./sidebar-data";
+import { storeToRefs } from 'pinia';
+import { useUserStore } from '../../../stores/userStore';
 
 const opener = ref(null)
 const openSettings = ref(false)
 const settings = ref(null)
+const userStore = useUserStore();
+const userStoreRef = storeToRefs(userStore);
 // From firestore
 const userData = ref<any>()
 
@@ -56,7 +60,11 @@ function handleSettings() {
         openSettings.value = false
     }, { ignore: [opener] })
 }
-onMounted(() => {
+onMounted(async () => {
+    if (!userStore.currentUser) {
+        await userStore.loadUser();
+    }
+
     businessUserInfo.getUserData(async (data) => {
         if (!data) return;
         userData.value = data

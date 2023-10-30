@@ -7,7 +7,7 @@
                     <div class="flex gap-4 max-w-4xl mx-auto px-4 py-7 text-sm tracking-wider font-light text-white">
                         <div v-if="userData"
                             class="w-[1.95rem] min-w-[1.95rem] h-[1.95rem] text-gray-200 border grid place-items-center rounded-full">
-                            {{ generate_icon(userData) }}
+                            {{ userStoreRef.currentUser.value?.initials }}
                         </div>
                         {{ chat.message }}
                     </div>
@@ -36,9 +36,12 @@ import RobotStatic from "../typewriter/robot-writer/RobotStatic.vue";
 import Kraalai from "../../icons/kraalai.vue";
 import { businessUserInfo } from "../../../firebase/read.business.user";
 import { generate_icon } from "../sidebar/sidebar-data";
+import { useUserStore } from "../../../stores/userStore";
 
 const props = defineProps<{ chatId: any }>()
 const store = useSideBarStoreAzureStore()
+const userStore = useUserStore();
+const userStoreRef = storeToRefs(userStore);
 const { chatMessages } = storeToRefs(store)
 const chat_user = ["User", "Bot"]
 const userData = ref<any>()
@@ -49,7 +52,11 @@ function eleScrollTop() {
     const rect = ele.getBoundingClientRect();
     ele.scrollTop += rect.height;
 }
-onMounted(() => {
+onMounted(async () => {
+    if (!userStore.currentUser) {
+        await userStore.loadUser();
+    }
+
     businessUserInfo.getUserData(async (data) => {
         if (!data) return;
         userData.value = data

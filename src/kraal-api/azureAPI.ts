@@ -2,7 +2,7 @@ import axios from "axios";
 import * as firebase from "../firebase/services";
 import { SignupData } from "../models/signupdata";
 import { User } from "../models/user";
-import { UnverifiedUser } from "../models/unverifiedUser";
+import { UnverifiedUser } from "../models/unverifieduser";
 
 const client = axios.create({
     baseURL: import.meta.env.VITE_API_URL,
