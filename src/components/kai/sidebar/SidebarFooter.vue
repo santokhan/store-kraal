@@ -1,5 +1,5 @@
 <template>
-    <div v-if="userData?.firstName" class="w-full relative text-sm mb-2">
+    <div v-if="userStoreRef.currentUser" class="w-full relative text-sm mb-2">
         <hr class="border-gray-600 mb-1">
         <div v-if="openSettings" ref="settings"
             class="absolute bottom-full left-0 right-0 bg-neutral-950 text-gray-200 rounded-lg overflow-hidden py-1 z-[10]">
@@ -25,7 +25,7 @@
                 'w-full text-gray-100 flex items-center gap-3 px-2 h-[3.25rem] rounded-lg hover:bg-chatgpt-700 overflow-x-hidden', openSettings && 'bg-chatgpt-700']">
             <UserIcon>{{ userStoreRef.currentUser.value?.initials }}</UserIcon>
             <h5 class="w-full flex justify-start font-medium text-sm tracking-wider font-normal">
-                {{ userData ? userData.firstName + " " + userData.lastName : "..." }}
+                {{ userStoreRef.currentUser.value?.fullName }}
             </h5>
             <div class="w-auto"><i class="fa fa-ellipsis-h text-sm text-neutral-400"></i></div>
         </button>
@@ -64,10 +64,5 @@ onMounted(async () => {
     if (!userStore.currentUser) {
         await userStore.loadUser();
     }
-
-    businessUserInfo.getUserData(async (data) => {
-        if (!data) return;
-        userData.value = data
-    })
 })
 </script>

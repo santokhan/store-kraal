@@ -68,11 +68,6 @@ export async function getCurrentUser() {
     while (loading) {
         await new Promise((res, rej) => setTimeout(() => res(true), 100));
     }
-    if (user) {
-        console.log(`User logged in: ${user.email}`);
-    } else {
-        console.log(`User not logged in`);
-    }
     return user;
 }
 
