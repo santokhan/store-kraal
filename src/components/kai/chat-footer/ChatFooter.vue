@@ -42,6 +42,8 @@ import Attachment from "../../icons/attachment.vue";
 import FileInput from "../instances/chat-main/file-input/FileInput.vue";
 
 const props = defineProps<{ chatId: any }>()
+const emits = defineEmits(["onInputSent", "onMessageReceived"]);
+
 const store = useSideBarStoreAzureStore()
 const hiddenDiv: any = ref<null | HTMLElement>(null);
 const input = ref<string>("");
@@ -72,7 +74,9 @@ async function handleSubmit(e: any) {
 
     if (typeof props.chatId !== "number") return;
     loading.value = true
+    emits("onInputSent", input.value);
     await store.sendChatMessage(props.chatId, input.value)
+    emits("onMessageReceived");
     loading.value = false
 
     // Clear <textarea> afer submit & set initial height

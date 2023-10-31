@@ -8,7 +8,7 @@ export const useUserStore = defineStore("userStore", {
     }),
     actions: {
         async loadUser() {
-            this.currentUser = await azureAPI.user.getUser();
+            this.currentUser = await azureAPI.user.getUser().then(data => User.fromJSON(data));
         }
     },
 });
