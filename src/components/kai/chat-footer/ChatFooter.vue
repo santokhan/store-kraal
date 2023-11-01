@@ -1,15 +1,14 @@
 <template>
-    <div class="h-auto w-full border-t xl:border-none border-white/20 mb-8">
+    <div class="h-auto w-full border-t xl:border-none border-white/20">
         <div class="max-w-4xl mx-auto mt-auto bg-chatgpt-500 px-4 pt-2" title="footer">
             <form @submit="handleSubmit" class="relative">
-                <div :class="['rounded-xl shadow bg-chatgpt-400 text-gray-300']">
+                <div class="rounded-xl shadow bg-chatgpt-400 text-gray-300">
                     <div v-if="fileInput.length > 0" class="p-3">
                         <AttachPreview :files="fileInput" :removeFiles="removeFiles" />
                     </div>
                     <div class="grid grid-cols-[2rem_1fr_2rem] gap-2 items-end p-3">
-                        <div class="w-8 h-8 rounded-lg grid place-items-center relative overflow-hidden text-gray-300 hover:text-white"
-                            title="attachment">
-                            <!-- <i class="fa fa-plus text-sm rounded-full"></i> -->
+                        <div
+                            class="w-8 h-8 rounded-lg grid place-items-center relative overflow-hidden text-gray-300 hover:text-white">
                             <Attachment class="w-5" />
                             <FileInput :handleFile="handleFile" />
                         </div>
@@ -23,7 +22,7 @@
                         </div>
                         <div class="flex justify-center items-end h-full relative">
                             <ChatSubmitBtn v-if="!loading" :disabled="!input" />
-                            <Loading v-else  class="absolute right-0"/>
+                            <Loading v-else class="absolute right-0" />
                         </div>
                     </div>
                 </div>

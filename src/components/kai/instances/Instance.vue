@@ -26,20 +26,14 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import ChatFooter from "../chat-footer/ChatFooter.vue";
-import UserIcon from '../../icons/user-pro.vue';
-import RobotWriter from "../typewriter/robot-writer/RobotWriter.vue";
-import { useSideBarStoreAzureStore } from "../../../stores/sideBarStoreAzure";
 import { storeToRefs } from "pinia";
 import RobotStatic from "../typewriter/robot-writer/RobotStatic.vue";
 import Kraalai from "../../icons/kraalai.vue";
-import { businessUserInfo } from "../../../firebase/read.business.user";
-import { generate_icon } from "../sidebar/sidebar-data";
 import { useUserStore } from "../../../stores/userStore";
 import { useChatStore } from "../../../stores/chatStore";
 import { ShownChatMessage } from "../../../models/chatmessage";
 import azureAPI, { chatHubConnection } from "../../../kraal-api/azureAPI";
 import { StreamChatMessage } from "../../../models/streamchatmessage";
-import RightSidebar from "../sidebar/right/RightSidebar.vue";
 
 const props = defineProps<{ chatId: any }>()
 const chatId = parseInt(props.chatId);
