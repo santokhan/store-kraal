@@ -8,7 +8,7 @@
                 :class="['fa fa-angle-right transition-transform linear text-lg', isOpen ? 'scale-x-100' : '-scale-x-100']"></i>
         </button>
 
-        <div v-if="isOpen" class="w-72 lg:w-96 p-4 grid grid-cols-2 gap-3">
+        <div v-if="isOpen" class="w-72 lg:w-[320px] p-4 grid grid-cols-2 gap-3">
             <slot></slot>
         </div>
     </aside>
