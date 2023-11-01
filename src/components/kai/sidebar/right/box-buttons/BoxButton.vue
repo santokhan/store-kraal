@@ -1,7 +1,7 @@
 <template>
     <button type="button" :class="[
-        view === 'GRID' && 'min-h-[6rem] w-full p-4 grid place-items-center gap-2 rounded-lg bg-kraal-purple-500 hover:bg-kraal-purple-500/80 border-t border-t-white/30',
-        view === 'LIST' && 'col-span-2 min-h-[4rem] w-full px-4 py-3 flex items-center gap-2 rounded-lg bg-kraal-purple-500 hover:bg-kraal-purple-500/80 border-t border-t-white/30'
+        view === 'GRID' && 'min-h-[6rem] w-full p-4 grid place-items-center gap-2 rounded-xl bg-kraal-purple-500 hover:bg-kraal-purple-500/80 border-t border-t-white/30',
+        view === 'LIST' && 'col-span-2 h-[3.75rem] w-full px-4 flex items-center gap-2 rounded-xl bg-kraal-purple-500 hover:bg-kraal-purple-500/80 border-t border-t-white/30'
     ]">
         <div class="w-8 h-8 grid place-items-center overflow-hidden">
             <slot></slot>
