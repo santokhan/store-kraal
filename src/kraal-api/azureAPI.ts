@@ -1,8 +1,8 @@
 import axios from "axios";
+import * as signalR from "@microsoft/signalr";
 import * as firebase from "../firebase/services";
 import { SignupData } from "../models/signupdata";
-import { User } from "../models/user";
-import { UnverifiedUser } from "../models/unverifiedUser";
+import { UnverifiedUser } from "../models/unverifieduser";
 
 const client = axios.create({
     baseURL: import.meta.env.VITE_API_URL,
@@ -11,6 +11,8 @@ const client = axios.create({
         'Accept': 'application/json',
     },
 });
+
+export let chatHubConnection: signalR.HubConnection | null = null;
 
 client.interceptors.request.use(function (config) {
     config.headers!.Authorization = `Bearer ${firebase.token}`;
@@ -42,9 +44,6 @@ async function deleteReq(url: string, data?: Record<string, unknown>) {
 }
 
 export default {
-    main: {
-        getApiVersion: () => get('/'),
-    },
     auth: {
         signupWithBusiness: (signupData: SignupData) => post('/auth/signup', signupData.toJSON()),
         verifyEmail: () => post('/auth/verify'),
@@ -69,6 +68,18 @@ export default {
             }
             return postForm('/documents', formData);
         },
+
+        connectHub: async () => {
+            chatHubConnection = new signalR.HubConnectionBuilder()
+                .withUrl(import.meta.env.VITE_CHAT_HUB_URL, { accessTokenFactory: () => firebase.token ?? "" })
+                .withAutomaticReconnect()
+                .build();
+
+            await chatHubConnection.start();
+        },
+        joinHubChat: async (chatUUID: string) => {
+            chatHubConnection?.invoke("AddClientToGroup", chatUUID);
+        },
     },
     quickbooks: {
         getAuthorizationUrl: () => get('/linking/url'),
@@ -76,6 +87,6 @@ export default {
     },
     user: {
         getUnverifiedUser: () => get('/users/unverifiedme').then(data => UnverifiedUser.fromJSON(data)),
-        getUser: () => get('/users/me').then(data => User.fromJSON(data)),
+        getUser: () => get('/users/me'),
     }
 }

@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, onUpdated } from 'vue'
 import markdownParser from '../markdownParser'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/atom-one-dark.css'
@@ -14,7 +14,8 @@ import KraalAI from '../../../icons/kraalai.vue'
 
 const props = defineProps<{ robot: string }>()
 
-onMounted(hljs.highlightAll)
+onMounted(hljs.highlightAll);
+onUpdated(hljs.highlightAll);
 </script>
 
 <style scoped>
