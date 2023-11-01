@@ -5,7 +5,7 @@
             <div class="relative w-full max-w-2xl max-h-full">
                 <div class="relative bg-chatgpt-600 rounded-lg">
                     <div class="flex items-start justify-between p-4 border-b border-chatgpt-400 rounded-t">
-                        <h3 class="text-xl font-semibold text-gray-200">
+                        <h3 class="text-xl font-semibold text-gray-200 px-2">
                             Introducing Custom Instructions
                         </h3>
                         <button type="button" @click="props.handleModal"
@@ -32,7 +32,7 @@
                             be shared with any plugins you've enabled. Visit our Help Center to learn more.
                         </p>
                     </div>
-                    <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b border-chatgpt-400">
+                    <div class="flex items-center p-6 space-x-2 rounded-b border-t border-chatgpt-400">
                         <button data-modal-hide="default-modal" type="button" @click="props.handleFormIsOpen"
                             class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">I
                             accept</button>
