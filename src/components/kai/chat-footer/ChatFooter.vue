@@ -28,6 +28,7 @@
                     </div>
                 </div>
             </form>
+            <ChatFooterInfo />
         </div>
     </div>
 </template>
@@ -40,6 +41,7 @@ import ChatSubmitBtn from "../instances/chat-main/ChatSubmitBtn.vue";
 import AttachPreview from "../instances/chat-main/AttachPreview.vue";
 import Attachment from "../../icons/attachment.vue";
 import FileInput from "../instances/chat-main/file-input/FileInput.vue";
+import ChatFooterInfo from "../instances/chat-main/ChatFooterInfo.vue";
 
 const props = defineProps<{ chatId: any }>()
 const emits = defineEmits(["onInputSent", "onMessageReceived"]);

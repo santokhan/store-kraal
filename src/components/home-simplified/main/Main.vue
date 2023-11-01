@@ -4,7 +4,7 @@
 			'max-w-md mx-auto h-screen px-4',
 			'flex flex-col items-center justify-center gap-20 pb-20'
 		]">
-			<SVGKraalBanner class="w-2/3" />
+			<SVGKraalBanner class="w-full" />
 			<StartedBusiness />
 		</div>
 		<div class="relative overflow-hidden w-full h-20">

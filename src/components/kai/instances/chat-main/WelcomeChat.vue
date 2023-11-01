@@ -18,7 +18,7 @@
                 </div>
             </div>
         </form>
-        <p class="text-center py-3 text-gray-400">KraalAI may produce inaccurate information about certain facts.</p>
+        <ChatFooterInfo />
     </div>
 </template>
 
@@ -33,6 +33,7 @@ import { storeToRefs } from 'pinia';
 import Branding from './Branding.vue';
 import ChatSubmitBtn from './ChatSubmitBtn.vue';
 import Loading from './Loading.vue';
+import ChatFooterInfo from './ChatFooterInfo.vue';
 
 const input = ref<string>("");
 const fileInput = ref<File[]>([]);

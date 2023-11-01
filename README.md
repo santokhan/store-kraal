@@ -57,3 +57,4 @@ netlify deploy --prod
 - [GitHub Repo](https://github.com/kraalai/app-frontend.git)
 - [Development preview](https://kraal-frontend.netlify.app)
 - [Website](https://app.kraal.ai)
+![Alt text](image.png)

@@ -1,16 +1,15 @@
 <template>
     <Container>
-        <BoxButton :text="grbi(0)" @click="handleAI"><i class="fa fa-cog text-xl" aria-hidden="true"></i></BoxButton>
-        <BoxButton :text="grbi(1)"><i class="fa fa-video text-xl" aria-hidden="true"></i></BoxButton>
-        <BoxButton :text="grbi(2)"><i class="fa fa-code text-xl" aria-hidden="true"></i></BoxButton>
-        <BoxButton :text="grbi(3)"><i class="fa fa-tasks text-xl" aria-hidden="true"></i></BoxButton>
-        <BoxButton :text="grbi(4)"><i class="fa fa-upload text-xl" aria-hidden="true"></i></BoxButton>
-        <BoxButton :text="grbi(5)"><i class="fa fa-info text-xl" aria-hidden="true"></i></BoxButton>
+        <BoxButton :text="grbi(0)" @click="handleAI"><i class="fa fa-cog text-2xl" aria-hidden="true"></i></BoxButton>
+        <BoxButton :text="grbi(1)"><i class="fa fa-video text-2xl" aria-hidden="true"></i></BoxButton>
+        <BoxButton :text="grbi(2)"><i class="fa fa-code text-2xl" aria-hidden="true"></i></BoxButton>
+        <BoxButton :text="grbi(3)"><i class="fa fa-tasks text-2xl" aria-hidden="true"></i></BoxButton>
+        <BoxButton :text="grbi(4)"><i class="fa fa-upload text-2xl" aria-hidden="true"></i></BoxButton>
+        <BoxButton :text="grbi(5)"><i class="fa fa-info text-2xl" aria-hidden="true"></i></BoxButton>
         <AddItem @click="handleAdd" />
+        <AISettingsModal :isOpen="modalAI" :handleModal="handleAI" />
+        <AddFeatureModal :isOpen="modalAdd" :handleModal="handleAdd" />
     </Container>
-
-    <AISettingsModal :isOpen="modalAI" :handleModal="handleAI" />
-    <AddFeatureModal :isOpen="modalAdd" :handleModal="handleAdd" />
 </template>
 
 <script setup lang="ts">
