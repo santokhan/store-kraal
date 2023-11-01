@@ -24,7 +24,7 @@
                     <Warning :message="warn.password" />
                     <Warning :message="firebaseError" />
                     <div class="flex items-center gap-2 px-1">
-                        <RouterLink to="/forgot-password" class="text-kraal-blue-500 text-sm hover:underline">Forgot you
+                        <RouterLink to="forgot" class="text-kraal-blue-500 text-sm hover:underline">Forgot you
                             password?</RouterLink>
                     </div>
                     <SubmitButton :disabled="disabled" text="Sign In" />

@@ -1,6 +1,5 @@
 <template>
   <div class="relative h-[100dvh] overflow-y-auto bg-gray-100">
-    <HeaderSimplified class="bg-white" />
     <MobileView class="py-20">
       <form @submit.prevent="handleForgotPassword" class="form-box w-full">
         <Success :message="mailSent" />

@@ -180,10 +180,6 @@ const protectedRoutes: Array<RouteRecordRaw> = [
                 path: "forgot",
                 name: "forgot",
                 component: () => import("../views/user/ForgotPasswordView.vue"),
-                meta: {
-                    requiresAuth: true,
-                    requiresVerification: true
-                }
             },
             {
                 path: "sign-out",
