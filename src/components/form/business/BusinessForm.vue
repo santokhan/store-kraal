@@ -35,16 +35,6 @@
                 <Warning :message="warn.company" />
             </div>
             <div class="space-y-2 col-span-2 lg:col-span-1">
-                <label class="flex items-center font-bold"><span>Organization Type</span><span>*</span></label>
-                <OrgType :organizationType="organizationType" />
-                <Warning :message="warn.organization" />
-            </div>
-            <div class="space-y-2 col-span-2 lg:col-span-1">
-                <label class="flex items-center font-bold"><span>Accounting System</span><span>*</span></label>
-                <Accounting :accounting="accounting" />
-                <Warning :message="warn.accounting" />
-            </div>
-            <div class="space-y-2 col-span-2 lg:col-span-1">
                 <label class="flex items-center font-bold"><span>Phone</span><span>*</span></label>
                 <input type="text" v-model="businessForm.phone"
                     class="block w-full h-12 rounded-xl border border-blue-300 p-4 focus:outline-none text-blue-950 bg-transparent">
@@ -86,13 +76,10 @@
 
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
-import OrgType from './OrgType.vue';
-import Accounting from './Accounting.vue';
 import { reactive, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import Warning from '../steps/layout/warnings/Warning.vue';
 import * as firebase from "../../../firebase/services";
-import addBusinessUser from '../../../auth/addBusinessUser';
 import SpinnerCircle from '../../shared/spinner/SpinnerCircle.vue';
 import { SignupData } from '../../../models/signupdata';
 import azureAPI from '../../../kraal-api/azureAPI';
@@ -108,8 +95,6 @@ const user_schema = {
     email: "",
     jobTitle: "",
     company: "",
-    organization: "",
-    accounting: "",
     phone: "",
     pass: "",
     confirmPass: "",
@@ -118,22 +103,12 @@ const user_schema = {
 const businessForm = reactive({ ...user_schema })
 const warn = reactive({ ...user_schema })
 
-// Select > options
-function organizationType(org: string) {
-    businessForm.organization = org;
-}
-function accounting(account: string) {
-    businessForm.accounting = account;
-}
-
 watch(businessForm, async (newInpt, oldInput) => {
     warn.firstName = businessForm.firstName && "";
     warn.lastName = businessForm.lastName && "";
     warn.email = businessForm.email && "";
     warn.jobTitle = businessForm.jobTitle && "";
     warn.company = businessForm.company && "";
-    warn.organization = businessForm.organization && "";
-    warn.accounting = businessForm.accounting && "";
     warn.phone = businessForm.phone && "";
 
     // Turn off client side password validation and show firebase validation on error
@@ -160,7 +135,7 @@ function handleSubmit(e: Event) {
     submitMessage.value = 'loading';
 
     async function signUp() {
-        const { firstName, lastName, company, email, confirmPass, jobTitle, organization, accounting, phone } = businessForm;
+        const { firstName, lastName, company, email, confirmPass, jobTitle, phone } = businessForm;
         try {
             const userCredential = await firebase.createUser(email, confirmPass);
             if (userCredential) {
@@ -197,14 +172,6 @@ function handleSubmit(e: Event) {
 
         case businessForm.company:
             warn.company = "Enter your first name";
-            break;
-
-        case businessForm.organization:
-            warn.organization = "Enter your first name";
-            break;
-
-        case businessForm.accounting:
-            warn.accounting = "Enter your first name";
             break;
 
         case businessForm.phone:

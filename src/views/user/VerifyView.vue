@@ -9,17 +9,17 @@
                 <div class="max-w-lg flex flex-col items-center relative">
                     <h5 class="mt-6 mb-5 text-2xl font-semibold tracking-tight text-gray-700">Please verify your email</h5>
                     <p class="mb-5 font-normal text-gray-500" v-if="currentUser">
-                        You are almost there! We send an e-mail to
+                        You are almost there! We sent an email to
                         <a href="https://mail.google.com/mail/u/0/"
                             class="text-kraal-blue-500 underline hover:text-kraal-blue-700">
                             {{ currentUser.email }}</a>
                     </p>
                     <p class="mb-5 font-normal text-gray-500">
-                        Just click on the link in that e-mail to complete your sign up.
+                        Just click on the link in that email to complete your sign up.
                         If you do not see it, you may need to check your spam folder.
                     </p>
                     <div class="space-y-4">
-                        <p class="font-normal text-gray-500">Still can't find the e-mail?</p>
+                        <p class="font-normal text-gray-500">Still can't find the email?</p>
                         <div class="">
                             <button @click="resend" :class="[
                                 'inline-flex items-center px-5 py-2.5 text-sm font-medium text-center rounded-lg',

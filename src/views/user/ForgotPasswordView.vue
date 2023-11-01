@@ -11,8 +11,8 @@
         </div>
         <QNextButtonBlue :nextForm="handleForgotPassword" text="Forgot password" :disabled="email ? false : true" />
         <div class="text-center">
-          Go Back to
-          <RouterLink to="/signin" class="text-kraal-blue-500 underline hover:no-underline">Sign In</RouterLink>
+          Go back to
+          <RouterLink to="sign-in" class="text-kraal-blue-500 underline hover:no-underline">Sign In</RouterLink>
         </div>
       </form>
     </MobileView>
@@ -29,7 +29,6 @@ import QNextButtonBlue from "../../components/form/steps/layout/QNextButtonBlue.
 import ForgotPassword from "../../auth/forgotPassword";
 import Lock from "../../components/icons/lock.vue";
 import Success from "../../components/form/steps/layout/Success.vue";
-import HeaderSimplified from "../../components/shared/header/HeaderSimplified.vue";
 
 // `v-model="email"`
 const email = ref<string>("");

@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col justify-between items-center h-full gap-10 lg:mb-4">
+    <div class="flex flex-col justify-between items-center h-full ">
         <Branding />
         <form @submit="handleSubmit" class="w-full max-w-4xl mx-auto mt-auto bg-chatgpt-500 px-4 pt-2"
             enctype="multipart/form-data">
@@ -18,6 +18,7 @@
                 </div>
             </div>
         </form>
+        <p class="text-center py-3 text-gray-400">KraalAI may produce inaccurate information about certain facts.</p>
     </div>
 </template>
 

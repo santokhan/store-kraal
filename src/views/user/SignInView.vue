@@ -5,7 +5,7 @@
                 <form @submit="nextForm" class="form-box w-full" id="signIn">
                     <div class="text-start w-full px-2">
                         <h3 class="font-bold text-xl uppercase">Welcome Back</h3>
-                        <h5 class="font- uppercas">Sign in to continue</h5>
+                        <h5 class="font- uppercas">Signin to continue</h5>
                     </div>
                     <div class="space-y-3">
                         <input type="email" name="email" id="email" placeholder="someone@kraal.com" maxlength="32"
@@ -24,11 +24,11 @@
                     <Warning :message="warn.password" />
                     <Warning :message="firebaseError" />
                     <div class="flex items-center gap-2 px-1">
-                        <RouterLink to="forgot" class="text-kraal-blue-500 text-sm hover:underline">Forgot you
+                        <RouterLink to="forgot" class="text-kraal-blue-500 text-sm hover:underline">Forgot your
                             password?</RouterLink>
                     </div>
                     <SubmitButton :disabled="disabled" text="Sign In" />
-                    <div class="text-center">Don't have a account?
+                    <div class="text-center">Don't have an account?
                         <RouterLink to="sign-up" class="text-kraal-blue-500 hover:underline">Sign Up</RouterLink>
                     </div>
                 </form>
