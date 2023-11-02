@@ -1,15 +1,3 @@
-// Chat Right Sidebar
-export const rightBarList = [
-    { name: "AI Settings" },
-    { name: "Meetings" },
-    { name: "App Connect" },
-    { name: "Planner" },
-    { name: "RAG Upload" },
-    { name: "Report" },
-];
-
-export const get_right_bar_item = (index: number) => rightBarList[index].name
-
 // Chat Left Sidebar
 export const chatLeftBarList = [
     {

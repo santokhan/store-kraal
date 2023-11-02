@@ -1,5 +1,7 @@
 # Kraal Web Application
 
+![Preview](./public/assets/images/meta/facebook.png)
+
 ## Vue 3 + TypeScript + Vite
 
 This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
@@ -55,6 +57,6 @@ netlify deploy --prod
 ## Related Links
 
 - [GitHub Repo](https://github.com/kraalai/app-frontend.git)
-- [Development preview](https://kraal-frontend.netlify.app)
+- [Dev preview](https://kraal-frontend.netlify.app)
+- [Dev preview Azure](https://ashy-river-0df11c00f.4.azurestaticapps.net/)
 - [Website](https://app.kraal.ai)
-![Alt text](image.png)

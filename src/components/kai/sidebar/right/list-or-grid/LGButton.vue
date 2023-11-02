@@ -1,6 +1,6 @@
 <template>
-    <button type="button" class="w-9 h-9 grid place-items-center rounded-xl text-gray-100"
-        :class="[props.active ? 'bg-kraal-purple-500' : 'hover:bg-white/5']">
+    <button type="button" class="w-9 h-9 grid place-items-center rounded-lg text-white"
+        :class="[props.active ? 'text-kraal-purple-500' : '']">
         <slot></slot>
     </button>
 </template>

@@ -153,29 +153,30 @@ function handleSubmit(e: Event) {
         }
     }
 
+    // if firstName === ""
     switch ("") {
         case businessForm.firstName:
             warn.firstName = "Enter your first name";
             break;
 
         case businessForm.lastName:
-            warn.lastName = "Enter your first name";
+            warn.lastName = "Enter your last name";
             break;
 
         case businessForm.email:
-            warn.email = "Enter your first name";
+            warn.email = "Enter your email name";
             break;
 
         case businessForm.jobTitle:
-            warn.jobTitle = "Enter your first name";
+            warn.jobTitle = "Enter your job title";
             break;
 
         case businessForm.company:
-            warn.company = "Enter your first name";
+            warn.company = "Enter your company name";
             break;
 
         case businessForm.phone:
-            warn.phone = "Enter your first name";
+            warn.phone = "Enter your phone number";
             break;
 
         default:
