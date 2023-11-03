@@ -1,6 +1,6 @@
 <template>
     <Teleport to="body">
-        <ModalContainer v-if="props.isOpen">
+        <ModalContainer>
             <div class="relative row-auto w-full rounded-lg text-left transition-all w-full" ref="target">
                 <div tabindex="-1" aria-hidden="true"
                     class="w-full overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -34,7 +34,7 @@ import { onClickOutside } from '@vueuse/core';
 import { ref } from 'vue';
 import ModalContainer from '../../../../modal/ModalContainer.vue';
 
-const props = defineProps<{ isOpen: boolean, handleModal: () => void }>();
+const props = defineProps<{ handleModal: () => void }>();
 const target = ref<any>(null);
 
 onClickOutside(target, props.handleModal)

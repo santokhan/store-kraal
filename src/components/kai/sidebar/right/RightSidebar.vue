@@ -1,7 +1,7 @@
 <template>
     <Container :view="viewType">
         <List_Grid :listView="list_view" :gridView="grid_view" :view="viewType" />
-        <BTN :data="settings[0]" :view="viewType">
+        <BTN :data="settings[0]" :view="viewType" @click="handleBuddy">
             <svg class="w-full h-full" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M47.3959 25C47.3959 12.65 37.3501 2.60416 25.0001 2.60416C12.6501 2.60416 2.60425 12.65 2.60425 25C2.60425 32.2292 6.06049 38.6501 11.3938 42.748C11.4022 42.7563 11.4147 42.7605 11.4231 42.7688C15.196 45.6584 19.8938 47.3958 25.0021 47.3958C30.1104 47.3958 34.8085 45.6584 38.5814 42.7688C38.5898 42.7605 38.6021 42.7563 38.6104 42.748C43.9396 38.6501 47.3959 32.2292 47.3959 25ZM5.72925 25C5.72925 14.3729 14.373 5.72916 25.0001 5.72916C35.6272 5.72916 44.2709 14.3729 44.2709 25C44.2709 30.2562 42.1501 35.0251 38.7251 38.5043C37.7897 34.5439 34.7958 30.8749 28.5625 30.8749H21.4377C15.2043 30.8749 12.2084 34.5439 11.2751 38.5043C7.85005 35.0251 5.72925 30.2562 5.72925 25ZM14.0814 40.8625C14.2022 38.725 15.1793 33.9999 21.4377 33.9999H28.5625C34.8208 33.9999 35.7979 38.725 35.9188 40.8625C32.8125 43.0084 29.0522 44.2708 25.0001 44.2708C20.948 44.2708 17.1876 43.0063 14.0814 40.8625ZM25.0169 28.6458C29.3231 28.6458 32.8294 25.1417 32.8294 20.8333C32.8294 16.525 29.3231 13.0208 25.0169 13.0208C20.7106 13.0208 17.2044 16.525 17.2044 20.8333C17.2044 25.1417 20.7085 28.6458 25.0169 28.6458ZM25.0169 16.1458C27.6002 16.1458 29.7044 18.2479 29.7044 20.8333C29.7044 23.4187 27.6002 25.5208 25.0169 25.5208C22.4335 25.5208 20.3294 23.4187 20.3294 20.8333C20.3294 18.2479 22.4335 16.1458 25.0169 16.1458Z"
@@ -45,8 +45,9 @@
         </BTN>
         <AddItem :view="viewType" @click="handleAdd" />
 
-        <AISettingsModal :isOpen="modalAI" :handleModal="handleAI" />
-        <AddFeatureModal :isOpen="modalAdd" :handleModal="handleAdd" />
+        <AISettingsModal v-if="modalAI" :handleModal="handleAI" />
+        <Buddy v-if="buddy" :handleModal="handleBuddy" />
+        <AddFeatureModal v-if="modalAdd" :handleModal="handleAdd" />
     </Container>
 </template>
 
@@ -60,6 +61,7 @@ import AddFeatureModal from './modals/AddFeatureModal.vue';
 import List_Grid from './list-or-grid/List_Grid.vue';
 import { useRightBarStore } from '../../../../stores/right-bar';
 import { storeToRefs } from 'pinia';
+import Buddy from './modals/Buddy.vue';
 
 const store = useRightBarStore()
 const { settings } = storeToRefs(store)
@@ -69,6 +71,9 @@ function handleAI() { modalAI.value = !modalAI.value }
 
 const modalAdd = ref<boolean>(false)
 function handleAdd() { modalAdd.value = !modalAdd.value }
+
+const buddy = ref<boolean>(false)
+function handleBuddy() { buddy.value = !buddy.value }
 
 // Switching view
 const viewType = ref<string>('GRID')
