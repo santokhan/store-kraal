@@ -15,8 +15,7 @@
             <slot></slot>
         </div>
         <div class="whitespace-nowrap overflow-hidden text-ellipsis text-start group-hover:text-white"
-            :title="props.data.name">
-            {{ props.data.name }}
+            :title="props.data.name">{{ props.data.name }}
         </div>
     </button>
 </template>
