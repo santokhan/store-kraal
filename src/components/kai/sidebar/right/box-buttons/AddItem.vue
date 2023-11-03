@@ -1,7 +1,7 @@
 <template>
     <button v-if="props.view === 'GRID'" type="button" :class="[
         'rounded-lg space-y-4',
-        'grid place-items-center p-4 w-[160px] h-[160px] bg-chatgpt-400 hover:bg-kraal-purple-500/80 hover:text-white'
+        'grid place-items-center p-4 w-full h-[160px] bg-chatgpt-400 hover:bg-kraal-purple-500/80 hover:text-white'
     ]">
         <div class="w-12 h-12 grid place-items-center overflow-hidden">
             <svg class="w-ful h-ful" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">

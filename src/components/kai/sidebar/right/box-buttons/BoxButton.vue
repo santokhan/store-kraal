@@ -1,6 +1,6 @@
 <template>
     <button v-if="props.view === 'GRID'" type="button"
-        class="w-[160px] h-[160px] w-full p-4 grid place-items-center rounded-xl bg-kraal-purple-500 hover:bg-kraal-purple-500/60">
+        class="h-[160px] w-full p-4 grid place-items-center rounded-xl bg-kraal-purple-500 hover:bg-kraal-purple-500/60">
         <div class="w-12 h-12 grid place-items-center overflow-hidden text-3xl">
             <slot></slot>
         </div>
