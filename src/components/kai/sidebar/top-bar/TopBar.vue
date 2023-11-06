@@ -1,5 +1,5 @@
 <template>
-    <div class="flex items-center gap-4 absolute top-2 right-4">
+    <div class="hidden lg:flex items-center gap-4 absolute top-2 right-4">
         <div class="flex gap-3 items-center">
             <a class="w-10 h-10 rounded-full border border-gray-400 grid place-items-center text-gray-100 bg-chatgpt-600"
                 href="/#">
