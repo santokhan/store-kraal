@@ -60,3 +60,4 @@ netlify deploy --prod
 - [Dev preview](https://kraal-frontend.netlify.app)
 - [Dev preview Azure](https://ashy-river-0df11c00f.4.azurestaticapps.net/)
 - [Website](https://app.kraal.ai)
+- <https://ashy-river-0df11c00f.4.azurestaticapps.net/kraalai>

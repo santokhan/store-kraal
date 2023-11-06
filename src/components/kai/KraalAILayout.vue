@@ -1,7 +1,8 @@
 <template>
     <div class="fixed inset-0 bg-chatgpt-500 z-50 flex">
         <SidebarLeft />
-        <div class="flex flex-col w-full h-full">
+        <div class="flex flex-col w-full h-full relative">
+            <TopBar />
             <slot></slot>
         </div>
         <RightSidebar />
@@ -12,6 +13,7 @@
 import { onMounted, onUnmounted } from "vue"
 import SidebarLeft from "./sidebar/ChatSidebar.vue"
 import RightSidebar from "./sidebar/right/RightSidebar.vue"
+import TopBar from "./sidebar/top-bar/TopBar.vue"
 import { useSideBarStoreAzureStore } from "../../stores/sideBarStoreAzure"
 
 const store = useSideBarStoreAzureStore()

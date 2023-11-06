@@ -65,7 +65,7 @@ import AddFeatureModal from './modals/AddFeatureModal.vue';
 import List_Grid from './list-or-grid/List_Grid.vue';
 import { useRightBarStore } from '../../../../stores/right-bar';
 import { storeToRefs } from 'pinia';
-import Buddy from './modals/Buddy.vue';
+import Buddy from './modals/buddy/Buddy.vue';
 
 const store = useRightBarStore()
 const { settings } = storeToRefs(store)
