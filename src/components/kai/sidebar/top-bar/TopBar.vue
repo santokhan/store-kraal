@@ -36,7 +36,7 @@
                         </svg>
                     </label>
                     <input type="search" id="default-search" placeholder="Search" value=""
-                        class="w-52 pr-4 h-11 pl-11 bg-chatgpt-600 text-gray-200 border border-gray-400 rounded-lg focus:outline-none" />
+                        class="w-52 pr-4 h-11 pl-11 bg-chatgpt-600 text-gray-200 border border-gray-400 rounded-lg focus:w-64 focus:outline-none transition-all" />
                 </div>
             </form>
         </div>
