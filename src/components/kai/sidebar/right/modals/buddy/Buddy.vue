@@ -2,8 +2,8 @@
     <Teleport to="body">
         <ModalContainer>
             <div ref="modal"
-                class="relative row-auto w-full rounded-lg text-left shadow-xl transition-all bg-chatgpt-600 max-w-2xl text-gray-200">
-                <div class="flex items-center justify-between px-6 py-4 border-b border-chatgpt-400 rounded-t">
+                class="relative row-auto w-full rounded-xl text-left shadow-xl transition-all bg-chatgpt-600 max-w-2xl text-gray-200">
+                <div class="flex items-center justify-between px-6 py-4">
                     <button type="button" @click="isOpenControl = !isOpenControl" class="w-8 h-8 grid place-items-center"
                         :class="[isOpenControl ? 'text-gray-100' : 'text-gray-400 hover:text-gray-200']"><svg
                             class="w-8 h-8" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
