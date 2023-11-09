@@ -15,27 +15,13 @@
                         </svg>
                     </button>
                 </div>
-                <div class="p-6 space-y-6">
+                <div class="p-6 space-y-8">
                     <div class="flex text-gray-100 bg-chatgpt-500 rounded-lg">
-                        <button type="button"
-                            class="grid place-items-center h-12 w-full bg-indigo-500 text-gray-100 rounded-lg">Attend</button>
-                        <button type="button" class="grid place-items-center h-12 w-full">Transcript</button>
+                        <TabButton :handleClick="open_attend" :active="tab === 'attend'">Attend</TabButton>
+                        <TabButton :handleClick="open_transcript" :active="tab === 'transcript'">Transcript</TabButton>
                     </div>
-                    <div class="flex items-center justify-between text-gray-100 rounded">
-                        <button type="button" class="grid place-items-center h-12 text-indigo-500"><i
-                                class="fa fa-arrow-left"></i></button>
-                        <div class="">October 2023</div>
-                        <button type="button" class="grid place-items-center h-12 text-indigo-500"><i
-                                class="fa fa-arrow-right"></i></button>
-                    </div>
-                    <ul class="space-y-3">
-                        <Item />
-                        <Item />
-                        <Item />
-                        <Item />
-                        <Item />
-                        <Item />
-                    </ul>
+                    <Tab1  v-if="tab === 'attend'"/>
+                    <Tab2  v-else-if="tab === 'transcript'"/>
                 </div>
             </div>
         </ModalContainer>
@@ -46,7 +32,17 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import ModalContainer from '../../../../../modal/ModalContainer.vue'
-import Item from './list/Item.vue'
+import Tab1 from './tab-1/Tab1.vue'
+import Tab2 from './tab-2/Tab2.vue'
+import TabButton from './TabButton.vue';
+
+const tab = ref<string>('attend')
+function open_attend() {
+    tab.value = 'attend'
+}
+function open_transcript() {
+    tab.value = 'transcript'
+}
 
 const props = defineProps<{ handleModal: () => void }>()
 </script>

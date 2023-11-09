@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{ title: string, date: string, label: string, active: boolean }>()
+// defineProps<{ title: string, date: string, label: string, active: boolean }>()
 </script>
 
 <style scoped></style>
