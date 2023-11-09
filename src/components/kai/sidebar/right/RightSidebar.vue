@@ -52,8 +52,8 @@
         <AISettingsModal v-if="modalAI" :handleModal="handle_ai" />
         <Meeting v-if="meeting" :handleModal="handle_meeting" />
         <Planner v-if="planner" :handleModal="handle_planner" />
-        <RAGUpload v-if="rag" :handleModal="handle_rag" />
-        <Connect v-if="connect" :handleModal="handle_connect" />
+        <!-- <RAGUpload v-if="rag" :handleModal="handle_rag" /> -->
+        <!-- <Connect v-if="connect" :handleModal="handle_connect" /> -->
         <AddFeatureModal v-if="modalAdd" :handleModal="handleAdd" />
     </Container>
 </template>
