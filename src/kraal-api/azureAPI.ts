@@ -58,7 +58,6 @@ export default {
         getChatMessages: (chatId: number) => get('/chatmessages', { params: { chatid: chatId } }),
         getChatMessage: (id: number) => get('/chatmessages', { params: { id: id } }),
         sendChatMessage: (chatId: number, message: string) => post('/chatmessages', { chatid: chatId, message: message }),
-        sendNewChatMessage: (message: string) => post('/chatmessages', { message: message }),
 
         sendDocuments: (chatId: number, files: File[]) => {
             const formData = new FormData();
@@ -70,15 +69,19 @@ export default {
         },
 
         connectHub: async () => {
+            console.log("Connecting to hub");
             chatHubConnection = new signalR.HubConnectionBuilder()
                 .withUrl(import.meta.env.VITE_CHAT_HUB_URL, { accessTokenFactory: () => firebase.token ?? "" })
                 .withAutomaticReconnect()
                 .build();
 
             await chatHubConnection.start();
+            console.log("Connected to hub");
         },
         joinHubChat: async (chatUUID: string) => {
-            chatHubConnection?.invoke("AddClientToGroup", chatUUID);
+            console.log(`Joining chat ${chatUUID}`);
+            chatHubConnection!.invoke("AddClientToGroup", chatUUID);
+            console.log(`Joined chat ${chatUUID}`);
         },
     },
     quickbooks: {
@@ -86,7 +89,7 @@ export default {
         link: (code: string, realmId: number) => post('/linking', { code: code, realmId: realmId }),
     },
     user: {
-        getUnverifiedUser: () => get('/users/unverifiedme').then(data => UnverifiedUser.fromJSON(data)),
+        getUnverifiedUser: () => get('/users/unverifiedme'),
         getUser: () => get('/users/me'),
     }
 }

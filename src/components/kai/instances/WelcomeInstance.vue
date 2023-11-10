@@ -17,7 +17,7 @@
             </div>
         </div>
     </div>
-    <ChatFooter :chatId="recentChatId" />
+    <!-- <ChatFooter :chatId="recentChatId" /> -->
 </template>
 
 <script setup lang="ts">

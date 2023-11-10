@@ -3,7 +3,7 @@
     <div ref="chatMain" class="h-full overflow-y-auto text-white">
         <div class="relative text-gray-200">
             <div v-for="message in shownChatMessages" ref="messages">
-                <div v-if="message.author === chat_user[0]" class="border-b border-gray-800">
+                <div v-if="message.author === authors[0]" class="border-b border-gray-800">
                     <div class="flex gap-4 max-w-4xl mx-auto px-4 py-7 text-sm tracking-wider font-light text-white">
                         <div v-if="userStoreRef.currentUser" class="w-[1.95rem] min-w-[1.95rem] h-[1.95rem] text-gray-200 border grid place-items-center rounded-full">
                             {{ userStoreRef.currentUser.value?.initials }}
@@ -11,7 +11,7 @@
                         {{ message.message }}
                     </div>
                 </div>
-                <div v-if="message.author === chat_user[1]" class="bg-chatgpt-400 border-b border-gray-800">
+                <div v-if="message.author === authors[1]" class="bg-chatgpt-400 border-b border-gray-800">
                     <div class="max-w-4xl mx-auto px-4 py-7 flex gap-4 items-start w-full font-light">
                         <Kraalai class="w-[1.95rem] min-w-[1.95rem] text-gray-400" />
                         <RobotStatic :robot="message.message" />
@@ -20,7 +20,7 @@
             </div>
         </div>
     </div>
-    <ChatFooter :chatId="props.chatId" @on-input-sent="onInputSent" @on-message-received="onMessageReceived"/>
+    <ChatFooter :loading="isInputLocked" @on-send="sendMessage"/>
 </template>
 
 <script setup lang="ts">
@@ -34,15 +34,19 @@ import { useChatStore } from "../../../stores/chatStore";
 import { ShownChatMessage } from "../../../models/chatmessage";
 import azureAPI, { chatHubConnection } from "../../../kraal-api/azureAPI";
 import { StreamChatMessage } from "../../../models/streamchatmessage";
+import { useSideBarStoreAzureStore } from "../../../stores/sideBarStoreAzure";
 
-const props = defineProps<{ chatId: any }>()
+const props = defineProps<{ chatId: any, lockInput?: boolean }>();
 const chatId = parseInt(props.chatId);
 
+const sideBarStoreAzure = useSideBarStoreAzureStore();
 const userStore = useUserStore();
 const userStoreRef = storeToRefs(userStore);
 const chatStore = useChatStore();
 const shownChatMessages = ref([] as ShownChatMessage[]);
-const chat_user = ["User", "Bot"]
+const authors = ["User", "Bot"];
+
+const isInputLocked = ref(true);
 
 const messages = ref([] as HTMLElement[]);
 function scrollToLastMessage() {
@@ -51,22 +55,24 @@ function scrollToLastMessage() {
 }
 
 async function reloadChatMessages() {
+    console.log("Reloading messages");
     await chatStore.loadChatMessages(chatId);
 
     const chatMessages = Array.from(chatStore.chats.get(chatId)!.messages.values()).sort((a, b) => b.timestamp.valueOf() - a.timestamp.valueOf());
     shownChatMessages.value = chatMessages.map(m => m.toShownChatMessage());
+    console.log("Reloaded messages");
 }
 
-function onInputSent(message: string) {
+async function sendMessage(message: string) {
+    sideBarStoreAzure.sendChatMessage(chatId, message)
+    isInputLocked.value = true;
     const shownMessage = new ShownChatMessage("", message, "User", chatStore.chats.get(chatId)!);
     shownChatMessages.value.push(shownMessage);
     setTimeout(() => scrollToLastMessage(), 100);
 }
 
-async function onMessageReceived() {
-    await reloadChatMessages();
-}
 onMounted(async function () {
+    console.log("Instance mounted");
     if (!userStore.currentUser) {
         await userStore.loadUser();
     }
@@ -78,32 +84,54 @@ onMounted(async function () {
 
     if (!chatHubConnection) {
         await azureAPI.chat.connectHub();
-        await azureAPI.chat.joinHubChat(chat.uuid);
     }
+    await azureAPI.chat.joinHubChat(chat.uuid);
+    isInputLocked.value = props.lockInput ?? false;
 
-    chatHubConnection?.on("ReceiveMessage", (messageJson: {chatUUID: string, uuid: string, content: string}) => {
+    scrollToLastMessage();
+
+    chatHubConnection?.off("ReceiveMessageStart");
+    chatHubConnection?.on("ReceiveMessageStart", async (messageJson: {chatUUID: string, uuid: string}) => {
         if (chat.uuid != messageJson.chatUUID) {
+            console.log(`?Message start ${chat.uuid} - ${messageJson.chatUUID}`);
             return;
         }
-        const message = StreamChatMessage.fromJSON({...messageJson, chat: chat});
-        const shownMessage = new ShownChatMessage(message.uuid, message.content, "Bot", message.chat);
-        shownChatMessages.value.push(shownMessage);
+        console.log(`!Message start ${chat.uuid} - ${messageJson.chatUUID}`);
+        isInputLocked.value = true;
+        // const message = StreamChatMessage.fromJSON({...messageJson, chat: chat});
+        // const shownMessage = new ShownChatMessage(message.uuid, message.content, "Bot", message.chat);
+        // shownChatMessages.value.push(shownMessage);
         setTimeout(() => scrollToLastMessage(), 100);
     });
 
-    chatHubConnection?.on("ReceiveMessageUpdate", (messageJson: {chatUUID: string, uuid: string, content: string}) => {
-        if (chat.uuid != messageJson.chatUUID || shownChatMessages.value.length == 0) {
+    chatHubConnection?.off("ReceiveMessageEnd");
+    chatHubConnection?.on("ReceiveMessageEnd", async (messageJson: {chatUUID: string, uuid: string}) => {
+        if (chat.uuid != messageJson.chatUUID) {
+            console.log(`?Message end ${chat.uuid} - ${messageJson.chatUUID}`);
             return;
         }
+        console.log(`!Message end ${chat.uuid} - ${messageJson.chatUUID}`);
+        isInputLocked.value = false;
+        reloadChatMessages().then(() => {
+            setTimeout(() => scrollToLastMessage(), 100);
+        });
+    });
+
+    chatHubConnection?.off("ReceiveMessageUpdate");
+    chatHubConnection?.on("ReceiveMessageUpdate", (messageJson: {chatUUID: string, uuid: string, content: string}) => {
+        if (chat.uuid != messageJson.chatUUID) {
+            console.log(`?Message update ${chat.uuid} - ${messageJson.chatUUID}`);
+            return;
+        }
+        console.log(`!Message update ${chat.uuid} - ${messageJson.chatUUID}`);
         const message = StreamChatMessage.fromJSON({...messageJson, chat: chat});
         const shownMessage = shownChatMessages.value.at(-1);
-        if (shownMessage!.uuid != message.uuid) {
-            return;
+        if (!shownMessage || shownMessage!.uuid != message.uuid) {
+            const newShownMessage = new ShownChatMessage(message.uuid, message.content, "Bot", message.chat);
+            shownChatMessages.value.push(newShownMessage);
         }
         shownChatMessages.value.at(-1)!.message = message.content;
         setTimeout(() => scrollToLastMessage(), 100);
     });
-
-    scrollToLastMessage();
 });
 </script>

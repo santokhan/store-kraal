@@ -10,6 +10,7 @@ export const useSideBarStoreAzureStore = defineStore("chatSideBarAzure", () => {
     const sideBarList = ref<SideBarData[]>([])
     // const sideBarList = ref<SideBarData[]>(dummyChats)
     const recentChatId = ref<number>(0)
+    const isInputLocked = ref<boolean>(false);
     const chatMessages = ref<TypeChatMessage[]>([])
     // const chatMessages = ref<TypeChatMessage[]>(dummyConversation)
     const animateChatBox = ref<boolean>(false)
@@ -37,6 +38,7 @@ export const useSideBarStoreAzureStore = defineStore("chatSideBarAzure", () => {
         // #sidebar
         sideBarList,
         recentChatId,
+        isInputLocked,
         async addNewInstance() {
             const res = await azureAPI.chat.createChat("New chat");
             // call it after getting response
@@ -104,9 +106,9 @@ export const useSideBarStoreAzureStore = defineStore("chatSideBarAzure", () => {
         async clearChatMessages() {
             chatMessages.value = []
         },
-        async sendNewChatMessage(message: string, files?: File[]) {
+        async sendNewChatMessage(id: number, message: string, files?: File[]) {
             if (message) {
-                const res = await azureAPI.chat.sendNewChatMessage(message)
+                const res = await azureAPI.chat.sendChatMessage(id, message)
                 console.log(res)
                 if (res) {
                     if (files) {
@@ -131,9 +133,9 @@ export const useSideBarStoreAzureStore = defineStore("chatSideBarAzure", () => {
                 console.log(`Can not read 'id' and 'message'`);
                 return;
             }
+            recentChatId.value = id;
             await azureAPI.chat.sendChatMessage(id, message)
             // set `recentChatId` to switch welcome to coversation
-            recentChatId.value = id
 
             // assign messages to print
             await this.Re_assignChatMessage(id)

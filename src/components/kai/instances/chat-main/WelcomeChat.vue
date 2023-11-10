@@ -34,6 +34,7 @@ import Branding from './Branding.vue';
 import ChatSubmitBtn from './ChatSubmitBtn.vue';
 import Loading from './Loading.vue';
 import ChatFooterInfo from './ChatFooterInfo.vue';
+import azureAPI from '../../../../kraal-api/azureAPI';
 
 const input = ref<string>("");
 const fileInput = ref<File[]>([]);
@@ -77,9 +78,17 @@ async function handleSubmit(e: any) {
         fileInput.value = []
         loading.value = true // start loading dots
         // switch to original chat instance
-        await store.sendNewChatMessage(msg, files)
+        
+        const chatRes = await azureAPI.chat.createChat("New chat");
+        let chatId: number | null = null;
+        if (!chatRes) {
+            return;
+        }
+        chatId = chatRes.id;
+        store.isInputLocked = true;
+        store.sendChatMessage(chatId!, msg);
         // TODO: clear input after form submit complete
-        loading.value = false
+        loading.value = true
         // input.value = "" // See on top
         fileInput.value = []
     }
