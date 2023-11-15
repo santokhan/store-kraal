@@ -1,7 +1,7 @@
 <template>
     <button v-if="props.view === 'GRID'" type="button"
-        class="h-[160px] w-full p-4 grid place-items-center rounded-xl bg-kraal-purple-500 hover:bg-kraal-purple-500/60">
-        <div class="w-12 h-12 grid place-items-center overflow-hidden text-3xl">
+        class="h-28 md:h-[160px] w-full p-4 grid place-items-center rounded-xl bg-kraal-purple-500 hover:bg-kraal-purple-500/60">
+        <div class="w-8 md:w-12 h-8 md:h-12 grid place-items-center overflow-hidden text-3xl">
             <slot></slot>
         </div>
         <div class="whitespace-nowrap overflow-hidden text-ellipsis text-start" :title="props.data.name">

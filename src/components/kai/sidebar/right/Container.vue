@@ -8,7 +8,7 @@
                 :class="['fa fa-angle-right transition-transform linear text-lg', isOpen ? 'scale-x-100' : '-scale-x-100']"></i>
         </button>
 
-        <div v-if="isOpen" class="w-72 lg:w- [320px]  lg:w-[364px] p-4 grid grid-cols-2"
+        <div v-if="isOpen" class="w-72 lg:w- [320px] lg:w-[364px] p-4"
             :class="props.view === 'GRID' ? 'gap-4' : 'gap-3'">
             <slot></slot>
         </div>

@@ -3,7 +3,6 @@
         <ul class="space-y-3">
             <Item />
             <Item />
-            <Item />
         </ul>
         <div class="flex items-center justify-between px-4">
             <h5 class="text-indigo-500">Load more</h5>
