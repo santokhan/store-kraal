@@ -29,7 +29,7 @@
                             <h4 class="text-gray-400">Result</h4>
                         </div>
                         <div class="flex gap-3 items-center"><a
-                                class="w-9 h-9 rounded-full border border-gray-400 grid place-items-center text-gray-100 bg-chatgpt-600 hover:bg-chatgpt-500 focus:bg-indigo-500"
+                                class="w-9 h-9 rounded-full border border-gray-400 grid place-items-center text-gray-100 bg-chatgpt-600 hover:bg-chatgpt-500 focus:bg-kraal-purple-500"
                                 href="#">
                                 <svg class="w-4 h-4" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -37,7 +37,7 @@
                                         fill="currentColor" />
                                 </svg>
                             </a>
-                            <a class="w-9 h-9 rounded-full border border-gray-400 grid place-items-center text-gray-100 bg-chatgpt-600 hover:bg-chatgpt-500 focus:bg-indigo-500"
+                            <a class="w-9 h-9 rounded-full border border-gray-400 grid place-items-center text-gray-100 bg-chatgpt-600 hover:bg-chatgpt-500 focus:bg-kraal-purple-500"
                                 href="#">
                                 <svg class="w-4 h-4" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -45,7 +45,7 @@
                                         fill="currentColor" />
                                 </svg>
                             </a>
-                            <a class="w-9 h-9 rounded-full border border-gray-400 grid place-items-center text-gray-100 bg-chatgpt-600 hover:bg-chatgpt-500 focus:bg-indigo-500"
+                            <a class="w-9 h-9 rounded-full border border-gray-400 grid place-items-center text-gray-100 bg-chatgpt-600 hover:bg-chatgpt-500 focus:bg-kraal-purple-500"
                                 href="#">
                                 <svg class="w-4 h-4" viewBox="0 0 20 20" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">

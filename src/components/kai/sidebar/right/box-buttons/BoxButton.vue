@@ -21,11 +21,12 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{
+type Props = {
     data: {
         name: string,
         listColor: string
     },
     view: string
-}>()
+}
+const props = defineProps<Props>()
 </script>

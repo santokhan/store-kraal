@@ -4,9 +4,14 @@ import { getFirestore } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
+const VITE_FIREBASE_SERVICE_CREDENTIALS = import.meta.env.VITE_FIREBASE_SERVICE_CREDENTIALS
+if (!VITE_FIREBASE_SERVICE_CREDENTIALS) {
+    throw new Error(`ENV variable not defined`);
+}
+
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = JSON.parse(import.meta.env.VITE_FIREBASE_SERVICE_CREDENTIALS)
+const firebaseConfig = JSON.parse(VITE_FIREBASE_SERVICE_CREDENTIALS)
 
 // Initialize Firebase App and export
 export const firebaseApp = initializeApp(firebaseConfig);

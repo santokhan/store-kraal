@@ -6,15 +6,15 @@
                 <div class="flex items-center justify-between px-6 py-4 border-b border-chatgpt-400 rounded-t">
                     <div class="w-8"></div>
                     <h3 class="text-xl font-semibold text-white">Meeting</h3>
-                    <CloseModal :handle-click="props.handleModal"/>
+                    <CloseModal :handle-click="props.handleModal" />
                 </div>
                 <div class="p-6 space-y-8">
                     <div class="flex text-gray-100 bg-chatgpt-500 rounded-lg">
                         <TabButton :handleClick="open_attend" :active="tab === 'attend'">Attend</TabButton>
                         <TabButton :handleClick="open_transcript" :active="tab === 'transcript'">Transcript</TabButton>
                     </div>
-                    <Tab1  v-if="tab === 'attend'"/>
-                    <Tab2  v-else-if="tab === 'transcript'"/>
+                    <Tab1 v-if="tab === 'attend'" />
+                    <Tab2 v-else-if="tab === 'transcript'" />
                 </div>
             </div>
         </ModalContainer>
@@ -38,7 +38,6 @@ function open_transcript() {
     tab.value = 'transcript'
 }
 
-const props = defineProps<{ handleModal: () => void }>()
+type Props = { handleModal: () => void }
+const props = defineProps<Props>()
 </script>
-
-<style scoped></style>

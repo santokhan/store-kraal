@@ -2,7 +2,7 @@
     <li class="flex items-center justify-between px-4 py-2 bg-white/5 rounded-xl">
         <div>
             <h5 class="text-white font-medium">Meeting Title</h5>
-            <p class="text-sm text-indigo-500">Oct 20 2023</p>
+            <p class="text-sm text-kraal-purple-500">Oct 20 2023</p>
         </div>
         <div class="flex items-center justify-between gap-4">
             <label class="relative inline-flex items-center cursor-pointer">

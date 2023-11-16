@@ -34,7 +34,7 @@
                     </div>
                     <div class="flex items-center p-6 space-x-2 rounded-b border-t border-chatgpt-400">
                         <button data-modal-hide="default-modal" type="button" @click="props.handleFormIsOpen"
-                            class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">I
+                            class="text-white bg-kraal-purple-500 hover:bg-kraal-purple-500/75 font-medium rounded-lg text-sm px-5 py-2.5 text-center">I
                             accept</button>
                         <button data-modal-hide="default-modal" type="button" @click="props.handleModal"
                             class="text-gray-700 bg-gray-50 hover:bg-gray-300 rounded-lg text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">Decline</button>
