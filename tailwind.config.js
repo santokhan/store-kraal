@@ -73,6 +73,15 @@ const variants = {
     },
     business: "#5f110e",
     "business-form": "#F6F4EE",
+    modal: {
+      raisin: {
+        black: "#202123"
+      },
+      very: {
+        dark: "#181A1C"
+      },
+      charcoal:"#343541"
+    }
   },
   orange: {
     primary: {

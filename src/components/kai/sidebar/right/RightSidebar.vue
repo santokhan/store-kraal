@@ -51,7 +51,7 @@
         </div>
 
         <Buddy v-if="buddy" :handleModal="handle_buddy" />
-        <AISettingsModal v-if="modalAI" :handleModal="handle_ai" />
+        <AiStudio v-if="modalAI" :handleModal="handle_ai" />
         <Meeting v-if="meeting" :handleModal="handle_meeting" />
         <Planner v-if="planner" :handleModal="handle_planner" />
         <RAGUpload v-if="rag" :handleModal="handle_rag" />
@@ -64,7 +64,7 @@
 import { ref } from 'vue'
 import Container from './Container.vue';
 import AddItem from './box-buttons/AddItem.vue';
-import AISettingsModal from './modals/AISettingsModal.vue';
+import AiStudio from './modals/AiStudio.vue';
 import BTN from './box-buttons/BoxButton.vue';
 import AddFeatureModal from './modals/AddFeatureModal.vue';
 import List_Grid from './list-or-grid/List_Grid.vue';

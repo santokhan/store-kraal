@@ -2,7 +2,7 @@
     <Teleport to="body">
         <ModalContainer>
             <div ref="modal"
-                class="relative row-auto w-full rounded-xl text-left shadow-xl transition-all bg-chatgpt-600 max-w-2xl text-gray-200">
+                class="relative row-auto w-full rounded-xl text-left shadow-xl transition-all bg-modal-raisin-black max-w-2xl text-gray-200">
                 <div class="flex items-center justify-between px-6 py-4">
                     <button type="button" @click="isOpenControl = !isOpenControl" class="w-8 h-8 grid place-items-center"
                         :class="[isOpenControl ? 'text-gray-100' : 'text-gray-400 hover:text-gray-200']"><svg

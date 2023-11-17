@@ -5,7 +5,7 @@
                 <div tabindex="-1" aria-hidden="true"
                     class="w-full overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
                     <div class="relative w-full max-w-2xl mx-auto max-h-full">
-                        <div class="relative bg-chatgpt-600 rounded-lg">
+                        <div class="relative bg-modal-raisin-black rounded-lg">
                             <div class="flex items-start justify-between p-4 border-b border-chatgpt-400 rounded-t">
                                 <h3 class="text-xl font-semibold text-gray-200">Introducing Custom Instructions</h3>
                                 <button type="button" @click="props.handleModal"

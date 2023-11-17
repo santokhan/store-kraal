@@ -2,21 +2,22 @@
     <Teleport to="body">
         <ModalContainer>
             <div ref="modal"
-                class="rounded-xl shadow-xl transition-all bg-chatgpt-600 max-w-2xl text-gray-200 p-6 space-y-6">
+                class="rounded-xl shadow-xl transition-all bg-modal-raisin-black max-w-2xl text-gray-200 p-6 space-y-6">
                 <div class="flex items-start justify-between">
                     <div class="w-8"></div>
                     <div class="text-center">
                         <h3 class="text-xl font-semibold text-white">RAG</h3>
-                        <p class="text-gray-400 text-sm">Upload new knowledge</p>
+                        <p class="text-white/50 text-sm">Upload new knowledge</p>
                     </div>
                     <CloseModal :handle-click="props.handleModal" />
                 </div>
                 <div class="grid sm:grid-cols-2 gap-3">
-                    <p class="text-gray-400 text-sm text-center" v-for="(e, i) in infoList" :key="i">{{ e }}</p>
+                    <p class="text-[#8A96BC] text-sm text-center" v-for="(e, i) in infoList" :key="i">{{ e }}</p>
                 </div>
-                <textarea rows="3" placeholder="Add short description of file content"
-                    class="w-full bg-transparent rounded-xl px-3 py-2 placeholder:text-gray-300 text-sm border border-chatgpt-400 focus:border-brand-green"></textarea>
-                <div class="w-full bg-chatgpt-400 rounded-xl relative grid place-items-center">
+                <textarea rows="4" name="description" placeholder="Add short description of file content"
+                    class="w-full bg-[#181A1C] rounded-xl px-3 py-2 placeholder:text-gray-500 text-sm focus:outline-none"
+                    spellcheck="false"></textarea>
+                <div class="w-full bg-[#343541] rounded-xl relative grid place-items-center">
                     <div class="py-4 grid place-items-center gap-2 text-gray-400">
                         <svg class="w-20 h-20" viewBox="0 0 115 115" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="57.5" cy="57.5" r="56.5" stroke="currentColor" stroke-width="2"
@@ -31,8 +32,8 @@
                 </div>
                 <div class="grid sm:grid-cols-2 gap-3">
                     <div class="space-y-1" v-for="(item, index) in fileList" :key="index">
-                        <div class="grid grid-cols-[3rem_auto_3rem] place-items-center gap-3 p-2 bg-white/5 rounded-xl">
-                            <div class="w-12 h-12 bg-kraal-purple-500 rounded-lg grid place-items-center">
+                        <div class="grid grid-cols-[3rem_auto_3rem] place-items-center gap-3 p-2 bg-[#343541] rounded-xl">
+                            <div class="w-11 h-11 bg-kraal-purple-500 rounded-lg grid place-items-center">
                                 <svg class="w-6 h-6 text-white" viewBox="0 0 24 29" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -41,14 +42,14 @@
                                 </svg>
                             </div>
                             <div class="w-full">
-                                <h5 class="text-white font-medium">{{ item.file.name }}</h5>
+                                <h5 class="text-white text-sm font-medium">{{ item.file.name }}</h5>
                                 <p class="text-xs text-gray-400">{{ item.file.createdAt.toDateString() }}</p>
                             </div>
-                            <div class="w-12 h-12 rounded-lg grid place-items-center">
+                            <div class="w-11 h-11 rounded-lg grid place-items-center">
                                 <svg class="w-6 h-6 text-white" viewBox="0 0 32 32" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
-                                        d="M21.3333 29H8C4.776 29 3 27.224 3 24V10.6667C3 7.44267 4.776 5.66667 8 5.66667H12C12.552 5.66667 13 6.11467 13 6.66667C13 7.21867 12.552 7.66667 12 7.66667H8C5.89733 7.66667 5 8.564 5 10.6667V24C5 26.1027 5.89733 27 8 27H21.3333C23.436 27 24.3333 26.1027 24.3333 24V20C24.3333 19.448 24.7813 19 25.3333 19C25.8853 19 26.3333 19.448 26.3333 20V24C26.3333 27.224 24.5573 29 21.3333 29ZM27.44 6.70667L25.2933 4.56002C24.5333 3.81335 23.32 3.81333 22.56 4.57333L20.76 6.38668L25.6134 11.24L27.4267 9.43998C28.1867 8.67999 28.1867 7.46667 27.44 6.70667ZM19.3467 7.80001L10.6667 16.52V21.3333H15.48L24.2 12.6533L19.3467 7.80001Z"
+                                        d="M21.3333 29H8C4.776 29 3 27.224 3 24V10.6667C3 7.44267 4.776 5.66667 8 5.66667H11C12.552 5.66667 13 6.11467 13 6.66667C13 7.21867 12.552 7.66667 12 7.66667H8C5.89733 7.66667 5 8.564 5 10.6667V24C5 26.1027 5.89733 27 8 27H21.3333C23.436 27 24.3333 26.1027 24.3333 24V20C24.3333 19.448 24.7813 19 25.3333 19C25.8853 19 26.3333 19.448 26.3333 20V24C26.3333 27.224 24.5573 29 21.3333 29ZM27.44 6.70667L25.2933 4.56002C24.5333 3.81335 23.32 3.81333 22.56 4.57333L20.76 6.38668L25.6134 11.24L27.4267 9.43998C28.1867 8.67999 28.1867 7.46667 27.44 6.70667ZM19.3467 7.80001L10.6667 16.52V21.3333H15.48L24.2 12.6533L19.3467 7.80001Z"
                                         fill="currentColor" />
                                 </svg>
                             </div>

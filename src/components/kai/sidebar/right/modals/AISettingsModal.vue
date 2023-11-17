@@ -2,7 +2,7 @@
     <Teleport to="body">
         <ModalContainer>
             <div ref="modal"
-                class="relative row-auto w-full rounded-lg text-left shadow-xl transition-all bg-chatgpt-600 max-w-2xl text-gray-200">
+                class="relative row-auto w-full rounded-lg text-left shadow-xl transition-all bg-modal-raisin-black max-w-2xl text-gray-200">
                 <InstructionsForm v-if="formIsOpen" :handleCancel="() => {
                     props.handleModal()
                     handleFormIsOpen()

@@ -2,34 +2,36 @@
     <Teleport to="body">
         <ModalContainer>
             <div ref="modal"
-                class="relative row-auto w-full rounded-xl text-left shadow-xl transition-all bg-chatgpt-600 max-w-2xl text-gray-200 p-6 space-y-6">
+                class="relative row-auto w-full rounded-xl text-left shadow-xl transition-all bg-modal-raisin-black max-w-2xl text-gray-200 p-6 space-y-6">
                 <div class="flex items-center justify-between">
-                    <h3 class="text-xl font-semibold text-white"><!-- Server data -->Buddy</h3>
-                    <CloseModal :handle-click="props.handleModal"/>
+                    <div class="w-8"></div>
+                    <h3 class="text-xl font-semibold text-white">Planner</h3>
+                    <CloseModal :handle-click="props.handleModal" />
                 </div>
                 <div class="space-y-4">
                     <div class="grid sm:grid-cols-2 gap-4 text-gray-400 text-sm">
-                        <div class="px-4 py-2 border border-gray-400 rounded-xl">
-                            <h4 class="">
-                                Lorem ipsum dolor sit consectetur, adipisicing elit. Veritatis tenetur
-                                corporis numquam, quidem natus
-                            </h4>
-                        </div>
-                        <div class="px-4 py-2 border border-gray-400 rounded-xl">
-                            <h4 class="">
-                                Lorem ipsum dolor sit consectetur, adipisicing elit. Veritatis tenetur
-                                corporis numquam, quidem natus
-                            </h4>
-                        </div>
+                        <h4 v-for="(item, index) in planDescList" :key="index"
+                            class="px-4 py-2 border border-[#343541] rounded-xl text-[#8A96BC]">
+                            {{ item.description }}
+                        </h4>
                     </div>
                 </div>
+                <div class="">
+                    <textarea rows="4" name="description" placeholder="Add short description of file content"
+                        class="w-full bg-[#181A1C] rounded-xl px-3 py-2 placeholder:text-gray-500 text-sm focus:outline-none"
+                        spellcheck="false"></textarea>
+                </div>
+                <div class="grid place-items-center">
+                    <button type="button" class="h-12 rounded-lg bg-kraal-purple-500 text-gray-100 px-12">Generate</button>
+                </div>
+
                 <div class="bg-chatgpt-400 rounded-xl overflow-hidden">
                     <div class="flex justify-between items-center text-gray-800 bg-black px-4 py-2">
                         <div class="p-1">
-                            <h4 class="text-gray-400">Result</h4>
+                            <h4 class="text-[#8A96BC]">Result</h4>
                         </div>
                         <div class="flex gap-3 items-center"><a
-                                class="w-9 h-9 rounded-full border border-gray-400 grid place-items-center text-gray-100 bg-chatgpt-600 hover:bg-chatgpt-500 focus:bg-kraal-purple-500"
+                                class="w-9 h-9 rounded-full border border-white/50 grid place-items-center text-gray-100 bg-chatgpt-600 hover:bg-chatgpt-500 focus:bg-kraal-purple-500"
                                 href="#">
                                 <svg class="w-4 h-4" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -37,7 +39,7 @@
                                         fill="currentColor" />
                                 </svg>
                             </a>
-                            <a class="w-9 h-9 rounded-full border border-gray-400 grid place-items-center text-gray-100 bg-chatgpt-600 hover:bg-chatgpt-500 focus:bg-kraal-purple-500"
+                            <a class="w-9 h-9 rounded-full border border-white/50 grid place-items-center text-gray-100 bg-chatgpt-600 hover:bg-chatgpt-500 focus:bg-kraal-purple-500"
                                 href="#">
                                 <svg class="w-4 h-4" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -45,10 +47,9 @@
                                         fill="currentColor" />
                                 </svg>
                             </a>
-                            <a class="w-9 h-9 rounded-full border border-gray-400 grid place-items-center text-gray-100 bg-chatgpt-600 hover:bg-chatgpt-500 focus:bg-kraal-purple-500"
+                            <a class="w-9 h-9 rounded-full border border-white/50 grid place-items-center text-gray-100 bg-chatgpt-600 hover:bg-chatgpt-500 focus:bg-kraal-purple-500"
                                 href="#">
-                                <svg class="w-4 h-4" viewBox="0 0 20 20" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
+                                <svg class="w-4 h-4" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         d="M7.05831 11.275C6.81414 11.0309 6.81414 10.635 7.05831 10.3908C7.30248 10.1467 7.69834 10.1467 7.9425 10.3908L9.37581 11.8242V2.5C9.37581 2.155 9.65581 1.875 10.0008 1.875C10.3458 1.875 10.6258 2.155 10.6258 2.5V11.8242L12.0591 10.3908C12.3033 10.1467 12.6992 10.1467 12.9433 10.3908C13.1875 10.635 13.1875 11.0309 12.9433 11.275L10.4433 13.775C10.3858 13.8325 10.3167 13.8783 10.2401 13.91C10.1634 13.9417 10.0825 13.9583 10.0008 13.9583C9.91915 13.9583 9.83843 13.9417 9.76176 13.91C9.68509 13.8783 9.61581 13.8325 9.55831 13.775L7.05831 11.275ZM15 7.70833C14.655 7.70833 14.375 7.98833 14.375 8.33333C14.375 8.67833 14.655 8.95833 15 8.95833C16.3142 8.95833 16.875 9.51917 16.875 10.8333V15C16.875 16.3142 16.3142 16.875 15 16.875H5C3.68583 16.875 3.125 16.3142 3.125 15V10.8333C3.125 9.51917 3.68583 8.95833 5 8.95833C5.345 8.95833 5.625 8.67833 5.625 8.33333C5.625 7.98833 5.345 7.70833 5 7.70833C2.985 7.70833 1.875 8.81833 1.875 10.8333V15C1.875 17.015 2.985 18.125 5 18.125H15C17.015 18.125 18.125 17.015 18.125 15V10.8333C18.125 8.81833 17.015 7.70833 15 7.70833Z"
                                         fill="currentColor" />
@@ -57,10 +58,9 @@
                         </div>
                     </div>
                     <ul class="list-disc list-inner space-y-2 text-gray-400 text-xs p-4">
-                        <li class="py-1 w-full flex items-center gap-2" v-for="(item, index) in [1, 2, 3, 4, 5, 6]"
-                            :key="index">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+                        <li v-for="(item, index) in resultList" :key="index"
+                            class="py-1 w-full flex items-center gap-2 text-[#8A96BC]">
+                            {{ item.description }}
                         </li>
                     </ul>
                 </div>
@@ -73,6 +73,7 @@
 import { ref } from 'vue';
 import ModalContainer from '../../../../../modal/ModalContainer.vue'
 import CloseModal from '../../../../../modal/CloseModal.vue';
+import { resultList, planDescList } from './planner'
 
 const props = defineProps<{ handleModal: () => void }>()
 const modal = ref<any>(null)
