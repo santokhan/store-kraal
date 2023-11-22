@@ -31,16 +31,15 @@ import TabButton from './TabButton.vue';
 import CloseModal from '../../../../../modal/CloseModal.vue';
 import ModalTitle from '../ModalTitle.vue';
 
-const TABS = ["attend", "transcript"]
-
-const tab = ref<string>('attend')
+const TABS = ["attend", "transcript"];
+const tab = ref<string>('attend');
 function open_attend() {
-    tab.value = 'attend'
+    tab.value = 'attend';
 }
 function open_transcript() {
-    tab.value = 'transcript'
+    tab.value = 'transcript';
 }
 
-type Props = { handleModal: () => void }
-const props = defineProps<Props>()
+type Props = { handleModal: () => void };
+const props = defineProps<Props>();
 </script>
