@@ -13,7 +13,7 @@
                         </svg>
                     </button>
                     <Control v-if="isOpenControl" />
-                    <h3 class="text-xl font-semibold text-white"><!-- Server data -->Buddy</h3>
+                    <ModalTitle>Buddy</ModalTitle>
                     <CloseModal :handle-click="props.handleModal"/>
                 </div>
                 <div class="p-6 space-y-6">
@@ -35,6 +35,7 @@ import VoiceInput from '../buddy/voice-input/VoiceInput.vue'
 import Control from './control/Control.vue'
 import TextInput from './TextInput.vue'
 import CloseModal from '../../../../../modal/CloseModal.vue';
+import ModalTitle from '../ModalTitle.vue';
 
 const props = defineProps<{ handleModal: () => void }>()
 const modal = ref<any>(null)

@@ -5,7 +5,7 @@
                 class="relative row-auto w-full rounded-xl text-left shadow-xl transition-all bg-modal-raisin-black max-w-2xl text-gray-200 p-6 space-y-6">
                 <div class="flex items-center justify-between">
                     <div class="w-8"></div>
-                    <h3 class="text-xl font-semibold text-white">API Connect</h3>
+                    <ModalTitle>API Connect</ModalTitle>
                     <CloseModal :handle-click="props.handleModal" />
                 </div>
                 <form class="space-y-3">
@@ -46,6 +46,7 @@
 import { ref } from 'vue';
 import ModalContainer from '../../../../../modal/ModalContainer.vue'
 import CloseModal from '../../../../../modal/CloseModal.vue';
+import ModalTitle from '../ModalTitle.vue';
 
 const props = defineProps<{ handleModal: () => void }>()
 const modal = ref<any>(null)

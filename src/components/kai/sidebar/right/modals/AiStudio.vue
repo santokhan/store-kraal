@@ -3,11 +3,11 @@
         <ModalContainer>
             <div ref="modal"
                 class="relative row-auto w-full rounded-xl text-left shadow-xl transition-all bg-modal-raisin-black max-w-2xl text-gray-200 p-6 space-y-6">
-                <div class="flex items-center justify-between">
+                <div class="flex items-center justify-between text-center">
                     <div class="w-8"></div>
                     <div class="">
-                        <h3 class="text-xl font-semibold text-white">AI Studio</h3>
-                        <p class="text-gray-400 text-sm">Craft new features</p>
+                        <ModalTitle>AI Studio</ModalTitle>
+                        <ModalDesc>Craft new features</ModalDesc>
                     </div>
                     <CloseModal :handle-click="props.handleModal" />
                 </div>
@@ -69,6 +69,8 @@ import { ref } from 'vue';
 import CloseModal from '../../../../modal/CloseModal.vue';
 import ModalContainer from '../../../../modal/ModalContainer.vue';
 import { connectionList } from './aistudio'
+import ModalTitle from './ModalTitle.vue';
+import ModalDesc from './ModalDesc.vue';
 
 const props = defineProps<{ handleModal: () => void }>()
 const modal = ref<any>(null)

@@ -6,8 +6,8 @@
                 <div class="flex items-start justify-between">
                     <div class="w-8"></div>
                     <div class="text-center">
-                        <h3 class="text-xl font-semibold text-white">RAG</h3>
-                        <p class="text-white/50 text-sm">Upload new knowledge</p>
+                        <ModalTitle>RAG</ModalTitle>
+                        <ModalDesc>Upload new knowledge</ModalDesc>
                     </div>
                     <CloseModal :handle-click="props.handleModal" />
                 </div>
@@ -80,6 +80,8 @@
 import { ref } from 'vue';
 import ModalContainer from '../../../../../modal/ModalContainer.vue'
 import CloseModal from '../../../../../modal/CloseModal.vue';
+import ModalDesc from '../ModalDesc.vue';
+import ModalTitle from '../ModalTitle.vue';
 
 const props = defineProps<{ handleModal: () => void }>()
 const modal = ref<any>(null)
