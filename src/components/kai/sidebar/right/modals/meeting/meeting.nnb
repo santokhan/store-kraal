@@ -1,0 +1,25 @@
+{
+    "cells": [
+        {
+            "language": "typescript",
+            "source": [
+                "let m = \"2023-12\"\r\n\r\nfunction handleDate(monthInput: string, payload: 'prev' | 'next'): string {\r\n    const date = new Date(monthInput);\r\n    if (payload === 'next') {\r\n        date.setMonth(date.getMonth() + 1);\r\n    } else {\r\n        date.setMonth(date.getMonth() - 1);\r\n    }\r\n    let m = date.getMonth();\r\n    const monthList = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']\r\n    return [date.getFullYear(), monthList[m]].join(\"-\");\r\n}\r\n\r\nconsole.log(handleDate(m, 'prev'));\r\nconsole.log(handleDate(m, 'next'));"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "2023-11",
+                                "2024-01",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

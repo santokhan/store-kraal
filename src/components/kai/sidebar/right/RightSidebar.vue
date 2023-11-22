@@ -1,7 +1,7 @@
 <template>
     <Container :view="viewType">
         <List_Grid :listView="list_view" :gridView="grid_view" :view="viewType" />
-        <div class="grid grid-cols-2 gap-4 h-full overflow-auto">
+        <div class="grid grid-cols-2 gap-3 lg:gap-4 h-full overflow-y-auto">
             <BTN :data="settings[0]" :view="viewType" @click="handle_buddy">
                 <svg class="w-full h-full" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path

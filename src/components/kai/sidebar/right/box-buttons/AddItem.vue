@@ -1,15 +1,15 @@
 <template>
     <button v-if="props.view === 'GRID'" type="button" :class="[
         'rounded-lg space-y-4',
-        'grid place-items-center p-4 w-full h-28 md:h-[160px] bg-chatgpt-400 hover:bg-kraal-purple-500/80 hover:text-white'
+        'grid place-items-center p-4 w-full aspect-square bg-chatgpt-400 hover:bg-kraal-purple-500/80 hover:text-white'
     ]">
-        <div class="w-8 md:w-12 h-8 md:h-12 grid place-items-center overflow-hidden">
-            <svg class="w-ful h-ful" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <IconBox>
+            <svg class="w-full h-full" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M25.0001 2.60417C12.6501 2.60417 2.60425 12.6521 2.60425 25C2.60425 37.3479 12.6501 47.3958 25.0001 47.3958C37.3501 47.3958 47.3959 37.3479 47.3959 25C47.3959 12.6521 37.3501 2.60417 25.0001 2.60417ZM25.0001 44.2708C14.373 44.2708 5.72925 35.6271 5.72925 25C5.72925 14.3729 14.373 5.72917 25.0001 5.72917C35.6272 5.72917 44.2709 14.3729 44.2709 25C44.2709 35.6271 35.6272 44.2708 25.0001 44.2708ZM33.8542 25C33.8542 25.8625 33.1542 26.5625 32.2917 26.5625H26.5626V32.2917C26.5626 33.1542 25.8626 33.8542 25.0001 33.8542C24.1376 33.8542 23.4376 33.1542 23.4376 32.2917V26.5625H17.7084C16.8459 26.5625 16.1459 25.8625 16.1459 25C16.1459 24.1375 16.8459 23.4375 17.7084 23.4375H23.4376V17.7083C23.4376 16.8458 24.1376 16.1458 25.0001 16.1458C25.8626 16.1458 26.5626 16.8458 26.5626 17.7083V23.4375H32.2917C33.1542 23.4375 33.8542 24.1375 33.8542 25Z"
                     fill="currentColor" />
             </svg>
-        </div>
+        </IconBox>
         Add
     </button>
 
@@ -25,5 +25,7 @@
 </template>
 
 <script setup lang="ts">
+import IconBox from './IconBox.vue';
+
 const props = defineProps<{ view: string }>()
 </script>

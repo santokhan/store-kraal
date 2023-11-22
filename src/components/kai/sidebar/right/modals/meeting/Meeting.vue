@@ -24,9 +24,9 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import ModalContainer from '../../../../../modal/ModalContainer.vue'
-import Attend from './Attend.vue'
-import Transcript from './Transcript.vue'
+import ModalContainer from '../../../../../modal/ModalContainer.vue';
+import Attend from './Attend.vue';
+import Transcript from './Transcript.vue';
 import TabButton from './TabButton.vue';
 import CloseModal from '../../../../../modal/CloseModal.vue';
 
