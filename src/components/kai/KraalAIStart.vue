@@ -1,6 +1,6 @@
 <template>
     <KraalAILayout>
-        <WelcomeChat v-if="temp(recentChatId.toString()) || recentChatId === 0" />
+        <WelcomeChat v-if="recentChatId.toString() || recentChatId === 0" />
         <ChatInstance v-else :chatId="recentChatId" :lockInput="isInputLocked" />
     </KraalAILayout>
 </template>
@@ -14,9 +14,4 @@ import KraalAILayout from "./KraalAILayout.vue";
 
 const store = useSideBarStoreAzureStore()
 const { recentChatId, isInputLocked } = storeToRefs(store)
-
-function temp(msg: string) {
-    console.log(msg);
-    return false;
-}
 </script>

@@ -52,7 +52,7 @@ netlify deploy
 netlify deploy --prod
 ```
 
-***Note:** Do not push to repository before checking your netlify deployment.*
+**Note: Do not push to repository before checking your netlify deployment.**
 
 ## Related Links
 

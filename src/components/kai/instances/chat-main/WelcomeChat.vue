@@ -1,13 +1,11 @@
 <template>
     <div class="flex flex-col justify-between items-center h-full ">
         <Branding />
-        <form @submit="handleSubmit" class="w-full max-w-4xl mx-auto mt-auto bg-chatgpt-500 px-4 pt-2"
-            enctype="multipart/form-data">
+        <form @submit="handleSubmit" enctype="multipart/form-data"
+            class="w-full max-w-4xl mx-auto mt-auto bg-chatgpt-500 px-4 pt-2">
             <div class="rounded-xl shadow bg-chatgpt-400" :class="animateChatBox && 'animate-chatbox'">
-                <div class="relative w-full h-full">
-                    <textarea :value="input" placeholder="Send a message..." @input="(e: any) => input = e.target.value"
-                        class="w-full focus:outline-none resize-none overflow-auto bg-transparent text-white min-h-56 h-56 px-4 py-3"></textarea>
-                </div>
+                <textarea :value="input" placeholder="Send a message..." @input="(e: any) => input = e.target.value"
+                    class="w-full focus:outline-none resize-none overflow-auto bg-transparent text-white min-h-56 h-56 px-4 py-3"></textarea>
                 <AttachmentPreview :files="fileInput" :removeFiles="(index) => { removeFiles(index) }" />
                 <div class="p-2 flex justify-between items-center">
                     <FileInputBox>
@@ -65,32 +63,38 @@ function removeFiles(index: number) {
 }
 async function handleSubmit(e: any) {
     e.preventDefault();
-    const formData = {
-        message: input.value,
-        files: fileInput.value.map((e: File) => e)
-    }
-    if (input.value) {
-        // clone current input
-        const msg = input.value
+    const msg = input.value
+    if (!msg) {
+        throw new Error("Can not read message")
+    } else {
         const files = fileInput.value
         // clear on submit for Nuku, doesn't matter user getting response of not
         input.value = ""
         fileInput.value = []
         loading.value = true // start loading dots
         // switch to original chat instance
-        
+
         const chatRes = await azureAPI.chat.createChat("New chat");
-        let chatId: number | null = null;
-        if (!chatRes) {
-            return;
+
+        let chatId = chatRes.id;
+        if (!chatId) {
+            throw new Error("Can not read chatId");
+        } else {
+            store.isInputLocked = true;
+            await store.sendChatMessage(chatId, msg);
+
+            if (files) {
+                console.log(files);
+                const fileSend = await azureAPI.chat.sendDocuments(chatId, files);
+                console.log(fileSend);
+                // if (!fileSend) throw new Error("Can send files");
+            }
+
+            // TODO: clear input after form submit complete
+            loading.value = true
+            // input.value = "" // See on top
+            fileInput.value = []
         }
-        chatId = chatRes.id;
-        store.isInputLocked = true;
-        store.sendChatMessage(chatId!, msg);
-        // TODO: clear input after form submit complete
-        loading.value = true
-        // input.value = "" // See on top
-        fileInput.value = []
     }
 }
 </script>

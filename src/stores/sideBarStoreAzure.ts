@@ -48,7 +48,7 @@ export const useSideBarStoreAzureStore = defineStore("chatSideBarAzure", () => {
         async assignSideBarData() {
             const navList = await azureAPI.chat.getChats();
             if (navList.length > 0) {
-                // descending
+                // sort by descending 
                 sideBarList.value = navList.sort((a: SideBarData, b: SideBarData) => {
                     if (a.id < b.id) {
                         return 1
@@ -130,16 +130,16 @@ export const useSideBarStoreAzureStore = defineStore("chatSideBarAzure", () => {
         },
         async sendChatMessage(id: number, message: string) {
             if (!id && !message) {
-                console.log(`Can not read 'id' and 'message'`);
-                return;
-            }
-            recentChatId.value = id;
-            await azureAPI.chat.sendChatMessage(id, message)
-            // set `recentChatId` to switch welcome to coversation
+                throw new Error(`Can not read 'id' and 'message'`);
+            } else {
+                // set `recentChatId` to switch welcome to coversation
+                recentChatId.value = id;
+                await azureAPI.chat.sendChatMessage(id, message)
 
-            // assign messages to print
-            await this.Re_assignChatMessage(id)
-            await this.assignSideBarData();
+                // assign messages to print
+                await this.Re_assignChatMessage(id)
+                await this.assignSideBarData();
+            }
         },
         clearRecentChatId() {
             recentChatId.value = 0

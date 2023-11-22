@@ -146,6 +146,15 @@ const protectedRoutes: Array<RouteRecordRaw> = [
             requiresVerification: true
         },
     },
+    /**
+     * User routes:
+     * 1. Sign Up
+     * 2. Sign In
+     * 3. Sign Out
+     * 4. Email Verification
+     * 5. Email Verified
+     * 6. Email Forgot
+     */
     {
         path: "/user",
         name: "user",
@@ -229,6 +238,7 @@ router.beforeEach(async (to: any) => {
             }
         }
     } else {
+        // Public route sign-up. But will redirect if user exist
         if (to.path === "/user/sign-up") {
             const currentUser = await getCurrentUser()
             if (currentUser) {

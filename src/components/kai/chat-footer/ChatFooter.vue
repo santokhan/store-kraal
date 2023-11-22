@@ -49,7 +49,7 @@ const store = useSideBarStoreAzureStore()
 const hiddenDiv: any = ref<null | HTMLElement>(null);
 const input = ref<string>("");
 const textarea: any = ref(null);
-const fileInput = ref<any[]>([])
+const fileInput = ref<File[]>([])
 
 function handleFile(files: FileList) {
     const len = files.length;
@@ -72,10 +72,15 @@ function handleChange(e: any) {
 async function handleSubmit(e: any) {
     e.preventDefault();
 
-    emits("onSend", input.value);
+    if (fileInput.value) {
+        emits("onSend", input.value, fileInput.value);
+    } else {
+        emits("onSend", input.value);
+    }
 
     // Clear <textarea> afer submit & set initial height
     input.value = "";
+    fileInput.value = [];
     textarea.value.style.height = "24px";
 }
 </script>
