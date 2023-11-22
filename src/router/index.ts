@@ -146,15 +146,6 @@ const protectedRoutes: Array<RouteRecordRaw> = [
             requiresVerification: true
         },
     },
-    /**
-     * User routes:
-     * 1. Sign Up
-     * 2. Sign In
-     * 3. Sign Out
-     * 4. Email Verification
-     * 5. Email Verified
-     * 6. Email Forgot
-     */
     {
         path: "/user",
         name: "user",
