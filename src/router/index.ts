@@ -56,7 +56,7 @@ const protectedRoutes: Array<RouteRecordRaw> = [
     {
         path: "/kraalai",
         name: "kraalai",
-        component: () => import("../views/kraala-ai/RootView.vue"),
+        component: () => import("../views/kraal-ai/RootView.vue"),
         meta: {
             requiresAuth: true,
             requiresVerification: true
@@ -71,6 +71,16 @@ const protectedRoutes: Array<RouteRecordRaw> = [
                 path: ":id",
                 name: "kraal-ai-with-id",
                 component: () => import("../components/kai/Kai.vue"),
+            },
+            {
+                path: "rag",
+                name: "rag",
+                component: () => import("../views/kraal-ai/RAGView.vue"),
+            },
+            {
+                path: "add-feature",
+                name: "add-feature",
+                component: () => import("../views/kraal-ai/AddFeatureView.vue"),
             },
         ]
     },

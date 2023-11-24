@@ -1,5 +1,5 @@
 <template>
-    <button v-if="props.view === 'GRID'" type="button" :class="[
+    <RouterLink :to="path" v-if="props.view === 'GRID'" type="button" :class="[
         'rounded-lg space-y-4',
         'grid place-items-center p-4 w-full aspect-square bg-chatgpt-400 hover:bg-kraal-purple-500/80 hover:text-white'
     ]">
@@ -11,9 +11,9 @@
             </svg>
         </IconBox>
         Add
-    </button>
+    </RouterLink>
 
-    <button v-else type="button"
+    <RouterLink :to="path" v-else type="button"
         class="rounded-xl space-y-4 h-[3.75rem] px-4 col-span-2 w-full flex place-items-center gap-3 hover:text-gray-300 bg-chatgpt-400 hover:bg-kraal-purple-500/80 hover:text-white">
         <svg class="w-7 h-7" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -21,11 +21,14 @@
                 fill="currentColor" />
         </svg>
         Add
-    </button>
+    </RouterLink>
 </template>
 
 <script setup lang="ts">
 import IconBox from './IconBox.vue';
 
-const props = defineProps<{ view: string }>()
+type Props = { view: string, to: string };
+const props = defineProps<Props>();
+
+const path = '/kraalai/' + props.to
 </script>

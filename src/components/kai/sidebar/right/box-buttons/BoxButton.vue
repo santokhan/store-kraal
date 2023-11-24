@@ -26,7 +26,6 @@ import IconBox from './IconBox.vue';
 type Props = {
     data: {
         name: string,
-        listColor: string
     },
     view: string
 }

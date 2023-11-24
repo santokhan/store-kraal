@@ -47,7 +47,7 @@
                         stroke="currentColor" stroke-width="3" stroke-linecap="round" />
                 </svg>
             </Item>
-            <AddItem :view="viewType" @click="handleAdd" />
+            <AddItem :view="viewType" @click="handleAdd" :to="'add-feature'"/>
         </div>
 
         <Buddy v-if="buddy" :handleModal="handle_buddy" />
@@ -56,7 +56,7 @@
         <Planner v-if="planner" :handleModal="handle_planner" />
         <RAGUpload v-if="rag" :handleModal="handle_rag" />
         <Connect v-if="connect" :handleModal="handle_connect" />
-        <AddFeatureModal v-if="modalAdd" :handleModal="handleAdd" />
+        <!-- <AddFeatureModal v-if="modalAdd" :handleModal="handleAdd" /> -->
     </Container>
 </template>
 
