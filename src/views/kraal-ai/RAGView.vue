@@ -98,10 +98,32 @@
                 </div>
             </div>
             <div :class="['px-4 lg:px-6 py-12', 'h-full flex flex-col justify-end', 'border-l border-gray-600']">
-                <div class="">
-                    <textarea rows="4" name="description" placeholder="Add short description of file content"
-                        class="w-full bg-transparent rounded-xl px-3 py-2 placeholder:text-gray-500 text-sm focus:outline-none border border-gray-600"
-                        spellcheck="false"></textarea>
+                <div class="rounded-xl border border-gray-600 px-1">
+                    <div class="flex gap-1 items-start">
+                        <button type="button" :class="['h-10 w-10 hover:text-white grid place-items-center relative']">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.372L8.552 18.32m.009-.01l-.01.01m5.699-9.941l-7.81 7.81a1.5 1.5 0 002.112 2.13" />
+                            </svg>
+                            <FileInput :handleFile="handleFile" />
+                        </button>
+                        <textarea rows="1" name="description" placeholder="Message GPT" v-model="message"
+                            class="w-full bg-transparent py-2 placeholder:text-gray-500 text-sm focus:outline-none"
+                            spellcheck="false"></textarea>
+                        <div class="h-10 w-10 grid place-items-center">
+                            <button type="button"
+                                :class="['h-8 w-8 bg-gray-100 rounded-lg text-gray-800 grid place-items-center hover:bg-white']">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-miterlimit="10" stroke-width="1.5"
+                                        d="M18.07 9.57L12 3.5 5.93 9.57M12 20.5V3.67">
+                                    </path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <AttachmentPreview v-if="fileInput" :files="fileInput" :removeFiles="(index) => { removeFiles(index) }" class="mb-2"/>
                 </div>
             </div>
         </main>
@@ -111,6 +133,26 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import FixedContainer from '../../components/shared/container/FixedContainer.vue';
+import BackButton from './BackButton.vue';
+import AttachmentPreview from '../../components/kai/instances/chat-main/AttachmentPreview.vue';
+import FileInput from '../../components/kai/instances/chat-main/file-input/FileInput.vue';
+
+const message = ref<string>();
+const fileInput = ref<File[]>([]);
+
+function handleFile(files: FileList) {
+    const len = files.length;
+    if (len) {
+        for (let i = 0; i < len; i++) {
+            const file = files[i];
+            fileInput.value.push(file)
+        }
+    }
+}
+
+function removeFiles(index: number) {
+    fileInput.value.splice(index, 1);
+}
 
 type FileData = {
     file: {

@@ -54,7 +54,7 @@
         <AiStudio v-if="modalAI" :handleModal="handle_ai" />
         <Meeting v-if="meeting" :handleModal="handle_meeting" />
         <Planner v-if="planner" :handleModal="handle_planner" />
-        <RAGUpload v-if="rag" :handleModal="handle_rag" />
+        <!-- <RAGUpload v-if="rag" :handleModal="handle_rag" /> -->
         <Connect v-if="connect" :handleModal="handle_connect" />
         <!-- <AddFeatureModal v-if="modalAdd" :handleModal="handleAdd" /> -->
     </Container>
@@ -66,14 +66,12 @@ import Container from './Container.vue';
 import AddItem from './box-buttons/AddItem.vue';
 import AiStudio from './modals/AiStudio.vue';
 import Item from './box-buttons/BoxButton.vue';
-import AddFeatureModal from './modals/AddFeatureModal.vue';
 import List_Grid from './list-or-grid/List_Grid.vue';
 import { useRightBarStore } from '../../../../stores/right-bar';
 import { storeToRefs } from 'pinia';
 import Buddy from './modals/buddy/Buddy.vue';
 import Meeting from './modals/meeting/Meeting.vue';
 import Planner from './modals/planner/Planner.vue';
-import RAGUpload from './modals/rag/RAGUpload.vue';
 import Connect from './modals/connect/Connect.vue';
 
 const store = useRightBarStore()
