@@ -12,24 +12,25 @@
                     class="text-white bg-kraal-purple-500 hover:bg-kraal-purple-500/80 font-medium rounded-lg text-sm px-4 py-2 focus:outline-none">Submit</button>
             </div>
         </header>
-        <main class="w-full max-w-screen-xl mx-auto grid md:grid-cols-2 divide-x">
-            <div :class="['w-full px-4 lg:px-6 py-12']" class="space-y-6">
-                <div class="space-y-4">
-                    <p>Hi friend I will help you.Add a new feature. Click the Listen button below.</p>
-                    <p>
-                        Then you can say something like "make all AI, automate the monthly marketing analytics report by
-                        taking data from.Salesforce add for the last month and putting it excel and analyzing it to
-                        generate
-                        a report with graph. Do it every first Monday of the new month."
-                    </p>
-                    <p>What would you like to make?</p>
-                </div>
-                <div class="grid place-items-center">
-                    <VoiceInput />
-                </div>
-                <div class="grid place-items-center">
-                    <button type="button"
-                        class="text-white bg-kraal-purple-500 hover:bg-kraal-purple-500/80 font-medium rounded-lg text-sm px-4 py-2 focus:outline-none">Listen</button>
+        <main class="w-full grid lg:grid-cols-2">
+            <div :class="['w-full px-4 lg:px-6 py-12 grid place-items-center']">
+                <div class="w-full max-w-md space-y-6">
+                    <div class="space-y-4">
+                        <p>Hi friend I will help you.Add a new feature. Click the Listen button below.</p>
+                        <p>
+                            Then you can say something like "make all AI, automate the monthly marketing analytics report by
+                            taking data from.Salesforce add for the last month and putting it excel and analyzing it to
+                            generate a report with graph. Do it every first Monday of the new month."
+                        </p>
+                        <p>What would you like to make?</p>
+                    </div>
+                    <div class="grid place-items-center bg-[#181A1C] w-full aspect-square">
+                        <VoiceInput />
+                    </div>
+                    <div class="grid place-items-center">
+                        <button type="button"
+                            class="text-white bg-kraal-purple-500 hover:bg-kraal-purple-500/80 font-medium rounded-lg text-sm px-4 py-2 focus:outline-none">Listen</button>
+                    </div>
                 </div>
             </div>
             <div :class="['w-full px-4 lg:px-6 py-12', 'border-l border-gray-600']">
