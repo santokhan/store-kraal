@@ -3,14 +3,14 @@
         class="h-12 flex justify-center items-center gap-3 px-3 rounded-md bg-chatgpt-700 break-all group cursor-pointer">
         <Ellipse :color="props.color" />
         <NavText>{{ props.chat.name }}</NavText>
-        <div class="grid grid-cols-3 w-[11rem]">
-            <button @click="edit = true" type="button" class="w-full h-full p-1 hover:opacity-50">
+        <div class="flex items-center gap-2 w-auto">
+            <button @click="edit = true" type="button" class="w-4 h-4 hover:opacity-50">
                 <ChatEdit />
             </button>
-            <button @click="edit = !edit" type="button" class="w-full h-full p-1 hover:opacity-50 disabled:opacity-50" disabled>
+            <!-- <button @click="edit = !edit" type="button" class="w-4 h-4 hover:opacity-50 disabled:opacity-50" disabled>
                 <ChatUpload />
-            </button>
-            <button @click="handleModal" type="button" class="w-full h-full p-1 hover:opacity-50">
+            </button> -->
+            <button @click="handleModal" type="button" class="w-4 h-4 hover:opacity-50">
                 <ChatDelete />
                 <DeleteModal v-if="openDeleteModal && props.chat" :chat="props.chat" :handleModal="handleModal" />
             </button>
@@ -31,11 +31,9 @@
 <script setup lang="ts">
 import { ref } from "vue"
 import ChatEdit from "../../../../icons/chat-edit.vue"
-import ChatUpload from "../../../../icons/chat-upload.vue"
 import ChatDelete from "../../../../icons/chat-delete.vue"
 import NavText from "../NavText.vue"
 import Ellipse from "./Ellipse.vue"
-import { useRouter } from "vue-router"
 import DeleteModal from "./DeleteModal.vue"
 import { SideBarData } from "../../../../../kraal-api/types.azureAPI"
 import { useSideBarStoreAzureStore } from "../../../../../stores/sideBarStoreAzure"
