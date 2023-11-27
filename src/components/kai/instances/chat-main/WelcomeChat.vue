@@ -81,15 +81,14 @@ async function handleSubmit(e: any) {
             throw new Error("Can not read chatId");
         } else {
             store.isInputLocked = true;
-            await store.sendChatMessage(chatId, msg);
 
-            if (files) {
+            store.sendChatMessage(chatId, msg);
+            if (false && files) {
                 console.log(files);
                 const fileSend = await azureAPI.chat.sendDocuments(chatId, files);
                 console.log(fileSend);
                 // if (!fileSend) throw new Error("Can send files");
             }
-
             // TODO: clear input after form submit complete
             loading.value = true
             // input.value = "" // See on top

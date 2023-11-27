@@ -1,6 +1,6 @@
 <template>
     <KraalAILayout>
-        <WelcomeChat v-if="recentChatId.toString() || recentChatId === 0" />
+        <WelcomeChat v-if="recentChatId === 0" />
         <ChatInstance v-else :chatId="recentChatId" :lockInput="isInputLocked" />
     </KraalAILayout>
 </template>
