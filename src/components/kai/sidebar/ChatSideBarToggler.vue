@@ -1,15 +1,30 @@
+<script setup lang="ts">
+/**
+ * Simple button component
+ * We have @click="handeClick" on top of this
+ */
+
+type Props = {
+    flip?: boolean;
+    isOpen: boolean;
+}
+const props = defineProps<Props>()
+</script>
+
+
 <template>
-    <button type="button" :class="[
-        'flex items-center justify-center pr-1',
-        'h-[2.75rem] min-h-[2.75rem] w-[1.5rem] min-w-[1.5rem] absolute left-full top-1/2 -translate-y-1/2 z-[11]',
-        'transition-colors duration-200 text-white text-sm rounded-r-full bg-chatgpt-600 z-10'
-    ]">
-        <i :class="['fa fa-angle-left transition-transform linear text-lg', store.getSidebar() ? 'scale-x-100' : '-scale-x-100']"></i>
+    <button type="button" :class="['relative w-6', props.flip ? '-scale-x-100' : '']">
+        <svg class='w-full fill-chatgpt-600' viewBox="0 0 40 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- width="160" height="40" -->
+            <path
+                d="M6.35572e-07 160L7.62939e-06 -5.56315e-06C5.88094e-06 40 40 40 40 80C40 120 2.38403e-06 120 6.35572e-07 160Z"
+                fill="fillColor" />
+        </svg>
+        <div class="absolute inset-0 grid place-items-center pr-1">
+            <i :class="[
+                'fa fa-angle-left transition-transform linear text-white relative',
+                props.isOpen ? 'scale-x-100' : '-scale-x-100'
+            ]"></i>
+        </div>
     </button>
 </template>
-
-<script setup lang="ts">
-import { useChatSideBarStore } from '../../../stores/chatSideBar';
-
-const store = useChatSideBarStore()
-</script>
