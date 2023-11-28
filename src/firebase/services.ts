@@ -54,7 +54,7 @@ export async function sendEmailVerification(): Promise<boolean> {
             return false;
         }
         await firebase.sendEmailVerification(user, {
-            url: window.location.href + '/user/verified',
+            url: window.location.hostname + '/user/verified',
         });
         return true;
     } catch (error) {
