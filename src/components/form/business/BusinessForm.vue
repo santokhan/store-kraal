@@ -2,7 +2,6 @@
     <form @submit="handleSubmit"
         class="w-full rounded-xl bg-[#2463eb0a] p-6 lg:p-10 my-10 lg:my-0 backdrop-blur-sm text-blue-950">
         <p class="text-blue-950">Create your account to connect with Kraal’s dedicated enterprise team.</p>
-
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-5 gap-y-5 mt-5">
             <div class="space-y-2 col-span-2 lg:col-span-1">
                 <label class="flex items-center font-bold"><span>First Name</span><span>*</span></label>
@@ -56,7 +55,7 @@
                 <Warning :message="firebaseWarn" class="w-full" />
                 <button type="submit" :disabled="disabled"
                     class="block h-12 px-8 font-semibold bg-kraal-blue-500 text-white rounded-xl hover:bg-kraal-blue-700 my-2 capitalize">
-                    <SpinnerCircle v-if="submitMessage == 'loading'" class="fill-kraal-blue-500 mx-12" />
+                    <SpinnerCircle v-if="submitMessage === 'loading'" class="fill-kraal-blue-500 mx-12" />
                     <span v-else>{{ submitMessage }}</span>
                 </button>
                 <div class="space-y-2">
@@ -139,17 +138,17 @@ function handleSubmit(e: Event) {
         try {
             const userCredential = await firebase.createUser(email, confirmPass);
             if (userCredential) {
-                const response = await azureAPI.auth.signupWithBusiness(new SignupData(firstName, lastName, company));
+                await azureAPI.auth.signupWithBusiness(new SignupData(firstName, lastName, company));
                 // const userData = await addBusinessUser({ firstName, lastName, email, jobTitle, company, organization, accounting, phone })
-                if (response) {
-                    submitMessage.value = 'Thank you for signing up';
-                    disabled.value = true;
+                submitMessage.value = 'Thank you for signing up';
+                disabled.value = true;
 
-                    router.push('/user/verify');
-                }
+                router.push('/user/verify');
             }
         } catch (error: any) {
             firebaseWarn.value = error.message;
+            // set default button text when got an error
+            submitMessage.value = 'Create Account';
         }
     }
 
