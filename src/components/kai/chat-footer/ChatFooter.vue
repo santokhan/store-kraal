@@ -9,7 +9,7 @@
                     <div class="grid grid-cols-[2rem_1fr_2rem] gap-2 items-end p-3">
                         <div
                             class="w-8 h-8 rounded-lg grid place-items-center relative overflow-hidden text-gray-300 hover:text-white">
-                            <Attachment class="w-5" />
+                            <DocumentIcon class="h-5" />
                             <FileInput :handleFile="handleFile" />
                         </div>
                         <div class="relative w-full h-full flex items-center">
@@ -41,6 +41,7 @@ import AttachPreview from "../instances/chat-main/AttachPreview.vue";
 import Attachment from "../../icons/attachment.vue";
 import FileInput from "../instances/chat-main/file-input/FileInput.vue";
 import ChatFooterInfo from "../instances/chat-main/ChatFooterInfo.vue";
+import { DocumentIcon } from '@heroicons/vue/24/outline'
 
 const props = defineProps<{ loading: boolean }>()
 const emits = defineEmits(["onSend"]);
