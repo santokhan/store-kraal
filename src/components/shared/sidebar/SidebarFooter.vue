@@ -4,45 +4,44 @@
         <!-- Drop Up bar -->
         <div v-if="openSettings" ref="settings"
             class="absolute bottom-full left-0 right-0 text-gray-800 rounded-lg overflow-hidden py-1 z-[10] bg-gray-100 mx-2 mb-1">
-            <NavLinkFooter :to="userNavs[0].path">
+            <NL :to="userNavs[0].path">
                 <IconBox>
                     <UserSimple class="w-5" />
                 </IconBox>
                 {{ userNavs[0].name }}
-            </NavLinkFooter>
-            <NavLinkFooter :to="userNavs[1].path">
+            </NL>
+            <NL :to="userNavs[1].path">
                 <IconBox>
                     <Team class="w-5" />
                 </IconBox>
                 {{ userNavs[1].name }}
-            </NavLinkFooter>
-            <NavLinkFooter :to="userNavs[2].path">
+            </NL>
+            <NL :to="userNavs[2].path">
                 <IconBox>
                     <Card class="w-5" />
                 </IconBox>
                 {{ userNavs[2].name }}
-            </NavLinkFooter>
+            </NL>
 
             <hr class="border-1 my-1 mx-3">
-            <NavLinkFooter :to="userNavs[3].path">
+            <NL :to="userNavs[3].path">
                 <IconBox>
                     <Logout class="w-5" />
                 </IconBox>
                 {{ userNavs[3].name }}
-            </NavLinkFooter>
+            </NL>
         </div>
 
         <!-- [SK] Santo Khan   ••• -->
-        <button type="button" @click="handleOpenSettings" ref="opener" title="Settings"
+        <button v-if="userStoreRef.currentUser.value" type="button" @click="handleOpenSettings" ref="opener"
+            title="Settings"
             :class="[pathExistOnNavs() ? 'bg-gray-100' : '', 'w-full text-gray-800 flex items-center gap-3 px-2 h-[3.25rem] rounded-lg hover:bg-gray-100 overflow-x-hidden']">
-            <div v-if="userData?.firstName"
-                class="bg-white min-w-[2.25rem] min-h-[2.25rem] flex justify-center items-center rounded">
-                <h5 class="font-medium">{{ userData.firstName[0] }}{{ userData.lastName[0] }}</h5>
+            <div class="bg-white min-w-[2.25rem] min-h-[2.25rem] grid place-items-center rounded font-medium">
+                {{ userStoreRef.currentUser.value?.initials }}
             </div>
-            <div class="w-full flex justify-start">
-                <h5 class="font-semibold" v-if="userData">{{ userData.firstName }} {{ userData.lastName }}</h5>
-                <h5 v-else>...</h5>
-            </div>
+            <h5 class="w-full flex justify-start font-medium text-sm tracking-wider font-normal">
+                {{ userStoreRef.currentUser.value?.fullName }}
+            </h5>
             <div class="w-auto"><i class="fa fa-ellipsis-h text-sm text-neutral-400"></i></div>
         </button>
     </div>
@@ -50,7 +49,7 @@
 
 <script setup lang="ts">
 import { onClickOutside } from '@vueuse/core';
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { businessUserInfo } from '../../../firebase/read.business.user'
 import Logout from '../../icons/logout.vue';
 import Card from '../../icons/card.vue';
@@ -58,7 +57,10 @@ import Team from '../../icons/team.vue';
 import UserSimple from '../../icons/user-simple.vue';
 import { RouterLink, useRoute } from 'vue-router';
 import IconBox from '../../kai/sidebar/footer/IconBox.vue';
-import NavLinkFooter from './NavLinkFooter.vue';
+import NL from './NavLinkFooter.vue';
+import { storeToRefs } from 'pinia';
+import { useUserStore } from '../../../stores/userStore';
+import UserProfileIcon from '../../kai/sidebar/footer/UserProfileIcon.vue';
 
 const route = useRoute()
 
@@ -107,6 +109,14 @@ function pathExistOnNavs(): boolean {
     })
     return exist
 }
+
+const userStore = useUserStore();
+const userStoreRef = storeToRefs(userStore);
+onMounted(async () => {
+    if (!userStore.currentUser) {
+        await userStore.loadUser();
+    }
+})
 </script>
 
 <style scoped></style>
