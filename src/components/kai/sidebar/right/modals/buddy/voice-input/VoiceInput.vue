@@ -1,6 +1,8 @@
 <template>
-    <button type="button"
-        class="w-60 lg:w-96 h-60 lg:h-96 grid place-items-center relative text-indigo-500 hover:text-indigo-600 focus:text-indigo-700">
+    <button type="button" :class="[
+        'w-60 lg:w-96 h-60 lg:h-96 grid place-items-center relative text-indigo-500',
+        'hover:text-indigo-600 focus:text-indigo-700'
+    ]">
         <ColorDots />
         <div class="rounded-full radial-gradient p-1">
             <div class="w-full h-full bg-chatgpt-600 rounded-full grid place-items-center">
