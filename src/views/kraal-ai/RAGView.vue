@@ -15,10 +15,10 @@
             </div>
         </header>
         <main class="grid lg:grid-cols-2 h-full">
-            <div :class="['px-4 lg:px-6 py-10', 'text-gray-200 grid place-items-center']">
+            <div :class="['w-full px-4 lg:px-6 py-10', 'text-gray-200 flex justify-center']">
                 <div class="w-full max-w-screen-sm space-y-6">
-                    <div class="border border-gray-600 rounded-xl shadows">
-                        <div class="w-full bg-[#343541] rounded-xl relative grid place-items-center">
+                    <div class="w-full border border-gray-600 rounded-xl shadows">
+                        <button type="button" class="w-full bg-[#343541] rounded-xl relative grid place-items-center">
                             <div class="py-4 grid place-items-center gap-2 text-gray-400">
                                 <svg class="w-20 h-20" viewBox="0 0 115 115" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="57.5" cy="57.5" r="56.5" stroke="currentColor" stroke-width="2"
@@ -29,15 +29,20 @@
                                 </svg>
                                 <p class="text-center text-base text-gray-400 tracking-widest">Upload Document</p>
                             </div>
-                            <input type="file" name="" id="" class="absolute inset-0 opacity-0">
-                        </div>
+                            <input @change="handleInput" type="file" name="attachment" id="attachment"
+                                class="absolute inset-0 opacity-0">
+                        </button>
+                        <AttachmentPreview v-if="fileInput" :files="fileInput"
+                            :removeFiles="(index) => { removeFiles(index) }" class="mb-2" />
                         <div class="flex justify-between items-center border-t border-gray-600 py-1">
-                            <button type="button" :class="['px-4 py-2 hover:text-white']">
+                            <button type="button" :class="['px-4 py-2 hover:text-white relative']">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                     stroke="currentColor" class="w-5 h-5">
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.372L8.552 18.32m.009-.01l-.01.01m5.699-9.941l-7.81 7.81a1.5 1.5 0 002.112 2.13" />
                                 </svg>
+                                <input @change="handleInput" type="file" name="attachment" id="attachment"
+                                    class="absolute inset-0 opacity-0">
                             </button>
                             <button type="button" :class="['px-4 py-2 hover:text-white', 'flex items-center gap-1']">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -57,7 +62,7 @@
                             </button>
                         </div>
                     </div>
-                    <div class="grid sm:grid-cols-2 gap-3">
+                    <!-- <div class="grid sm:grid-cols-2 gap-3">
                         <div class="space-y-1" v-for="(item, index) in fileList" :key="index">
                             <div
                                 class="grid grid-cols-[3rem_auto_3rem] place-items-center gap-3 py-2 bg-[#343541] rounded-xl">
@@ -84,8 +89,8 @@
                             </div>
                             <p class="text-gray-500 text-xs">{{ item.description }}</p>
                         </div>
-                    </div>
-                    <div class="grid sm:grid-cols-2 gap-3">
+                    </div> -->
+                    <!-- <div class="grid sm:grid-cols-2 gap-3">
                         <button type="button"
                             class="h-12 rounded-lg bg-kraal-purple-500 text-gray-100 px-12 flex justify-center items-center gap-2">
                             <div class="w-5 h-5 grid place-items-center">
@@ -101,37 +106,34 @@
                         </button>
                         <button type="button"
                             class="h-12 rounded-lg bg-kraal-purple-500 text-gray-100 px-12">Submit</button>
-                    </div>
+                    </div> -->
                 </div>
             </div>
-            <div :class="['px-4 lg:px-6 py-10', 'flex flex-col items-center justify-end', 'border-l border-gray-600']">
+            <div :class="['px-4 lg:px-6 py-10', 'flex flex-col items-center', 'border-l border-gray-600']">
                 <div class="w-full max-w-screen-sm rounded-xl border border-gray-600 px-1">
-                    <div class="flex gap-1 items-start">
-                        <button type="button" :class="['h-10 w-10 hover:text-white grid place-items-center relative']">
+                    <div class="flex gap-1 items-center pl-2.5">
+                        <!-- <button type="button" :class="['h-10 w-10 hover:text-white grid place-items-center relative']">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-5 h-5">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.372L8.552 18.32m.009-.01l-.01.01m5.699-9.941l-7.81 7.81a1.5 1.5 0 002.112 2.13" />
                             </svg>
                             <FileInput :handleFile="handleFile" />
-                        </button>
-                        <textarea rows="1" name="description" placeholder="Message GPT" v-model="message"
+                        </button> -->
+                        <!-- <textarea rows="1" name="description" placeholder="Message GPT" v-model="message"
                             class="w-full bg-transparent py-2 placeholder:text-gray-500 text-sm focus:outline-none"
-                            spellcheck="false"></textarea>
+                            spellcheck="false"></textarea> -->
+                        <input type="search" name="description" placeholder="Search GPT" v-model="message"
+                            class="w-full bg-transparent py-3 placeholder:text-gray-500 text-sm focus:outline-none"
+                            spellcheck="false">
                         <div class="h-10 w-10 grid place-items-center">
                             <button type="button"
-                                :class="['h-8 w-8 bg-gray-100 rounded-lg text-gray-800 grid place-items-center hover:bg-white']">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-miterlimit="10" stroke-width="1.5"
-                                        d="M18.07 9.57L12 3.5 5.93 9.57M12 20.5V3.67">
-                                    </path>
-                                </svg>
+                                :class="[
+                                    'h-8 w-8 text-gray-100 rounded-lg grid place-items-center hover:text-kraal-purple-500']">
+                                <i class="fa fa-search" aria-hidden="true"></i>
                             </button>
                         </div>
                     </div>
-                    <AttachmentPreview v-if="fileInput" :files="fileInput" :removeFiles="(index) => { removeFiles(index) }"
-                        class="mb-2" />
                 </div>
             </div>
         </main>
@@ -193,5 +195,13 @@ const fileList: Array<FileData> = [
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore"
     },
 ]
+
+function handleInput(e: Event) {
+    const target = e.target as HTMLInputElement;
+    const files = target.files;
+    if (files) {
+        handleFile(files);
+    }
+}
 </script>
 
