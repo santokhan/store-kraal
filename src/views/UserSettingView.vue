@@ -116,7 +116,7 @@
                     </div>
                     <div class="mt-4">
                         <p>Enable two-factor authentication to add an extra layer of security to your
-                            account. We support 2FA via SMA and Google Authenticator only.</p>
+                            account. We support 2FA via SMS and Google Authenticator only.</p>
                         <div class="mt-4">
                             <button class="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600">Enable two-factor
                                 authentication</button>
