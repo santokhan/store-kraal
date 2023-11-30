@@ -14,8 +14,8 @@
         </header>
         <main class="w-full grid lg:grid-cols-2">
             <div :class="['w-full px-4 lg:px-6 py-12 grid place-items-center']">
-                <div class="w-full max-w-md space-y-6">
-                    <div class="space-y-4">
+                <div class="w-full max-w-md space-y-4">
+                    <!-- <div class="space-y-4">
                         <p>Hi friend I will help you.Add a new feature. Click the Listen button below.</p>
                         <p>
                             Then you can say something like "make all AI, automate the monthly marketing analytics report by
@@ -23,8 +23,8 @@
                             generate a report with graph. Do it every first Monday of the new month."
                         </p>
                         <p>What would you like to make?</p>
-                    </div>
-                    <div class="grid place-items-center bg-[#181A1C] w-full aspect-square">
+                    </div> -->
+                    <div class="grid place-items-center bg- [#181A1C] w-full aspect-square rounded-full">
                         <VoiceInput />
                     </div>
                     <div class="grid place-items-center">
