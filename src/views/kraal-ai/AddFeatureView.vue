@@ -12,7 +12,7 @@
                     class="text-white bg-kraal-purple-500 hover:bg-kraal-purple-500/80 font-medium rounded-lg text-sm px-4 py-2 focus:outline-none">Submit</button>
             </div>
         </header>
-        <main class="w-full grid lg:grid-cols-2">
+        <main class="w-full flex">
             <div :class="['w-full px-4 lg:px-6 py-12 grid place-items-center']">
                 <div class="w-full max-w-md space-y-4">
                     <!-- <div class="space-y-4">
@@ -28,12 +28,12 @@
                         <VoiceInput />
                     </div>
                     <div class="grid place-items-center">
-                        <button type="button"
+                        <button type="button" @click="openForm = !openForm"
                             class="text-white bg-kraal-purple-500 hover:bg-kraal-purple-500/80 font-medium rounded-lg text-sm px-4 py-2 focus:outline-none">Listen</button>
                     </div>
                 </div>
             </div>
-            <div :class="['w-full px-4 lg:px-6 py-12', 'border-l border-gray-600']">
+            <div v-if="openForm" :class="['w-full px-4 lg:px-6 py-12', 'border-l border-gray-600']">
                 <form class="rounded-lg space-y-12" @submit="handle_form_submit">
                     <div class="grid gap-6">
                         <div class="">
@@ -133,6 +133,7 @@ const checkList = ["Web Browsing", "DALL-E Image Generation", "Code Interpreter"
 const checkState = reactive(checkList.map(e => false));
 const state = reactive<{ name: string, desc: string }>({ name: "", desc: "" })
 const fileInput = ref<File[]>([]);
+const openForm = ref<boolean>(false);
 
 function handleFiles(e: any) {
     const { files } = e.target;
