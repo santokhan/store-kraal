@@ -3,7 +3,7 @@
         <div class="fixed left-0 top-0 w-full h-screen flex justify-center items-center z-[51] bg-black/10">
             <div class="w-full max-w-lg text-gray-400 bg-chatgpt-600 rounded-xl shadow-lg">
                 <div class="flex justify-between items-center p-4">
-                    <p class="font-medium text-sm select-none">
+                    <p class="font-medium text-sm">
                         Delete Chat "<span class="select-text">
                             {{ props.chat.name.split(' ').slice(0, 5).join(" ") }}...
                         </span>"
@@ -13,9 +13,9 @@
                     </button>
                 </div>
                 <hr class="border-gray-700">
-                <div class="flex flex-col items-center gap-4 py-10">
-                    <Kraal class="w-20 select-none" />
-                    <h2 class="w-full text-xl font-semibold text-center select-none">Are you sure to delete?</h2>
+                <div class="flex flex-col items-center space-y-3 py-10">
+                    <h3 v-for="(item, index) in alert" :key="index" class="w-full font-medium text-lg text-center">{{
+                        item }}</h3>
                 </div>
                 <hr class="border-gray-700">
                 <div class="p-3">
@@ -61,4 +61,6 @@ async function handleDelete() {
 
 // on input change
 watch(name, () => { err.value = false })
+
+const alert = ["Are you sure?", "You can’t undo once deleted."]
 </script>
