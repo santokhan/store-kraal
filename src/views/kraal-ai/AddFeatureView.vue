@@ -1,169 +1,382 @@
-<template>
-    <FixedContainer class="bg-[#343541] text-gray-100">
-        <header :class="['px-4 py-2 border-b border-gray-600', 'flex justify-between items-center']">
-            <div class="w-full">
-                <BackButton />
-            </div>
-            <div>
-                <h5 class="font-medium whitespace-nowrap">New feature</h5>
-            </div>
-            <div class="w-full flex items-center justify-end">
-                <button type="button"
-                    class="text-white bg-kraal-purple-500 hover:bg-kraal-purple-500/80 font-medium rounded-lg text-sm px-4 py-2 focus:outline-none">Submit</button>
-            </div>
-        </header>
-        <main class="w-full flex">
-            <div :class="['w-full px-4 lg:px-6 py-12 grid place-items-center']">
-                <div class="w-full max-w-md space-y-4">
-                    <!-- <div class="space-y-4">
-                        <p>Hi friend I will help you.Add a new feature. Click the Listen button below.</p>
-                        <p>
-                            Then you can say something like "make all AI, automate the monthly marketing analytics report by
-                            taking data from.Salesforce add for the last month and putting it excel and analyzing it to
-                            generate a report with graph. Do it every first Monday of the new month."
-                        </p>
-                        <p>What would you like to make?</p>
-                    </div> -->
-                    <div class="grid place-items-center bg- [#181A1C] w-full aspect-square rounded-full">
-                        <VoiceInput />
-                    </div>
-                    <div class="grid place-items-center">
-                        <button type="button" @click="openForm = !openForm"
-                            class="text-white bg-kraal-purple-500 hover:bg-kraal-purple-500/80 font-medium rounded-lg text-sm px-4 py-2 focus:outline-none">Listen</button>
-                    </div>
-                </div>
-            </div>
-            <div v-if="openForm" :class="['w-full px-4 lg:px-6 py-12', 'border-l border-gray-600']">
-                <form class="rounded-lg space-y-12" @submit="handle_form_submit">
-                    <div class="grid gap-6">
-                        <div class="">
-                            <label for="first-name" class="block text-sm font-medium leading-6">Name</label>
-                            <div class="mt-2">
-                                <input type="text" name="first-name" id="first-name" placeholder="Name your GPT"
-                                    v-model="state.name"
-                                    class="block w-full bg-transparent text-gray-100 rounded-md border border-gray-600 px-2 py-1.5 shadow-sm focus:outline-none placeholder:text-gray-500 sm:text-sm sm:leading-6" />
-                            </div>
-                        </div>
 
-                        <div class="">
-                            <label for="last-name" class="block text-sm font-medium leading-6">Description</label>
-                            <div class="mt-2">
-                                <input type="text" name="last-name" id="last-name" v-model="state.desc"
-                                    placeholder="Add is short description about what this GPT does"
-                                    class="block w-full bg-transparent text-gray-100 rounded-md border border-gray-600 px-2 py-1.5 shadow-sm focus:outline-none placeholder:text-gray-500 sm:text-sm sm:leading-6" />
-                            </div>
-                        </div>
-                        <div class="">
-                            <label for="country" class="block text-sm font-medium leading-6">Conversation
-                                starter</label>
-                            <div class="mt-2">
-                                <select id="country" name="country" autocomplete="country-name"
-                                    class="block w-full bg-[#343541] text-gray-100 rounded-md border border-gray-600 px-2 py-1.5 shadow-sm focus:outline-none text-sm sm:leading-6">
-                                    <option>United States</option>
-                                    <option>Canada</option>
-                                    <option>Mexico</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="">
-                            <label for="about" class="block text-sm font-medium leading-6">Instructions</label>
-                            <div class="mt-2">
-                                <textarea rows="4" name="description"
-                                    placeholder="What does this GPT do? How does it behave? What should it avoid doing?"
-                                    class="w-full bg-transparent text-gray-100 rounded-xl px-3 py-2 placeholder:text-gray-500 text-sm border border-gray-600 focus:outline-none"
-                                    spellcheck="false"></textarea>
-                            </div>
-                        </div>
-                        <div class="space-y-3">
-                            <h2 class="text-base font-semibold leading-7">Knowledge</h2>
-                            <p class="text-sm leading-6">
-                                Conversation with your GPT may include file contents. The file can be downloaded when
-                                the code interpreter is enabled.
-                            </p>
-                            <p class="text-sm leading-6">
-                                The following files are only available for code interpreters.
-                            </p>
-                            <div class="flex flex-wrap gap-4 py-1" v-if="fileInput">
-                                <template v-for="(item, index) in fileInput" :key="index">
-                                    <Preview :file="item" :i="index" :removeFiles="removeFiles"></Preview>
-                                </template>
-                            </div>
-                            <div class="">
-                                <button type="button"
-                                    class="relative overflow-hidden text-gray-100 hover:text- white border border-gray-600 hover:bg-kraal-purple-500 font-medium rounded-lg text-sm px-5 py-2.5">
-                                    <span class="relative">Upload files</span>
-                                    <input class="absolute w-full inset-0 opacity-0" id="file_input" type="file"
-                                        @change="handleFiles">
-                                </button>
-                            </div>
-                        </div>
-
-                        <fieldset class="space-y-2">
-                            <legend class="text-sm font-medium leading-6">Capabilities</legend>
-                            <template v-for="item, i in checkList" :key="i">
-                                <Check v-if="item" :title="item" :index="i" :handleChecked="checkbox_clicked" />
-                            </template>
-                        </fieldset>
-
-                        <div class="grid gap-2">
-                            <h5 class="text-sm font-medium leading-6">Actions</h5>
-                            <div class="">
-                                <button type="submit"
-                                    class="text-gray-100 border border-gray-600 font-medium rounded-lg text-sm px-5 py-2.5 hover:bg-kraal-purple-500">
-                                    Create new action
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </main>
-    </FixedContainer>
-</template>
-
-<script setup lang="ts">
-import { reactive, ref } from 'vue';
-import Check from '../../components/kai/sidebar/right/rag/input/Check.vue';
-import VoiceInput from '../../components/kai/sidebar/right/modals/buddy/voice-input/VoiceInput.vue';
-import FixedContainer from '../../components/shared/container/FixedContainer.vue';
-import Preview from '../../components/kai/instances/chat-main/attachment/Preview.vue';
+<script lang="ts" setup>
+// @ts-nocheck+
+// import * as marked from 'marked';
+import markdownIt from 'markdown-it';
+// import DOMPurify from 'dompurify';
+import { onMounted, reactive, ref } from 'vue';
+import axios from 'axios';
 import BackButton from './BackButton.vue';
 
-const checkList = ["Web Browsing", "DALL-E Image Generation", "Code Interpreter"];
-const checkState = reactive(checkList.map(e => false));
-const state = reactive<{ name: string, desc: string }>({ name: "", desc: "" })
-const fileInput = ref<File[]>([]);
-const openForm = ref<boolean>(false);
+const ws = ref<any>(null);
+const mediaRecorder = ref<any>(null)
+const audioChunks = ref<any[]>([])
+const transcription = ref<string>('')
+const errorMessage = ref<string>('')
+const awaitingFollowUp = ref<boolean>(false)
+const isRecording = ref<boolean>(false)
+const editMode = ref<string>('') // To track which section is being edited
+const editableDescription = ref<string>('') // To hold the editable content for description
+const editableInstructions = ref<string>('') // To hold the editable content for description
+const editableName = ref<string>('') // To hold the editable content for description
+const loading = ref<boolean>(false)
+const editableResponse = ref<string>('') // Holds the editable response
+const isResponseReceived = ref<boolean>(false) // Tracks if a response has been received
+const featureInfo = reactive<{ name: string; description: string; instructions: string }>({ name: '', description: '', instructions: '' });
 
-function handleFiles(e: any) {
-    const { files } = e.target;
-    for (const file of files) {
-        fileInput.value.push(file)
+onMounted(connectWebSocket)
+
+function connectWebSocket() {
+    // WebSocket URL based on the environment
+    // const wsUrl = process.env.NODE_ENV === 'production'
+    //     ? 'wss://kraaltalk-5bfb8353b69a.herokuapp.com'
+    //     : 'ws://localhost:8080';
+    const wsUrl = "wss://kraaltalk-5bfb8353b69a.herokuapp.com";
+    ws.value = new WebSocket(wsUrl);
+    ws.value.onopen = () => console.log("WebSocket connection established");
+    ws.value.onmessage = (event: any) => {
+        try {
+            loading.value = false;
+            const data = JSON.parse(event.data);
+            console.log("Complete WebSocket data received:", data);
+            if (data.status === 'completed') {
+                handleResponseReceived(data.details);
+                console.log("Feature info updated:", featureInfo);
+            } else if (data.status === 'incomplete') {
+                transcription.value = data.question;
+                awaitingFollowUp.value = true;
+            } else if (data.error) {
+                errorMessage.value = `${data.error} Try recording again.`;
+                awaitingFollowUp.value = false;
+            }
+        } catch (error) {
+            errorMessage.value = "Error parsing message from server: " + error;
+            console.error("WebSocket message parsing error:", error);
+        }
+    };
+    ws.value.onerror = (error: any) => {
+        errorMessage.value = "WebSocket connection error: " + (error.message ||
+            "Unknown Error");
+        console.error("WebSocket error:", error);
+    };
+    ws.value.onclose = (event: any) => {
+        if (!event.wasClean) {
+            errorMessage.value = `WebSocket connection closed unexpectedly: ${event.reason}`;
+        } else {
+            errorMessage.value = "WebSocket connection closed";
+        }
+    };
+}
+async function startRecording() {
+    if (isRecording.value) {
+        console.log("Already recording, not starting a new recording");
+        return;
+    }
+    errorMessage.value = '';
+    isRecording.value = true;
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder.value = new MediaRecorder(stream);
+        audioChunks.value = [];
+        mediaRecorder.value.ondataavailable = (e: any) => {
+            if (e.data && e.data.size > 0) {
+                audioChunks.value.push(e.data);
+            }
+        };
+        mediaRecorder.value.onstop = () => {
+            processRecording();
+        };
+        mediaRecorder.value.start(1000);
+    } catch (error: any) {
+        errorMessage.value = "Error starting recording: " + (error.message || "Unknown Error");
+        isRecording.value = false;
     }
 }
-function removeFiles(index: number) {
-    fileInput.value.splice(index, 1)
-}
-
-function checkbox_clicked(index: number) {
-    checkState[index] = !checkState[index];
-}
-
-async function handle_form_submit(e: any) {
-    e.preventDefault();
-    const formData = new FormData()
-
-    formData.append("name", state.name)
-    formData.append("description", state.desc)
-    for (const file of fileInput.value) {
-        formData.append("file", file);
+function stopRecording() {
+    if (mediaRecorder.value && mediaRecorder.value.state === 'recording') {
+        mediaRecorder.value.stop();
     }
+    isRecording.value = false;
+}
+function processRecording() {
+    loading.value = true;
+    const audioBlob = new Blob(audioChunks.value, { type: 'audio/wav' });
+    if (!audioBlob.size) {
+        errorMessage.value = "No data recorded. Please try again.";
+        loading.value = false;
+        return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+        ws.value.send(reader.result);
+    };
+    reader.onerror = () => {
+        errorMessage.value = "Error processing the recording.";
+        loading.value = false;
+    };
+    reader.readAsDataURL(audioBlob);
+    audioChunks.value = [];
+}
+function parseMarkdown(markdown: string) {
+    if (!markdown) return '';
+    // const rawHtml = marked(markdown);
+    // return DOMPurify.sanitize(rawHtml);
 
-    formData.forEach(e => {
-        console.log(e);
-    })
-    // await fetch()
+    const md = new markdownIt()
+    const rawHtml = md.render(markdown);
+    return rawHtml;
+}
+function enterEditMode(section: string) {
+    editMode.value = section;
+    switch (section) {
+        case 'name':
+            editableName.value = featureInfo.name;
+            break;
+        case 'description':
+            editableDescription.value = featureInfo.description;
+            break;
+        case 'instructions':
+            editableInstructions.value = featureInfo.instructions;
+            break;
+        // Add more cases as needed
+    }
+}
+function saveEdits() {
+    switch (editMode.value) {
+        case 'name':
+            featureInfo.name = editableName.value;
+            break;
+        case 'description':
+            featureInfo.description = editableDescription.value;
+            break;
+        case 'instructions':
+            featureInfo.instructions = editableInstructions.value;
+            break;
+        // Add more cases as needed
+    }
+    editMode.value = ''; // Exit edit mode
+}
+function updateFeatureInfo(data: any) {
+    if (data.name) featureInfo.name = data.name;
+    if (data.description) featureInfo.description =
+        parseMarkdown(data.description);
+    if (data.instructions) featureInfo.instructions =
+        parseMarkdown(data.instructions);
+}
+function handleResponseReceived(responseData: any) {
+    console.log("Received Response Data:", responseData);
+    featureInfo.name = responseData.name;
+    featureInfo.description = responseData.description;
+    featureInfo.instructions = responseData.instructions;
+    editableResponse.value = `Name: ${responseData.name}\n\nDescription: ${responseData.description}\n\nInstructions: ${responseData.instructions}`;
+    isResponseReceived.value = true;
+    console.log("Updated featureInfo:", featureInfo);
+}
+function submitFeatureRequest() {
+    const payload = {
+        response: editableResponse.value,
+        // any other relevant data
+    };
+    // Replace 'your-backend-endpoint' with your actual backend endpoint
+    axios.post('your-backend-endpoint', payload)
+        .then(response => {
+            console.log('Response submitted successfully', response);
+            // Handle success
+        })
+        .catch(error => {
+            console.error('Error submitting response', error);
+            // Handle error
+        });
+}
+
+function parsedDescription() {
+    return featureInfo.description ?
+        // DOMPurify.sanitize(marked(featureInfo.description))
+        new markdownIt().render(featureInfo.description)
+        :
+        '';
+}
+function parsedInstructions() {
+    return featureInfo.instructions ?
+        // DOMPurify.sanitize(marked(featureInfo.instructions))
+        new markdownIt().render(featureInfo.instructions)
+        :
+        '';
 }
 </script>
 
-<style scoped></style>
+<template>
+    <div class="bg-[#343541] flex flex-col h-screen w-full text-white">
+        <div class="flex justify-between items-center border-b border-gray-500 px-4 py-2">
+            <div class="w-full">
+                <BackButton />
+            </div>
+            <!-- <button class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded disabled:bg-blue-400">Create</button> -->
+            <button type="button" :disabled="!isResponseReceived" @click="submitFeatureRequest"
+                class="text-white bg-kraal-purple-500 hover:bg-kraal-purple-500/80 font-medium rounded-lg text-sm px-4 py-2 focus:outline-none">Create</button>
+        </div>
+        <div class="flex flex-grow overflow-hidden">
+            <div class="flex flex-col items-center justify-center w-1/2 border-r border-gray-500 p-4">
+                <button :class="{ 'bg-red-600': isRecording, 'bg-green-600': !isRecording }" @mousedown="startRecording"
+                    @mouseup="stopRecording" class="text-white font-bold py-2 px-4 rounded focus:outline-none">
+                    {{
+                        isRecording ?
+                        'Release to Stop'
+                        :
+                        (awaitingFollowUp ? 'Respond to Question' : 'Push & Hold to Talk')
+                    }}
+                </button>
+                <div v-if="isRecording" class="mt-2 text-white">
+                    Recording... <span class="animate-ping absolute h-3 w-3 rounded-full bg-white opacity-75"></span>
+                </div>
+            </div>
+            <div class="flex flex-col w-1/2 p-4 overflow-auto text-white">
+                <!-- Name Section -->
+                <div v-if="isResponseReceived" class="mb-6">
+                    <h2 class="text-2xl font-semibold mb-2 text-white">Name</h2>
+                    <p>{{ featureInfo.name }}</p>
+                </div>
+                <!-- Description Section -->
+                <div v-if="isResponseReceived" class="mb-6">
+                    <h2 class="text-2xl font-semibold mb-2 text-white">Description</h2>
+                    <div class="prose prose-invert" v-html="parsedDescription()"></div>
+                </div>
+                <!-- Instructions Section -->
+                <div v-if="isResponseReceived" class="mb-6">
+                    <h2 class="text-2xl font-semibold mb-2 text-white">Instructions</h2>
+                    <div class="prose prose-invert" v-html="parsedInstructions()"></div>
+                </div>
+                <!-- Error Message Display -->
+                <div v-if="errorMessage" class="bg-red-200 p-4 rounded text-red-800">
+                    <p><strong>Error:</strong> {{ errorMessage }}</p>
+                </div>
+                <!-- Loading Spinner -->
+                <div v-if="loading" class="loading-spinner"></div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<style scoped>
+/*
+.container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    background-color: #1e1e1e;
+    color: white;
+    box-sizing: border-box;
+} 
+*/
+.left-section,
+.right-section {
+    flex: 1;
+    /* Flex-grow to fill the space */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    /* Padding for spacing */
+    box-sizing: border-box;
+    /* Adjusts box model to include padding and border */
+}
+
+.left-section {
+    border-right: 2px solid gray;
+    /* Vertical dividing line */
+}
+
+.right-section {
+    padding-left: 1rem;
+}
+
+button.active {
+    background-color: #f44336;
+    /* Red background for active recording */
+}
+
+/* Style for the recording indicator */
+.recording-indicator {
+    padding: 10px;
+    background-color: #ff4d4d;
+    /* Red background */
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Style for dot flashing animation */
+.dot-flashing {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: white;
+    margin: 0 5px;
+    animation: dotFlashing 1s infinite linear alternate;
+}
+
+@keyframes dotFlashing {
+    0% {
+        background-color: #e0e0e0;
+    }
+
+    50%,
+    100% {
+        background-color: white;
+    }
+}
+
+/* Style for loading spinner */
+.loading-spinner {
+    margin: 20px auto;
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #3498db;
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.feature-info,
+.error-message {
+    background-color: #333;
+    /* Slightly lighter background for visibility */
+    padding: 20px;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+@media (max-width: 768px) {
+    /* Responsive styles for smaller screens */
+}
+</style>
