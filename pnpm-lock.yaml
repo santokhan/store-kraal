@@ -32,6 +32,9 @@ dependencies:
   axios:
     specifier: ^1.5.0
     version: 1.6.2
+  dompurify:
+    specifier: ^3.0.6
+    version: 3.0.6
   firebase:
     specifier: ^9.21.0
     version: 9.23.0
@@ -41,6 +44,9 @@ dependencies:
   markdown-it:
     specifier: ^13.0.1
     version: 13.0.2
+  marked:
+    specifier: ^11.0.0
+    version: 11.0.0
   pinia:
     specifier: ^2.0.33
     version: 2.1.7(typescript@4.9.5)(vue@3.3.8)
@@ -1357,6 +1363,10 @@ packages:
   /dlv@1.1.3:
     resolution: {integrity: sha512-+HlytyjlPKnIG8XuRG8WvmBP8xs8P71y+SKKS6ZXWoEgLuePxtDoUEiH7WkdePWrQ5JBpE6aoVqfZfJUQkjXwA==}
 
+  /dompurify@3.0.6:
+    resolution: {integrity: sha512-ilkD8YEnnGh1zJ240uJsW7AzE+2qpbOUYjacomn3AvJ6J4JhKGSZ2nh4wUIXPZrEPppaCLx5jFe8T89Rk8tQ7w==}
+    dev: false
+
   /electron-to-chromium@1.4.589:
     resolution: {integrity: sha512-zF6y5v/YfoFIgwf2dDfAqVlPPsyQeWNpEWXbAlDUS8Ax4Z2VoiiZpAPC0Jm9hXEkJm2vIZpwB6rc4KnLTQffbQ==}
     dev: false
@@ -1697,6 +1707,12 @@ packages:
       linkify-it: 4.0.1
       mdurl: 1.0.1
       uc.micro: 1.0.6
+    dev: false
+
+  /marked@11.0.0:
+    resolution: {integrity: sha512-2GsW34uXaFEGTQ/+3rCnNC6vUYTAgFuDLGl70v/aWinA5mIJtTrrFAmfbLOfVvgPyxXuDVL9He/7reCK+6j3Sw==}
+    engines: {node: '>= 18'}
+    hasBin: true
     dev: false
 
   /match-sorter@6.3.1:
