@@ -7,6 +7,7 @@ import { VueFire, VueFireAuth } from 'vuefire';
 import { firebaseApp } from "./auth/firebaseApp";
 // CSS
 import "./main.css";
+import "./assets/css/markdown-github.css";
 // highlightjs https://github.com/highlightjs/vue-plugin
 import 'highlight.js/styles/stackoverflow-light.css'
 import hljs from 'highlight.js/lib/core';

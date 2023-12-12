@@ -7,6 +7,7 @@ import markdownIt from 'markdown-it';
 import { onMounted, reactive, ref } from 'vue';
 import axios from 'axios';
 import BackButton from './BackButton.vue';
+import VoiceInput from '../../components/kai/sidebar/right/modals/buddy/voice-input/VoiceInput.vue';
 
 const ws = ref<any>(null);
 const mediaRecorder = ref<any>(null)
@@ -208,15 +209,15 @@ function parsedInstructions() {
 <template>
     <div class="bg-[#343541] flex flex-col h-screen w-full text-white">
         <div class="flex justify-between items-center border-b border-gray-500 px-4 py-2">
-            <div class="w-full">
-                <BackButton />
-            </div>
+            <RouterLink to="/kraalai" class="w-6 h-6 grid place-items-center text-white hover:text-gray-200">Back
+            </RouterLink>
             <!-- <button class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded disabled:bg-blue-400">Create</button> -->
             <button type="button" :disabled="!isResponseReceived" @click="submitFeatureRequest"
                 class="text-white bg-kraal-purple-500 hover:bg-kraal-purple-500/80 font-medium rounded-lg text-sm px-4 py-2 focus:outline-none">Create</button>
         </div>
         <div class="flex flex-grow overflow-hidden">
-            <div class="flex flex-col items-center justify-center w-1/2 border-r border-gray-500 p-4">
+            <div class="flex flex-col items-center justify-center w-1/2 border-r border-gray-500 p-4 space-y-4">
+                <VoiceInput :transcription="editableResponse" />
                 <button :class="{ 'bg-red-600': isRecording, 'bg-green-600': !isRecording }" @mousedown="startRecording"
                     @mouseup="stopRecording" class="text-white font-bold py-2 px-4 rounded focus:outline-none">
                     {{
@@ -230,7 +231,7 @@ function parsedInstructions() {
                     Recording... <span class="animate-ping absolute h-3 w-3 rounded-full bg-white opacity-75"></span>
                 </div>
             </div>
-            <div class="flex flex-col w-1/2 p-4 overflow-auto text-white">
+            <div class="markdown-body flex flex-col w-1/2 px-4 md:px-8 md:py-4 overflow-auto text-white">
                 <!-- Name Section -->
                 <div v-if="isResponseReceived" class="mb-6">
                     <h2 class="text-2xl font-semibold mb-2 text-white">Name</h2>
@@ -251,7 +252,10 @@ function parsedInstructions() {
                     <p><strong>Error:</strong> {{ errorMessage }}</p>
                 </div>
                 <!-- Loading Spinner -->
-                <div v-if="loading" class="loading-spinner"></div>
+                <div v-if="loading" class="relative grid place-items-center gap-1">
+                    <div class="loading-spinner"></div>
+                    <div class="">Processing...</div>
+                </div>
             </div>
         </div>
     </div>
@@ -348,11 +352,12 @@ button.active {
 
 /* Style for loading spinner */
 .loading-spinner {
-    margin: 20px auto;
+    /* margin: 20px auto; */
     width: 50px;
     height: 50px;
     border: 5px solid #f3f3f3;
-    border-top: 5px solid #3498db;
+    /* border-top: 5px solid #3498db; */
+    border-top: 5px solid #8d41fe;
     border-radius: 50%;
     animation: spin 2s linear infinite;
 }
