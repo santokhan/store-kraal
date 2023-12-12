@@ -5,6 +5,7 @@
             class="w-full max-w-4xl mx-auto mt-auto bg-chatgpt-500 px-4 pt-2">
             <div class="rounded-xl shadow bg-chatgpt-400" :class="animateChatBox && 'animate-chatbox'">
                 <textarea :value="input" placeholder="Send a message..." @input="(e: any) => input = e.target.value"
+                    ref="aiInput"
                     class="w-full focus:outline-none resize-none overflow-auto bg-transparent text-white min-h-56 h-56 px-4 py-3"></textarea>
                 <AttachmentPreview :files="fileInput" :removeFiles="(index) => { removeFiles(index) }" />
                 <div class="p-2 flex justify-between items-center">
@@ -21,7 +22,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import AttachmentPreview from './AttachmentPreview.vue';
 import FileInputBox from './FileInputBox.vue';
 import FileInput from './file-input/FileInput.vue';
@@ -40,6 +41,7 @@ const route = useRoute();
 const loading = ref<boolean>(false);
 const store = useSideBarStoreAzureStore();
 const { animateChatBox } = storeToRefs(store);
+const aiInput = ref<HTMLElement | null>(null);
 
 const chatId = ref<number>()
 function assignInstanceId() {
@@ -96,6 +98,12 @@ async function handleSubmit(e: any) {
         }
     }
 }
+
+onMounted(() => {
+    if (aiInput.value) {
+        aiInput.value.focus();
+    }
+})
 </script>
 
 <style scoped>
