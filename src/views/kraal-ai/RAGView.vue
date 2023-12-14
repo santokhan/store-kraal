@@ -128,8 +128,7 @@
                             spellcheck="false">
                         <div class="h-10 w-10 grid place-items-center">
                             <button type="button"
-                                :class="[
-                                    'h-8 w-8 text-gray-100 rounded-lg grid place-items-center hover:text-kraal-purple-500']">
+                                :class="['text-gray-100 rounded-lg grid place-items-center hover:text-kraal-purple-500']">
                                 <i class="fa fa-search" aria-hidden="true"></i>
                             </button>
                         </div>
@@ -205,3 +204,8 @@ function handleInput(e: Event) {
 }
 </script>
 
+<style scoped>
+input:-internal-autofill-selected {
+    background-color: transparent !important;
+}
+</style>
