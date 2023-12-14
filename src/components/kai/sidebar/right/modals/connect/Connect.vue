@@ -2,7 +2,7 @@
    <Teleport to="body">
       <ModalContainer>
          <div ref="modal"
-            class="relative row-auto w-full rounded-xl text-left shadow-xl transition-all bg-modal-raisin-black max-w-2xl text-gray-200 p-6 space-y-6">
+            class="relative row-auto w-full rounded-xl text-left shadow-xl transition-all bg-modal-raisin-black max-w-3xl text-gray-200 p-6 space-y-6">
             <div class="flex items-center justify-between">
                <div class="w-8"></div>
                <ModalTitle>API Connect</ModalTitle>
@@ -24,13 +24,15 @@
                </div>
             </form>
 
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                <div v-for="(item, index) in apiList" :key="index"
-                  class="bg-[#343541] p-4 grid place-items-center gap-2 rounded-xl text-center">
+                  class="bg-[#343541] p-4 grid place-items-center gap-3 rounded-xl text-center">
                   <img src="../../../../../../assets/image/modal/connect/api.png" alt="api-connect"
                      class="w-8 h-8 object-contain">
-                  <h4 class="font-medium">{{ item.title }}</h4>
-                  <p class="text-xs text-[#8A96BC]">{{ item.description }}</p>
+                  <div class="">
+                     <h4 class="font-medium">{{ item.title }}</h4>
+                     <p class="text-xs text-[#8A96BC]">{{ item.description }}</p>
+                  </div>
                   <div>
                      <button type="button"
                         class="h-8 rounded-lg bg-kraal-purple-500 hover:bg-kraal-purple-500/80 text-gray-100 px-4 text-sm focus:bg-[#EF466F]">Connect</button>
@@ -55,8 +57,8 @@ const modal = ref<any>(null)
 
 const apiList = [
    {
-      title: "Quick Book",
-      description: "Account Software",
+      title: "QuickBook",
+      description: "Accounting Software",
    },
 ]
 </script>
