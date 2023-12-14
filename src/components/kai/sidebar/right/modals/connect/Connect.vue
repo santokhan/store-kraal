@@ -57,7 +57,7 @@ const modal = ref<any>(null)
 
 const apiList = [
    {
-      title: "QuickBook",
+      title: "QuickBooks",
       description: "Accounting Software",
    },
 ]
