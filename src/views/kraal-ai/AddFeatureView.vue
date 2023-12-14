@@ -215,46 +215,51 @@ function parsedInstructions() {
             <button type="button" :disabled="!isResponseReceived" @click="submitFeatureRequest"
                 class="text-white bg-kraal-purple-500 hover:bg-kraal-purple-500/80 font-medium rounded-lg text-sm px-4 py-2 focus:outline-none">Create</button>
         </div>
-        <div class="flex flex-grow overflow-hidden">
-            <div class="flex flex-col items-center justify-center w-1/2 border-r border-gray-500 p-4 space-y-4">
-                <VoiceInput :transcription="editableResponse" />
-                <button :class="{ 'bg-red-600': isRecording, 'bg-green-600': !isRecording }" @mousedown="startRecording"
-                    @mouseup="stopRecording" class="text-white font-bold py-2 px-4 rounded focus:outline-none">
-                    {{
-                        isRecording ?
-                        'Release to Stop'
-                        :
-                        (awaitingFollowUp ? 'Respond to Question' : 'Push & Hold to Talk')
-                    }}
-                </button>
-                <div v-if="isRecording" class="mt-2 text-white">
-                    Recording... <span class="animate-ping absolute h-3 w-3 rounded-full bg-white opacity-75"></span>
+        <div class="flex-grow flex flex-wrap overflow-auto relative">
+            <div :class="['w-full lg:w-1/2 lg:border-r border-gray-500 p-4 grid', 'bg-[#343541] sticky left-0 top-0']">
+                <div class="flex flex-col items-center justify-center space-y-4">
+                    <VoiceInput :transcription="editableResponse" />
+                    <button :class="{ 'bg-red-600': isRecording, 'bg-gray-600': !isRecording }" @mousedown="startRecording"
+                        @mouseup="stopRecording" class="text-white font-semibold py-2 px-4 rounded focus:outline-none">
+                        {{
+                            isRecording ?
+                            'Release to Stop'
+                            :
+                            (awaitingFollowUp ? 'Respond to Question' : 'Push & Hold to Talk')
+                        }}
+                    </button>
+                    <div v-if="isRecording" class="mt-2 text-white">
+                        Recording... <span class="animate-ping absolute h-3 w-3 rounded-full bg-white opacity-75"></span>
+                    </div>
                 </div>
+                <div class=""></div>
             </div>
-            <div class="markdown-body flex flex-col w-1/2 px-4 md:px-8 md:py-4 overflow-auto text-white">
-                <!-- Name Section -->
-                <div v-if="isResponseReceived" class="mb-6">
-                    <h2 class="text-2xl font-semibold mb-2 text-white">Name</h2>
-                    <p>{{ featureInfo.name }}</p>
-                </div>
-                <!-- Description Section -->
-                <div v-if="isResponseReceived" class="mb-6">
-                    <h2 class="text-2xl font-semibold mb-2 text-white">Description</h2>
-                    <div class="prose prose-invert" v-html="parsedDescription()"></div>
-                </div>
-                <!-- Instructions Section -->
-                <div v-if="isResponseReceived" class="mb-6">
-                    <h2 class="text-2xl font-semibold mb-2 text-white">Instructions</h2>
-                    <div class="prose prose-invert" v-html="parsedInstructions()"></div>
-                </div>
-                <!-- Error Message Display -->
-                <div v-if="errorMessage" class="bg-red-200 p-4 rounded text-red-800">
-                    <p><strong>Error:</strong> {{ errorMessage }}</p>
-                </div>
-                <!-- Loading Spinner -->
-                <div v-if="loading" class="relative grid place-items-center gap-1">
-                    <div class="loading-spinner"></div>
-                    <div class="">Processing...</div>
+            <div class="w-full lg:w-1/2 h-full overflow-auto+ flex flex-col items-center">
+                <div class="markdown-body px-4 md:px-8 md:py-4 text-white max-w-2xl">
+                    <!-- Name Section -->
+                    <div v-if="isResponseReceived" class="mb-6">
+                        <h2 class="text-2xl font-semibold mb-2 text-white">Name</h2>
+                        <p>{{ featureInfo.name }}</p>
+                    </div>
+                    <!-- Description Section -->
+                    <div v-if="isResponseReceived" class="mb-6">
+                        <h2 class="text-2xl font-semibold mb-2 text-white">Description</h2>
+                        <div class="prose prose-invert" v-html="parsedDescription()"></div>
+                    </div>
+                    <!-- Instructions Section -->
+                    <div v-if="isResponseReceived" class="mb-6">
+                        <h2 class="text-2xl font-semibold mb-2 text-white">Instructions</h2>
+                        <div class="prose prose-invert" v-html="parsedInstructions()"></div>
+                    </div>
+                    <!-- Error Message Display -->
+                    <div v-if="errorMessage" class="bg-red-200 p-4 rounded text-red-800">
+                        <p><strong>Error:</strong> {{ errorMessage }}</p>
+                    </div>
+                    <!-- Loading Spinner -->
+                    <div v-if="loading" class="relative grid place-items-center gap-1">
+                        <div class="loading-spinner"></div>
+                        <div class="">Processing...</div>
+                    </div>
                 </div>
             </div>
         </div>
