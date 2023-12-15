@@ -1,5 +1,5 @@
 <template>
-    <div class="fixed inset-0 h-screen overflow-auto bg-gray-800 text-gray-100">
+    <div class="fixed inset-0 h-screen overflow-auto bg-gray-800+ bg-[#343541] text-gray-100">
         <header class="px-4 py-2 border-b border-gray-600 flex justify-between items-center">
             <div>
                 <BackButton />

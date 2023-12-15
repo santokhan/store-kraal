@@ -209,8 +209,7 @@ function parsedInstructions() {
 <template>
     <div class="bg-[#343541] flex flex-col h-screen w-full text-white">
         <div class="flex justify-between items-center border-b border-gray-500 px-4 py-2">
-            <RouterLink to="/kraalai" class="w-6 h-6 grid place-items-center text-white hover:text-gray-200">Back
-            </RouterLink>
+            <BackButton />
             <!-- <button class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded disabled:bg-blue-400">Create</button> -->
             <button type="button" :disabled="!isResponseReceived" @click="submitFeatureRequest"
                 class="text-white bg-kraal-purple-500 hover:bg-kraal-purple-500/80 font-medium rounded-lg text-sm px-4 py-2 focus:outline-none">Create</button>
