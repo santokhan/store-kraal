@@ -1,11 +1,11 @@
 <template>
-    <div class="fixed inset-0 h-screen overflow-auto bg-gray-800 text-gray-100">
+    <div class="fixed inset-0 h-screen overflow-auto bg-gray-800+ bg-[#343541] text-gray-100">
         <!-- Title Bar -->
         <div class="flex justify-between items-center border-b border-gray-500 px-4 py-2">
-            <h1 class="text-xl font-semibold text-white">Back</h1>
+            <BackButton />
             <button class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded disabled:bg-blue-400">
                 User Admin
-            </button>
+            </button>                         
         </div>
         <!-- Main Content -->
         <main class="flex h-full">
@@ -134,6 +134,7 @@
 <script lang="ts">
 import axios from 'axios';
 import { ref, onMounted, computed } from 'vue';
+import BackButton from './kraal-ai/BackButton.vue';
 export default {
     setup() {
         const users = ref<any[]>([]); // This will hold the original users data
@@ -142,7 +143,6 @@ export default {
         const selectedDepartment = ref<any>(null);
         const clients = ref<any[]>([]); // Populate with your clients data
         const departments = ref<any[]>([]); // Extract unique departments from users
-
         // Simulate fetching users from API
         const fetchUsers = () => {
             // Simulate API call here
@@ -256,7 +256,7 @@ export default {
                         { name: 'Client D', role: 'User' }
                     ],
                 }
-            ]
+            ];
         };
         // Transform users data to client-centric data
         const fetchClients = () => {
@@ -298,13 +298,13 @@ export default {
                             selectedClient.value.users.splice(index, 1);
                         }
                     }
-                } catch (error) {
+                }
+                catch (error) {
                     console.error("Failed to delete user:", error);
                     // Handle error (e.g., show an error message)
                 }
             }
         };
-
         // Function to select a client
         const selectClient = (client: any) => {
             selectedClient.value = clients.value.find(c => c.name === client.name);
@@ -325,12 +325,14 @@ export default {
                     if (response.status === 200) {
                         // Update the role in the frontend state
                         user.role = newRole;
-                    } else {
+                    }
+                    else {
                         // Handle unsuccessful response
                         console.error("Failed to update role:", response);
                         // Optionally show an error message to the user
                     }
-                } catch (error) {
+                }
+                catch (error) {
                     console.error("Failed to update user role:", error);
                     // Handle network or other errors (e.g., show an error message)
                 }
@@ -361,10 +363,10 @@ export default {
             if (Array.isArray(fetchedUsers)) {
                 users.value = fetchedUsers;
                 clients.value = fetchClients();
-                const departmentSet = new Set(fetchedUsers.map(user =>
-                    user.department));
+                const departmentSet = new Set(fetchedUsers.map(user => user.department));
                 departments.value = Array.from(departmentSet);
-            } else {
+            }
+            else {
                 console.error("Fetched users is not an array:", fetchedUsers);
                 // Handle this situation appropriately, maybe set users.value to []
             }
@@ -383,7 +385,8 @@ export default {
             editUserRole,
             changeUserRole
         };
-    }
+    },
+    components: { BackButton }
 };
 </script>
 <style scoped>

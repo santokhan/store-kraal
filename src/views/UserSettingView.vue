@@ -1,8 +1,8 @@
 <template v-for="(email, index) in emails" :key="index">
-    <div class="fixed inset-0 h-screen overflow-auto bg-gray-800 text-gray-100">
+    <div class="fixed inset-0 h-screen overflow-auto bg-gray-800+ bg-[#343541] text-gray-100">
         <!-- Title Bar -->
         <div class="flex justify-between items-center border-b border-gray-500 px-4 py-2">
-            <h1 class="text-xl font-semibold text-white">Back</h1>
+            <BackButton />
             <button :disabled="!isResponseReceived" @click="submitFeatureRequest"
                 class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded disabled:bg-blue-400">
                 Edit Clients & Departments
@@ -166,6 +166,8 @@
 
 <script lang="ts">
 import { ref, onMounted } from 'vue';
+import BackButton from './kraal-ai/BackButton.vue';
+
 export default {
     setup() {
         const showNewUserForm = ref<boolean>(false);
@@ -309,7 +311,7 @@ export default {
                         { name: 'Client T', role: 'User' }
                     ],
                 }
-            ]
+            ];
         };
         // Fetch users when component is mounted
         onMounted(() => {
@@ -322,8 +324,7 @@ export default {
         }
         // Function to add email to list
         function addEmail() {
-            let emailToAdd = newEmail.value.split(/[\s,]+/).map(e => e.trim().replace(/,$/,
-                '')).filter(isEmailValid);
+            let emailToAdd = newEmail.value.split(/[\s,]+/).map(e => e.trim().replace(/,$/, '')).filter(isEmailValid);
             emails.value.push(...emailToAdd);
             newEmail.value = ''; // Reset input
         }
@@ -355,14 +356,15 @@ export default {
                 await new Promise(resolve => setTimeout(resolve, 1000));
                 message.value = { type: 'success', content: 'Invites sent successfully!' };
                 emails.value = [];
-            } catch (error: any) {
+            }
+            catch (error: any) {
                 message.value = { type: 'error', content: `Failed to send invites: ${error.message}` };
-            } finally {
+            }
+            finally {
                 loading.value = false;
             }
         }
         const isEditing = ref(false); // Add this for tracking edit mode
-        // Methods for editing, saving, and deleting
         const editUser = (user: any) => {
             // Logic to edit the user
             isEditing.value = true;
@@ -386,7 +388,6 @@ export default {
             }
         };
         function submitFeatureRequest() {
-
         }
         // Return all reactive properties and methods
         return {
@@ -399,8 +400,9 @@ export default {
             confirmUserDeletion,
             submitFeatureRequest
         };
-    }
-}
+    },
+    components: { BackButton }
+}                                                                                                                                           
 </script>
 <style scoped>
 svg.align-middle {
