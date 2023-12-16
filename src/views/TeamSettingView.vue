@@ -1,193 +1,391 @@
 <template>
-    <DBLayout>
-        <div class="px-4 sm:px-12 py-6">
-            <div class="max-w-5xl mx-auto flex flex-wrap items-start gap-10">
-                <!-- Page Header -->
-                <div class="space-y-2 w-full">
-                    <div class="text-3xl font-semibold">Team details</div>
-                    <p class="text-gray-600">Your team’s profile and single sign-on information</p>
-                </div>
-                <!-- General Info -->
-                <div class="bg-white rounded-lg shadow p-6 border border-gray-200 w-full">
-                    <div class="border-b border-gray-200 pb-2 mb-4">
-                        <h2 class="text-2xl font-semibold capitalize">General</h2>
-                    </div>
-                    <p class="mt-4">
-                        Settings for {{ state.teamName }}<br />
-                        Starter<br />
-                        1 team member.<br />
-                        Team created at 11:49 AM (an hour ago).
-                    </p>
-                </div>
-                <!-- Team details -->
-                <div class="bg-white rounded-lg shadow p-6 border border-gray-200 w-full">
-                    <div class="border-b border-gray-200 pb-2 mb-4">
-                        <h2 class="text-2xl font-semibold capitalize">Team Information</h2>
-                    </div>
-                    <div class="mt-4 space-y-4">
-                        <div>
-                            <dl class="space-y-2 mt-2 divide-y divide-gray-100">
-                                <div class="grid grid-cols-2 py-2">
-                                    <dt>Name:</dt>
-                                    <dd v-if="!state.isEditing">{{ state.teamName }}</dd>
-                                    <dd v-else><input v-model="state.editableTeamName" type="text"></dd>
-                                </div>
-
-                                <div class="grid grid-cols-2 py-2">
-                                    <dt>Logo:</dt>
-                                    <dd v-if="!state.isEditing">{{ state.teamLogo }}</dd>
-                                    <dd v-else><input v-model="state.editableTeamLogo" type="text"></dd>
-                                </div>
-                                <div class="grid grid-cols-2 py-2 bg-gray-50">
-                                    <dt>Current plan:</dt>
-                                    <dd>{{ state.teamPlan }}</dd>
-                                </div>
-                            </dl>
-                            <div class="mt-4 flex flex-col lg:flex-row gap-2 items-start">
-                                <button class="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600 block"
-                                    @click="openPlanModal">Change team plan</button>
-                                <button v-if="!state.isEditing"
-                                    class="px-4 py-2 text-white bg-gray-500 rounded hover:bg-gray-600 block"
-                                    @click="toggleEdit">Edit team information</button>
-                                <button v-else class="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600 block"
-                                    @click="updateTeamSettings">Save</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Query Pack -->
-                <div class="bg-white rounded-lg shadow p-6 border border-gray-200 w-full">
-                    <div class="border-b border-gray-200 pb-2 mb-4">
-                        <h2 class="text-2xl font-semibold capitalize">Query Pack</h2>
-                    </div>
-                    <p class="mt-4">
-                        Add Kraal query tokens. These tokens are used to run queries on the AI
-                        engine to continue fulfilling requests
-                        and responses once you exhaust your monthly allocation. The packs are in
-                        $100 bundles that expire after 6 months
-                        and $50 bundles that expire after 3 months.
-                    </p>
-                    <div class="mt-4">
-                        <button class="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600">Add
-                            Tokens</button>
-                    </div>
-                </div>
-                <!-- Invite team member -->
-                <div class="bg-white rounded-lg shadow p-6 border border-gray-200 w-full">
-                    <div class="border-b border-gray-200 pb-2 mb-4">
-                        <h2 class="text-2xl font-semibold capitalize">Invite team member</h2>
-                    </div>
-                    <form class="mt-4">
-                        <div class="flex items-center gap-2 relative">
-                            <label for="email" class="absolute left-3 text-gray-700"><i class="fa fa-envelope"></i></label>
-                            <input type="email" name="email" id="email" placeholder="someone@kraal.com" maxlength="24"
-                                class="block px-4 max-w-md w-full h-10 text-noom-text-900 text-base rounded-xl border bg-gray-100 outline-none pl-9"
-                                autocomplete="false">
-                            <button class="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600">Sent
-                                Invitation</button>
-                        </div>
-                    </form>
-                </div>
-                <!-- Danger Zone -->
-                <div class="w-full">
-                    <div class="bg-white rounded-lg shadow p-6 mt-4 border border-gray-200">
-                        <div class="border-b border-gray-200 pb-2 mb-4">
-                            <h2 class="text-2xl font-semibold capitalize">Manage team member</h2>
-                        </div>
-                        <p class="mt-4">This team was created at Kraal signup and cannot be deleted.To remove all your data
-                            from Kraal, delete your user under User settings.</p>
-                        <div class="mt-4">
-                            <button class="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600">Manage</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Modal for changing team plan -->
-            <div v-if="state.showModal"
-                class="fixed w-full h-screen flex justify-center items-center z-10 inset-0 overflow-y-auto" aria-
-                labelledby="modal-title" role="dialog" aria-modal="true">
-                <div class="flex items-end justify-center pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                    <div class="fixed inset-0 transition-opacity" aria-hidden="true" @click="closePlanModal">
-                        <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
-                    </div>
-                    <div
-                        class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">Change Team Plan</h3>
-                            <div class="mt-2">
-                                <select v-model="state.selectedPlan"
-                                    class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                    <option v-for="plan in state.teamPlans" :key="plan.id" :value="plan.name">
-                                        {{ plan.name }}
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                            <button type="button" @click="changePlan(state.selectedPlan)"
-                                class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">Change
-                                Plan</button>
-                            <button type="button"
-                                class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-                                @click="closePlanModal">Cancel</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="fixed inset-0 h-screen overflow-auto bg-gray-800 text-gray-100">
+        <!-- Title Bar -->
+        <div class="flex justify-between items-center border-b border-gray-500 px-4 py-2">
+            <h1 class="text-xl font-semibold text-white">Back</h1>
+            <button class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded disabled:bg-blue-400">
+                User Admin
+            </button>
         </div>
-    </DBLayout>
+        <!-- Main Content -->
+        <main class="flex h-full">
+            <!-- Left Section: Tabs + Clients/Departments List -->
+            <div class="w-1/2">
+                <!-- Tabs at the top of the left section -->
+                <div class="pl-4 flex pt-2">
+                    <button @click="clearSelections('clients')"
+                        :class="{ 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-md': activeTab === 'clients', 'bg-gray-800 text-gray-400 hover:text-white hover:bg-gray-700': activeTab !== 'clients' }"
+                        class="tab-button mr-2 px-6 py-2 rounded-md text-sm font-medium transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50">
+                        Clients
+                    </button>
+                    <button @click="clearSelections('departments')"
+                        :class="{ 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-md': activeTab === 'departments', 'bg-gray-800 text-gray-400 hover:text-white hover:bg-gray-700': activeTab !== 'departments' }"
+                        class="tab-button px-6 py-2 rounded-md text-sm font-medium transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50">
+                        Departments
+                    </button>
+                </div>
+                <!-- Dynamic Content Based on Selected Tab -->
+                <div class="max-w-md mx-auto py-10">
+                    <ul v-if="activeTab === 'clients'" class="divide-y divide-gray-600">
+                        <!-- Clients list -->
+                        <li v-for="client in clients" :key="client.id" @click="selectClient(client)"
+                            class="py-3 cursor-pointer">
+                            <p class="font-medium">{{ client.name }}</p>
+                        </li>
+                    </ul>
+                    <ul v-if="activeTab === 'departments'" class="divide-y divide-gray-600">
+                        <!-- Departments list -->
+                        <li v-for="department in departments" :key="department" @click="selectDepartment(department)"
+                            class="py-3 cursor-pointer">
+                            <p class="font-medium">{{ department }}</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Right Section: Client or Department Details -->
+            <div class="w-1/2 border-l border-gray-600">
+                <div v-if="selectedClient || selectedDepartment" class="max-w-md mx-auto py-10">
+                    <!-- Display content based on selected client or department -->
+                    <h4 class="text-lg font-semibold mb-4">
+                        {{ selectedClient ? selectedClient.name : selectedDepartment }}
+                    </h4>
+                    <table v-if="selectedClient" class="min-w-full table-auto">
+                        <thead>
+                            <tr>
+                                <th class="px-4 py-2 border-b border-gray-500">User Name</th>
+                                <th class="px-4 py-2 border-b border-gray-500">Role</th>
+                                <th class="px-4 py-2 border-b border-gray-500">Actions</th> <!-- Add this line -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="user in selectedClient.users" :key="user.id" class="border-b border-gray-500">
+                                <td class="px-4 py-2 text-center">{{ user.displayName }}</td>
+                                <td class="px-4 py-2 text-center">{{ user.role }}</td>
+                                <td class=" px-4 py-2 text-center flex items-center justify-center">
+                                    <button @click="confirmDeletion(user.id)"
+                                        class="focus:outline-none hover:bg-gray-200 rounded">
+                                        <!-- SVG icon for delete button -->
+                                        <svg class="delete-icon w-5 h-5 text-white-400 hover:text-gray-600"
+                                            viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <g clip-path="url(#clip0_1_2)">
+                                                <path
+                                                    d="M1 5H17M7 8V16M11 8V16M7 1H11C11.2652 1 11.5196 1.1053611.7071 1.29289C11.8946 1.48043 12 1.73478 12 2V5H6V2C6 1.73478 6.10536 1.48043 6.29289 1.29289C6.48043 1.10536 6.73478 1 7 1ZM3 5H15V18C15 18.2652 14.8946 18.5196 14.7071 18.7071C14.5196 18.8946 14.2652 19 14 19H4C3.73478 19 3.48043 18.8946 3.29289 18.7071C3.10536 18.5196 3 18.2652 3 18V5Z"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                            </g>
+                                            <defs>
+                                                <clipPath id="clip0_1_2">
+                                                    <rect width="18" height="20" fill="white" />
+                                                </clipPath>
+                                            </defs>
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- Table for Selected Department -->
+                    <table v-if="selectedDepartment" class="min-w-full table-auto">
+                        <thead>
+                            <tr>
+                                <th class="px-4 py-2 border-b border-gray-500">User Name</th>
+                                <th class="px-4 py-2 border-b border-gray-500">Role</th>
+                                <th class="px-4 py-2 border-b border-gray-500">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="user in departmentUsers" :key="user.id" class="border-b border-gray-500">
+                                <td class="px-4 py-2 text-center">{{ user.displayName }}</td>
+                                <td class="px-4 py-2 text-center">{{ user.role }}</td>
+                                <td class=" px-4 py-2 text-center flex items-center justify-center">
+                                    <button @click="confirmDeletion(user.id)"
+                                        class="focus:outline-none hover:bg-gray-200 rounded">
+                                        <!-- SVG icon for delete button -->
+                                        <svg class="delete-icon w-5 h-5 text-white-400 hover:text-gray-600"
+                                            viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <g clip-path="url(#clip0_1_2)">
+                                                <path
+                                                    d="M1 5H17M7 8V16M11 8V16M7 1H11C11.2652 1 11.5196 1.10536 11.7071 1.29289C11.8946 1.48043 12 1.73478 12 2V5H6V2C6 1.73478 6.10536 1.48043 6.29289 1.29289C6.48043 1.10536 6.73478 1 7 1ZM3 5H15V18C15 18.2652 14.8946 18.5196 14.7071 18.7071C14.5196 18.8946 14.2652 19 14 19H4C3.73478 19 3.48043 18.8946 3.29289 18.7071C3.10536 18.5196 3 18.2652 3 18V5Z"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                            </g>
+                                            <defs>
+                                                <clipPath id="clip0_1_2">
+                                                    <rect width="18" height="20" fill="white" />
+                                                </clipPath>
+                                            </defs>
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p v-else-if="selectedDepartment" class="text-center py-10">
+                        No users found for this department.
+                    </p>
+                </div>
+                <p v-else class="text-center py-10">Select a client or department to view details</p>
+            </div>
+        </main>
+    </div>
 </template>
 
-<script lang="ts" setup>
-import { reactive } from "vue";
-import DBLayout from "../components/shared/dashboard-layout/DBLayout.vue";
+<script lang="ts">
+import axios from 'axios';
+import { ref, onMounted, computed } from 'vue';
+export default {
+    setup() {
+        const users = ref<any[]>([]); // This will hold the original users data
+        const selectedClient = ref<any>(null); // Holds the currently selected client
+        const activeTab = ref<string>('clients');
+        const selectedDepartment = ref<any>(null);
+        const clients = ref<any[]>([]); // Populate with your clients data
+        const departments = ref<any[]>([]); // Extract unique departments from users
 
-const state: any = reactive({
-    teamName: 'Kraal',
-    teamSlug: 'naggor',
-    teamLogo: 'None',
-    teamPlan: 'Starter',
-    isEditing: false,
-    showModal: false,
-    editableTeamName: '',
-    editableTeamSlug: '',
-    editableTeamLogo: '',
-    teamPlans: [
-        { id: 1, name: 'Starter' },
-        { id: 2, name: 'Pro' },
-        { id: 3, name: 'Enterprise' }
-    ],
-    selectedPlan: ''
-})
+        // Simulate fetching users from API
+        const fetchUsers = () => {
+            // Simulate API call here
+            //Axios request
+            return [
+                {
+                    id: '1',
+                    displayName: 'John Doe',
+                    email: 'john.doe@example.com',
+                    role: 'user',
+                    title: 'Senior Developer',
+                    department: 'Development',
+                    location: 'New York',
+                    clients: [
+                        { name: 'Client A', role: 'Manager' },
+                        { name: 'Client B', role: 'Manager' },
+                        { name: 'Client C', role: 'User' },
+                        { name: 'Client D', role: 'User' }
+                    ],
+                },
+                {
+                    id: '2',
+                    displayName: 'Jane Smith',
+                    email: 'jane.smith@example.com',
+                    role: 'admin',
+                    title: 'Project Manager',
+                    department: 'Project Management',
+                    location: 'London',
+                    clients: [
+                        { name: 'Client D', role: 'User' },
+                        { name: 'Client B', role: 'User' },
+                        { name: 'Client C', role: 'User' },
+                        { name: 'Client F', role: 'User' }
+                    ],
+                },
+                {
+                    id: '3',
+                    displayName: 'Emily Johnson',
+                    email: 'emily.johnson@example.com',
+                    role: 'user',
+                    title: 'Marketing Specialist',
+                    department: 'Marketing',
+                    location: 'San Francisco',
+                    clients: [
+                        { name: 'Client A', role: 'User' },
+                        { name: 'Client C', role: 'User' }
+                    ],
+                },
+                {
+                    id: '4',
+                    displayName: 'Michael Brown',
+                    email: 'michael.brown@example.com',
+                    role: 'admin',
+                    title: 'IT Manager',
+                    department: 'Information Technology',
+                    location: 'Toronto',
+                    clients: [
+                        { name: 'Client B', role: 'Manager' },
+                        { name: 'Client D', role: 'User' }
+                    ],
+                },
+                {
+                    id: '5',
+                    displayName: 'Sarah Davis',
+                    email: 'sarah.davis@example.com',
+                    role: 'user',
+                    title: 'Graphic Designer',
+                    department: 'Design',
+                    location: 'Berlin',
+                    clients: [
+                        { name: 'Client C', role: 'User' },
+                        { name: 'Client A', role: 'User' }
+                    ],
+                },
+                {
+                    id: '6',
+                    displayName: 'William Wilson',
+                    email: 'william.wilson@example.com',
+                    role: 'admin',
+                    title: 'Sales Director',
+                    department: 'Sales',
+                    location: 'Sydney',
+                    clients: [
+                        { name: 'Client B', role: 'User' },
+                        { name: 'Client C', role: 'Manager' }
+                    ],
+                },
+                {
+                    id: '7',
+                    displayName: 'Olivia Martinez',
+                    email: 'olivia.martinez@example.com',
+                    role: 'user',
+                    title: 'Customer Support Lead',
+                    department: 'Support',
+                    location: 'Dublin',
+                    clients: [
+                        { name: 'Client B', role: 'User' },
+                        { name: 'Client D', role: 'User' }
+                    ],
+                },
+                {
+                    id: '8',
+                    displayName: 'James Taylor',
+                    email: 'james.taylor@example.com',
+                    role: 'admin',
+                    title: 'Operations Manager',
+                    department: 'Operations',
+                    location: 'Singapore',
+                    clients: [
+                        { name: 'Client A', role: 'Manager' },
+                        { name: 'Client D', role: 'User' }
+                    ],
+                }
+            ]
+        };
+        // Transform users data to client-centric data
+        const fetchClients = () => {
+            const clientMap = new Map();
+            if (Array.isArray(users.value)) {
+                users.value.forEach(user => {
+                    user.clients.forEach((client: any) => {
+                        if (!clientMap.has(client.name)) {
+                            clientMap.set(client.name, { name: client.name, users: [] });
+                        }
+                        clientMap.get(client.name).users.push({
+                            id: user.id,
+                            displayName: user.displayName,
+                            role: client.role,
+                            email: user.email
+                        });
+                    });
+                });
+            }
+            return Array.from(clientMap.values());
+        };
+        const changeUserRole = (clientId: string, userId: string, newRole: string) => {
+            const client = clients.value.find(c => c.name === clientId);
+            const user = client.users.find((u: any) => u.id === userId);
+            if (user) {
+                user.role = newRole;
+                // Call API to update user role
+            }
+        };
+        const confirmDeletion = async (userId: string) => {
+            if (window.confirm("Are you sure you want to delete this user?")) {
+                try {
+                    const response = await axios.delete(`https://api.yourdomain.com/users/${userId}`);
+                    if (response.status === 200) {
+                        // Assuming the user is removed successfully from the backend
+                        // Now remove the user from the selected client's user list
+                        const index = selectedClient.value.users.findIndex((user: any) => user.id === userId);
+                        if (index > -1) {
+                            selectedClient.value.users.splice(index, 1);
+                        }
+                    }
+                } catch (error) {
+                    console.error("Failed to delete user:", error);
+                    // Handle error (e.g., show an error message)
+                }
+            }
+        };
 
-function toggleEdit() {
-    state.isEditing = !state.isEditing;
-    if (state.isEditing) {
-        state.editableTeamName = state.teamName;
-        state.editableTeamSlug = state.teamSlug;
-        state.editableTeamLogo = state.teamLogo;
+        // Function to select a client
+        const selectClient = (client: any) => {
+            selectedClient.value = clients.value.find(c => c.name === client.name);
+            selectedDepartment.value = null; // Clear department selection when a client is selected
+            activeTab.value = 'clients'; // Set the active tab to 'clients'
+        };
+        // Function to edit user role under a client
+        const editUserRole = async (userId: string, newRole: string) => {
+            const user = selectedClient.value.users.find((u: any) => u.id === userId);
+            if (user && window.confirm(`Change role of ${user.displayName} to ${newRole}?`)) {
+                try {
+                    // Assuming the API requires the client ID and the new role in the request
+                    const response = await axios.put(`https://api.yourdomain.com/users/${userId}/role`, {
+                        newRole: newRole,
+                        clientId: selectedClient.value.id // Or however you identify the client
+                    });
+                    // Check if the API response is successful
+                    if (response.status === 200) {
+                        // Update the role in the frontend state
+                        user.role = newRole;
+                    } else {
+                        // Handle unsuccessful response
+                        console.error("Failed to update role:", response);
+                        // Optionally show an error message to the user
+                    }
+                } catch (error) {
+                    console.error("Failed to update user role:", error);
+                    // Handle network or other errors (e.g., show an error message)
+                }
+            }
+        };
+        // Function to select a department
+        const selectDepartment = (department: any) => {
+            selectedDepartment.value = department;
+            selectedClient.value = null; // Clear client selection when a department is selected
+            activeTab.value = 'departments'; // Set the active tab to 'departments'
+        };
+        // Reactive property for department users
+        const departmentUsers = computed(() => {
+            if (selectedDepartment.value) {
+                return users.value.filter(user => user.department ===
+                    selectedDepartment.value);
+            }
+            return [];
+        });
+        const clearSelections = (tab: any) => {
+            activeTab.value = tab; // Set the active tab
+            selectedClient.value = null; // Clear selected client
+            selectedDepartment.value = null; // Clear selected department
+        };
+        // Simulate fetching users from API
+        onMounted(() => {
+            const fetchedUsers = fetchUsers();
+            if (Array.isArray(fetchedUsers)) {
+                users.value = fetchedUsers;
+                clients.value = fetchClients();
+                const departmentSet = new Set(fetchedUsers.map(user =>
+                    user.department));
+                departments.value = Array.from(departmentSet);
+            } else {
+                console.error("Fetched users is not an array:", fetchedUsers);
+                // Handle this situation appropriately, maybe set users.value to []
+            }
+        });
+        return {
+            activeTab,
+            selectedClient,
+            selectedDepartment,
+            clients,
+            departments,
+            selectClient,
+            selectDepartment,
+            departmentUsers,
+            confirmDeletion,
+            clearSelections,
+            editUserRole,
+            changeUserRole
+        };
     }
-}
-function updateTeamSettings() {
-    // perform your API call to update the team settings here
-    // then update the data and close the editing mode
-    state.teamName = state.editableTeamName;
-    state.teamSlug = state.editableTeamSlug;
-    state.teamLogo = state.editableTeamLogo;
-    state.toggleEdit();
-}
-function openPlanModal() {
-    state.showModal = true;
-    // Make the current plan the default selected in the modal
-    state.selectedPlan = state.teamPlan;
-}
-function closePlanModal() {
-    state.showModal = false;
-}
-function changePlan(plan: any) {
-    // perform your API call to update the team plan here
-    // then update the data and close the modal
-    state.teamPlan = plan;
-    state.closePlanModal();
-}
+};
 </script>
+<style scoped>
+/* Your CSS styles */
+</style>
