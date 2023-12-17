@@ -3,7 +3,7 @@
         <div class="absolute right-full top-1/2 -translate-y-1/2 z-[11]">
             <ChatSideBarToggler @click="isOpen = !isOpen" :isOpen="isOpen" :flip="true" />
         </div>
-        <div v-if="isOpen" class="w-72 lg:w-[364px] p-4" :class="props.view === 'GRID' ? 'gap-4' : 'gap-3'">
+        <div v-if="isOpen" class="w-72 lg:w-[340px] p-4" :class="props.view === 'GRID' ? 'gap-4' : 'gap-3'">
             <slot></slot>
         </div>
     </aside>

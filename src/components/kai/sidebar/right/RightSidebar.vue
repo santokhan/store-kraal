@@ -30,14 +30,14 @@
                         fill="currentColor" />
                 </svg>
             </Item> -->
-            <Item :data="settings[4]" :view="viewType" @click="handle_rag">
+            <BoxButton :data="settings[4]" :view="viewType" @click="handle_rag">
                 <svg class="w-full h-full" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M35.4166 45.3125H14.5833C9.54575 45.3125 6.77075 42.5375 6.77075 37.5V12.5C6.77075 7.4625 9.54575 4.6875 14.5833 4.6875H35.4166C40.4541 4.6875 43.2291 7.4625 43.2291 12.5V37.5C43.2291 42.5375 40.4541 45.3125 35.4166 45.3125ZM14.5833 7.8125C11.2978 7.8125 9.89575 9.21458 9.89575 12.5V37.5C9.89575 40.7854 11.2978 42.1875 14.5833 42.1875H35.4166C38.702 42.1875 40.1041 40.7854 40.1041 37.5V12.5C40.1041 9.21458 38.702 7.8125 35.4166 7.8125H14.5833ZM34.8958 25C34.8958 24.1375 34.1958 23.4375 33.3333 23.4375H16.6666C15.8041 23.4375 15.1041 24.1375 15.1041 25C15.1041 25.8625 15.8041 26.5625 16.6666 26.5625H33.3333C34.1958 26.5625 34.8958 25.8625 34.8958 25ZM28.6458 33.3333C28.6458 32.4708 27.9458 31.7708 27.0833 31.7708H16.6666C15.8041 31.7708 15.1041 32.4708 15.1041 33.3333C15.1041 34.1958 15.8041 34.8958 16.6666 34.8958H27.0833C27.9458 34.8958 28.6458 34.1958 28.6458 33.3333ZM34.8958 16.6667C34.8958 15.8042 34.1958 15.1042 33.3333 15.1042H16.6666C15.8041 15.1042 15.1041 15.8042 15.1041 16.6667C15.1041 17.5292 15.8041 18.2292 16.6666 18.2292H33.3333C34.1958 18.2292 34.8958 17.5292 34.8958 16.6667Z"
                         fill="currentColor" />
                 </svg>
-            </Item>
-            <Item :data="settings[5]" :view="viewType" @click="handle_connect">
+            </BoxButton>
+            <BoxButton :data="settings[5]" :view="viewType" @click="handle_connect">
                 <svg class="w-full h-full" viewBox="0 0 45 44" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M34.8743 21.6464L38.0563 18.4645C41.3758 15.145 41.3758 9.76309 38.0563 6.44364V6.44364C34.7368 3.12418 29.3549 3.12418 26.0355 6.44363L20.3786 12.1005C17.0592 15.4199 17.0592 20.8018 20.3786 24.1213V24.1213"
@@ -46,8 +46,8 @@
                         d="M10.1257 22.3535L6.9437 25.5355C3.62424 28.8549 3.62424 34.2368 6.94369 37.5563V37.5563C10.2632 40.8758 15.6451 40.8758 18.9645 37.5563L24.6214 31.8995C27.9408 28.58 27.9408 23.1981 24.6214 19.8786V19.8786"
                         stroke="currentColor" stroke-width="3" stroke-linecap="round" />
                 </svg>
-            </Item>
-            <AddItem :view="viewType" @click="handleAdd" :to="'add-feature'"/>
+            </BoxButton>
+            <AddItem :view="viewType" @click="handleAdd" :to="'add-feature'" />
         </div>
 
         <!-- <Buddy v-if="buddy" :handleModal="handle_buddy" />
@@ -65,7 +65,7 @@ import { ref } from 'vue'
 import Container from './Container.vue';
 import AddItem from './box-buttons/AddItem.vue';
 import AiStudio from './modals/AiStudio.vue';
-import Item from './box-buttons/BoxButton.vue';
+import BoxButton from './box-buttons/BoxButton.vue';
 import List_Grid from './list-or-grid/List_Grid.vue';
 import { useRightBarStore } from '../../../../stores/right-bar';
 import { storeToRefs } from 'pinia';
