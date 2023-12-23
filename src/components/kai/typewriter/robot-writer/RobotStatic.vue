@@ -1,6 +1,6 @@
 <template>
-    <div v-if="props.robot" v-html="markdownParser(props.robot)"
-        :class="['markdown-body overflow-auto', 'text-gray-300 leading-[2] text-sm tracking-wider'.replace(/\s/, '+ ')]">
+    <div v-if="props.robot" :class="['markdown-body overflow-auto']">
+        <div class="prose prose-invert" v-html="markdownParser(props.robot)"></div>
     </div>
 </template>
 
@@ -10,7 +10,6 @@ import markdownParser from '../markdownParser'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/atom-one-dark.css'
 // import './atom-one-dark.css'
-import KraalAI from '../../../icons/kraalai.vue'
 
 const props = defineProps<{ robot?: string }>()
 
