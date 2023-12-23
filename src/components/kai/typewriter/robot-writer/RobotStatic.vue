@@ -1,6 +1,6 @@
 <template>
-    <div v-html="markdownParser(props.robot)"
-        :class="['markdown-body text-gray-300 overflow-auto leading-[2] text-sm tracking-wider']">
+    <div v-if="props.robot" v-html="markdownParser(props.robot)"
+        :class="['markdown-body overflow-auto', 'text-gray-300 leading-[2] text-sm tracking-wider'.replace(/\s/, '+ ')]">
     </div>
 </template>
 
@@ -12,7 +12,7 @@ import 'highlight.js/styles/atom-one-dark.css'
 // import './atom-one-dark.css'
 import KraalAI from '../../../icons/kraalai.vue'
 
-const props = defineProps<{ robot: string }>()
+const props = defineProps<{ robot?: string }>()
 
 onMounted(hljs.highlightAll);
 onUpdated(hljs.highlightAll);
