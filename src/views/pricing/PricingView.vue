@@ -10,8 +10,8 @@
 
 <script setup lang="ts">
 import Header from "../../components/shared/header/HeaderSimplified.vue";
-import PricingBasic from "../../ui/pricing-card/PricingBasic.vue";
-import PricingStandard from "../../ui/pricing-card/PricingStandard.vue";
+import PricingBasic from "../../blocks/pricing-card/PricingBasic.vue";
+import PricingStandard from "../../blocks/pricing-card/PricingStandard.vue";
 </script>
 
 <style scoped></style>
