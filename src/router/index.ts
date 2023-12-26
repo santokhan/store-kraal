@@ -197,16 +197,30 @@ const protectedRoutes: Array<RouteRecordRaw> = [
                 component: () => import("../views/user/SignOutView.vue"),
                 meta: { requiresAuth: true },
             },
+            {
+                path: "profile",
+                name: "profile",
+                component: () => import("../views/user/ProfileView.vue"),
+                meta: {
+                    requiresAuth: true,
+                    requiresVerification: true
+                },
+            },
         ]
     },
 ]
 
 const publicRoutes: Array<RouteRecordRaw> = [
     {
-        path: "/",
+        path: "",
         name: "home",
         component: () => import("../views/HomeView.vue"),
-    }
+    },
+    {
+        path: "/pricing",
+        name: "pricing",
+        component: () => import("../views/pricing/PricingView.vue"),
+    },
 ]
 
 const router = createRouter({
