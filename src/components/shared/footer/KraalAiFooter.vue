@@ -71,7 +71,7 @@ const FLinks = {
         },
         {
             text: "Pricing",
-            to: "/pricing-overview",
+            to: "/pricing",
         },
     ],
     Resources: [
