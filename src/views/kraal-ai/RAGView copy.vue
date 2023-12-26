@@ -142,7 +142,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import FixedContainer from '../../components/shared/container/FixedContainer.vue';
-import BackButton from './BackButton.vue';
+import BackButton from '../../components/button/BackButton.vue';
 import AttachmentPreview from '../../components/kai/instances/chat-main/AttachmentPreview.vue';
 import FileInput from '../../components/kai/instances/chat-main/file-input/FileInput.vue';
 

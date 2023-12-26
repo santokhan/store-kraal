@@ -127,7 +127,7 @@ import Check from '../../components/kai/sidebar/right/rag/input/Check.vue';
 import VoiceInput from '../../components/kai/sidebar/right/modals/buddy/voice-input/VoiceInput.vue';
 import FixedContainer from '../../components/shared/container/FixedContainer.vue';
 import Preview from '../../components/kai/instances/chat-main/attachment/Preview.vue';
-import BackButton from './BackButton.vue';
+import BackButton from '../../components/button/BackButton.vue';
 
 const checkList = ["Web Browsing", "DALL-E Image Generation", "Code Interpreter"];
 const checkState = reactive(checkList.map(e => false));

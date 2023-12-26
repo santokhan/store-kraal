@@ -54,7 +54,7 @@
                             <div class="mb-4">
                                 <label for="emails" class="block text-sm font-medium text-gray-700">Emails</label>
                                 <div
-                                    class="flex flex-wrap items-center gap-2 mt-1 p-2 border border-gray-500 rounded-md w-full bg-gray-800">
+                                    class="flex flex-wrap items-center gap-2 mt-1 p-2 border border-gray-500 rounded-md w-full bg-gray-800+">
                                     <!-- Email tags -->
                                     <span class="email-tag" v-for="(email, index) in emails" :key="index">
                                         {{ email }}
@@ -103,29 +103,29 @@
                         <label for="displayName">Name</label>
                         <input type="text" id="displayName" name="displayName" v-model="selectedUser.displayName"
                             autocomplete="user-name"
-                            class="bg-gray-800 text-white p-2 rounded border border-gray-600 w-full mb-4"
+                            class="bg-gray-800+ text-white p-2 rounded border border-gray-600 w-full mb-4"
                             placeholder="Name">
                         <!-- Title Input -->
                         <label for="title" class="block text-sm font-medium text-gray-300">Title</label>
                         <input type="text" id="title" name="title" v-model="selectedUser.title" autocomplete="job-title"
-                            class="bg-gray-800 text-white p-2 rounded border border-gray-600 w-full mb-4"
+                            class="bg-gray-800+ text-white p-2 rounded border border-gray-600 w-full mb-4"
                             placeholder="Title">
                         <!-- Department Input -->
                         <label for="department" class="block text-sm font-medium text-gray-300">Department</label>
                         <input type="text" id="department" name="department" v-model="selectedUser.department"
                             autocomplete="organization-title"
-                            class="bg-gray-800 text-white p-2 rounded border border-gray-600 w-full mb-4"
+                            class="bg-gray-800+ text-white p-2 rounded border border-gray-600 w-full mb-4"
                             placeholder="Department">
                         <!-- Email Input -->
                         <label for="email" class="block text-sm font-medium text-gray-300">Email</label>
                         <input type="email" id="email" name="email" v-model="selectedUser.email" autocomplete="email"
-                            class="bg-gray-800 text-white p-2 rounded border border-gray-600 w-full mb-4"
+                            class="bg-gray-800+ text-white p-2 rounded border border-gray-600 w-full mb-4"
                             placeholder="Email">
                         <!-- Location Input -->
                         <label for="location" class="block text-sm font-medium text-gray-300">Location</label>
                         <input type="text" id="location" name="location" v-model="selectedUser.location"
                             autocomplete="shipping address-level2"
-                            class="bg-gray-800 text-white p-2 rounded border border-gray-600 w-full mb-4"
+                            class="bg-gray-800+ text-white p-2 rounded border border-gray-600 w-full mb-4"
                             placeholder="Location">
                         <div class="flex justify-between mt-6">
                             <button @click="saveUserChanges"
@@ -143,7 +143,7 @@
                     <!-- Non-editable clients section -->
                     <div v-if="!isEditing" class="max-w-md mx-auto py-10 mt-6">
                         <h5 class="font-semibold mb-4 text-white">Clients:</h5>
-                        <table class="min-w-full table-auto bg-gray-800 text-white rounded border border-gray-600">
+                        <table class="min-w-full table-auto bg-gray-800+ text-white rounded border border-gray-600">
                             <thead>
                                 <tr class="bg-gray-700">
                                     <th class="px-4 py-2">Client Name</th>
@@ -166,7 +166,7 @@
 
 <script lang="ts">
 import { ref, onMounted } from 'vue';
-import BackButton from './kraal-ai/BackButton.vue';
+import BackButton from '../components/button/BackButton.vue';
 
 export default {
     setup() {

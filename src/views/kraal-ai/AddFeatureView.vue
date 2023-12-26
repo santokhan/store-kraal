@@ -6,7 +6,7 @@ import markdownIt from 'markdown-it';
 // import DOMPurify from 'dompurify';
 import { onMounted, reactive, ref } from 'vue';
 import axios from 'axios';
-import BackButton from './BackButton.vue';
+import BackButton from '../../components/button/BackButton.vue';
 import VoiceInput from '../../components/kai/sidebar/right/modals/buddy/voice-input/VoiceInput.vue';
 
 const ws = ref<any>(null);
@@ -123,7 +123,7 @@ function parseMarkdown(markdown: string) {
     // const rawHtml = marked(markdown);
     // return DOMPurify.sanitize(rawHtml);
 
-    const md = new markdownIt()
+    const md = new markdownIt();
     const rawHtml = md.render(markdown);
     return rawHtml;
 }

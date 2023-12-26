@@ -111,7 +111,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue';
-import BackButton from './BackButton.vue';
+import BackButton from '../../components/button/BackButton.vue';
 // Import Axios once we have real API to use
 // import axios from 'axios';
 

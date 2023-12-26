@@ -5,7 +5,7 @@
             <BackButton />
             <button class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded disabled:bg-blue-400">
                 User Admin
-            </button>                         
+            </button>
         </div>
         <!-- Main Content -->
         <main class="flex h-full">
@@ -14,12 +14,12 @@
                 <!-- Tabs at the top of the left section -->
                 <div class="pl-4 flex pt-2">
                     <button @click="clearSelections('clients')"
-                        :class="{ 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-md': activeTab === 'clients', 'bg-gray-800 text-gray-400 hover:text-white hover:bg-gray-700': activeTab !== 'clients' }"
+                        :class="{ 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-md': activeTab === 'clients', 'bg-gray-800+ text-gray-400 hover:text-white hover:bg-gray-700': activeTab !== 'clients' }"
                         class="tab-button mr-2 px-6 py-2 rounded-md text-sm font-medium transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50">
                         Clients
                     </button>
                     <button @click="clearSelections('departments')"
-                        :class="{ 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-md': activeTab === 'departments', 'bg-gray-800 text-gray-400 hover:text-white hover:bg-gray-700': activeTab !== 'departments' }"
+                        :class="{ 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-md': activeTab === 'departments', 'bg-gray-800+ text-gray-400 hover:text-white hover:bg-gray-700': activeTab !== 'departments' }"
                         class="tab-button px-6 py-2 rounded-md text-sm font-medium transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50">
                         Departments
                     </button>
@@ -134,7 +134,8 @@
 <script lang="ts">
 import axios from 'axios';
 import { ref, onMounted, computed } from 'vue';
-import BackButton from './kraal-ai/BackButton.vue';
+import BackButton from '../components/button/BackButton.vue';
+
 export default {
     setup() {
         const users = ref<any[]>([]); // This will hold the original users data
