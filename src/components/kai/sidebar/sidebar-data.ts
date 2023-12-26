@@ -18,6 +18,10 @@ type NavItem = {
 
 export const chatLeftBarList: Array<NavItem> = [
     {
+        name: "Profile",
+        to: "/user/profile"
+    },
+    {
         name: "User Settings",
         to: "/user-setting"
     },
