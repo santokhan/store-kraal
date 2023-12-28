@@ -68,15 +68,15 @@ async function sendMessage(message: string, files?: File[]) {
     if (!message) {
         throw new Error("Can not read message input");
     } else {
+        if (files && files.length >= 1) {
+            await azureAPI.chat.sendDocuments(chatId, files)
+        }
+
         sideBarStoreAzure.sendChatMessage(chatId, message)
         isInputLocked.value = true;
         const shownMessage = new ShownChatMessage("", message, "User", chatStore.chats.get(chatId)!);
         shownChatMessages.value.push(shownMessage);
         setTimeout(() => scrollToLastMessage(), 100);
-
-        if (files) {
-            azureAPI.chat.sendDocuments(chatId, files)
-        }
     }
 }
 
@@ -97,7 +97,7 @@ onMounted(async function () {
     await azureAPI.chat.joinHubChat(chat.uuid);
     isInputLocked.value = props.lockInput ?? false;
 
-    scrollToLastMessage();
+    setTimeout(() => scrollToLastMessage(), 100);
 
     chatHubConnection?.off("ReceiveMessageStart");
     chatHubConnection?.on("ReceiveMessageStart", async (messageJson: { chatUUID: string, uuid: string }) => {
@@ -132,7 +132,7 @@ onMounted(async function () {
             console.log(`?Message update ${chat.uuid} - ${messageJson.chatUUID}`);
             return;
         }
-        console.log(`!Message update ${chat.uuid} - ${messageJson.chatUUID}`);
+        console.log(`!Message update ${chat.uuid} - ${messageJson.chatUUID} - ${messageJson.content}`);
         const message = StreamChatMessage.fromJSON({ ...messageJson, chat: chat });
         const shownMessage = shownChatMessages.value.at(-1);
         if (!shownMessage || shownMessage!.uuid != message.uuid) {
