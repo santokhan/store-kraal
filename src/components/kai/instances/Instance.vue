@@ -69,10 +69,10 @@ async function sendMessage(message: string, files?: File[]) {
         throw new Error("Can not read message input");
     } else {
         if (files && files.length >= 1) {
-            await azureAPI.chat.sendDocuments(chatId, files)
+            await azureAPI.chat.sendDocuments(chatId, files);
         }
 
-        sideBarStoreAzure.sendChatMessage(chatId, message)
+        sideBarStoreAzure.sendChatMessage(chatId, message);
         isInputLocked.value = true;
         const shownMessage = new ShownChatMessage("", message, "User", chatStore.chats.get(chatId)!);
         shownChatMessages.value.push(shownMessage);
