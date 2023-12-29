@@ -3,7 +3,7 @@ import { Chat } from "./chat";
 export class ChatMessage {
     readonly id: number;
     readonly uuid: string;
-    readonly message: string;
+    message: string;
     readonly author: string;
     readonly chat: Chat;
     readonly timestamp: Date;

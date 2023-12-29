@@ -60,7 +60,9 @@ async function reloadChatMessages() {
     await chatStore.loadChatMessages(chatId);
 
     const chatMessages = Array.from(chatStore.chats.get(chatId)!.messages.values()).sort((a, b) => b.timestamp.valueOf() - a.timestamp.valueOf());
-    shownChatMessages.value = chatMessages.map(m => m.toShownChatMessage());
+    const newShownMessages = chatMessages.map(m => m.toShownChatMessage())
+    newShownMessages.forEach(m => {m.message = replaceURLs(m.message)});
+    shownChatMessages.value = newShownMessages;
     console.log("Reloaded messages");
 }
 
@@ -78,6 +80,15 @@ async function sendMessage(message: string, files?: File[]) {
         shownChatMessages.value.push(shownMessage);
         setTimeout(() => scrollToLastMessage(), 100);
     }
+}
+
+function replaceURLs(content: string) {
+    const uuidRegex = /(\[.+\])\(.*\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\)/gi; // Regex pattern for (...)[.../UUID]
+
+    console.log(content);
+    return content.replace(uuidRegex, (match, text, uuid) => {
+        return `${text}(https://kraalapi20230810134811.azurewebsites.net/api/documents/no/${uuid})`;
+    });
 }
 
 onMounted(async function () {
@@ -136,7 +147,8 @@ onMounted(async function () {
         const message = StreamChatMessage.fromJSON({ ...messageJson, chat: chat });
         const shownMessage = shownChatMessages.value.at(-1);
         if (!shownMessage || shownMessage!.uuid != message.uuid) {
-            const newShownMessage = new ShownChatMessage(message.uuid, message.content, "Bot", message.chat);
+            const content = replaceURLs(message.content);
+            const newShownMessage = new ShownChatMessage(message.uuid, content, "Bot", message.chat);
             shownChatMessages.value.push(newShownMessage);
         }
         shownChatMessages.value.at(-1)!.message = message.content;
