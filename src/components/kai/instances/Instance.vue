@@ -85,7 +85,6 @@ async function sendMessage(message: string, files?: File[]) {
 function replaceURLs(content: string) {
     const uuidRegex = /(\[.+\])\(.*\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\)/gi; // Regex pattern for (...)[.../UUID]
 
-    console.log(content);
     return content.replace(uuidRegex, (match, text, uuid) => {
         return `${text}(https://kraalapi20230810134811.azurewebsites.net/api/documents/no/${uuid})`;
     });
