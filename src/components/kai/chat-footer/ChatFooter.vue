@@ -66,7 +66,7 @@ function removeFiles(index: number) {
 }
 
 function handleChange(e: any) {
-    input.value = e.target.value.trim();
+    input.value = e.target.value;
     e.target.style.height = `${hiddenDiv.value.scrollHeight}px`;
 }
 
@@ -74,9 +74,9 @@ async function handleSubmit(e: any) {
     e.preventDefault();
 
     if (fileInput.value) {
-        emits("onSend", input.value, fileInput.value);
+        emits("onSend", input.value.trim(), fileInput.value);
     } else {
-        emits("onSend", input.value);
+        emits("onSend", input.value.trim());
     }
 
     // Clear <textarea> afer submit & set initial height
