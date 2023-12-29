@@ -106,38 +106,25 @@ export const useSideBarStoreAzureStore = defineStore("chatSideBarAzure", () => {
         async clearChatMessages() {
             chatMessages.value = []
         },
-        async sendNewChatMessage(id: number, message: string, files?: File[]) {
-            if (message) {
-                const res = await azureAPI.chat.sendChatMessage(id, message)
-                console.log(res)
-                if (res) {
-                    if (files) {
-                        const result = await azureAPI.chat.sendDocuments(res.chatId, files);
-                        console.log(result);
-                    }
-                    // *** set `recentChatId` to switch welcome to coversation ***
-                    recentChatId.value = res.chatId;
-                    /**
-                     * 1. assign messages to print
-                     * 2. assign sidebar nav
-                     */
-                    await this.Re_assignChatMessage(res.chatId)
-                    await this.assignSideBarData();
-                }
-            } else {
-                console.log(`Can not read 'message'`);
+        async sendNewChatMessage(chatId: number, message: string, files?: File[]) {
+            if (files && files.length >= 1) {
+                await azureAPI.chat.sendDocuments(chatId, files);
             }
+            recentChatId.value = chatId;
+            history.pushState({}, "", window.location.href + '/' + recentChatId.value);
+            await azureAPI.chat.sendChatMessage(chatId, message);
+            await this.Re_assignChatMessage(chatId);
+            await this.assignSideBarData();
         },
-        async sendChatMessage(id: number, message: string) {
-            if (!id && !message) {
-                throw new Error(`Can not read 'id' and 'message'`);
+        async sendChatMessage(chatId: number, message: string) {
+            if (!chatId && !message) {
+                throw new Error(`Can not read 'chatId' and 'message'`);
             } else {
                 // set `recentChatId` to switch welcome to coversation
-                recentChatId.value = id;
-                await azureAPI.chat.sendChatMessage(id, message)
+                await azureAPI.chat.sendChatMessage(chatId, message);
 
                 // assign messages to print
-                await this.Re_assignChatMessage(id)
+                await this.Re_assignChatMessage(chatId);
                 await this.assignSideBarData();
             }
         },
