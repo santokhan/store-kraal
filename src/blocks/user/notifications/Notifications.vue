@@ -1,12 +1,12 @@
 <template>
-    <div class="w-full bg-white divide-y divide-gray-100 rounded-lg shadow">
-        <div class="block px-4 py-4 font-medium text-gray-800 rounded-t-lg bg-gray-50">
+    <div class="w-full text-white divide-y divide-white/30 rounded-lg shadow border border-white/30">
+        <div class="block px-4 py-4 font-medium rounded-t-lg">
             Notifications
         </div>
-        <div class="divide-y divide-gray-100">
-            <a href="#" class="flex px-4 py-3 hover:bg-gray-100">
+        <div class="divide-y divide-white/30">
+            <a href="#" class="flex px-4 py-3">
                 <div class="flex-shrink-0">
-                    <figure class="rounded-full w-11 h-11 bg-indigo-50 grid place-items-center">
+                    <figure class="rounded-full w-11 h-11 bg-white/20 text-gray-100 grid place-items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                             <path fill-rule="evenodd"
                                 d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z"
@@ -14,8 +14,7 @@
                         </svg>
                         <!-- <img class="w-full h-full object-cover" src="" alt="" /> -->
                     </figure>
-                    <div
-                        class="flex items-center justify-center w-5 h-5 ml-6 -mt-5 bg-blue-600 border border-white rounded-full">
+                    <div class="flex items-center justify-center w-5 h-5 ml-6 -mt-5  border border-white rounded-full">
                         <svg class="w-2 h-2 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             fill="currentColor" viewBox="0 0 18 18">
                             <path
@@ -26,16 +25,16 @@
                     </div>
                 </div>
                 <div class="w-full pl-3">
-                    <div class="text-gray-500 text-sm mb-1.5">
-                        New message from <span class="font-semibold text-gray-900">Jese Leos</span>:"Hey, what's up? All
+                    <div class=" text-sm mb-1.5">
+                        New message from <span class="font-semibold ">Jese Leos</span>:"Hey, what's up? All
                         set for the presentation?"
                     </div>
                     <div class="text-xs text-blue-600">a few moments ago</div>
                 </div>
             </a>
-            <a href="#" class="flex px-4 py-3 hover:bg-gray-100">
+            <a href="#" class="flex px-4 py-3">
                 <div class="flex-shrink-0">
-                    <figure class="rounded-full w-11 h-11 bg-indigo-50 grid place-items-center">
+                    <figure class="rounded-full w-11 h-11 bg-white/20 text-gray-100 grid place-items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                             <path fill-rule="evenodd"
                                 d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z"
@@ -53,16 +52,16 @@
                     </div>
                 </div>
                 <div class="w-full pl-3">
-                    <div class="text-gray-500 text-sm mb-1.5">
-                        <span class="font-semibold text-gray-900">Joseph Mcfall</span> and <span
-                            class="font-medium text-gray-900">5 others</span> started following you.
+                    <div class=" text-sm mb-1.5">
+                        <span class="font-semibold ">Joseph Mcfall</span> and <span class="font-medium ">5 others</span>
+                        started following you.
                     </div>
                     <div class="text-xs text-blue-600">10 minutes ago</div>
                 </div>
             </a>
-            <a href="#" class="flex px-4 py-3 hover:bg-gray-100">
+            <a href="#" class="flex px-4 py-3">
                 <div class="flex-shrink-0">
-                    <figure class="rounded-full w-11 h-11 bg-indigo-50 grid place-items-center">
+                    <figure class="rounded-full w-11 h-11 bg-white/20 text-gray-100 grid place-items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                             <path fill-rule="evenodd"
                                 d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z"
@@ -80,18 +79,18 @@
                     </div>
                 </div>
                 <div class="w-full pl-3">
-                    <div class="text-gray-500 text-sm mb-1.5">
-                        <span class="font-semibold text-gray-900">Bonnie Green</span>
+                    <div class=" text-sm mb-1.5">
+                        <span class="font-semibold ">Bonnie Green</span>
                         and
-                        <span class="font-medium text-gray-900">141 others</span> love your
+                        <span class="font-medium ">141 others</span> love your
                         story. See it and view more stories.
                     </div>
                     <div class="text-xs text-blue-600">44 minutes ago</div>
                 </div>
             </a>
-            <a href="#" class="flex px-4 py-3 hover:bg-gray-100">
+            <a href="#" class="flex px-4 py-3">
                 <div class="flex-shrink-0">
-                    <figure class="rounded-full w-11 h-11 bg-indigo-50 grid place-items-center">
+                    <figure class="rounded-full w-11 h-11 bg-white/20 text-gray-100 grid place-items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                             <path fill-rule="evenodd"
                                 d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z"
@@ -109,10 +108,10 @@
                     </div>
                 </div>
                 <div class="w-full pl-3">
-                    <div class="text-gray-500 text-sm mb-1.5">
-                        <span class="font-semibold text-gray-900">Bonnie Green</span>
+                    <div class=" text-sm mb-1.5">
+                        <span class="font-semibold ">Bonnie Green</span>
                         and
-                        <span class="font-medium text-gray-900">141 others</span> love your
+                        <span class="font-medium ">141 others</span> love your
                         story. See it and view more stories.
                     </div>
                     <div class="text-xs text-blue-600">44 minutes ago</div>
@@ -120,11 +119,10 @@
             </a>
         </div>
         <div>
-            <a href=""
-                class="block py-2 text-sm font-medium text-center text-gray-900 rounded-b-lg bg-gray-50 hover:bg-gray-100">
+            <a href="" class="block py-2 text-sm font-medium text-center  rounded-b-lg">
                 <div class="inline-flex items-center">
-                    <svg class="w-4 h-4 mr-2 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                        fill="currentColor" viewBox="0 0 20 14">
+                    <svg class="w-4 h-4 mr-2 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                        viewBox="0 0 20 14">
                         <path
                             d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />
                     </svg>

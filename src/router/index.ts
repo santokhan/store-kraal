@@ -139,6 +139,15 @@ const protectedRoutes: Array<RouteRecordRaw> = [
         },
     },
     {
+        path: "/user/profile",
+        name: "profile",
+        component: () => import("../views/user/ProfileView.vue"),
+        meta: {
+            requiresAuth: true,
+            requiresVerification: true
+        },
+    },
+    {
         path: "/qb-link",
         name: "qb-link",
         component: () => import("../views/QuickbooksConnect.vue"),
@@ -197,15 +206,6 @@ const protectedRoutes: Array<RouteRecordRaw> = [
                 component: () => import("../views/user/SignOutView.vue"),
                 meta: { requiresAuth: true },
             },
-            {
-                path: "profile",
-                name: "profile",
-                component: () => import("../views/user/ProfileView.vue"),
-                meta: {
-                    requiresAuth: true,
-                    requiresVerification: true
-                },
-            },
         ]
     },
 ]
@@ -216,11 +216,11 @@ const publicRoutes: Array<RouteRecordRaw> = [
         name: "home",
         component: () => import("../views/HomeView.vue"),
     },
-    {
-        path: "/pricing",
-        name: "pricing",
-        component: () => import("../views/pricing/PricingView.vue"),
-    },
+    // {
+    //     path: "/pricing",
+    //     name: "pricing",
+    //     component: () => import("../views/pricing/PricingView.vue"),
+    // },
 ]
 
 const router = createRouter({
