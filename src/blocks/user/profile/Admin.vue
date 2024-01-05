@@ -1,5 +1,5 @@
 <template>
-    <div v-if="adminData" class="w-full text-gray-100 rounded-lg border border-white/30 p-4 lg:p-6 space-y-3 lg:space-y-4">
+    <div v-if="adminData" class="w-full text-gray-100 rounded-lg border border-gray-500 p-4 lg:p-6 space-y-3 lg:space-y-4">
         <div class="font-semibold">Admin</div>
         <ul class="space-y-3 lg:space-y-4">
             <li v-for="(item, index) in serverData" :key="index" class="space-y-1">

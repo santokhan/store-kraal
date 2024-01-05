@@ -1,6 +1,6 @@
 <template>
-    <div class="w-full text-white rounded-lg border border-white/30">
-        <div class="flex justify-between items-center border-b border-white/30">
+    <div class="w-full text-white rounded-lg border border-gray-500">
+        <div class="flex justify-between items-center border-b  border-gray-500">
             <div class="px-4 lg:px-6 py-3 lg:py-5 space-y-1">
                 <dt class="font-medium ">Amount</dt>
                 <dd class="font-medium ">${{ serverData.paymentDetails.amount }}</dd>
@@ -37,7 +37,7 @@
                 <dd class=" text-sm">Paid with {{ serverData.paymentDetails.cardType }}</dd>
             </div>
         </div>
-        <div class="px-4 lg:px-6 py-3 lg:py-5 border-t border-white/30">
+        <div class="px-4 lg:px-6 py-3 lg:py-5 border-t  border-gray-500">
             <a href="#" class="text-sm font-medium ">Download receipt<span aria-hidden="true">→</span></a>
         </div>
     </div>

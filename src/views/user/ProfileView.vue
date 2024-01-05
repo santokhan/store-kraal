@@ -19,8 +19,6 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref } from "vue";
-import { useRoute, useRouter } from "vue-router";
 import PaymentStatusCard from '../../blocks/payment-status-card/PaymentStatusCard.vue';
 import Admin from '../../blocks/user/profile/Admin.vue';
 import Company from "../../blocks/user/profile/Company.vue";

@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full text-white divide-y divide-white/30 rounded-lg shadow border border-white/30">
+    <div class="w-full text-white divide-y divide-white/30 rounded-lg shadow border border-gray-500">
         <div class="block px-4 py-4 font-medium rounded-t-lg">
             Notifications
         </div>
@@ -12,7 +12,6 @@
                                 d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z"
                                 clip-rule="evenodd" />
                         </svg>
-                        <!-- <img class="w-full h-full object-cover" src="" alt="" /> -->
                     </figure>
                     <div class="flex items-center justify-center w-5 h-5 ml-6 -mt-5  border border-white rounded-full">
                         <svg class="w-2 h-2 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +28,7 @@
                         New message from <span class="font-semibold ">Jese Leos</span>:"Hey, what's up? All
                         set for the presentation?"
                     </div>
-                    <div class="text-xs text-blue-600">a few moments ago</div>
+                    <div class="text-xs text-gray-400">a few moments ago</div>
                 </div>
             </a>
             <a href="#" class="flex px-4 py-3">
@@ -40,7 +39,6 @@
                                 d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z"
                                 clip-rule="evenodd" />
                         </svg>
-                        <!-- <img class="w-full h-full object-cover" src="" alt="" /> -->
                     </figure>
                     <div
                         class="flex items-center justify-center w-5 h-5 ml-6 -mt-5 bg-gray-900 border border-white rounded-full">
@@ -56,7 +54,7 @@
                         <span class="font-semibold ">Joseph Mcfall</span> and <span class="font-medium ">5 others</span>
                         started following you.
                     </div>
-                    <div class="text-xs text-blue-600">10 minutes ago</div>
+                    <div class="text-xs text-gray-400">10 minutes ago</div>
                 </div>
             </a>
             <a href="#" class="flex px-4 py-3">
@@ -67,7 +65,6 @@
                                 d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z"
                                 clip-rule="evenodd" />
                         </svg>
-                        <!-- <img class="w-full h-full object-cover" src="" alt="" /> -->
                     </figure>
                     <div
                         class="flex items-center justify-center w-5 h-5 ml-6 -mt-5 bg-red-600 border border-white rounded-full">
@@ -79,13 +76,9 @@
                     </div>
                 </div>
                 <div class="w-full pl-3">
-                    <div class=" text-sm mb-1.5">
-                        <span class="font-semibold ">Bonnie Green</span>
-                        and
-                        <span class="font-medium ">141 others</span> love your
-                        story. See it and view more stories.
-                    </div>
-                    <div class="text-xs text-blue-600">44 minutes ago</div>
+                    <p class=" text-sm mb-1.5"><span class="font-semibold ">Bonnie Green</span> and <span
+                            class="font-medium ">141 others</span> love your story. See it and view more stories.</p>
+                    <p class="text-xs text-gray-400">44 minutes ago</p>
                 </div>
             </a>
             <a href="#" class="flex px-4 py-3">
@@ -96,7 +89,6 @@
                                 d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z"
                                 clip-rule="evenodd" />
                         </svg>
-                        <!-- <img class="w-full h-full object-cover" src="" alt="" /> -->
                     </figure>
                     <div
                         class="flex items-center justify-center w-5 h-5 ml-6 -mt-5 bg-red-600 border border-white rounded-full">
@@ -108,13 +100,9 @@
                     </div>
                 </div>
                 <div class="w-full pl-3">
-                    <div class=" text-sm mb-1.5">
-                        <span class="font-semibold ">Bonnie Green</span>
-                        and
-                        <span class="font-medium ">141 others</span> love your
-                        story. See it and view more stories.
-                    </div>
-                    <div class="text-xs text-blue-600">44 minutes ago</div>
+                    <p class=" text-sm mb-1.5"><span class="font-semibold ">Bonnie Green</span> and <span
+                            class="font-medium ">141 others</span> love your story. See it and view more stories.</p>
+                    <p class="text-xs text-gray-400">44 minutes ago</p>
                 </div>
             </a>
         </div>
