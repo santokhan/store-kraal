@@ -12,8 +12,6 @@ jobs:
       MASSDRIVER_API_KEY: ${{ secrets.MASSDRIVER_API_KEY }}
     steps:
       - uses: actions/checkout@v2
-        with:
-          path: 'Kraal.API'
 
       - name: Install Massdriver CLI
         uses: massdriver-cloud/actions@v4
