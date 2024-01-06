@@ -10,9 +10,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import ChatSideBarToggler from '../ChatSideBarToggler.vue';
 
 const isOpen = ref(false)
 const props = defineProps<{ view: string }>()
+
+onMounted(() => {
+    isOpen.value = localStorage.getItem('right-sidebar') === 'true';
+})
+
+watch(() => isOpen.value, () => {
+    localStorage.setItem('right-sidebar', isOpen.value.toString());
+})
 </script>
