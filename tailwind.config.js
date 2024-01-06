@@ -68,7 +68,8 @@ const variants = {
       400: "#40414f",
       500: "#343541",
       // 600 is for sidebar
-      600: "rgba(32,33,35)",
+      600: "#000000",
+      // 600: "rgba(32,33,35)",
       700: "#2A2B32",
     },
     business: "#5f110e",
@@ -80,7 +81,7 @@ const variants = {
       very: {
         dark: "#181A1C"
       },
-      charcoal:"#343541"
+      charcoal: "#343541"
     }
   },
   orange: {
