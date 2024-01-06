@@ -20,7 +20,7 @@
                         </div>
                         <label class="" for="Basic">
                             <h5 class="font-semibold text-sm text-white">Basic</h5>
-                            <p id="small-description" class="text-sm text-gray-300 mt-1">Basic features</p>
+                            <p id="small-description" class="text-sm text-gray-300 mt-1">Limited features</p>
                         </label>
                     </div>
                     <div class="flex items-start gap-3">
@@ -28,14 +28,14 @@
                             <input id="Premium" aria-describedby="medium-description" name="plan" type="radio" class="">
                         </div>
                         <label class="" for="Premium">
-                            <h5 class="font-semibold text-sm text-white">Premium</h5>
-                            <p id="medium-description" class="text-sm text-gray-300 mt-1">Premium features</p>
+                            <h5 class="font-semibold text-sm text-white">Advanced</h5>
+                            <p id="medium-description" class="text-sm text-gray-300 mt-1">Custom features</p>
                         </label>
                     </div>
                     <div class="">
                         <button type="button"
-                            class="text-white bg-purple-500 hover:bg-purple-600 font-medium rounded-lg px-5 py-2.5 focus:outline-none text-sm w-full">
-                            Upgrade to plus
+                            class="text-white border border-white font-normal rounded-lg px-5 py-2.5 focus:outline-none text-sm w-full">
+                            This model will incur premium rates
                         </button>
                     </div>
                 </div>
