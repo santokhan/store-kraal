@@ -112,10 +112,8 @@ onMounted(async function () {
     chatHubConnection?.off("ReceiveMessageStart");
     chatHubConnection?.on("ReceiveMessageStart", async (messageJson: { chatUUID: string, uuid: string }) => {
         if (chat.uuid != messageJson.chatUUID) {
-            console.log(`?Message start ${chat.uuid} - ${messageJson.chatUUID}`);
             return;
         }
-        console.log(`!Message start ${chat.uuid} - ${messageJson.chatUUID}`);
         isInputLocked.value = true;
         // const message = StreamChatMessage.fromJSON({...messageJson, chat: chat});
         // const shownMessage = new ShownChatMessage(message.uuid, message.content, "Bot", message.chat);
@@ -126,10 +124,8 @@ onMounted(async function () {
     chatHubConnection?.off("ReceiveMessageEnd");
     chatHubConnection?.on("ReceiveMessageEnd", async (messageJson: { chatUUID: string, uuid: string }) => {
         if (chat.uuid != messageJson.chatUUID) {
-            console.log(`?Message end ${chat.uuid} - ${messageJson.chatUUID}`);
             return;
         }
-        console.log(`!Message end ${chat.uuid} - ${messageJson.chatUUID}`);
         isInputLocked.value = false;
         reloadChatMessages().then(() => {
             setTimeout(() => scrollToLastMessage(), 100);
@@ -139,10 +135,8 @@ onMounted(async function () {
     chatHubConnection?.off("ReceiveMessageUpdate");
     chatHubConnection?.on("ReceiveMessageUpdate", (messageJson: { chatUUID: string, uuid: string, content: string }) => {
         if (chat.uuid != messageJson.chatUUID) {
-            console.log(`?Message update ${chat.uuid} - ${messageJson.chatUUID}`);
             return;
         }
-        console.log(`!Message update ${chat.uuid} - ${messageJson.chatUUID} - ${messageJson.content}`);
         const message = StreamChatMessage.fromJSON({ ...messageJson, chat: chat });
         const shownMessage = shownChatMessages.value.at(-1);
         if (!shownMessage || shownMessage!.uuid != message.uuid) {
