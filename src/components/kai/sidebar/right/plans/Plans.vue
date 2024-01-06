@@ -3,8 +3,8 @@
         <div>
             <MenuButton
                 class="text-white bg-purple-500 hover:bg-purple-600 font-medium rounded-lg px-5 py-3 focus:outline-none flex gap-2 items-center">
+                <i class="pi pi-box w-4 h-4"></i>
                 <span>Get premium</span>
-                <ChevronDownIcon class="w-4 h-4" />
             </MenuButton>
         </div>
 
