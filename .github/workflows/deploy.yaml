@@ -35,7 +35,7 @@ jobs:
           env: dev
           manifest: frontend
           set: |
-            .params.image.tag = "${{ github.sha }}"
+            .image.tag = "${{ github.sha }}"
       - name: Deploy App
         uses: massdriver-cloud/actions/app_deploy@v4
         with:
