@@ -4,7 +4,7 @@ import App from "./App.vue";
 import router from "./router/index";
 // firebase
 import { VueFire, VueFireAuth } from 'vuefire';
-import { firebaseApp } from "./auth/firebaseApp";
+import { firebaseApp, firebaseInit } from "./auth/firebaseApp";
 // CSS
 import "./main.css";
 import "./assets/css/markdown-github.css";
@@ -17,14 +17,20 @@ hljs.registerLanguage('javascript', javascript);
 // VueDatePicker
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
+import { loadConfig } from "./config";
 
-// mount app
-const app = createApp(App);
-app.use(createPinia());
-app.use(router);
-app.use(VueFire, { firebaseApp, modules: [VueFireAuth()] });
-app.use(hljsVuePlugin);
-app.component('VueDatePicker', VueDatePicker);
-app.mount("#app");
+async function init() {
+    await loadConfig();
+    await firebaseInit();
 
+    // mount app
+    const app = createApp(App);
+    app.use(createPinia());
+    app.use(router);
+    app.use(VueFire, { firebaseApp, modules: [VueFireAuth()] });
+    app.use(hljsVuePlugin);
+    app.component('VueDatePicker', VueDatePicker);
+    app.mount("#app");
+}
 
+init()

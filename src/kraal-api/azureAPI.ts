@@ -3,9 +3,10 @@ import * as signalR from "@microsoft/signalr";
 import * as firebase from "../firebase/services";
 import { SignupData } from "../models/signupdata";
 import { UnverifiedUser } from "../models/unverifieduser";
+import { VITE_API_URL, VITE_CHAT_HUB_URL } from "../config";
 
 const client = axios.create({
-    baseURL: import.meta.env.VITE_API_URL,
+    baseURL: VITE_API_URL,
     headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
@@ -71,7 +72,7 @@ export default {
         connectHub: async () => {
             console.log("Connecting to hub");
             chatHubConnection = new signalR.HubConnectionBuilder()
-                .withUrl(import.meta.env.VITE_CHAT_HUB_URL, { accessTokenFactory: () => firebase.token ?? "" })
+                .withUrl(VITE_CHAT_HUB_URL, { accessTokenFactory: () => firebase.token ?? "" })
                 .withAutomaticReconnect()
                 .build();
 
