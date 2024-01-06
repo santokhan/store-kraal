@@ -5,6 +5,8 @@
             <ChatBox v-if="message.author === authors[0]">
                 <IconByInitialName v-if="userStoreRef.currentUser.value" :name="userStoreRef.currentUser.value.initials" />
                 <div class="w-full lg:w-[calc(100%-115px)] mt-1">
+                    <b>{{ userStoreRef.currentUser.value?.fullName }}</b>
+                    <br/>
                     {{ message.message }}
                 </div>
             </ChatBox>
@@ -31,6 +33,9 @@ import { StreamChatMessage } from "../../../models/streamchatmessage";
 import { useSideBarStoreAzureStore } from "../../../stores/sideBarStoreAzure";
 import IconByInitialName from "./chat-main/users/IconByInitialName.vue";
 import ChatBox from "./chat-main/users/ChatBox.vue";
+import { VITE_API_URL } from "../../../config";
+
+const defaultBotMessage = '"Blinking dot"';
 
 const props = defineProps<{ chatId: any, lockInput?: boolean }>();
 const chatId = parseInt(props.chatId);
@@ -71,8 +76,10 @@ async function sendMessage(message: string, files?: File[]) {
 
         sideBarStoreAzure.sendChatMessage(chatId, message);
         isInputLocked.value = true;
-        const shownMessage = new ShownChatMessage("", message, "User", chatStore.chats.get(chatId)!);
-        shownChatMessages.value.push(shownMessage);
+        const userShownMessage = new ShownChatMessage("", message, "User", chatStore.chats.get(chatId)!);
+        const botShownMessage = new ShownChatMessage("", defaultBotMessage, "Bot", chatStore.chats.get(chatId)!);
+        shownChatMessages.value.push(userShownMessage);
+        shownChatMessages.value.push(botShownMessage);
         setTimeout(() => scrollToLastMessage(), 100);
     }
 }
@@ -81,7 +88,7 @@ function replaceURLs(content: string) {
     const uuidRegex = /(\[.+\])\(.*\/?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\)/gi; // Regex pattern for (...)[.../UUID]
 
     return content.replace(uuidRegex, (match, text, uuid) => {
-        return `${text}(https://kraalapi20230810134811.azurewebsites.net/api/documents/no/${uuid})`;
+        return `${text}(${VITE_API_URL}/documents/no/${uuid})`;
     });
 }
 
@@ -134,7 +141,7 @@ onMounted(async function () {
         }
         const message = StreamChatMessage.fromJSON({ ...messageJson, chat: chat });
         const shownMessage = shownChatMessages.value.at(-1);
-        if (!shownMessage || shownMessage!.uuid != message.uuid) {
+        if (!shownMessage || (shownMessage!.uuid != "" && shownMessage!.uuid != message.uuid)) {
             const content = replaceURLs(message.content);
             const newShownMessage = new ShownChatMessage(message.uuid, content, "Bot", message.chat);
             shownChatMessages.value.push(newShownMessage);
