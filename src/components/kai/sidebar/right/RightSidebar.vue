@@ -101,7 +101,7 @@ const connect = ref<boolean>(false)
 function handle_connect() { connect.value = !connect.value }
 
 // Switching view
-const viewType = ref<string>('GRID')
+const viewType = ref<string>('LIST')
 function list_view() { viewType.value = 'LIST' }
 function grid_view() { viewType.value = 'GRID' }
 </script>

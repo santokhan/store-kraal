@@ -12,7 +12,7 @@
             enter-to-class="transform scale-100 opacity-100" leave-active-class="transition duration-75 ease-in"
             leave-from-class="transform scale-100 opacity-100" leave-to-class="transform scale-95 opacity-0">
             <MenuItems
-                class="absolute left-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black/5 focus:outline-none">
+                class="absolute+ left-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black/5 focus:outline-none">
                 <div class="space-y-4 p-4 rounded-lg bg-chatgpt-500">
                     <div class="flex items-start gap-3">
                         <div class="pt-[2px]">
