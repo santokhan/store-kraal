@@ -1,24 +1,17 @@
 <template>
     <!-- !Do not use parent div in this instance -->
-    <div ref="chatMain" class="h-full overflow-y-auto text-white">
-        <div class="relative text-gray-200">
-            <div v-for="message in shownChatMessages" ref="messages">
-                <div v-if="message.author === authors[0]" class="border-b border-gray-800">
-                    <div class="flex gap-4 max-w-4xl mx-auto px-4 py-7 text-sm tracking-wider font-light text-white">
-                        <div v-if="userStoreRef.currentUser"
-                            class="w-[1.95rem] min-w-[1.95rem] h-[1.95rem] text-gray-200 border grid place-items-center rounded-full">
-                            {{ userStoreRef.currentUser.value?.initials }}
-                        </div>
-                        {{ message.message }}
-                    </div>
+    <div ref="chatMain" class="h-full overflow-y-auto relative text-gray-200 conversation">
+        <div v-for="message in shownChatMessages" ref="messages">
+            <ChatBox v-if="message.author === authors[0]">
+                <IconByInitialName v-if="userStoreRef.currentUser.value" :name="userStoreRef.currentUser.value.initials" />
+                <div class="w-full lg:w-[calc(100%-115px)] mt-1">
+                    {{ message.message }}
                 </div>
-                <div v-if="message.author === authors[1]" class="bg-chatgpt-400 border-b border-gray-800">
-                    <div class="max-w-4xl mx-auto px-4 py-7 flex gap-4 items-start w-full font-light">
-                        <Kraalai class="w-[1.95rem] min-w-[1.95rem] text-gray-400" />
-                        <RobotStatic :robot="message.message" />
-                    </div>
-                </div>
-            </div>
+            </ChatBox>
+            <ChatBox v-if="message.author === authors[1]">
+                <Kraalai />
+                <RobotStatic :robot="message.message" />
+            </ChatBox>
         </div>
     </div>
     <ChatFooter :loading="isInputLocked" @on-send="sendMessage" />
@@ -36,6 +29,8 @@ import { ShownChatMessage } from "../../../models/chatmessage";
 import azureAPI, { chatHubConnection } from "../../../kraal-api/azureAPI";
 import { StreamChatMessage } from "../../../models/streamchatmessage";
 import { useSideBarStoreAzureStore } from "../../../stores/sideBarStoreAzure";
+import IconByInitialName from "./chat-main/users/IconByInitialName.vue";
+import ChatBox from "./chat-main/users/ChatBox.vue";
 
 const props = defineProps<{ chatId: any, lockInput?: boolean }>();
 const chatId = parseInt(props.chatId);
@@ -61,7 +56,7 @@ async function reloadChatMessages() {
 
     const chatMessages = Array.from(chatStore.chats.get(chatId)!.messages.values()).sort((a, b) => b.timestamp.valueOf() - a.timestamp.valueOf());
     const newShownMessages = chatMessages.map(m => m.toShownChatMessage())
-    newShownMessages.forEach(m => {m.message = replaceURLs(m.message)});
+    newShownMessages.forEach(m => { m.message = replaceURLs(m.message) });
     shownChatMessages.value = newShownMessages;
     console.log("Reloaded messages");
 }
@@ -149,3 +144,9 @@ onMounted(async function () {
     });
 });
 </script>
+
+<style scoped>
+.conversation::-webkit-scrollbar {
+    background: transparent;
+}
+</style>

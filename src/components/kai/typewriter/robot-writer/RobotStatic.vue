@@ -1,5 +1,5 @@
 <template>
-    <div v-if="props.robot" :class="['markdown-body overflow-auto']">
+    <div v-if="props.robot" :class="['markdown-body overflow-auto pt-1']">
         <div class="prose prose-invert" v-html="markdownParser(props.robot)"></div>
     </div>
 </template>

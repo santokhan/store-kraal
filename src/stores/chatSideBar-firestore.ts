@@ -13,7 +13,9 @@ export const useChatSideBarStore = defineStore("chatSideBar", () => {
     const uid = ref<string>("")
     const cUser = getCurrentUser()
     cUser.then(user => { if (user) { uid.value = user.uid } })
-    const logger = (str: string) => { console.log(`KAI Store: ${str}`) }
+    const logger = (str: string) => {
+        // console.log(`KAI Store: ${str}`)
+    }
 
     return {
         state,

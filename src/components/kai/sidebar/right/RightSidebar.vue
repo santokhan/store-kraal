@@ -1,7 +1,8 @@
 <template>
     <Container :view="viewType">
         <List_Grid :listView="list_view" :gridView="grid_view" :view="viewType" />
-        <div class="grid grid-cols-2 gap-3 lg:gap-4 h-full overflow-y-auto">
+        <Plans />
+        <div class="grid grid-cols-2 gap-3 lg:gap-4 h-full overflow-y-auto mt-6">
             <!-- <Item :data="settings[0]" :view="viewType" @click="handle_buddy">
                 <svg class="w-full h-full" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -73,6 +74,7 @@ import Buddy from './modals/buddy/Buddy.vue';
 import Meeting from './modals/meeting/Meeting.vue';
 import Planner from './modals/planner/Planner.vue';
 import Connect from './modals/connect/Connect.vue';
+import Plans from './plans/Plans.vue';
 
 const store = useRightBarStore()
 const { settings } = storeToRefs(store)
@@ -99,7 +101,7 @@ const connect = ref<boolean>(false)
 function handle_connect() { connect.value = !connect.value }
 
 // Switching view
-const viewType = ref<string>('GRID')
+const viewType = ref<string>('LIST')
 function list_view() { viewType.value = 'LIST' }
 function grid_view() { viewType.value = 'GRID' }
 </script>
