@@ -1,20 +1,11 @@
 <template>
-    <RouterLink :to="path" v-if="props.view === 'GRID'" type="button" :class="[
-        'rounded-xl space-y-4', 'grid place-items-center',
-        'p-4 w-full aspect-square',
-        'border border-gray-500 hover:bg-white/10 focus:bg-transparent'
-    ]">
+    <RouterLink :to="path" v-if="props.view === 'GRID'" :class="['grid place-items-center p-4 aspect-square', tw]">
         <IconBox>
             <PlusCircleIcon class="w-full h-full" />
         </IconBox>
         {{ name }}
     </RouterLink>
-
-    <RouterLink :to="path" v-else type="button" :class="[
-        'rounded-xl space-y-4', 'flex place-items-center gap-3',
-        'h-[3.75rem] px-4 col-span-2 w-full',
-        'border border-gray-500 hover:bg-white/10 focus:bg-transparent'
-    ]">
+    <RouterLink :to="path" v-else :class="['col-span-2 flex place-items-center gap-3 p-4', tw]">
         <PlusCircleIcon class="w-7 h-7" />
         {{ name }}
     </RouterLink>
@@ -28,4 +19,5 @@ type Props = { view: string, to: string };
 const props = defineProps<Props>();
 const name = 'Add Feature';
 const path = '/kraalai/' + props.to;
+const tw = ['rounded-xl space-y-4', 'border border-gray-500 hover:bg-white/10 focus:bg-transparent'].join(" ");
 </script>
