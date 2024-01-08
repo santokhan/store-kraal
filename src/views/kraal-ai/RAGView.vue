@@ -40,7 +40,7 @@
                         <label for="tag-all-checkbox" class="mr-2">Tag All</label>
                         <select v-model="bulkTag" class="ml-auto bg-gray-700 text-white rounded p-1" @change="applyBulkTag">
                             <option disabled value="">Select a tag</option>
-                            <option v-for="tag in tags" :key="tag" :value="tag">{{ tag }}</option>
+                            <option v-for="tag in tags" :key="tag.groupUUID" :value="tag.groupUUID">{{ tag.name }}</option>
                         </select>
                     </div>
                     <div v-if="fileInput.length > 0" class="space-y-3">
@@ -53,7 +53,7 @@
                             <div class="flex items-center">
                                 <select v-model="file.tag" class="bg-gray-800 text-white rounded p-1 ml-2">
                                     <option disabled value="">Select a tag</option>
-                                    <option v-for="tag in tags" :key="tag" :value="tag">{{ tag }}</option>
+                                    <option v-for="tag in tags" :key="tag.groupUUID" :value="tag.groupUUID">{{ tag.name }}</option>
                                 </select>
                                 <button @click="removeFile(index)" class="ml-2 p-1" title="Delete">
                                     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
@@ -112,37 +112,34 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue';
 import BackButton from '../../components/button/BackButton.vue';
+import { useUserStore } from '../../stores/userStore';
+import azureAPI from '../../kraal-api/azureAPI';
 // Import Axios once we have real API to use
 // import axios from 'axios';
 
+interface Tag {
+    groupUUID: string,
+    name: string,
+}
+
+const userStore = useUserStore();
 const fileInput = ref<any[]>([]);
-const tags: string[] = ['Client 1', 'Client 2', 'Client 3', 'Client 4', 'Client 5'];
+let tags: Tag[] = [];
 const searchQuery = ref<string>('');
 const searchResult = ref<string>('');
 const isDragOver = ref<boolean>(false);
-const bulkTag = ref<string>('');
+const bulkTag = ref<Tag | null>(null);
 const isLoading = ref<boolean>(false);
 const feedbackMessage = ref<string>('');
 const feedbackTimeout = ref<any>(null);
 const tagAllSelected = ref<boolean>(false);
 const allFilesTagged = computed<boolean>(() => fileInput.value.length > 0 && fileInput.value.every(file => file.tag));
 
-onMounted(() => {
-    try {
-        const savedFiles = localStorage.getItem('savedFiles');
-        if (savedFiles) {
-            const parsedFiles = JSON.parse(savedFiles);
-            fileInput.value = parsedFiles.map((f: any) => ({
-                ...f,
-                file: {
-                    name: f.name
-                },
-                selected: false
-            }));
-        }
-    } catch (error) {
-        console.error('Error loading files from localStorage:', error);
+onMounted(async () => {
+    if (userStore.departments.size == 0) {
+        await userStore.loadUsers();
     }
+    tags = [...Array.from(userStore.departments.values()).map(d => ({ groupUUID: d.groupUUID, name: d.name })), ...Array.from(userStore.clients.values()).map(c => ({ groupUUID: c.groupUUID, name: c.name }))];
 });
 
 function handleFileInput(event: any) {
@@ -159,9 +156,7 @@ function addFiles(files: any[]) {
     for (let file of files) {
         if (!fileInput.value.some(f => f.file.name === file.name)) {
             fileInput.value.push({
-                file: {
-                    name: file.name
-                },
+                file: file,
                 tag: '',
                 selected: false
             });
@@ -193,10 +188,10 @@ function applyBulkTag() {
     if (bulkTag.value) {
         fileInput.value.forEach(file => {
             if (file.selected) {
-                file.tag = bulkTag.value;
+                file.tag = bulkTag.value?.groupUUID;
             }
         });
-        bulkTag.value = ''; // Reset the bulk tag selection
+        bulkTag.value = null; // Reset the bulk tag selection
     }
 }
 // Watch for changes in fileInput to update the tagAllSelected state
@@ -223,32 +218,26 @@ function performSearch() {
 }
 // Function to simulate file submission with error handling
 
-function submitFiles() {
+async function submitFiles() {
     if (allFilesTagged.value) {
         isLoading.value = true;
         feedbackMessage.value = '';
         // Simulate file submission
-        new Promise((resolve, reject) => {
-            setTimeout(() => {
-                // Randomly determine success or failure
-                if (Math.random() > 0.5) {
-                    resolve('Files successfully submitted.');
-                } else {
-                    // Provide a mock error message
-                    reject('Submission failed due to network error.');
-                }
-            }, 2000);
-        }).then((response: any) => {
-            feedbackMessage.value = response;
+        console.log(JSON.stringify(fileInput.value));
+        try {
+            for (const file of fileInput.value) {
+                await azureAPI.documents.sendDocument(file.tag, file.file);
+            }
+            feedbackMessage.value = "Documents uploaded successfully";
             fileInput.value = [];
             localStorage.removeItem('savedFiles');
             setFeedbackTimeout();
-        }).catch(error => {
+        } catch (error) {
             feedbackMessage.value = `Error: ${error}`;
             setFeedbackTimeout();
-        }).finally(() => {
-            isLoading.value = false;
-        });
+        }
+        isLoading.value = false;
+
         // For actual API call, replace the above with:
         // axios.post('YOUR_API_ENDPOINT', formData)
         //   .then(response => {

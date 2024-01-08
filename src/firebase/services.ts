@@ -70,6 +70,11 @@ export async function getCurrentUser() {
     return user;
 }
 
+export async function getToken() {
+    await refreshToken();
+    return token;
+}
+
 export async function refreshToken() {
     token = await user?.getIdToken() ?? null;
 }
