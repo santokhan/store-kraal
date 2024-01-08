@@ -2,7 +2,6 @@ import axios from "axios";
 import * as signalR from "@microsoft/signalr";
 import * as firebase from "../firebase/services";
 import { SignupData } from "../models/signupdata";
-import { UnverifiedUser } from "../models/unverifieduser";
 import { VITE_API_URL, VITE_CHAT_HUB_URL } from "../config";
 
 const client = axios.create({
@@ -15,8 +14,8 @@ const client = axios.create({
 
 export let chatHubConnection: signalR.HubConnection | null = null;
 
-client.interceptors.request.use(function (config) {
-    config.headers!.Authorization = `Bearer ${firebase.token}`;
+client.interceptors.request.use(async function (config) {
+    config.headers!.Authorization = `Bearer ${await firebase.getToken()}`;
     return config;
 });
 
@@ -85,12 +84,36 @@ export default {
             console.log(`Joined chat ${chatUUID}`);
         },
     },
+    client: {
+        getClients: () => get('/clients'),
+    },
+    department: {
+        getDepartments: () => get('/departments'),
+    },
+    documents: {
+        sendDocuments: (chatId: number, files: File[]) => {
+            const formData = new FormData();
+            formData.set("chatId", chatId.toString());
+            for (const file of files) {
+                formData.append("files", file);
+            }
+            return postForm('/documents', formData);
+        },
+        sendDocument: (groupUUID: string, file: File) => {
+            const formData = new FormData();
+            formData.set("groupUUID", groupUUID);
+            formData.set("file", file);
+            return postForm('/documents/rag', formData);
+        },
+    },
     quickbooks: {
         getAuthorizationUrl: () => get('/linking/url'),
         link: (code: string, realmId: number) => post('/linking', { code: code, realmId: realmId }),
     },
     user: {
+        getUsers: () => get('/users'),
         getUnverifiedUser: () => get('/users/unverifiedme'),
         getUser: () => get('/users/me'),
+        editUser: (uuid: string, firstName: string | null, lastName: string | null, title: string | null) => patch(`/users/${uuid}`, { firstName: firstName, lastName: lastName, title: title }),
     }
 }

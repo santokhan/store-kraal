@@ -138,7 +138,7 @@ function handleSubmit(e: Event) {
         try {
             const userCredential = await firebase.createUser(email, confirmPass);
             if (userCredential) {
-                await azureAPI.auth.signupWithBusiness(new SignupData(firstName, lastName, company));
+                await azureAPI.auth.signupWithBusiness(new SignupData(firstName, lastName, company, jobTitle));
                 // const userData = await addBusinessUser({ firstName, lastName, email, jobTitle, company, organization, accounting, phone })
                 submitMessage.value = 'Thank you for signing up';
                 disabled.value = true;
@@ -147,6 +147,14 @@ function handleSubmit(e: Event) {
             }
         } catch (error: any) {
             firebaseWarn.value = error.message;
+            if (error.code == "auth/email-already-in-use") {
+                await azureAPI.auth.signupWithBusiness(new SignupData(firstName, lastName, company, jobTitle));
+                // const userData = await addBusinessUser({ firstName, lastName, email, jobTitle, company, organization, accounting, phone })
+                submitMessage.value = 'Thank you for signing up';
+                disabled.value = true;
+
+                router.push('/user/verify');
+            }
             // set default button text when got an error
             submitMessage.value = 'Create Account';
         }

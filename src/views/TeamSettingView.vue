@@ -28,16 +28,16 @@
                 <div class="max-w-md mx-auto py-10">
                     <ul v-if="activeTab === 'clients'" class="divide-y divide-gray-600">
                         <!-- Clients list -->
-                        <li v-for="client in clients" :key="client.id" @click="selectClient(client)"
+                        <li v-for="client of clients" :key="client.uuid" @click="selectClient(client)"
                             class="py-3 cursor-pointer">
                             <p class="font-medium">{{ client.name }}</p>
                         </li>
                     </ul>
                     <ul v-if="activeTab === 'departments'" class="divide-y divide-gray-600">
                         <!-- Departments list -->
-                        <li v-for="department in departments" :key="department" @click="selectDepartment(department)"
+                        <li v-for="department of departments" :key="department.uuid" @click="selectDepartment(department)"
                             class="py-3 cursor-pointer">
-                            <p class="font-medium">{{ department }}</p>
+                            <p class="font-medium">{{ department.name }}</p>
                         </li>
                     </ul>
                 </div>
@@ -48,7 +48,7 @@
                 <div v-if="selectedClient || selectedDepartment" class="max-w-md mx-auto py-10">
                     <!-- Display content based on selected client or department -->
                     <h4 class="text-lg font-semibold mb-4">
-                        {{ selectedClient ? selectedClient.name : selectedDepartment }}
+                        {{ selectedClient ? selectedClient.name : selectedDepartment!.name }}
                     </h4>
                     <table v-if="selectedClient" class="min-w-full table-auto">
                         <thead>
@@ -59,11 +59,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="user in selectedClient.users" :key="user.id" class="border-b border-gray-500">
-                                <td class="px-4 py-2 text-center">{{ user.displayName }}</td>
-                                <td class="px-4 py-2 text-center">{{ user.role }}</td>
+                            <tr v-for="user of selectedClient.users.values()" :key="user.uuid" class="border-b border-gray-500">
+                                <td class="px-4 py-2 text-center">{{ user.fullName }}</td>
+                                <td class="px-4 py-2 text-center">{{ user.businessRole }}</td>
                                 <td class=" px-4 py-2 text-center flex items-center justify-center">
-                                    <button @click="confirmDeletion(user.id)"
+                                    <button @click="confirmDeletion(user.uuid)"
                                         class="focus:outline-none hover:bg-gray-200 rounded">
                                         <!-- SVG icon for delete button -->
                                         <svg class="delete-icon w-5 h-5 text-white-400 hover:text-gray-600"
@@ -95,11 +95,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="user in departmentUsers" :key="user.id" class="border-b border-gray-500">
-                                <td class="px-4 py-2 text-center">{{ user.displayName }}</td>
-                                <td class="px-4 py-2 text-center">{{ user.role }}</td>
+                            <tr v-for="user in departmentUsers" :key="user.uuid" class="border-b border-gray-500">
+                                <td class="px-4 py-2 text-center">{{ user.fullName }}</td>
+                                <td class="px-4 py-2 text-center">{{ user.businessRole }}</td>
                                 <td class=" px-4 py-2 text-center flex items-center justify-center">
-                                    <button @click="confirmDeletion(user.id)"
+                                    <button @click="confirmDeletion(user.uuid)"
                                         class="focus:outline-none hover:bg-gray-200 rounded">
                                         <!-- SVG icon for delete button -->
                                         <svg class="delete-icon w-5 h-5 text-white-400 hover:text-gray-600"
@@ -135,15 +135,20 @@
 import axios from 'axios';
 import { ref, onMounted, computed } from 'vue';
 import BackButton from '../components/button/BackButton.vue';
+import { useUserStore } from '../stores/userStore';
+import { User } from '../models/user';
+import { Department } from '../models/department';
+import { Client } from '../models/client';
 
 export default {
     setup() {
-        const users = ref<any[]>([]); // This will hold the original users data
-        const selectedClient = ref<any>(null); // Holds the currently selected client
+        const userStore = useUserStore();
+        const users = ref<User[]>([]); // This will hold the original users data
+        const selectedClient = ref<Client | null>(null); // Holds the currently selected client
         const activeTab = ref<string>('clients');
-        const selectedDepartment = ref<any>(null);
-        const clients = ref<any[]>([]); // Populate with your clients data
-        const departments = ref<any[]>([]); // Extract unique departments from users
+        const selectedDepartment = ref<Department | null>(null);
+        const clients = ref<Client[]>([]); // Populate with your clients data
+        const departments = ref<Department[]>([]); // Extract unique departments from users
         // Simulate fetching users from API
         const fetchUsers = () => {
             // Simulate API call here
@@ -260,45 +265,31 @@ export default {
             ];
         };
         // Transform users data to client-centric data
-        const fetchClients = () => {
-            const clientMap = new Map();
-            if (Array.isArray(users.value)) {
-                users.value.forEach(user => {
-                    user.clients.forEach((client: any) => {
-                        if (!clientMap.has(client.name)) {
-                            clientMap.set(client.name, { name: client.name, users: [] });
-                        }
-                        clientMap.get(client.name).users.push({
-                            id: user.id,
-                            displayName: user.displayName,
-                            role: client.role,
-                            email: user.email
-                        });
-                    });
-                });
+        const fetchClients = async () => {
+            if (!userStore.currentUser) {
+                await userStore.loadUser();
             }
-            return Array.from(clientMap.values());
+            if (userStore.users.size == 0) {
+                await userStore.loadUsers();
+            }
+            users.value = Array.from(userStore.users.values());
+            departments.value = Array.from(userStore.departments.values());
+            clients.value = Array.from(userStore.clients.values());
         };
         const changeUserRole = (clientId: string, userId: string, newRole: string) => {
             const client = clients.value.find(c => c.name === clientId);
-            const user = client.users.find((u: any) => u.id === userId);
-            if (user) {
-                user.role = newRole;
-                // Call API to update user role
-            }
+            const user = client?.users.get(userId);
+            // if (user) {
+            //     user.businessRole = newRole;
+            //     // Call API to update user role
+            // }
         };
         const confirmDeletion = async (userId: string) => {
             if (window.confirm("Are you sure you want to delete this user?")) {
                 try {
-                    const response = await axios.delete(`https://api.yourdomain.com/users/${userId}`);
-                    if (response.status === 200) {
-                        // Assuming the user is removed successfully from the backend
-                        // Now remove the user from the selected client's user list
-                        const index = selectedClient.value.users.findIndex((user: any) => user.id === userId);
-                        if (index > -1) {
-                            selectedClient.value.users.splice(index, 1);
-                        }
-                    }
+                    // Assuming the user is removed successfully from the backend
+                    // Now remove the user from the selected client's user list
+                    if (selectedClient.value) selectedClient.value.users.delete(userId);
                 }
                 catch (error) {
                     console.error("Failed to delete user:", error);
@@ -307,31 +298,29 @@ export default {
             }
         };
         // Function to select a client
-        const selectClient = (client: any) => {
-            selectedClient.value = clients.value.find(c => c.name === client.name);
+        const selectClient = (client: Client) => {
+            selectedClient.value = client;
             selectedDepartment.value = null; // Clear department selection when a client is selected
             activeTab.value = 'clients'; // Set the active tab to 'clients'
         };
         // Function to edit user role under a client
         const editUserRole = async (userId: string, newRole: string) => {
-            const user = selectedClient.value.users.find((u: any) => u.id === userId);
-            if (user && window.confirm(`Change role of ${user.displayName} to ${newRole}?`)) {
+            const user = selectedClient.value?.users.get(userId);
+            if (user && window.confirm(`Change role of ${user.fullName} to ${newRole}?`)) {
                 try {
-                    // Assuming the API requires the client ID and the new role in the request
-                    const response = await axios.put(`https://api.yourdomain.com/users/${userId}/role`, {
-                        newRole: newRole,
-                        clientId: selectedClient.value.id // Or however you identify the client
-                    });
+                    // // Assuming the API requires the client ID and the new role in the request
+                    // const response = await axios.put(`https://api.yourdomain.com/users/${userId}/role`, {
+                    //     newRole: newRole,
+                    //     clientId: selectedClient.value.id // Or however you identify the client
+                    // });
                     // Check if the API response is successful
-                    if (response.status === 200) {
-                        // Update the role in the frontend state
-                        user.role = newRole;
-                    }
-                    else {
-                        // Handle unsuccessful response
-                        console.error("Failed to update role:", response);
-                        // Optionally show an error message to the user
-                    }
+                    // Update the role in the frontend state
+                    // user.businessRole = newRole;
+                    // else {
+                    //     // Handle unsuccessful response
+                    //     console.error("Failed to update role:", response);
+                    //     // Optionally show an error message to the user
+                    // }
                 }
                 catch (error) {
                     console.error("Failed to update user role:", error);
@@ -360,17 +349,8 @@ export default {
         };
         // Simulate fetching users from API
         onMounted(() => {
+            fetchClients();
             const fetchedUsers = fetchUsers();
-            if (Array.isArray(fetchedUsers)) {
-                users.value = fetchedUsers;
-                clients.value = fetchClients();
-                const departmentSet = new Set(fetchedUsers.map(user => user.department));
-                departments.value = Array.from(departmentSet);
-            }
-            else {
-                console.error("Fetched users is not an array:", fetchedUsers);
-                // Handle this situation appropriately, maybe set users.value to []
-            }
         });
         return {
             activeTab,

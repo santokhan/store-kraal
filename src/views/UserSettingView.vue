@@ -19,8 +19,8 @@
 
                     </div>
                     <div class="p-3 rounded border border-gray-600 mb-8">
-                        <p class="font-medium">{{ currentUser.displayName }}</p>
-                        <p class="text-sm">{{ currentUser.email }}</p>
+                        <p class="font-medium">{{ currentUser?.fullName }}</p>
+                        <p class="text-sm">{{ currentUser?.email }}</p>
                     </div>
                     <!-- All Users Section with New User Button -->
                     <div class="flex justify-between items-center mb-4">
@@ -31,14 +31,14 @@
                         </button>
                     </div>
                     <ul class="divide-y divide-gray-600">
-                        <li v-for="user in users" :key="user.id" class="py-3">
+                        <li v-for="user in users" :key="user.uuid" class="py-3">
                             <div @click="selectUser(user)" class="flex justify-between items-center cursor-pointer">
                                 <div>
-                                    <p class="font-medium">{{ user.displayName }}</p>
+                                    <p class="font-medium">{{ user.fullName }}</p>
                                     <p class="text-sm">{{ user.email }}</p>
                                 </div>
                                 <span class="bg-blue-500 text-white py-1 px-3 rounded-full text-xs">
-                                    {{ user.role.toUpperCase() }}
+                                    {{ user.businessRole!.toUpperCase() }}
                                 </span>
                             </div>
                         </li>
@@ -78,7 +78,7 @@
                     <div class="flex items-center justify-between">
                         <h4 class="text-lg font-semibold mb-4">
                             <!-- Conditional rendering based on isEditing flag -->
-                            <span v-if="!isEditing">{{ selectedUser.displayName }}</span>
+                            <span v-if="!isEditing">{{ selectedUser.department.name }}</span>
                         </h4>
                         <button v-if="!isEditing" @click="isEditing = true" class="p-1">
                             <!-- Edit Icon, size adjusted -->
@@ -94,14 +94,13 @@
                     <!-- Conditional rendering for the rest of the user details -->
                     <div v-if="!isEditing">
                         <p>Title: {{ selectedUser.title }}</p>
-                        <p>Department: {{ selectedUser.department }}</p>
+                        <p>Department: {{ selectedUser.department.name }}</p>
                         <p>Email: {{ selectedUser.email }}</p>
-                        <p>Location: {{ selectedUser.location }}</p>
                     </div>
                     <!-- Editable fields only shown when isEditing is true -->
                     <div v-if="isEditing" class="max-w-md mx-auto py-10 space-y-4">
                         <label for="displayName">Name</label>
-                        <input type="text" id="displayName" name="displayName" v-model="selectedUser.displayName"
+                        <input type="text" id="displayName" name="displayName" v-model="selectedUser.fullName"
                             autocomplete="user-name"
                             class="bg-gray-800+ text-white p-2 rounded border border-gray-600 w-full mb-4"
                             placeholder="Name">
@@ -112,7 +111,7 @@
                             placeholder="Title">
                         <!-- Department Input -->
                         <label for="department" class="block text-sm font-medium text-gray-300">Department</label>
-                        <input type="text" id="department" name="department" v-model="selectedUser.department"
+                        <input type="text" id="department" name="department" v-model="selectedUser.department.name"
                             autocomplete="organization-title"
                             class="bg-gray-800+ text-white p-2 rounded border border-gray-600 w-full mb-4"
                             placeholder="Department">
@@ -123,10 +122,6 @@
                             placeholder="Email">
                         <!-- Location Input -->
                         <label for="location" class="block text-sm font-medium text-gray-300">Location</label>
-                        <input type="text" id="location" name="location" v-model="selectedUser.location"
-                            autocomplete="shipping address-level2"
-                            class="bg-gray-800+ text-white p-2 rounded border border-gray-600 w-full mb-4"
-                            placeholder="Location">
                         <div class="flex justify-between mt-6">
                             <button @click="saveUserChanges"
                                 class="bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition duration-300">Save
@@ -151,9 +146,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="client in selectedUser.clients" :key="client.name">
+                                <tr v-for="client of selectedUser.clients.values()" :key="client.name">
                                     <td class="border px-4 py-2 border-gray-600">{{ client.name }}</td>
-                                    <td class="border px-4 py-2 border-gray-600">{{ client.role }}</td>
+                                    <!-- <td class="border px-4 py-2 border-gray-600">{{ client.role }}</td> -->
                                 </tr>
                             </tbody>
                         </table>
@@ -167,34 +162,23 @@
 <script lang="ts">
 import { ref, onMounted } from 'vue';
 import BackButton from '../components/button/BackButton.vue';
+import { useUserStore } from '../stores/userStore';
+import { User } from '../models/user';
 
 export default {
     setup() {
+        const userStore = useUserStore();
         const showNewUserForm = ref<boolean>(false);
         const isResponseReceived = ref<boolean>(false);
         const newEmail = ref<string>('');
         const emails = ref<string[]>([]);
         const loading = ref<boolean>(false);
         const message = ref<Record<string, string>>({ type: '', content: '' });
-        const currentUser = ref({
-            id: '2',
-            displayName: 'Jane Smith',
-            email: 'jane.smith@example.com',
-            role: 'admin',
-            title: 'Project Manager',
-            department: 'Project Management',
-            location: 'London',
-            clients: [
-                { name: 'Client E', role: 'User' },
-                { name: 'Client F', role: 'User' },
-                { name: 'Client G', role: 'Manager' },
-                { name: 'Client H', role: 'Viewer' }
-            ],
-        });
-        const users = ref<any[]>([]); // Start with an empty array
+        const currentUser = ref<User | null>(null);
+        const users = ref<User[]>([]); // Start with an empty array
         // Selected user ref
-        const selectedUser = ref<any>(null);
-        const selectUser = (user: any) => {
+        const selectedUser = ref<User | null>(null);
+        const selectUser = (user: User) => {
             selectedUser.value = user; // Make sure this is correctly updating
             showNewUserForm.value = false;
         };
@@ -314,8 +298,15 @@ export default {
             ];
         };
         // Fetch users when component is mounted
-        onMounted(() => {
-            users.value = fetchUsers();
+        onMounted(async () => {
+            if (!userStore.currentUser) {
+                await userStore.loadUser();
+            }
+            if (userStore.users.size == 0) {
+                await userStore.loadUsers();
+            }
+            currentUser.value = userStore.currentUser;
+            users.value = Array.from(userStore.users.values());
         });
         // Email validation function
         function isEmailValid(email: string) {
