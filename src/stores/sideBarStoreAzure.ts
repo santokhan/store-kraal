@@ -40,13 +40,13 @@ export const useSideBarStoreAzureStore = defineStore("chatSideBarAzure", () => {
         recentChatId,
         isInputLocked,
         async addNewInstance() {
-            const res = await azureAPI.chat.createChat("New chat");
+            const res = await azureAPI.chats.createChat("New chat");
             // call it after getting response
             // await this.assignSideBarData();
             return res;
         },
         async assignSideBarData() {
-            const navList = await azureAPI.chat.getChats();
+            const navList = await azureAPI.chats.getChats();
             if (navList.length > 0) {
                 // sort by descending 
                 sideBarList.value = navList.sort((a: SideBarData, b: SideBarData) => {
@@ -61,7 +61,7 @@ export const useSideBarStoreAzureStore = defineStore("chatSideBarAzure", () => {
             }
         },
         async editChatName(id: number, name: string) {
-            await azureAPI.chat.editChat(id, name)
+            await azureAPI.chats.editChat(id, name)
             this.assignSideBarData()
         },
         /**
@@ -71,7 +71,7 @@ export const useSideBarStoreAzureStore = defineStore("chatSideBarAzure", () => {
          * @param id 
          */
         async deleteSideBarInstance(id: number) {
-            await azureAPI.chat.deleteChat(id)
+            await azureAPI.chats.deleteChat(id)
             this.assignSideBarData()
             recentChatId.value = 0
         },
@@ -90,13 +90,13 @@ export const useSideBarStoreAzureStore = defineStore("chatSideBarAzure", () => {
             return this.addNewInstance()
         },
         async assignChatMessage(chatId: number) {
-            const conversations = await azureAPI.chat.getChatMessages(chatId);
+            const conversations = await azureAPI.chats.getChatMessages(chatId);
             const len = conversations.length
             if (len < 1) { throw new Error() };
             chatMessages.value = conversations
         },
         async Re_assignChatMessage(chatId: number) {
-            const conversations = await azureAPI.chat.getChatMessages(chatId);
+            const conversations = await azureAPI.chats.getChatMessages(chatId);
             const len = conversations.length
             if (len < 1) { throw new Error() };
 
@@ -108,11 +108,11 @@ export const useSideBarStoreAzureStore = defineStore("chatSideBarAzure", () => {
         },
         async sendNewChatMessage(chatId: number, message: string, files?: File[]) {
             if (files && files.length >= 1) {
-                await azureAPI.chat.sendDocuments(chatId, files);
+                await azureAPI.chats.sendDocuments(chatId, files);
             }
             recentChatId.value = chatId;
             history.pushState({}, "", window.location.href + '/' + recentChatId.value);
-            await azureAPI.chat.sendChatMessage(chatId, message);
+            await azureAPI.chats.sendChatMessage(chatId, message);
             await this.Re_assignChatMessage(chatId);
             await this.assignSideBarData();
         },
@@ -121,7 +121,7 @@ export const useSideBarStoreAzureStore = defineStore("chatSideBarAzure", () => {
                 throw new Error(`Can not read 'chatId' and 'message'`);
             } else {
                 // set `recentChatId` to switch welcome to coversation
-                await azureAPI.chat.sendChatMessage(chatId, message);
+                await azureAPI.chats.sendChatMessage(chatId, message);
 
                 // assign messages to print
                 await this.Re_assignChatMessage(chatId);

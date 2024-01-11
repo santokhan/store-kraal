@@ -9,7 +9,7 @@ export const useChatStore = defineStore("chatStore", {
     }),
     actions: {
         async loadChats(loadMessages = false) {
-            const chatJsonData = await azureAPI.chat.getChats();
+            const chatJsonData = await azureAPI.chats.getChats();
             for (const json of chatJsonData) {
                 const chat = Chat.fromJSON(json);
                 this.chats.set(chat.id, chat);
@@ -27,7 +27,7 @@ export const useChatStore = defineStore("chatStore", {
             if (!chat) {
                 return false;
             }
-            const messageJsonData = await azureAPI.chat.getChatMessages(chat.id);
+            const messageJsonData = await azureAPI.chats.getChatMessages(chat.id);
             for (const json of messageJsonData) {
                 json.chat = chat;
                 const message = ChatMessage.fromJSON(json);

@@ -13,22 +13,22 @@ export const useUserStore = defineStore("userStore", {
     }),
     actions: {
         async loadUser() {
-            this.currentUser = await azureAPI.user.getUser().then(data => User.fromJSON(data));
+            this.currentUser = await azureAPI.users.getUser().then(data => User.fromJSON(data));
         },
         async loadUsers() {
-            const departmentsJsonData = await azureAPI.department.getDepartments();
+            const departmentsJsonData = await azureAPI.departments.getDepartments();
             for (const json of departmentsJsonData) {
                 const department = Department.fromJSON(json);
                 this.departments.set(department.uuid, department);
             }
             
-            const clientsJsonData = await azureAPI.client.getClients();
+            const clientsJsonData = await azureAPI.clients.getClients();
             for (const json of clientsJsonData) {
                 const client = Client.fromJSON(json);
                 this.clients.set(client.uuid, client);
             }
 
-            const usersJsonData = await azureAPI.user.getUsers();
+            const usersJsonData = await azureAPI.users.getUsers();
             for (const json of usersJsonData) {
                 const user = User.fromJSON(json);
                 for (const departmentJson of json.departments) {

@@ -3,6 +3,8 @@ import * as signalR from "@microsoft/signalr";
 import * as firebase from "../firebase/services";
 import { SignupData } from "../models/signupdata";
 import { VITE_API_URL, VITE_CHAT_HUB_URL } from "../config";
+import { CreateClientDTO } from "../models/createclientdto";
+import { CreateDepartmentDTO } from "../models/createdepartmentdto";
 
 const client = axios.create({
     baseURL: VITE_API_URL,
@@ -48,7 +50,7 @@ export default {
         signupWithBusiness: (signupData: SignupData) => post('/auth/signup', signupData.toJSON()),
         verifyEmail: () => post('/auth/verify'),
     },
-    chat: {
+    chats: {
         getChats: () => get('/chats'),
         getChat: (id: number) => get('/chats', { params: { id: id } }),
         createChat: (name: string) => post('/chats', { name: name }),
@@ -84,11 +86,17 @@ export default {
             console.log(`Joined chat ${chatUUID}`);
         },
     },
-    client: {
+    clients: {
         getClients: () => get('/clients'),
+        addClient: (createClientData: CreateClientDTO) => post('/clients', createClientData.toJSON()),
+        deleteClient: (uuid: string) => deleteReq(`/clients/${uuid}`),
+        addUserToClient: (uuid: string, userEmail: string, roleName?: string | null) => post(`/clients/${uuid}/add`, { userEmail: userEmail, roleName: roleName }),
     },
-    department: {
+    departments: {
         getDepartments: () => get('/departments'),
+        addDepartment: (createDepartmentData: CreateDepartmentDTO) => post('/departments', createDepartmentData.toJSON()),
+        deleteDepartment: (uuid: string) => deleteReq(`/departments/${uuid}`),
+        addUserToDepartment: (uuid: string, userEmail: string, roleName?: string | null) => post(`/departments/${uuid}/add`, { userEmail: userEmail, roleName: roleName }),
     },
     documents: {
         sendDocuments: (chatId: number, files: File[]) => {
@@ -110,7 +118,7 @@ export default {
         getAuthorizationUrl: () => get('/linking/url'),
         link: (code: string, realmId: number) => post('/linking', { code: code, realmId: realmId }),
     },
-    user: {
+    users: {
         getUsers: () => get('/users'),
         getUnverifiedUser: () => get('/users/unverifiedme'),
         getUser: () => get('/users/me'),

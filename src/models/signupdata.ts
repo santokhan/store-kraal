@@ -5,8 +5,8 @@ export class SignupData {
     readonly title: string;
 
     constructor(firstName: string, lastName: string, businessName: string, title: string) {
-        this.firstName = firstName,
-        this.lastName = lastName,
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.businessName = businessName;
         this.title = title;
     }

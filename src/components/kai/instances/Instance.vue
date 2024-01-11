@@ -71,7 +71,7 @@ async function sendMessage(message: string, files?: File[]) {
         throw new Error("Can not read message input");
     } else {
         if (files && files.length >= 1) {
-            await azureAPI.chat.sendDocuments(chatId, files);
+            await azureAPI.chats.sendDocuments(chatId, files);
         }
 
         sideBarStoreAzure.sendChatMessage(chatId, message);
@@ -104,9 +104,9 @@ onMounted(async function () {
     await reloadChatMessages();
 
     if (!chatHubConnection) {
-        await azureAPI.chat.connectHub();
+        await azureAPI.chats.connectHub();
     }
-    await azureAPI.chat.joinHubChat(chat.uuid);
+    await azureAPI.chats.joinHubChat(chat.uuid);
     isInputLocked.value = props.lockInput ?? false;
 
     setTimeout(() => scrollToLastMessage(), 100);

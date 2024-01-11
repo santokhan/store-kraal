@@ -33,7 +33,7 @@ export const useChatSideBarStore = defineStore("chatSideBar", () => {
         toggleSideBarDesktop() { state.sidebarDesktop = !state.sidebarDesktop },
         // Info: Chat related functions
         addNewInstance() {
-            azureAPI.chat.sendChatMessage(0, "").then()
+            azureAPI.chats.sendChatMessage(0, "").then()
         },
         /**
          * Re-assign on adding new chat instance
@@ -43,7 +43,7 @@ export const useChatSideBarStore = defineStore("chatSideBar", () => {
          * Re-assign on chat instance delete
          */
         async assignChats() {
-            const chats = await azureAPI.chat.getChats()
+            const chats = await azureAPI.chats.getChats()
             chatList.value = chats
         },
         /**

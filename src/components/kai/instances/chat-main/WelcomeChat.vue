@@ -76,7 +76,7 @@ async function handleSubmit(e: any) {
         loading.value = true // start loading dots
         // switch to original chat instance
 
-        const chatRes = await azureAPI.chat.createChat("New chat");
+        const chatRes = await azureAPI.chats.createChat("New chat");
 
         let chatId = chatRes.id;
         if (!chatId) {
