@@ -192,6 +192,8 @@ import BillCardSubtitle from "../blocks/billing/BillCardSubTitle.vue";
 import BillCardButton from "../blocks/billing/BillCardButton.vue";
 import BillContent from "../blocks/billing/BillContent.vue";
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from "@headlessui/vue";
+import {Listbox, ListboxLabel, ListboxButton, ListboxOptions, ListboxOption } from '@headlessui/vue';
+import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/20/solid';
 
 interface Invoice {
 	month: string;
@@ -238,15 +240,6 @@ function openInvoiceModal(invoice: Invoice) {
 function closeInvoiceModal() {
 	showInvoiceModal.value = false;
 }
-
-import {
-	Listbox,
-	ListboxLabel,
-	ListboxButton,
-	ListboxOptions,
-	ListboxOption,
-} from '@headlessui/vue'
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/20/solid'
 
 const people = [
 	{ name: 'Starter' },
